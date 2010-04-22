@@ -1,0 +1,20 @@
+#ifndef CCDSTATES_IDL_
+#define CCDSTATES_IDL_
+
+#include <baci.idl>
+#include <acscomponent.idl>
+#include <ACSErrTypeCommon.idl>
+
+#pragma prefix "alma"
+
+module CCDStates
+{
+  //CCD camera status
+  enum CCDSTATE{ 
+  	STATE_DISCONNECTED,
+  	STATE_CONNECTED,
+  	STATE_ACQUIRING
+  };
+};
+
+#endif
