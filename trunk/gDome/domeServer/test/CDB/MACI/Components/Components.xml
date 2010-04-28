@@ -4,6 +4,6 @@
        xmlns:baci="urn:schemas-cosylab-com:BACI:1.0" 
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-<_ Name="domoServer" Code="domoServer" Type="IDL:alma/domoServerModule/domoServerInterface:1.0" Container="bilboContainer" ImplLang="cpp" />
+	<_ Name="domeServer" Code="domeServer" Type="IDL:alma/domeServerModule/domeServerInterface:1.0" Container="bilboContainer" ImplLang="cpp" />
 
 </Components>
