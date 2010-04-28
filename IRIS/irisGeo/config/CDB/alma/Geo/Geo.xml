@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GEO xmlns="urn:schemas-cosylab-com:GEO:1.0"
+
+       xmlns:baci="urn:schemas-cosylab-com:BACI:1.0"
+       xmlns:cdb="urn:schemas-cosylab-com:CDB:1.0"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<height    default_value="27000"/>
+	<longitude default_value="-1.2252427334"/> 
+	<latitude  default_value="-0.429325"/>
+</GEO>
