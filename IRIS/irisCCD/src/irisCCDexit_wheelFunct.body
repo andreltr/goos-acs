@@ -1,0 +1,27 @@
+/*
+ * "@(#) $Id: irisCCDexit_wheelFunct.body,v 1.3 2005/03/09 14:46:30 tjuerges Exp $"
+ *
+ * $Log: irisCCDexit_wheelFunct.body,v $
+ * Revision 1.3  2005/03/09 14:46:30  tjuerges
+ * - Changed to be conform with the body architecture.
+ *
+ * Revision 1.2  2004/09/22 14:16:35  tjuerges
+ * - F�r Simulation backgroundNoise und readoutNoise hinzugef�gt, rmsNoise entfernt.
+ * - GUI speichert FITS auf Verlangen.
+ * - GUI startet externes DS9 und beendet es.
+ *
+ *
+ */
+
+/*
+ * Put in ret_value the return value of type CORBA::Long.
+ * By default it is set to 1|true|"1","OK".
+ *
+ * Set old_component_status to any irisStatus.
+ * The component will reflect this after exiting
+ * this method.
+ *
+ * Already defined are int acs_error and ACS::Time time_stamp for DevIO calls.
+ */
+
+ret_value=camera->exit_wheel();

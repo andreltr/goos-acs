@@ -1,0 +1,97 @@
+/*
+ * "@(#) $Id: irisCCD.idl,v 1.13 2009/12/04 10:37:25 Exp $"
+ *
+ * $Log: irisCCD.idl,v $
+ * Revision 1.13  2009/12/04 10:37:25  mparra
+ * - Adapted to IRIS telescope name.
+ *
+ * Revision 1.12  2005/03/09 14:33:16  tjuerges
+ * - Added component status.
+ *
+ * Revision 1.11  2005/02/11 14:47:28  tjuerges
+ * - Added possibility to pass centre of simulated field rotation.
+ *
+ * Revision 1.10  2005/01/25 17:20:26  tjuerges
+ * - Added simulationFieldRotation to simulated CCD camera.
+ *
+ * Revision 1.9  2005/01/18 15:00:36  tjuerges
+ * - Changed irisCamera-Simulator to enable the possibility of many simulated stars. This change has to be made in irisCCD and irisCCDGUI, too.
+ *
+ *
+ */
+
+#ifndef irisCCD_idl
+#define irisCCD_idl
+
+#include <baci.idl>
+#include <irisComponentStatus.idl>
+
+#pragma prefix "alma"
+
+module irisCCD
+{
+  interface CCD: ACS::CharacteristicComponent
+  {
+    void on(in ACS::CBvoid cb,in ACS::CBDescIn desc);
+    void off(in ACS::CBvoid cb,in ACS::CBDescIn desc);
+    void resetCamera(in ACS::CBvoid cb,in ACS::CBDescIn desc);
+    void startExposure(in ACS::CBvoid cb,in ACS::CBDescIn desc);
+    void stopExposure(in ACS::CBvoid cb,in ACS::CBDescIn desc);
+    void setTemperature(in ACS::CBvoid cb,in ACS::CBDescIn desc);
+
+    readonly attribute irisStatus::ROstatus componentStatus;
+    readonly attribute ACS::ROpattern status;
+    readonly attribute ACS::RWlong xStart;
+    readonly attribute ACS::RWlong yStart;
+    readonly attribute ACS::RWlong xEnd;
+    readonly attribute ACS::RWlong yEnd;
+    readonly attribute ACS::ROdouble xPixelSize;
+    readonly attribute ACS::ROdouble yPixelSize;
+    readonly attribute ACS::ROdouble gain;
+    readonly attribute ACS::RWlong darkFrame;
+    readonly attribute ACS::RWlong numberOfFlushes;
+    readonly attribute ACS::ROdouble actualAirTemperature;
+    readonly attribute ACS::ROdouble actualCCDTemperature;
+    readonly attribute ACS::RWdouble commandedCCDTemperature;
+    readonly attribute ACS::RWdouble exposureTime;
+    readonly attribute ACS::ROlong imageReady;
+    readonly attribute ACS::ROlongSeq imageData;
+    readonly attribute ACS::RWlong exposureSequence;
+    readonly attribute ACS::RWlong numberOfExposuresInSequence;
+    readonly attribute ACS::RWdouble waitTimeBetweenExposuresInSequence;
+    readonly attribute ACS::ROstring timeExposureStart;
+    readonly attribute ACS::ROstring timeExposureEnd;
+    readonly attribute ACS::RWstring filterName;
+    readonly attribute ACS::RWstring cameraName;
+    readonly attribute ACS::RWstring telescopeName;
+    readonly attribute ACS::RWdouble focalLength;
+    readonly attribute ACS::RWstring observerName;
+    readonly attribute ACS::RWstring objectName;
+
+    /*
+     * Simulation parametres.
+     */
+    readonly attribute ACS::RWdoubleSeq simulationX;
+    readonly attribute ACS::RWdoubleSeq simulationY;
+    readonly attribute ACS::RWdouble simulationFieldRotation;
+    readonly attribute ACS::RWdouble simulationRotationCentreX;
+    readonly attribute ACS::RWdouble simulationRotationCentreY;
+    readonly attribute ACS::RWdouble simulationFwhmX;
+    readonly attribute ACS::RWdouble simulationFwhmY;
+    readonly attribute ACS::RWdoubleSeq simulationAmplitude;
+    readonly attribute ACS::RWlong simulationNoise;
+    readonly attribute ACS::RWdouble simulationBackgroundNoise;
+    readonly attribute ACS::RWdouble simulationReadoutNoise;
+
+    /*
+     * Filter wheel
+     */
+    long init_wheel();
+    long exit_wheel();
+    long move_wheel_up();
+    long move_wheel_down();
+    long move_wheel_to(in long position);
+    long get_wheel_position();
+  };
+};
+#endif

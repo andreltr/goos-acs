@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  $Id: CCD_STL.xml,v 1.14 2005/03/09 14:32:57 tjuerges Exp $
+  
+  $Log: CCD_STL.xml,v $
+  Revision 1.14  2005/03/09 14:32:57  tjuerges
+  - Added component status.
+
+  Revision 1.13  2005/02/11 14:46:51  tjuerges
+  - Added possibility to pass centre of simulated field rotation.
+
+  Revision 1.12  2005/01/26 09:17:03  tjuerges
+  - Changed default cameraName back to irisCCDSTL.
+
+  Revision 1.11  2005/01/25 17:20:11  tjuerges
+  - One default_timer_trig in property simulatedFieldRotation was too much.
+
+  Revision 1.10  2005/01/25 16:24:13  tjuerges
+  - Added simulationFieldRotation to simulated CCD camera.
+
+  Revision 1.9  2005/01/18 15:00:36  tjuerges
+  - Changed irisCamera-Simulator to enable the possibility of many simulated stars. This change has to be made in irisCCD and irisCCDGUI, too.
+
+  Revision 1.8  2004/10/14 11:36:57  tjuerges
+  - Aenderungen vom OCA-Test
+
+-->
+<CCD
+	xmlns="urn:schemas-cosylab-com:CCD:1.0"
+	xmlns:baci="urn:schemas-cosylab-com:BACI:1.0"
+	xmlns:cdb="urn:schemas-cosylab-com:CDB:1.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<actualAirTemperature default_timer_trig="2.0" description="The approximate temperature of the CCD chip." format="%9.4f" units="Degrees Celsius" default_value="-9999.9"/>
+	<actualCCDTemperature default_timer_trig="2.0" description="The approximate temperature of the CCD chip." format="%9.4f" units="Degrees Celsius" default_value="-9999.9"/>
+	<cameraName default_timer_trig="2.0" description="Name of the used camera. Set to irisCCDFLI, irisCCDST9, irisCCDSTL or irisCCDSimulator." format="%s" units="-" default_value="irisCCDSTL"/>
+	<commandedCCDTemperature default_timer_trig="2.0" description="The temperature the CCD is to be cooled down to." format="%9.4f" units="Degrees Celsius" default_value="0.0" min_value="-55.0" max_value="45.0"/>
+	<componentStatus default_timer_trig="2.0" description="Reflects the current status of the component."/>
+	<darkFrame default_timer_trig="2.0" description="Expose a dark frame? Then set to 1." format="%d" units="-" default_value="0" min_value="0" max_value="1"/>
+	<exposureSequence default_timer_trig="2.0" description="Set to 1 for an exposure sequence. Set numberOfExposuresInSequence to number of exposures in the sequence." format="%d" units="-" default_value="0" min_value="0" max_value="1"/>
+	<exposureTime default_timer_trig="2.0" description="Exposure time." format="%9.4f" units="s" default_value="0.1" min_value="0.0" max_value="167777.16"/>
+	<filterName default_timer_trig="2.0" description="Name of the used filter." format="%s" units="-" archive_priority="3" default_value="V"/>
+	<focalLength default_timer_trig="2.0" description="Focal length of used (imaginary) telescope." format="%10.7f" units="m" default_value="12.00453"/>
+	<gain default_timer_trig="2.0" description="Gain of the CCD." format="%12.9f" units="e-/ADU" default_value="2.8"/>
+	<imageData default_timer_trig="2.0" description="Unprocessed image data." default_value="0"/>
+	<imageReady default_timer_trig="2.0" description="Is set to number of images taken since onAction." format="%d" units="-" default_value="0"/>
+	<numberOfExposuresInSequence default_timer_trig="2.0" description="Enter number of exposures to be made in a sequence. Set to -1 for unlimited number of exposures." format="%d" units="-" default_value="0" min_value="-1"/>
+	<numberOfFlushes default_timer_trig="2.0" description="How often is the CCD to be flushed before exposure?" format="%d" units="-" default_value="0" min_value="0"/>
+	<objectName default_timer_trig="2.0" description="Name of object observed." format="%s" units="-" default_value="Dummy star."/>
+	<observerName default_timer_trig="2.0" description="Name of observer(s)." format="%s" units="-" default_value="Software group of AIRUB, Bochum, Germany"/>
+	<simulationAmplitude default_timer_trig="2.0" description="Amplitudes of the simulated stars." format="%7.2f" units="counts" default_value="32768.0" min_value="0.0" max_value="65535.0"/>
+	<simulationBackgroundNoise default_timer_trig="2.0" description="Simulate noise bias level." format="%10.5f" units="Counts" default_value="100" min_value="0.0" max_value="65535"/>
+	<simulationFieldRotation default_timer_trig="2.0" description="Simulated field rotation." format="%3.6f" units="degrees" default_value="0.0" min_value="0.0" max_value="360.0"/>
+	<simulationRotationCentreX description="Coordinates of the centre the field will be rotated around." format="%5.2f" units="pixel" default_value="0.0" min_value="-10000.0" max_value="10000.0" default_timer_trig="2.0"/>
+	<simulationRotationCentreY description="Coordinates of the centre the field will be rotated around." format="%5.2f" units="pixel" default_value="0.0" min_value="-10000.0" max_value="10000.0" default_timer_trig="2.0"/>
+	<simulationFwhmX default_timer_trig="2.0" description="Full width at half maximum of the simulated star in X direction." format="%5.2f" units="pixel" default_value="5.7" min_value="1.0" max_value="500.0"/>
+	<simulationFwhmY default_timer_trig="2.0" description="Full width at half maximum of the simulated star in Y direction." format="%5.2f" units="pixel" default_value="4.9" min_value="1.0" max_value="500.0"/>
+	<simulationNoise default_timer_trig="2.0" description="Add noise to the simulated CCD image?" format="%d" units="-" min_value="0" max_value="1" default_value="1"/>
+	<simulationReadoutNoise default_timer_trig="2.0" description="Simulate read out noise." format="%10.5f" units="Counts" default_value="5350" min_value="0.0" max_value="65535"/>
+	<simulationX default_timer_trig="2.0" description="X coordinates of the simulated star centres." format="%5.2f" units="pixel" default_value="33.0" min_value="0.0" max_value="999.0"/>
+	<simulationY default_timer_trig="2.0" description="Y coordinates of the simulated star centres." format="%5.2f" units="pixel" default_value="44.0" min_value="0.0" max_value="999.0"/>
+	<status default_timer_trig="2.0" description="Status of DO with bits representing the state." format="%u" units="-" default_value="1" bitDescription="String"/>
+	<telescopeName default_timer_trig="2.0" description="Name of the used telescope." format="%s" units="-" default_value="Hexapod telescope"/>
+	<timeExposureEnd default_timer_trig="2.0" description="End time of exposure" format="%s" units="-" archive_priority="3" default_value="0000-00-00T00:00:00.000"/>
+	<timeExposureStart default_timer_trig="2.0" description="Start time of exposure" format="%s" units="-" archive_priority="3" default_value="0000-00-00T00:00:00.000"/>
+	<waitTimeBetweenExposuresInSequence default_timer_trig="2.0" description="The time in seconds to wait between exposures in an exposure sequence." format="%9.4f" units="s" default_value="0.0" min_step="0.01" min_value="0.0"/>
+	<xEnd default_timer_trig="2.0" description="Lower right corner of CCD image (X)." format="%d" units="pixel" min_value="1" max_value="3071" default_value="3071"/>
+	<xPixelSize default_timer_trig="2.0" description="Pixel size (X) in metres." format="%11.10f" units="m" default_value="0.000009"/>
+	<xStart default_timer_trig="2.0" description="Upper left corner of CCD image (X)." format="%d" units="pixel" min_value="0" max_value="3070" default_value="0"/>
+	<yEnd default_timer_trig="2.0" description="Lower right corner of CCD image (Y)." format="%d" units="pixel" min_value="1" max_value="2047" default_value="2047"/>
+	<yPixelSize default_timer_trig="2.0" description="Pixel size (Y) in metres." format="%11.10f" units="m" default_value="0.000009"/>
+	<yStart default_timer_trig="2.0" description="Upper left corner of CCD image (Y)." format="%d" units="pixel" min_value="0" max_value="2046" default_value="0"/>
+</CCD>

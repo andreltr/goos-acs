@@ -1,0 +1,30 @@
+# Name: 	10-sbig.rules
+# Version:	1.0
+# Author: 	Jan Soldan (JS) jsoldan@asu.cas.cz
+# Author:	Matt Longmire (ml) matto@sbig.com
+# Description:	Upload firmware to SBIG USB CCD cameras.
+# History:
+# 2005-11-24: The version 1.0 released.
+# 2008-11-18: Added support for ST-7/8/9 Pro cameras with external Guide Head
+
+# 1. Pre-renumeration device IDs
+#=============================
+# SBIG ST-7/8/9/10/2K cameras
+BUS=="usb", SYSFS{idVendor}=="0d97", SYSFS{idProduct}=="0001", SYSFS{bcdDevice}=="0001", RUN+="/sbin/fxload -t fx2 -I /usr/share/usb/sbigucam.hex"
+
+# SBIG ST-7/8/9/10/2K Pro cameras with External Guide Head
+BUS=="usb", SYSFS{idVendor}=="0d97", SYSFS{idProduct}=="0001", SYSFS{bcdDevice}=="0002", RUN+="/sbin/fxload -t fx2 -I /usr/share/usb/sbigpcam.hex"
+
+# SBIG ST-L cameras
+BUS=="usb", SYSFS{idVendor}=="0d97", SYSFS{idProduct}=="0002", RUN+="/sbin/fxload -t fx2 -I /usr/share/usb/sbiglcam.hex"
+
+# SBIG ST-402/1603/3200 cameras
+BUS=="usb", SYSFS{idVendor}=="0d97", SYSFS{idProduct}=="0003", RUN+="/sbin/fxload -t fx2 -I /usr/share/usb/sbigfcam.hex"
+
+# 2. Post-renumeration device IDs:
+#==============================
+# We run /etc/hotplug/usb/sbig.py script to add write permission to newly connected USB camera.
+# Because we use libusb driver, so we do not create device node here!
+BUS=="usb", SYSFS{idVendor}=="0d97", SYSFS{idProduct}=="0101", RUN+="/etc/hotplug/usb/sbig.py %k" 
+
+

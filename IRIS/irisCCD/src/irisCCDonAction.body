@@ -1,0 +1,130 @@
+/*
+ * "@(#) $Id: irisCCDonAction.body,v 1.15 2005/03/09 14:46:30 tjuerges Exp $"
+ *
+ * $Log: irisCCDonAction.body,v $
+ * Revision 1.16  2009/12/04 12:21:43  mparra
+ * - Adapted to IRIS telescope name.
+ * - The SmartPropertyPointer has change the methods read and write, there is no need
+ *   to  use the int& variable, so the local definition acs_error has been deleted.
+ *
+ * Revision 1.15  2005/03/09 14:46:30  tjuerges
+ * - Changed to be conform with the body architecture.
+ *
+ * Revision 1.14  2005/01/26 11:52:44  tjuerges
+ * - Replaced get_sync and set_sync to properties by getDevIO()->read and write.
+ * - Added local definitions of acs_error and time_stamp for getDevIO calls.
+ *
+ * Revision 1.13  2005/01/20 16:09:17  tjuerges
+ * - Changed CCD pairwise characteristics to std::pair (dimensions etc.)
+ *
+ * Revision 1.12  2004/11/04 15:33:26  tjuerges
+ * - �berfl�ssige Variable entfernt.
+ * - Log-Meldung ge�ndert.
+ *
+ * Revision 1.11  2004/09/22 14:16:35  tjuerges
+ * - F�r Simulation backgroundNoise und readoutNoise hinzugef�gt, rmsNoise entfernt.
+ * - GUI speichert FITS auf Verlangen.
+ * - GUI startet externes DS9 und beendet es.
+ *
+ */
+
+/*
+ * Put in completion.[type|code] the completion error code.
+ * By default it is set to Ok.
+ *
+ * Set old_component_status to any irisStatus.
+ * The component will reflect this after exiting
+ * this method.
+ *
+ * Already defined are int acs_error and ACS::Time time_stamp for DevIO calls.
+ */
+
+set_to_error( irisCamera::OK);
+
+std::string wantedCamera(m_cameraName_p->getDevIO()->read(time_stamp).c_str());
+camera=irisCameraFactory::getCamera(wantedCamera);
+
+if(!camera)
+{
+  ACS_SHORT_LOG((LM_ERROR,"irisCCD::onAction: Cannot open camera of type %s!",wantedCamera.c_str()));
+}
+else
+{
+  ACS_SHORT_LOG((LM_INFO,"irisCCD::onAction: Searching for camera..."));
+  if(camera->open_camera()!=irisCamera::OK)
+  {
+    ACS_SHORT_LOG((LM_ERROR,"irisCCD::onAction: Cannot open camera. Check hardware!"));
+    set_to_error(irisCamera::NO_CAMERA_FOUND);
+    set_error(irisCamera::CAMERA_OFF);
+  }
+  else
+  {
+    bool ret(true);
+
+    /*
+     * Temporary data which is used by the exposure thread
+     * to save the image data before sending it into ACS.
+     */
+    tempImage->resize(static_cast<std::size_t>(0));
+
+    timeservice=new myTimeService;
+    if(!timeservice->connect())
+    {
+      delete timeservice;
+      timeservice=0;
+    }
+
+    // Set up properties:
+    std::pair<double,double> pixelSize(-9999.9,-9999.9);
+    ret=camera->get_pixel_size(pixelSize);
+    if(ret)
+    {
+      m_xPixelSize_p->getDevIO()->write(pixelSize.first, time_stamp);
+      m_yPixelSize_p->getDevIO()->write(pixelSize.second, time_stamp);
+    }
+
+    if((m_xStart_p->getDevIO()->read(time_stamp)==0)
+        &&(m_yStart_p->getDevIO()->read(time_stamp)==0)
+        &&(m_xEnd_p->getDevIO()->read(time_stamp)==0)
+        &&(m_yEnd_p->getDevIO()->read(time_stamp)==0))
+    {
+      std::pair<long,long> start(-9999L,-9999L),end(-9999L,-9999L);
+      ret=camera->get_image_area(start,end);
+      if(ret)
+      {
+        m_xStart_p->getDevIO()->write(start.first, time_stamp);
+        m_yStart_p->getDevIO()->write(start.second, time_stamp);
+        m_xEnd_p->getDevIO()->write(end.first, time_stamp);
+        m_yEnd_p->getDevIO()->write(end.second, time_stamp);
+      }
+    }
+
+    long number_of_flushes(m_numberOfFlushes_p->getDevIO()->read(time_stamp));
+    ret=camera->set_number_of_flushes(number_of_flushes);
+
+    double commanded_temperature(m_commandedCCDTemperature_p->getDevIO()->read(time_stamp));
+    ret=camera->set_camera_temperature(commanded_temperature);
+
+    long frame_type(m_darkFrame_p->getDevIO()->read(time_stamp));
+    ret=camera->set_camera_frame_type(frame_type);
+
+    double gain(-9999.9);
+    ret=camera->get_gain(gain);
+    if(ret==true)
+    {
+      m_gain_p->getDevIO()->write(gain, time_stamp);
+    }
+
+    set_to_error(irisCamera::OK);
+
+    camera_name=wantedCamera;
+
+    ACS_SHORT_LOG((LM_INFO,"irisCCD::onAction: OK. Camera attached to ACS."));
+    component_running=true;
+
+    //Resume temperature thread.
+    getComponent()->getThreadManager()->resume("getTemperatureThread");
+    ACS_SHORT_LOG((LM_INFO,"irisCCD::onAction: getTemperatureThread resumed."));
+    old_component_status=irisStatus::ON;
+  }
+}
