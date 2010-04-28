@@ -1,0 +1,51 @@
+#ifndef CCD_IDL_
+#define CCD_IDL_
+
+#include <baci.idl>
+#include <acscomponent.idl>
+#include <ACSErrTypeCommon.idl>
+#include <luckyCameraCCDModels.idl>
+#include <luckyCameraCCDStates.idl>
+
+#pragma prefix "alma"
+
+module CCDmodule
+{
+  //Notification channels definition
+  const string CHANNELNAME_CCDCLIENT = "ccdchannelclient";
+  
+  //Type of event FILENAME, END_SUBSCRIPTION
+  enum NCMsgType{ FILENAME, END_SUBSCRIPTION };
+
+  //Struct that contains information about the images being sent
+  //type: The message type
+  //fileName: The name of the file
+  //id: The id of this image in the sequence
+  //total: The total number of images in the sequence
+  struct ncCCDFilename
+  {
+    NCMsgType type;
+    string fileName;
+    long id;
+    long total;
+  };
+
+  //CCD interface
+  interface CCDinterface : ACS::ACSComponent
+  {
+    void on();
+    void off();
+    void getImage(in long width, in long height, in long acquisitionMode, in long numberOfAcquisitions, in float exposureTime);
+    CCDStates::CCDSTATE getState();
+    void setCCDModel(in CCDModels::CCDMODEL model);
+    CCDModels::CCDMODEL getCCDModel();
+  };
+
+  //Notification channel supplier interface
+  interface NotificationSupplier : ACS::ACSComponent
+  {
+    void sendNotification(in ncCCDFilename fileEvent) raises (ACSErrTypeCommon::CouldntPerformActionEx);
+  };
+};
+
+#endif
