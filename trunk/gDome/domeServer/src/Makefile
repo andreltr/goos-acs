@@ -3,7 +3,7 @@
 #
 # "@(#) $Id$"
 #
-# Makefile of ........
+# Makefile of Dome Server v0.1
 #
 # who       when      what
 # --------  --------  ----------------------------------------------
@@ -51,12 +51,12 @@ xxxxx_LIBS      =
 #
 # Includes (.h) files (public only)
 # ---------------------------------
-INCLUDES        =
+INCLUDES        = domeServerImpl.h
 
 #
 # Libraries (public and local)
 # ----------------------------
-LIBRARIES       =
+LIBRARIES       = domeServerImpl
 LIBRARIES_L     =
 
 #
@@ -112,7 +112,7 @@ CDB_SCHEMAS =
 # 
 # IDL Files and flags
 # 
-IDL_FILES =
+IDL_FILES = domeServer
 TAO_IDLFLAGS =
 USER_IDL =
 #
