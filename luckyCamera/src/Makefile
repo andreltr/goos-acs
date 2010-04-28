@@ -7,7 +7,7 @@
 #
 # who       when      what
 # --------  --------  ----------------------------------------------
-# almadev  28/04/10  created
+# almadev  28/11/09  created
 #
 
 #*******************************************************************************
@@ -19,12 +19,40 @@
 
 #
 # user definable C-compilation flags
-#USER_CFLAGS = 
+#USER_CFLAGS =  
 
 #
 # additional include and library search paths
-#USER_INC = 
-#USER_LIB = 
+#USER_INC = -I$(QTDIR)/include -I$(QWTDIR)/include
+#USER_INC = -I/usr/local/include/CCfits/
+
+USER_LIB = -lACE \
+	-lTAO \
+	-lTAO_AV \
+	-lTAO_DsLogAdmin \
+	-lTAO_CosNaming \
+	-lTAO_IORTable \
+	-lTAO_PortableServer \
+	-lTAO_Svc_Utils \
+	-lTAO_CosTrading \
+	-lTAO_CosNotification \
+	-lTAO_DynamicAny \
+	-lTAO_IFR_Client \
+	-lTAO_CosProperty \
+	-lacsutil \
+	-lcdb \
+	-llogging \
+	-lacscomponent \
+	-lbaci \
+	-lmaci \
+	-lmaciClient \
+	-lacserr \
+	-lm \
+	-lloki \
+	-lacstime \
+	-lACSErrTypeCommon \
+	-L/usr/lib /usr/local/lib/libCCfits.so  -L. -lcfitsio -lm -lnsl \
+	-landor
 
 #
 # MODULE CODE DESCRIPTION:
@@ -51,17 +79,42 @@ xxxxx_LIBS      =
 #
 # Includes (.h) files (public only)
 # ---------------------------------
-INCLUDES        =
+INCLUDES        = 
 
 #
 # Libraries (public and local)
 # ----------------------------
-LIBRARIES       =
+LIBRARIES       = luckyCameraCCDComponent luckyCameraNCSupplier
+luckyCameraCCDComponent_LIBS = luckyCameraCCDStubs \
+					luckyCameraCCDModelsStubs \
+					luckyCameraCCDStatesStubs \
+					acscomponent \
+					bulkDataReceiverStubs \
+					bulkDataSenderStubs \
+					bulkDataStubs \
+					bulkDataCallback \
+					ACSBulkDataError 
+luckyCameraNCSupplier_LIBS = luckyCameraCCDStubs \
+			 	  luckyCameraCCDModelsStubs \
+				  luckyCameraCCDStatesStubs \
+				  acsnc \
+			   	  acscomponent
 LIBRARIES_L     =
 
 #
 # <brief description of lllll library>
-lllll_OBJECTS   =
+CCDComponent_OBJECTS   = luckyCameraCCD \
+			 			 luckyCameraBDTThread \
+			 			 luckyCameraCCDContext \
+			 			 luckyCameraCCDStateConnected \
+			 			 luckyCameraCCDStateDisconnected \
+			 			 luckyCameraCCDStateAcquiring \
+		  	 			 luckyCameraSTRContext \
+			 			 luckyCameraSTRLuckyEMCCD \
+			 			 luckyCameraSTROcaSimCCD \
+			 			 luckyCameraSTRTestCCD	
+
+NCSupplier_OBJECTS   = luckyCameraNCSupplier
 
 #
 # Scripts (public and local)
@@ -92,7 +145,7 @@ pppppp_MODULES	   =
 # <brief description of tttttt tcl-script>
 tttttt_OBJECTS  =
 tttttt_TCLSH    = 
-tttttt_LIBS     = 
+#CCDComponent_LIBS     = CCDComponentStubs
 
 #
 # TCL libraries (public and local)
@@ -112,7 +165,7 @@ CDB_SCHEMAS =
 # 
 # IDL Files and flags
 # 
-IDL_FILES =
+IDL_FILES = luckyCameraCCDModels luckyCameraCCDStates luckyCameraCCD
 TAO_IDLFLAGS =
 USER_IDL =
 #
@@ -123,7 +176,7 @@ jjj_DIRS=
 jjj_EXTRAS= 
 #
 # java sources in Jarfile on/off
-DEBUG= 
+DEBUG=on
 #
 # ACS XmlIdl generation on/off
 #

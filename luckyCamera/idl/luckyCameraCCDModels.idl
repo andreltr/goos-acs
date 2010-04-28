@@ -1,0 +1,20 @@
+#ifndef CCDMODELS_IDL_
+#define CCDMODELS_IDL_
+
+#include <baci.idl>
+#include <acscomponent.idl>
+#include <ACSErrTypeCommon.idl>
+
+#pragma prefix "alma"
+
+module CCDModels
+{
+  //CCD camera models
+  enum CCDMODEL{ 
+    LUCKY_EMCCD,
+    OCA_SIMCCD,
+    TEST_CCD
+  };
+};
+
+#endif
