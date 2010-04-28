@@ -55,7 +55,7 @@ import alma.ucn.oca.ccd.logic.*;
  * PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR
  * ANY CORPORATE OR COMMERCIAL PURPOSE.
  */
-public class CCDGUI extends javax.swing.JFrame {
+public class luckyClientCCDGUI extends javax.swing.JFrame {
 	private JButton jBtnDropConnection;
 	private JPanel jPanelInformationCamera;
 	private JButton jBtnOriginalSize;
@@ -90,7 +90,7 @@ public class CCDGUI extends javax.swing.JFrame {
 	JFileChooser jFileChooserDialog;
 	private int counterTemp;
 	// Logic reference
-	private CCDController controller;
+	private luckyClientCCDController controller;
 	// Current exposition time
 	private int ExposureTime;
 	// Used to calculate the completed percentage
@@ -102,7 +102,7 @@ public class CCDGUI extends javax.swing.JFrame {
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				CCDGUI inst = new CCDGUI();
+				luckyClientCCDGUI inst = new luckyClientCCDGUI();
 				inst.setLocationRelativeTo(null);
 				inst.setVisible(true);
 
@@ -110,7 +110,7 @@ public class CCDGUI extends javax.swing.JFrame {
 		});
 	}
 
-	public CCDGUI() {
+	public luckyClientCCDGUI() {
 		super();
 		SpinnerFilenameModel = null;
 
@@ -127,7 +127,7 @@ public class CCDGUI extends javax.swing.JFrame {
 
 	private void initGUI() {
 		try {
-			controller = new CCDController();
+			controller = new luckyClientCCDController();
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			getContentPane().setLayout(null);
 			this.setPreferredSize(new java.awt.Dimension(807, 750));

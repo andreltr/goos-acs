@@ -9,7 +9,7 @@ import alma.acs.container.ContainerServices;
 import alma.acs.nc.Consumer;
 import alma.ACS.ACSComponent;
 
-public class CCDModel extends ComponentClient {
+public class luckyClientCCDModel extends ComponentClient {
 	// Reference to the CCD component
 	private alma.CCDmodule.CCDinterface ccdCompReference;
 	// Instance of Notification Channel consumer
@@ -18,12 +18,12 @@ public class CCDModel extends ComponentClient {
 	private ContainerServices m_containerServices;
 	// List of the received filenames
 	private LinkedList<String> l_filenames;
-	private NCEvent lastNotification;
+	private luckyClientNCEvent lastNotification;
 	private boolean consumerOn;
 	private alma.CCDModels.CCDMODEL [] modelsList;
 
 	// Constructor
-	public CCDModel(Logger logger, String managerLoc, String clientName)
+	public luckyClientCCDModel(Logger logger, String managerLoc, String clientName)
 			throws Exception {
 		super(logger, managerLoc, clientName);
 		ccdCompReference = null;
@@ -65,7 +65,7 @@ public class CCDModel extends ComponentClient {
 			l_filenames = new LinkedList<String>();
 		}
 		
-		lastNotification = new NCEvent(newImageEvent.type.toString(), newImageEvent.id ,newImageEvent.total);
+		lastNotification = new luckyClientNCEvent(newImageEvent.type.toString(), newImageEvent.id ,newImageEvent.total);
 		m_logger.info("INFO: Last notification:" + lastNotification.getID());
 		if ((newImageEvent.type.toString()).equals("FILENAME")) {
 			m_logger.info("INFO: 'FILENAME' Notification received filename: " + newImageEvent.fileName);
@@ -128,7 +128,7 @@ public class CCDModel extends ComponentClient {
 		return l_filenames;
 	}
 	
-	public NCEvent getLastNotification(){
+	public luckyClientNCEvent getLastNotification(){
 		return lastNotification;
 	}
 	
