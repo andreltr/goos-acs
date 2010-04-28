@@ -1,0 +1,13 @@
+#ifndef _DOMESERVER_IDL_
+#define _DOMESERVER_IDL_
+
+#include <acscomponent.idl>
+#include <baci.idl>
+#pragma prefix "alma"
+
+module domeServerModule{
+	interface domeServerInterface:ACS::ACSComponent {
+		 boolean getState();
+	};
+};
+#endif
