@@ -6,7 +6,7 @@
 #pragma prefix "alma"
 
 module domeServerModule{
-	interface domeServertInterface:ACS::ACSComponent {
+	interface domeServerInterface:ACS::ACSComponent {
 		boolean getStatus();
 	};
 };
