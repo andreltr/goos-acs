@@ -1,7 +1,7 @@
 #include <domeServerImpl.h>
 #include <iostream>
 
-domoTestImpl::domoTestImpl( const ACE_CString &name, maci::ContainerServices * containerServices) : ACSComponentImpl(name, containerServices){
+domeServerImpl::domeServerImpl( const ACE_CString &name, maci::ContainerServices * containerServices) : ACSComponentImpl(name, containerServices){
 }
 CORBA::long domeServerImpl::getStatus() {
 	return status;

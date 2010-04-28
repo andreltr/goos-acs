@@ -56,9 +56,9 @@ INCLUDES        = domeServerImpl.h
 #
 # Libraries (public and local)
 # ----------------------------
-LIBRARIES       = domeServerImpl
+LIBRARIES       = domeServer
 LIBRARIES_L     =
-
+domeServer_OBJECTS = domeServerImpl
 #
 # <brief description of lllll library>
 lllll_OBJECTS   =
