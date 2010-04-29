@@ -58,14 +58,18 @@ USER_LIB = 	-lACE \
 #
 # C programs (public and local)
 # -----------------------------
-EXECUTABLES     =
+EXECUTABLES     = $(PROG) \
+				  acsdomeClient
 EXECUTABLES_L   = 
+$(PROG)_OBJECTS            = $(PROG)
+$(PROG)_LDFLAGS            =
+$(PROG)_LIBS               = C++
 
 #
 # <brief description of xxxxx program>
-xxxxx_OBJECTS   =	
+acsdomeClient_OBJECTS   = acsdomeClient
 xxxxx_LDFLAGS   =
-xxxxx_LIBS      =
+acsdomeClient_LIBS      = acsdomeServerStubs ACSErrTypeCommon
 
 #
 # special compilation flags for single c sources
