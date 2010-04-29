@@ -60,14 +60,19 @@ USER_LIB = 	-lACE \
 #
 # C programs (public and local)
 # -----------------------------
-EXECUTABLES     = 
+EXECUTABLES     = $(PROG) \
+				  acsexmplClientHelloWorld
 EXECUTABLES_L   = 
+
+$(PROG)_OBJECTS            = $(PROG)
+$(PROG)_LDFLAGS            =
+$(PROG)_LIBS               = C++
 
 #
 # <brief description of xxxxx program>
-xxxxx_OBJECTS   =	
+acsexmplClientHelloWorld_OBJECTS   = acsexmplClientHelloWorld
 xxxxx_LDFLAGS   =
-xxxxx_LIBS      =
+acsexmplClientHelloWorld_LIBS      = acsexmplHelloWorldStubs ACSErrTypeCommon
 
 #
 # special compilation flags for single c sources
