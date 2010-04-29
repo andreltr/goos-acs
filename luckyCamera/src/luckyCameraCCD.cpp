@@ -1,4 +1,7 @@
+#include <baciDB.h>
 #include "luckyCameraCCD.h"
+
+using namespace baci;
 
 /*
  *
@@ -9,7 +12,8 @@
 
 CCDComponent::CCDComponent(const ACE_CString& name,
 		maci::ContainerServices * containerServices) :
-	ACSComponentImpl(name, containerServices) {
+	CharacteristicComponentImpl(name, containerServices), m_longitude_p(this),
+			m_latitude_p(this), m_height_p(this) {
 
 	ACS_TRACE("CCDComponent::CCDComponent(): created");
 	ncSupplier = 0;
@@ -18,6 +22,10 @@ CCDComponent::CCDComponent(const ACE_CString& name,
 	m_bdtThread_p = 0;
 	bdStatus = false;
 	context = new CCDContext(this, CCDStates::STATE_DISCONNECTED);
+
+	m_longitude_p = new RWdouble(name + ":longitude", getComponent());
+	m_latitude_p = new RWdouble(name + ":latitude", getComponent());
+	m_height_p = new RWdouble(name + ":height", getComponent());
 }
 
 CCDComponent::~CCDComponent() {
@@ -131,5 +139,35 @@ void CCDComponent::sendBulkData() {
 	}
 }
 
+ACS::RWdouble_ptr Geo::longitude() throw (CORBA::SystemException)
+{
+  if (!m_longitude_p)
+  {
+    return ACS::RWdouble::_nil();
+  }
+  ACS::RWdouble_var prop = ACS::RWdouble::_narrow(m_longitude_p->getCORBAReference());
+  return prop._retn();
+}
+
+ACS::RWdouble_ptr Geo::latitude() throw (CORBA::SystemException)
+{
+  if (!m_latitude_p)
+  {
+    return ACS::RWdouble::_nil();
+  }
+  ACS::RWdouble_var prop = ACS::RWdouble::_narrow(m_latitude_p->getCORBAReference());
+  return prop._retn();
+}
+
+ACS::RWdouble_ptr Geo::height() throw (CORBA::SystemException)
+{
+  if (!m_height_p)
+  {
+    return ACS::RWdouble::_nil();
+  }
+  ACS::RWdouble_var prop = ACS::RWdouble::_narrow(m_height_p->getCORBAReference());
+  return prop._retn();
+}
+
 #include <maciACSComponentDefines.h>
-MACI_DLL_SUPPORT_FUNCTIONS(CCDComponent)
+MACI_DLL_SUPPORT_FUNCTIONS( CCDComponent)

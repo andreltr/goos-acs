@@ -7,7 +7,9 @@
 
 #include <iostream>
 
-#include <baci.h>
+//#include <baci.h>
+#include <baciCharacteristicComponentImpl.h>
+
 #include <acscomponentImpl.h>
 #include <ACSErrTypeCommon.h>
 
@@ -22,11 +24,16 @@
 
 #include "luckyCameraCCDContext.h"
 #include "luckyCameraBDTThread.h"
+
+#include <baciRWstring.h>
+#include <baciROdouble.h>
+#include <baciRWdouble.h>
 //#include "CCDStateDisconnected.h"
 //#include "CCDStateConnected.h"
 //#include "CCDStateAcquiring.h"
 
 using namespace ACSBulkDataError;
+using namespace baci;
 
 class BDTThread;
 class CCDContext;
@@ -35,14 +42,21 @@ class CCDStateConnected;
 /**
  * ACS component class
  */
-class CCDComponent: public virtual acscomponent::ACSComponentImpl,
-		public POA_CCDmodule::CCDinterface {
+class CCDComponent: public virtual CharacteristicComponentImpl,
+		public virtual POA_CCDmodule::CCDinterface {
 private:
 
 	bool bdStatus;
 	BDTThread * m_bdtThread_p;
 	std::string * filesQueue;
 	int queueSize;
+
+	/* --------------------- [ Properties START ] ----------------------*/
+	SmartPropertyPointer<RWdouble> m_longitude_p;
+	SmartPropertyPointer<RWdouble> m_latitude_p;
+	SmartPropertyPointer<RWdouble> m_height_p;
+
+	/* --------------------- [ Properties END ] ------------------------*/
 
 protected:
 
@@ -83,6 +97,12 @@ public:
 	CCDStates::CCDSTATE getState();
 	void setCCDModel(CCDModels::CCDMODEL model);
 	CCDModels::CCDMODEL getCCDModel();
+
+	virtual ACS::RWdouble_ptr longitude() throw (CORBA::SystemException);
+
+	virtual ACS::RWdouble_ptr latitude() throw (CORBA::SystemException);
+
+	virtual ACS::RWdouble_ptr height() throw (CORBA::SystemException);
 
 	/* --------------------- [ internal purpose ] -------------------- */
 	//! gets context
