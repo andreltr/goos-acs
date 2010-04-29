@@ -1,0 +1,19 @@
+#ifndef _DOME_SERVER_IDL_
+#define _DOME_SERVER_IDL_
+
+#include <acscomponent.idl>
+#include <ACSErrTypeCommon.idl>
+
+#pragma prefix "alma"
+
+module acsdomeServer 
+{
+    interface DomeServer : ACS::ACSComponent
+	{
+	void displayMessage();
+	
+	void badMethod() raises (ACSErrTypeCommon::UnknownEx);
+	};
+};
+
+#endif
