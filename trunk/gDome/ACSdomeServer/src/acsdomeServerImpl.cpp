@@ -24,6 +24,13 @@ DomeServer::displayMessage ()
     std::cout << "Dome Server Ready" << std::endl;
 }
 
+CORBA::Long DomeServer::rotate_dome(CORBA::Long radians) throw (CORBA::SystemException)
+{
+  //CORBA::Long ret_value(1);
+  std::cout << "Dome Server ~ radians received: " << radians << std::endl;
+  return radians*2-1;
+}
+
 void
 DomeServer::badMethod()
 {

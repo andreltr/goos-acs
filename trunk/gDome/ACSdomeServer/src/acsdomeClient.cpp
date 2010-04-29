@@ -46,7 +46,11 @@ int main(int argc, char *argv[])
 
    	        if (!CORBA::is_nil(foo.in()))
    	        {
+   	        	long radians = 3;
+   	        	std::cout << "Dome Client ~ radians to server: " << radians << std::endl;
    	        	foo->displayMessage();
+   	        	long new_radians = foo->rotate_dome(radians);
+   	        	std::cout << "Dome Client ~ radians from server: " << new_radians << std::endl;
     	    }
 	}
     catch(maciErrType::CannotGetComponentExImpl &_ex)

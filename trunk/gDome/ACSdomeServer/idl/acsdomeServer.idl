@@ -12,6 +12,8 @@ module acsdomeServer
 	{
 	void displayMessage();
 	
+	long rotate_dome(in long radians);
+	
 	void badMethod() raises (ACSErrTypeCommon::UnknownEx);
 	};
 };
