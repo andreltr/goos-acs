@@ -22,6 +22,8 @@ class DomeServer: public virtual acscomponent::ACSComponentImpl,   	//Component 
     virtual void
     displayMessage ();
 
+    virtual CORBA::Long rotate_dome(CORBA::Long radians) throw(CORBA::SystemException);
+
     virtual void
     badMethod();
 };
