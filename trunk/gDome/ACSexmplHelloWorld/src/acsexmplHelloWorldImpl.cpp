@@ -55,7 +55,8 @@ HelloWorld::~HelloWorld()
 void
 HelloWorld::displayMessage ()
 {
-    std::cout << "Hello World" << std::endl;
+    //std::cout << "Hello World" << std::endl;
+    ACS_SHORT_LOG((LM_INFO, "Hello World"));
 }
 /* ----------------------------------------------------------------*/
 void

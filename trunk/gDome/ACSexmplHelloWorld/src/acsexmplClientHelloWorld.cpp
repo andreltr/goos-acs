@@ -98,6 +98,9 @@ This example shows a client that:
 #include <acsexmplHelloWorldC.h>
 #include <ACSErrTypeCommon.h>
 #include <acsutilTimeStamp.h>
+#include <vltPort.h>
+#include <acsutil.h>
+#include <baciS.h>
 
 ACE_RCSID(acsexmpl, acsexmplHelloWorldClient, "$Id: acsexmplClientHelloWorld.cpp,v 1.7 2007/02/01 05:14:26 cparedes Exp $")
 using namespace maci;
@@ -119,13 +122,43 @@ int main(int argc, char *argv[])
     else
 	{
 	//Must log into manager before we can really do anything
-	client.login();
+	 ACS_SHORT_LOG((LM_INFO, "Welcome to HelloWorld"));
+     ACS_SHORT_LOG((LM_INFO, "Login into maciManager!"));
+     client.login();
 	}
    
+    //sleep(10);
+    //exit;
+
     try
 	{
+    	ACS_SHORT_LOG((LM_INFO, "Listing all COBs of type *Geo*"));
+    	    maci::HandleSeq seq;
+    	    maci::ComponentInfoSeq_var cobs = client.manager()->get_component_info(client.handle(), seq,
+    	        "*", "*HelloWorld*", false);
+
+    	    for (CORBA::ULong i = 0; i < cobs->length(); i++)
+    	    {
+    	      ACS_SHORT_LOG((LM_INFO, "%s (%s)", cobs[i].name.in(), cobs[i].type.in()));
+    	    }
+
+    	    /*
+    	         * Now gets the specific DO we have requested on the command line
+    	         */
+    	        ACS_SHORT_LOG((LM_INFO, "Getting COB: %s", argv[1]));
+    	        acsexmplHelloWorld::HelloWorld_var foo = client.get_object<acsexmplHelloWorld::HelloWorld> (argv[1], 0, true);
+
 	//Get the specific component we have requested on the command-line
-	foo = client.getComponent<acsexmplHelloWorld::HelloWorld>(argv[1], 0, true);
+	//foo = client.getComponent<acsexmplHelloWorld::HelloWorld>(argv[1], 0, true);
+
+
+    	        if (!CORBA::is_nil(foo.in()))
+    	        {
+    	          /*
+    	           * Prints the descriptor of the requested DO
+    	           */
+    	        	foo->displayMessage();
+    	        }
 	}
     catch(maciErrType::CannotGetComponentExImpl &_ex)
 	{
@@ -134,21 +167,7 @@ int main(int argc, char *argv[])
 	}
     
     
-    //Call the displayMessage() method existing in the interface for HelloWorld
-    foo->displayMessage();
     
-    try
-	{
-	foo->badMethod();
-	}
-    catch(ACSErrTypeCommon::UnknownEx &ex)
-	{
-	ACSErrTypeCommon::UnknownExImpl badMethodEx(ex);
-	badMethodEx.log();
-	ACS::Time timeStamp = badMethodEx.getTimeStamp();
-	ACE_CString tString = getStringifiedUTC(timeStamp);
-	ACS_DEBUG_PARAM(argv[0], "Time of the exception: %s\n", tString.c_str());
-	}
 
     //We release our component and logout from manager
     try
