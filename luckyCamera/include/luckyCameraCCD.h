@@ -52,9 +52,10 @@ private:
 	int queueSize;
 
 	/* --------------------- [ Properties START ] ----------------------*/
-	SmartPropertyPointer<RWdouble> m_longitude_p;
-	SmartPropertyPointer<RWdouble> m_latitude_p;
-	SmartPropertyPointer<RWdouble> m_height_p;
+	  SmartPropertyPointer<ROdouble> m_actualAirTemperature_p;
+	  SmartPropertyPointer<ROdouble> m_actualCCDTemperature_p;
+	  SmartPropertyPointer<RWstring> m_cameraName_p;
+	  SmartPropertyPointer<RWdouble> m_commandedCCDTemperature_p;
 
 	/* --------------------- [ Properties END ] ------------------------*/
 
@@ -98,11 +99,13 @@ public:
 	void setCCDModel(CCDModels::CCDMODEL model);
 	CCDModels::CCDMODEL getCCDModel();
 
-	virtual ACS::RWdouble_ptr longitude() throw (CORBA::SystemException);
+	  virtual ACS::ROdouble_ptr actualAirTemperature() throw(CORBA::SystemException);
 
-	virtual ACS::RWdouble_ptr latitude() throw (CORBA::SystemException);
+	  virtual ACS::ROdouble_ptr actualCCDTemperature() throw(CORBA::SystemException);
 
-	virtual ACS::RWdouble_ptr height() throw (CORBA::SystemException);
+	  virtual ACS::RWstring_ptr cameraName() throw(CORBA::SystemException);
+
+	  virtual ACS::RWdouble_ptr commandedCCDTemperature() throw(CORBA::SystemException);
 
 	/* --------------------- [ internal purpose ] -------------------- */
 	//! gets context

@@ -12,8 +12,9 @@ using namespace baci;
 
 CCDComponent::CCDComponent(const ACE_CString& name,
 		maci::ContainerServices * containerServices) :
-	CharacteristicComponentImpl(name, containerServices), m_longitude_p(this),
-			m_latitude_p(this), m_height_p(this) {
+	CharacteristicComponentImpl(name, containerServices),
+			m_actualAirTemperature_p(this), m_actualCCDTemperature_p(this),
+			m_cameraName_p(this), m_commandedCCDTemperature_p(this) {
 
 	ACS_TRACE("CCDComponent::CCDComponent(): created");
 	ncSupplier = 0;
@@ -23,9 +24,13 @@ CCDComponent::CCDComponent(const ACE_CString& name,
 	bdStatus = false;
 	context = new CCDContext(this, CCDStates::STATE_DISCONNECTED);
 
-	m_longitude_p = new RWdouble(name + ":longitude", getComponent());
-	m_latitude_p = new RWdouble(name + ":latitude", getComponent());
-	m_height_p = new RWdouble(name + ":height", getComponent());
+	m_actualAirTemperature_p = new ROdouble(name + ":actualAirTemperature",
+			getComponent());
+	m_actualCCDTemperature_p = new ROdouble(name + ":actualCCDTemperature",
+			getComponent());
+	m_cameraName_p = new RWstring(name + ":cameraName", getComponent());
+	m_commandedCCDTemperature_p = new RWdouble(name
+			+ ":commandedCCDTemperature", getComponent());
 }
 
 CCDComponent::~CCDComponent() {
@@ -139,33 +144,43 @@ void CCDComponent::sendBulkData() {
 	}
 }
 
-ACS::RWdouble_ptr Geo::longitude() throw (CORBA::SystemException)
+ACS::ROdouble_ptr CCD::actualAirTemperature() throw (CORBA::SystemException)
 {
-  if (!m_longitude_p)
+  if (!m_actualAirTemperature_p)
   {
-    return ACS::RWdouble::_nil();
+    return ACS::ROdouble::_nil();
   }
-  ACS::RWdouble_var prop = ACS::RWdouble::_narrow(m_longitude_p->getCORBAReference());
+  ACS::ROdouble_var prop = ACS::ROdouble::_narrow(m_actualAirTemperature_p->getCORBAReference());
   return prop._retn();
 }
 
-ACS::RWdouble_ptr Geo::latitude() throw (CORBA::SystemException)
+ACS::ROdouble_ptr CCD::actualCCDTemperature() throw (CORBA::SystemException)
 {
-  if (!m_latitude_p)
+  if (!m_actualCCDTemperature_p)
   {
-    return ACS::RWdouble::_nil();
+    return ACS::ROdouble::_nil();
   }
-  ACS::RWdouble_var prop = ACS::RWdouble::_narrow(m_latitude_p->getCORBAReference());
+  ACS::ROdouble_var prop = ACS::ROdouble::_narrow(m_actualCCDTemperature_p->getCORBAReference());
   return prop._retn();
 }
 
-ACS::RWdouble_ptr Geo::height() throw (CORBA::SystemException)
+ACS::RWstring_ptr CCD::cameraName() throw (CORBA::SystemException)
 {
-  if (!m_height_p)
+  if (!m_cameraName_p)
+  {
+    return ACS::RWstring::_nil();
+  }
+  ACS::RWstring_var prop = ACS::RWstring::_narrow(m_cameraName_p->getCORBAReference());
+  return prop._retn();
+}
+
+ACS::RWdouble_ptr CCD::commandedCCDTemperature() throw (CORBA::SystemException)
+{
+  if (!m_commandedCCDTemperature_p)
   {
     return ACS::RWdouble::_nil();
   }
-  ACS::RWdouble_var prop = ACS::RWdouble::_narrow(m_height_p->getCORBAReference());
+  ACS::RWdouble_var prop = ACS::RWdouble::_narrow(m_commandedCCDTemperature_p->getCORBAReference());
   return prop._retn();
 }
 
