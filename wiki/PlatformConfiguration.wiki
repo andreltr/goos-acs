@@ -1,4 +1,4 @@
-#summary Installation and configuration of the platform where ACS will run.
+#summary Installation and configuration of the platform where gCCD will run.
 
 = Introduction =
 
