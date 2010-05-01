@@ -28,15 +28,15 @@ Then install the packages under sudo mode or using the root account, you can do 
 
 = Installing ACS =
 
-Then get the ACS8xx_installer.sh script and execute it under sudo:
+Then get the ACS_installer.sh script and execute it under sudo:
 
 You can use the script to check if everything is OK to install ACS with the "--test" parameter:
 
- * sudo ACS800_installer.sh --test
+ * sudo ACS_installer.sh --test
 
 If everything is alright, install ACS, and follow the script instructions:
 
- * sudo ACS800_installer.sh --install
+ * sudo ACS_installer.sh --install
 
 Reboot your machine and start X (startx) in the account specified in ACS installation, you will notice that bash is replaced by korn shell.
 
