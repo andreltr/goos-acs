@@ -1,8 +1,8 @@
-#summary One-sentence summary of this page.
+#summary Guide to install ACS 8.1.0
 
 = Introduction =
 
-ACS 8.0.0 and ACS 8.0.1 are supported on Scientific Linux 5.3 (SL) and is very easy to install.
+ACS 8.1.0 is supported on Scientific Linux 5.3 (SL) and is very easy to install.
 
 = Requirements =
 
