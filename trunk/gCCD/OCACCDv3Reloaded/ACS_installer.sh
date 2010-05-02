@@ -3,8 +3,8 @@
 # ACS 8.0.0 ENVIROMENT CONFIGURATION TEST
 # AND INSTALLATION SCRIPT
 ######################################################
-# This script vefiries that some important files ares
-# installed and some enviroment variables are set
+# This script verifies that some important files ares
+# installed and some environment variables are set
 # for ACS to work.
 # It can also install ACS almost automatically.
 ######################################################
@@ -109,7 +109,7 @@ else
 fi
 
 ######################################################
-# Checks the enviroment variable LD_LIBRARY_PATH
+# Checks the environment variable LD_LIBRARY_PATH
 ######################################################
 
 sumTotal=$(( $sumTotal + 2 ))
@@ -161,7 +161,7 @@ else
 fi
 
 ######################################################
-#Probamos que esta la libreria itcl
+# Checks for itcl library
 ######################################################
 
 sumTotal=$(( $sumTotal + 1 ))
@@ -209,77 +209,77 @@ fi
 if [ "$1" = "--install" ]
 then
 
-######################################################
-# INSTALLATION NOTICE
-######################################################
-echo $bold "+---------------------------------------------+" $eformat
-echo $bold "| ACS 8.x.x installation is about to start    |" $eformat
-echo $bold "+---------------------------------------------+" $eformat
-echo $bold "Starting..." $eformat
-echo ""
+	######################################################
+	# INSTALLATION NOTICE
+	######################################################
+	echo $bold "+---------------------------------------------+" $eformat
+	echo $bold "| ACS 8.x.x installation is about to start    |" $eformat
+	echo $bold "+---------------------------------------------+" $eformat
+	echo $bold "Starting..." $eformat
+	echo ""
 
-#Must have root super powers
-echo $bold$red "WARNING" $eformat
-echo $bold "In order for this script to work correctly, you must have root access." $eformat
-echo $bold "If you didn't execute this script with 'sudo' press CTRL+C to cancel." $eformat
-echo ""
-echo $bold "Press any key to continue..." $eformat
-echo ""
+	#Must have root super powers
+	echo $bold$red "WARNING" $eformat
+	echo $bold "In order for this script to work correctly, you must have root access." $eformat
+	echo $bold "If you didn't execute this script with 'sudo' press CTRL+C to cancel." $eformat
+	echo ""
+	echo $bold "Press any key to continue..." $eformat
+	echo ""
 
-read vpause
+	read vpause
 
-#Default user and group names
-if [ "$2" != "--default" ]
-then
-#Username
+	#Default user and group names
+	if [ "$2" != "--default" ]
+	then
+	#Username
 
-while [ "$vend" != y ]
-do
-	echo $bold "Enter the ACS installation account username:" $eformat
-	read vusername
-	echo $bold "The username is:"$eformat$green$vusername $eformat
-	echo $bold "Is this correct? (y/n)" $eformat
-	read vend
-done
+	while [ "$vend" != y ]
+	do
+		echo $bold "Enter the ACS installation account username:" $eformat
+		read vusername
+		echo $bold "The username is:"$eformat$green$vusername $eformat
+		echo $bold "Is this correct? (y/n)" $eformat
+		read vend
+	done
 
-vend="n"
+	vend="n"
 
-while [ "$vend" != y ]
-do
-	echo $bold "Enter the developer account username:" $eformat
-	read vusernamedev
-	echo $bold "The username is:"$eformat$green$vusernamedev $eformat
-	echo $bold "Is this correct? (y/n)" $eformat
-	read vend
-done
+	while [ "$vend" != y ]
+	do
+		echo $bold "Enter the developer account username:" $eformat
+		read vusernamedev
+		echo $bold "The username is:"$eformat$green$vusernamedev $eformat
+		echo $bold "Is this correct? (y/n)" $eformat
+		read vend
+	done
 
-#Group name
-vend="n"
+	#Group name
+	vend="n"
 
-while [ "$vend" != y ]
-do
-	echo $bold "Enter the group name for ACS:" $eformat
-	read vgroupname
-	echo $bold "The group name is:"$eformat$green$vgroupname $eformat
-	echo $bold "Is this correct? (y/n)" $eformat
-	read vend
-done
+	while [ "$vend" != y ]
+	do
+		echo $bold "Enter the group name for ACS:" $eformat
+		read vgroupname
+		echo $bold "The group name is:"$eformat$green$vgroupname $eformat
+		echo $bold "Is this correct? (y/n)" $eformat
+		read vend
+	done
 
-######################################################
-# ALL THE WORK GETS DONE HERE
-######################################################
+	######################################################
+	# ALL THE WORK GETS DONE HERE
+	######################################################
 
-#We create the group
-groupadd -g 335 -o $vgroupname
+	#We create the group
+	groupadd -g 335 -o $vgroupname
 
-#We create the users
-useradd -g 335 -u 3060 -o -d /home/$vusername -m -s /bin/bash $vusername
-useradd -g 335 -u 3070 -o -d /home/$vusernamedev -m -s /bin/bash $vusernamedev
+	#We create the users
+	useradd -g 335 -u 3060 -o -d /home/$vusername -m -s /bin/bash $vusername
+	useradd -g 335 -u 3070 -o -d /home/$vusernamedev -m -s /bin/bash $vusernamedev
 
-#Change the passwords of the accounts
+	#Change the passwords of the accounts
 
-passwd $vusername
-passwd $vusernamedev
+	passwd $vusername
+	passwd $vusernamedev
 
 fi
 
