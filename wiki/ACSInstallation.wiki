@@ -14,7 +14,7 @@ Install this required packages:
 
  * *sudo yum install -y openssl openssl-devel yumex glibc-devel tclx gcc openssl097a gcc-c++ jdk*
 
-Then download the required packages (available in Files section of this group):
+Then download the required packages (available in the Downloads section):
 
  * *itcl-3.2-92.2.i386.rpm*
  * *pdksh-5.2.14-30.i386.rpm*
