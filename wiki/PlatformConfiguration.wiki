@@ -4,8 +4,8 @@
 
 Add your content here.
 
-= ImageMagick =
+= Image Magick =
 
-To install ImageMagick you must download the source code of version 6.4.0 from http://downloads.jmagick.org/ and decompress it:
+To install Image Magick you must download the source code of version 6.4.0 from http://downloads.jmagick.org/ and decompress it:
 
  * *tar -xvzf ImageMagick.tar.gz
