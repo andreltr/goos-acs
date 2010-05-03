@@ -51,7 +51,7 @@ USER_LIB = -lACE \
 	-lloki \
 	-lacstime \
 	-lACSErrTypeCommon \
-	-L/usr/lib /usr/local/lib/libCCfits.so  -L. -lcfitsio -lm -lnsl \
+	-L/usr/lib /usr/lib/libCCfits.so  -L. -lcfitsio -lm -lnsl \
 	-landor
 
 #

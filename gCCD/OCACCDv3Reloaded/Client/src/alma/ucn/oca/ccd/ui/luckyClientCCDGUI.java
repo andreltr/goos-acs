@@ -84,7 +84,7 @@ public class luckyClientCCDGUI extends javax.swing.JFrame {
 	private JPanel Exposure;
 	private JTabbedPane jTabPaneOptions;
 	private JButton jBtnGetConnection;
-	private ImagePanels panelImagen;
+	private luckyClientImagePanels panelImagen;
 	private Timer imageListTimer;
 	private BufferedImage image;
 	JFileChooser jFileChooserDialog;
@@ -372,7 +372,7 @@ public class luckyClientCCDGUI extends javax.swing.JFrame {
 									public void stateChanged(ChangeEvent e) {
 										// Avoids creating unnecessary objects
 										if (panelImagen == null) {
-											panelImagen = new ImagePanels(
+											panelImagen = new luckyClientImagePanels(
 													jScrollPaneImage.getWidth() - 30,
 													jScrollPaneImage
 															.getHeight() - 45,
@@ -421,7 +421,7 @@ public class luckyClientCCDGUI extends javax.swing.JFrame {
 					// File selector dialog
 					jFileChooserDialog = new JFileChooser();
 					jFileChooserDialog
-							.addChoosableFileFilter(new FileSelectorDialog());
+							.addChoosableFileFilter(new luckyClientFileSelectorDialog());
 
 				}
 			}
@@ -618,7 +618,7 @@ public class luckyClientCCDGUI extends javax.swing.JFrame {
 				jSpinnerFilename.setModel(SpinnerFilenameModel);
 
 				if (panelImagen == null) {
-					panelImagen = new ImagePanels(
+					panelImagen = new luckyClientImagePanels(
 							jScrollPaneImage.getWidth() - 30, jScrollPaneImage
 									.getHeight() - 45, jSpinnerFilename
 									.getValue().toString());
@@ -649,7 +649,7 @@ public class luckyClientCCDGUI extends javax.swing.JFrame {
 				jSpinnerFilename.setModel(SpinnerFilenameModel);
 
 				if (panelImagen == null) {
-					panelImagen = new ImagePanels(
+					panelImagen = new luckyClientImagePanels(
 							jScrollPaneImage.getWidth() - 30, jScrollPaneImage
 									.getHeight() - 45, jSpinnerFilename
 									.getValue().toString());
