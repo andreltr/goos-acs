@@ -1,0 +1,14 @@
+#summary This guide will show you how to install the gCCD software
+
+= Introduction =
+
+Add your content here.
+
+= Requirements =
+
+In order for the software to work, you must first have ACS installed and working. See these pages:
+
+ * *PlatformConfiguration*
+ * *ACSInstallation*
+
+= Installation =
