@@ -284,14 +284,14 @@ then
 	fi
 
 	#Untar the ACS tar in /
-	#tar -xvzf ACS810.tar.gz -C /
+	#tar -xvzf ACS800.tar.gz -C /
 
 	#We change the owner of /alma to $vusername
 	chown -R $vusername:$vgroupname /alma 
 
 	#We copy the configuration file
-	cp -rf /alma/ACS-8.1/ACSSW/config/.acs/ /home/$vusername
-	cp -rf /alma/ACS-8.1/ACSSW/config/.acs/ /home/$vusernamedev
+	cp -rf /alma/ACS-8.0/ACSSW/config/.acs/ /home/$vusername
+	cp -rf /alma/ACS-8.0/ACSSW/config/.acs/ /home/$vusernamedev
 
 	#We append the neccesary lines to /home/$vusername/.bashrc
 
