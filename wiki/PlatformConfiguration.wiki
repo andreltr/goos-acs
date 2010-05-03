@@ -2,7 +2,7 @@
 
 = Introduction =
 
-Add your content here.
+In order to compile the software you must install some libraries. This guide will show you  the needed libraries and explain how to install them.
 
 = Image Magick =
 
@@ -51,3 +51,7 @@ After it's done, install it with:
 You must add jmagick.jar to the CLASSPATH enviroment variable:
 
  * *export CLASSPATH=/usr/lib/jmagick.jar:$CLASSPATH*
+
+= CFITSIO =
+
+= CCFITS =
