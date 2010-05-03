@@ -22,4 +22,32 @@ After it's done, you can verify that it's working by opening the image viewer:
 
  * *display*
 
+Also you must add libMagick.so to the LD_LIBRARY_PATH enviroment variable:
+
+ * *LD_LIBRARY_PATH=/usr/lib:$LD_LIBRARY_PATH
+
 = Jmagick =
+
+Download the source code of version 6.4.0 from http://downloads.jmagick.org and decompress it:
+
+ * *tar -xvzf JMagick.tar.gz
+
+Enter the new directory and execute autoconf:
+
+ * *autoconf*
+
+Then configure:
+
+ * *./configure*
+
+To compile it, you must execute make:
+
+ * *make all*
+
+After it's done, install it with:
+
+ * *make install*
+
+You must add jmagick.jar to the CLASSPATH enviroment variable:
+
+ * *export CLASSPATH=/usr/lib/jmagick.jar:$CLASSPATH*
