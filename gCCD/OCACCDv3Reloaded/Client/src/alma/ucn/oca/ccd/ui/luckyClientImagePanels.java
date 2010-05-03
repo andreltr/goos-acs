@@ -39,7 +39,7 @@ public class luckyClientImagePanels extends JPanel {
 			preferenceWidthPanel = widthx;
 			
 			//We read using ImageMagick
-			ImageInfo info = new ImageInfo("/diska/home/almadev/" + filename);
+			ImageInfo info = new ImageInfo("/home/almadev/" + filename);
 			System.out.println("Filename: "+filename);
 			System.out.println("File read ImageInfo: " + info.getFileName());
 			MagickImage mImage = new MagickImage(info);
@@ -108,7 +108,7 @@ public class luckyClientImagePanels extends JPanel {
 	public void setImage(String filename) {
 		try {			
 		        //We read using ImageMagick
-			ImageInfo info = new ImageInfo("/diska/home/almadev/" + filename);
+			ImageInfo info = new ImageInfo("/home/almadev/" + filename);
 			System.out.println("File read ImageInfo: " + info.getFileName());
 			MagickImage mImage = new MagickImage(info);
 			System.out.println("Frames: " + mImage.getNumFrames());
