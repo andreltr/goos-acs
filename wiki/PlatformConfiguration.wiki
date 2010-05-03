@@ -9,3 +9,17 @@ Add your content here.
 To install Image Magick you must download the source code of version 6.4.0 from http://downloads.jmagick.org/ and decompress it:
 
  * *tar -xvzf ImageMagick.tar.gz
+
+Enter the directory and execute configure:
+
+ * *./configure*
+
+Then just execute make as *root*:
+
+ * *make install*
+
+After it's done, you can verify that it's working by opening the image viewer:
+
+ * *display*
+
+= Jmagick =
