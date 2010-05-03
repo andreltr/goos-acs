@@ -1,8 +1,8 @@
-#summary Guide to install ACS 8.1.0
+#summary Guide to install ACS 8.0.0
 
 = Introduction =
 
-ACS 8.1.0 is supported on Scientific Linux 5.3 (SL) and is very easy to install.
+ACS 8.0.0 is supported on Scientific Linux 5.3 (SL) and is very easy to install.
 
 = Requirements =
 
@@ -32,17 +32,21 @@ Then get the ACS_installer.sh script and execute it under sudo:
 
 You can use the script to check if everything is OK to install ACS with the "--test" parameter:
 
- * *sudo ACS_installer.sh --test*
+ * *sudo ACS800_installer.sh --test*
 
 If everything is alright, install ACS, and follow the script instructions:
 
- * *sudo ACS_installer.sh --install*
+ * *sudo ACS800_installer.sh --install*
 
 Reboot your machine and start X (startx) in the account specified in ACS installation, you will notice that bash is replaced by korn shell.
 
 = Testing the installation =
 
-You can check if ACS runs fine by executing ACS. Just open a terminal and execute one of the following commands:
+You can check if ACS runs fine by executing ACS. But first you must change the *ACS_CDB* environment variable, since it currently points to an empty folder.
+
+ * */alma/.../defaultCDB/*
+
+Then, just open a terminal and execute one of the following commands:
 
  * *acsStart*
  * *acscommandcenter*
