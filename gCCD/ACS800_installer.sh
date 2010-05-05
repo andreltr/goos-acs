@@ -284,7 +284,7 @@ then
 	fi
 
 	#Untar the ACS tar in /
-	#tar -xvzf ACS800.tar.gz -C /
+	tar -xvzf ACS800.tar.gz -C /
 
 	#We change the owner of /alma to $vusername
 	chown -R $vusername:$vgroupname /alma 
@@ -298,23 +298,23 @@ then
 	#If /usr/lib wasn't found
 	if [ $usrlib -gt 1 ]
 	then
-		echo "export LD_LIBRARY_PATH=/usr/lib:$LD_LIBRARY_PATH" >> /home/$vusername/.bashrc
-		echo "export LD_LIBRARY_PATH=/usr/lib:$LD_LIBRARY_PATH" >> /home/$vusernamedev/.bashrc
+		echo "export LD_LIBRARY_PATH=/usr/lib:\$LD_LIBRARY_PATH" >> /home/$vusername/.bashrc
+		echo "export LD_LIBRARY_PATH=/usr/lib:\$LD_LIBRARY_PATH" >> /home/$vusernamedev/.bashrc
 		echo ""
 	fi
 
 	#If /usr/local/lib wasn't found
 	if [ $usrlocallib -gt 1 ]
 	then
-		echo "export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH" >> /home/$vusername/.bashrc
-		echo "export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH" >> /home/$vusernamedev/.bashrc
+		echo "export LD_LIBRARY_PATH=/usr/local/lib:\$LD_LIBRARY_PATH" >> /home/$vusername/.bashrc
+		echo "export LD_LIBRARY_PATH=/usr/local/lib:\$LD_LIBRARY_PATH" >> /home/$vusernamedev/.bashrc
 		echo ""
 	fi
 
-	echo "export PYTHON_PATH=$PYTHONPATH" >> /home/$vusername/.bashrc
+	echo "export PYTHON_PATH=\$PYTHONPATH" >> /home/$vusername/.bashrc
 	echo "source /home/$vusername/.acs/.bash_profile.acs" >> /home/$vusername/.bashrc
 
-	echo "export PYTHON_PATH=$PYTHONPATH" >> /home/$vusernamedev/.bashrc
+	echo "export PYTHON_PATH=\$PYTHONPATH" >> /home/$vusernamedev/.bashrc
 	echo "source /home/$vusernamedev/.acs/.bash_profile.acs" >> /home/$vusernamedev/.bashrc
 
 	#We configure the integration area for ACS (INTROOT)

@@ -160,7 +160,7 @@ tttlll_OBJECTS  =
 #
 # Configuration Database Files
 # ----------------------------
-CDB_SCHEMAS = 
+CDB_SCHEMAS = CCDComponent
 
 # 
 # IDL Files and flags
