@@ -31,7 +31,7 @@ module CCDmodule
   };
 
   //CCD interface
-  interface CCDinterface : ACS::ACSComponent
+  interface CCDinterface : ACS::CharacteristicComponent
   {
     void on();
     void off();
@@ -39,6 +39,11 @@ module CCDmodule
     CCDStates::CCDSTATE getState();
     void setCCDModel(in CCDModels::CCDMODEL model);
     CCDModels::CCDMODEL getCCDModel();
+
+    readonly attribute ACS::ROdouble actualAirTemperature;
+    readonly attribute ACS::ROdouble actualCCDTemperature;
+    readonly attribute ACS::RWdouble commandedCCDTemperature;
+    readonly attribute ACS::RWstring cameraName;
   };
 
   //Notification channel supplier interface
