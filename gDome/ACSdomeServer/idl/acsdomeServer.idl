@@ -12,8 +12,12 @@ module acsdomeServer
 	{
 	void displayMessage();
 	
-	long rotate_dome(in long radians);
-	
+	double getCurrentPosition();
+	boolean rotateDome(in double radians);
+	boolean domeSlitIsOpen();
+    boolean openDomeSlit();
+    boolean closeDomeSlit();
+    
 	void badMethod() raises (ACSErrTypeCommon::UnknownEx);
 	};
 };

@@ -6,13 +6,20 @@
 #include <acsutil.h>
 #include <baciS.h>
 
+#include <iostream>
+
 ACE_RCSID(acsexmpl, acsdomeClient, "$Id: acsdomeClient.cpp,v 1.0 Exp $")
 using namespace maci;
 
+const double Pi = 3.14159265358979323846;
+
+
+bool check(int, int);
+
 int main(int argc, char *argv[])
 {
-    SimpleClient client;
-    acsdomeServer::DomeServer_var foo;
+	SimpleClient client;
+	acsdomeServer::DomeServer_var foo;
 
     if (client.init(argc,argv) == 0)
 	{
@@ -46,11 +53,77 @@ int main(int argc, char *argv[])
 
    	        if (!CORBA::is_nil(foo.in()))
    	        {
-   	        	long radians = 3;
-   	        	std::cout << "Dome Client ~ radians to server: " << radians << std::endl;
+   	        	// Initiating program
    	        	foo->displayMessage();
-   	        	long new_radians = foo->rotate_dome(radians);
-   	        	std::cout << "Dome Client ~ radians from server: " << new_radians << std::endl;
+   	        	// main loop
+   	        	system("clear");
+   	        	bool goOff = false;
+   	        	std::cout << ">>>>>>>>>>>>>>>>>>> Dome Server Client >>>>>>>>>>>>>>>>>>>" << endl;
+   	        	while (!goOff) {
+					std::cout << "\nChoose the desired operation:"
+							  << "\n(0) Exit"
+							  << "\n(1) Get current position of the dome"
+							  << "\n(2) Rotate dome"
+							  << "\n(3) Get current state of the dome slit"
+							  << "\n(4) Open dome slit"
+							  << "\n(5) Close dome slit"
+							  << "\n?"
+							  << std::endl;
+					int op;
+					std::cin >> op;
+					while (!check(op, 5)) {
+						std::cout << "...out of range!\n" << std::endl;
+						std::cin >> op;
+					}
+					switch(op) {
+					case 0:
+						goOff = true;
+						std::cout << "\ngoodbye!" << std::endl;
+						break;
+					case 1:
+						//double new_radians = foo->getCurrentPosition();
+						std::cout << "\n> The current position of the dome is: " << foo->getCurrentPosition() << std::endl;
+						break;
+					case 2:
+						std::cout << "\nEnter the number of radians to rotate:" << std::endl;
+						double radians;
+						std::cin >> radians;
+						if (radians > -2*Pi && radians < 2*Pi) {
+							std::cout << "> Dome Client ~ radians to server: " << radians << std::endl;
+							bool rotate = foo->rotateDome(radians);
+							if (rotate) {
+								double current_position = foo->getCurrentPosition();
+								std::cout << "> Dome Client ~ new position of the dome: " << current_position << std::endl;
+							} else {
+								std::cout << "> Error by rotating the dome" << std::endl;
+							}
+						} else {
+							std::cout << "...out of range!\n" << std::endl;
+						}
+						break;
+					case 3:
+						std::cout << "\n> Current state of the dome slit: " << foo->domeSlitIsOpen() << std::endl;
+						break;
+					case 4:
+						std::cout << "\n...opening the slit\n" << std::endl;
+						if (foo->openDomeSlit()) {
+							std::cout << "> Now, the current state of the dome slit is: " << foo->domeSlitIsOpen() << std::endl;
+						} else {
+							std::cout << "> Error when opening the slit" << std::endl;
+						}
+						break;
+					case 5:
+						std::cout << "\n...closing the slit\n" << std::endl;
+						if (foo->closeDomeSlit()) {
+							std::cout << "> Now, the current state of the dome slit is: " << foo->domeSlitIsOpen() << std::endl;
+						} else {
+							std::cout << "> Error when closing the slit" << std::endl;
+						}
+						break;
+					default:
+						break;
+					}
+   	        	}
     	    }
 	}
     catch(maciErrType::CannotGetComponentExImpl &_ex)
@@ -75,4 +148,12 @@ int main(int argc, char *argv[])
     //Sleep for 3 sec to allow everything to cleanup and stablize
     ACE_OS::sleep(3);
     return 0;
+}
+
+bool check(int op, int range) {
+	if (op >= 0 && op <= range) return true;
+	else {
+		std::cout << "...option out of range, re-enter\n";
+		return false;
+	}
 }

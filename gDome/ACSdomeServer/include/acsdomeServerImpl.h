@@ -19,13 +19,14 @@ class DomeServer: public virtual acscomponent::ACSComponentImpl,   	//Component 
 
     virtual ~DomeServer();
 
-    virtual void
-    displayMessage ();
+    virtual void displayMessage();
+    virtual CORBA::Double getCurrentPosition() throw(CORBA::SystemException);
+    virtual CORBA::Boolean rotateDome(CORBA::Double radians) throw(CORBA::SystemException);
+    virtual CORBA::Boolean domeSlitIsOpen() throw(CORBA::SystemException);
+    virtual CORBA::Boolean openDomeSlit() throw(CORBA::SystemException);
+    virtual CORBA::Boolean closeDomeSlit() throw(CORBA::SystemException);
 
-    virtual CORBA::Long rotate_dome(CORBA::Long radians) throw(CORBA::SystemException);
-
-    virtual void
-    badMethod();
+    virtual void badMethod();
 };
 
 #endif
