@@ -2,6 +2,9 @@
 #include <ACSErrTypeCommon.h>
 #include <iostream>
 
+double domeCurrentPosition = 0.0;
+bool slitCurrentState = false;
+
 ACE_RCSID(acsexmpl, acsdomeServerImpl, "$Id: acsdomeServerImpl.cpp,v 1.0 Exp $")
 
 DomeServer::DomeServer(
@@ -24,11 +27,33 @@ DomeServer::displayMessage ()
     std::cout << "Dome Server Ready" << std::endl;
 }
 
-CORBA::Long DomeServer::rotate_dome(CORBA::Long radians) throw (CORBA::SystemException)
+CORBA::Double DomeServer::getCurrentPosition() throw (CORBA::SystemException)
 {
-  //CORBA::Long ret_value(1);
-  std::cout << "Dome Server ~ radians received: " << radians << std::endl;
-  return radians*2-1;
+	return domeCurrentPosition;
+}
+
+CORBA::Boolean DomeServer::rotateDome(CORBA::Double radians) throw (CORBA::SystemException)
+{
+   std::cout << "Dome Server ~ radians received: " << radians << std::endl;
+   domeCurrentPosition += radians;
+   return true;
+}
+
+CORBA::Boolean DomeServer::domeSlitIsOpen() throw (CORBA::SystemException) {
+	std::cout << "Dome Server ~ returning slit current state " << std::endl;
+	return slitCurrentState;
+}
+
+CORBA::Boolean DomeServer::openDomeSlit() throw (CORBA::SystemException) {
+	std::cout << "Dome Server ~ opening the slit " << std::endl;
+	slitCurrentState = true;
+	return true;
+}
+
+CORBA::Boolean DomeServer::closeDomeSlit() throw (CORBA::SystemException) {
+	std::cout << "Dome Server ~ closing the slit " << std::endl;
+	slitCurrentState = false;
+	return true;
 }
 
 void
