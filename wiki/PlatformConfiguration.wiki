@@ -62,3 +62,15 @@ To install CCfits, you must download the rpm files available in the Downloads se
 = ANDOR SDK =
 
 The Andor SDK is needed to compile the ACS component part of the software.
+
+Uncompress the TAR using:
+
+ * *tar -xvzf andor.tar.gz*
+
+Go to the new directory from a terminal and execute (as sudo):
+
+ * *sudo ./install_andor*
+
+Select you camera type from the list and wait for the script to finish.
+
+
