@@ -10,18 +10,17 @@
 #include <acsncSimpleSupplier.h>
 #include <CCDS.h>
 
-class NCSupplier: public virtual acscomponent::ACSComponentImpl, 
-		    public POA_CCDmodule::NotificationSupplier
-{    
-  public:
+class NCSupplier: public virtual acscomponent::ACSComponentImpl,
+		public POA_CCDmodule::NotificationSupplier {
+public:
 
-    NCSupplier(const ACE_CString& name,
-	       maci::ContainerServices * containerServices);
-    virtual ~NCSupplier();
-    
-    /* --------------------- [ CORBA interface ] ----------------------*/    
-  
-    void sendNotification(const CCDmodule::ncCCDFilename &fileEvent);
+	NCSupplier(const ACE_CString& name,
+			maci::ContainerServices * containerServices);
+	virtual ~NCSupplier();
+
+	/* --------------------- [ CORBA interface ] ----------------------*/
+
+	void sendNotification(const CCDmodule::ncCCDFilename &fileEvent);
 };
 
 #endif

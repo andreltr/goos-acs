@@ -35,6 +35,7 @@ module CCDmodule
   {
     void on();
     void off();
+    //void resetCamera();
     void getImage(in long width, in long height, in long acquisitionMode, in long numberOfAcquisitions, in float exposureTime);
     CCDStates::CCDSTATE getState();
     void setCCDModel(in CCDModels::CCDMODEL model);
