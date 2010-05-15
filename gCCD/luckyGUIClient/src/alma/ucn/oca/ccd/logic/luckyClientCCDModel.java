@@ -10,6 +10,8 @@ import alma.acs.nc.Consumer;
 import alma.ACS.ACSComponent;
 
 public class luckyClientCCDModel extends ComponentClient {
+	private alma.ACS.RWstring myStringProperty;
+	private alma.ACS.RWdouble myDoubleProperty;
 	// Reference to the CCD component
 	private alma.CCDmodule.CCDinterface ccdCompReference;
 	// Instance of Notification Channel consumer
@@ -32,6 +34,9 @@ public class luckyClientCCDModel extends ComponentClient {
 		l_filenames = null;
 		lastNotification = null;
 		consumerOn = false;
+		
+		myStringProperty = null;
+		myDoubleProperty = null;
 	}
 
 	// Obtains a connection to the ACS Component
@@ -46,6 +51,12 @@ public class luckyClientCCDModel extends ComponentClient {
 				.narrow(m_containerServices.getComponent("CCDComponent"));
 		ccdCompReference.on();
 		getCameraModels();
+		
+		myStringProperty = ccdCompReference.cameraName();
+		myDoubleProperty = ccdCompReference.commandedCCDTemperature();
+		System.out.println("77777777777777CAMERA NAME" + myStringProperty.get_sync(new alma.ACSErr.CompletionHolder()));
+		System.out.println("77777777777777CMDCCD TEMP" + myDoubleProperty.get_sync(new alma.ACSErr.CompletionHolder()));
+				
 		m_logger.info("INFO: Connected!!!");
 	}
 
@@ -116,6 +127,16 @@ public class luckyClientCCDModel extends ComponentClient {
 	}
 	
 	public void disconnectCamera(){
+		myStringProperty.set_sync("BLABLA");
+		System.out.println("88888888888CAMERA NAME: " + ccdCompReference.cameraName().get_sync(new alma.ACSErr.CompletionHolder()));
+		System.out.println("99999999999CAMERA NAME: " + myStringProperty.get_sync(new alma.ACSErr.CompletionHolder()));
+		
+		myDoubleProperty.set_sync(12.7);
+		System.out.println("101010101010CMDCCD TEMP" + ccdCompReference.commandedCCDTemperature().get_sync(new alma.ACSErr.CompletionHolder()));
+		System.out.println("111111111111CMDCCD TEMP" + myDoubleProperty.get_sync(new alma.ACSErr.CompletionHolder()));
+		System.out.println("121212121212CMDCCD TEMP" + myDoubleProperty.min_value());
+		
+		
 		disconnectConsumer();
 		ccdCompReference.off();		
 	}

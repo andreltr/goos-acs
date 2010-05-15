@@ -144,45 +144,44 @@ void CCDComponent::sendBulkData() {
 	}
 }
 
-ACS::ROdouble_ptr CCDComponent::actualAirTemperature() throw (CORBA::SystemException)
-{
-  if (!m_actualAirTemperature_p)
-  {
-    return ACS::ROdouble::_nil();
-  }
-  ACS::ROdouble_var prop = ACS::ROdouble::_narrow(m_actualAirTemperature_p->getCORBAReference());
-  return prop._retn();
+ACS::ROdouble_ptr CCDComponent::actualAirTemperature()
+		throw (CORBA::SystemException) {
+	if (!m_actualAirTemperature_p) {
+		return ACS::ROdouble::_nil();
+	}
+	ACS::ROdouble_var prop = ACS::ROdouble::_narrow(
+			m_actualAirTemperature_p->getCORBAReference());
+	return prop._retn();
 }
 
-ACS::ROdouble_ptr CCDComponent::actualCCDTemperature() throw (CORBA::SystemException)
-{
-  if (!m_actualCCDTemperature_p)
-  {
-    return ACS::ROdouble::_nil();
-  }
-  ACS::ROdouble_var prop = ACS::ROdouble::_narrow(m_actualCCDTemperature_p->getCORBAReference());
-  return prop._retn();
+ACS::ROdouble_ptr CCDComponent::actualCCDTemperature()
+		throw (CORBA::SystemException) {
+	if (!m_actualCCDTemperature_p) {
+		return ACS::ROdouble::_nil();
+	}
+	ACS::ROdouble_var prop = ACS::ROdouble::_narrow(
+			m_actualCCDTemperature_p->getCORBAReference());
+	return prop._retn();
 }
 
-ACS::RWstring_ptr CCDComponent::cameraName() throw (CORBA::SystemException)
-{
-  if (!m_cameraName_p)
-  {
-    return ACS::RWstring::_nil();
-  }
-  ACS::RWstring_var prop = ACS::RWstring::_narrow(m_cameraName_p->getCORBAReference());
-  return prop._retn();
+ACS::RWstring_ptr CCDComponent::cameraName() throw (CORBA::SystemException) {
+	if (!m_cameraName_p) {
+		return ACS::RWstring::_nil();
+	}
+	ACS::RWstring_var prop = ACS::RWstring::_narrow(
+			m_cameraName_p->getCORBAReference());
+	return prop._retn();
 }
 
-ACS::RWdouble_ptr CCDComponent::commandedCCDTemperature() throw (CORBA::SystemException)
-{
-  if (!m_commandedCCDTemperature_p)
-  {
-    return ACS::RWdouble::_nil();
-  }
-  ACS::RWdouble_var prop = ACS::RWdouble::_narrow(m_commandedCCDTemperature_p->getCORBAReference());
-  return prop._retn();
+ACS::RWdouble_ptr CCDComponent::commandedCCDTemperature()
+		throw (CORBA::SystemException) {
+	if (!m_commandedCCDTemperature_p) {
+		return ACS::RWdouble::_nil();
+	}
+	ACS::RWdouble_var prop = ACS::RWdouble::_narrow(
+			m_commandedCCDTemperature_p->getCORBAReference());
+	return prop._retn();
 }
 
 #include <maciACSComponentDefines.h>
-MACI_DLL_SUPPORT_FUNCTIONS(CCDComponent)
+MACI_DLL_SUPPORT_FUNCTIONS( CCDComponent)

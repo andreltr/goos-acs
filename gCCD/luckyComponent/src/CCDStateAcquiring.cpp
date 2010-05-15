@@ -28,8 +28,8 @@ void CCDStateAcquiring::off() {
 	return;
 }
 
-std::string* CCDStateAcquiring::getImage(int width, int height, int acquisitionMode,
-		int numberOfAcquisitions, float exposureTime) {
+std::string* CCDStateAcquiring::getImage(int width, int height,
+		int acquisitionMode, int numberOfAcquisitions, float exposureTime) {
 	std::cout << "CCDStateAcquiring::getImage() nothing to do" << std::endl;
 	return 0;
 }
