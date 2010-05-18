@@ -1,4 +1,4 @@
-# Main page of the gDome project
+#summary Main page of the gDome project
 
 = gDome =
 
