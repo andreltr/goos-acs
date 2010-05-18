@@ -1,4 +1,0 @@
-This is the main page of all of GOOS projects. From here, add the pages that reference subprojects:
-
-   * [ProjectGccd gCCD]
-   * [ProjectGdome gDome]
