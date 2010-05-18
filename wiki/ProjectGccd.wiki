@@ -1,3 +1,4 @@
+#summary Main page of the gCCD project
 = gCCD =
 
 The gCCD project aims to create an ACS-based software to operate CCD cameras. The focus is to develop a generic set of components that could be specialized to support different CCD hardware.
