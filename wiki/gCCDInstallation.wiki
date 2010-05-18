@@ -9,6 +9,6 @@ Add your content here.
 In order for the software to work, you must first have ACS installed and working. See these pages:
 
  * *PlatformConfiguration*
- * *ACSInstallation*
+ * *[ACSInstallation ACS Installation]*
 
 = Installation =
