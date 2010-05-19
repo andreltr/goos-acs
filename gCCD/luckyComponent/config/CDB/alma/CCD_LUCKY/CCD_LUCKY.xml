@@ -7,6 +7,6 @@
 
 	<actualAirTemperature default_timer_trig="2.0" description="The approximate temperature of the CCD chip." format="%9.4f" units="Degrees Celsius" default_value="-9999.9"/>
 	<actualCCDTemperature default_timer_trig="2.0" description="The approximate temperature of the CCD chip." format="%9.4f" units="Degrees Celsius" default_value="-9999.9"/>
-	<cameraName default_timer_trig="2.0" description="Name of the used camera. Set to luckyEMCCD, luckyTESTCCD or luckySIMCCD." format="%s" units="-" default_value="DEFAULT"/>
+	<cameraName default_timer_trig="2.0" description="Name of the used camera. Set to luckyEMCCD, luckyTESTCCD or luckySIMCCD." format="%s" units="-" default_value="LUCKY_CCD"/>
 	<commandedCCDTemperature default_timer_trig="2.0" description="The temperature the CCD is to be cooled down to." format="%9.4f" units="Degrees Celsius" default_value="25.0" min_value="-55.0" max_value="45.0"/>
 </CCDComponent>

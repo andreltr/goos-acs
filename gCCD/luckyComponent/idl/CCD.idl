@@ -2,7 +2,7 @@
 #define CCD_IDL_
 
 #include <baci.idl>
-#include <acscomponent.idl>
+//#include <acscomponent.idl>
 #include <ACSErrTypeCommon.idl>
 #include <CCDModels.idl>
 #include <CCDStates.idl>
