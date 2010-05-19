@@ -39,6 +39,7 @@ CCDComponent::~CCDComponent() {
 	if (m_bdtThread_p != 0) {
 		getContainerServices()->getThreadManager()->destroy(m_bdtThread_p);
 	}
+
 	//delete[] filesQueue;
 	delete context;
 }
