@@ -265,23 +265,22 @@ then
 			read vend
 		done
 
-		######################################################
-		# ALL THE WORK GETS DONE HERE
-		######################################################
-
-		#We create the group
-		groupadd -g 335 -o $vgroupname
-
-		#We create the users
-		useradd -g 335 -u 3060 -o -d /home/$vusername -m -s /bin/bash $vusername
-		useradd -g 335 -u 3070 -o -d /home/$vusernamedev -m -s /bin/bash $vusernamedev
-
-		#Change the passwords of the accounts
-
-		passwd $vusername
-		passwd $vusernamedev
-
 	fi
+
+	######################################################
+	# ALL THE WORK GETS DONE HERE
+	######################################################
+
+	#We create the group
+	groupadd -g 335 -o $vgroupname
+
+	#We create the users
+	useradd -g 335 -u 3060 -o -d /home/$vusername -m -s /bin/bash $vusername
+	useradd -g 335 -u 3070 -o -d /home/$vusernamedev -m -s /bin/bash $vusernamedev
+
+	#Change the passwords of the accounts
+	passwd $vusername
+	passwd $vusernamedev
 
 	#Untar the ACS tar in /
 	tar -xvzf ACS800.tar.gz -C /
@@ -294,6 +293,9 @@ then
 	cp -rf /alma/ACS-8.0/ACSSW/config/.acs/ /home/$vusernamedev
 
 	#We append the neccesary lines to /home/$vusername/.bashrc
+
+	echo "source /home/$vusername/.acs/.bash_profile.acs" >> /home/$vusername/.bashrc
+	echo "source /home/$vusernamedev/.acs/.bash_profile.acs" >> /home/$vusernamedev/.bashrc
 
 	#If /usr/lib wasn't found
 	if [ $usrlib -gt 1 ]
@@ -312,10 +314,7 @@ then
 	fi
 
 	echo "export PYTHON_PATH=\$PYTHONPATH" >> /home/$vusername/.bashrc
-	echo "source /home/$vusername/.acs/.bash_profile.acs" >> /home/$vusername/.bashrc
-
 	echo "export PYTHON_PATH=\$PYTHONPATH" >> /home/$vusernamedev/.bashrc
-	echo "source /home/$vusernamedev/.acs/.bash_profile.acs" >> /home/$vusernamedev/.bashrc
 
 	#We configure the integration area for ACS (INTROOT)
 	vintroot="/home/$vusername/INTROOT"
