@@ -6,7 +6,7 @@
 #endif
 
 #include <iostream>
-#include "CCDModelsC.h"
+#include "CCDModels.h"
 #include "CCDStates.h"
 #include "STRContext.h"
 #include "atmcdLXd.h"
@@ -22,10 +22,7 @@ protected:
 	CCDComponent * ccd_p;
 	STRContext * strContext_p;
 public:
-	CCDState(CCDComponent * ccd) {
-		ccd_p = ccd;
-		strContext_p = new STRContext(CCDModels::OCA_SIMCCD);
-	}
+	CCDState(CCDComponent * ccd);
 	virtual ~CCDState() {
 		delete strContext_p;
 	}
@@ -35,13 +32,6 @@ public:
 	virtual std::string* getImage(int width, int height, int acquisitionMode,
 			int numberOfAcquisitions, float exposureTime) = 0;
 	virtual int getState() = 0;
-	void setCCDModel(CCDModels::CCDMODEL model) {
-		strContext_p->setCCDModel(model);
-	}
-	;
-	CCDModels::CCDMODEL getCCDModel() {
-		return strContext_p->getCCDModel();
-	}
 
 };
 #endif

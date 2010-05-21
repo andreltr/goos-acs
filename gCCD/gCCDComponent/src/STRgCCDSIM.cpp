@@ -1,20 +1,20 @@
-#include "STROcaSimCCD.h"
+#include "STRgCCDSIM.h"
 
 /*
- * Implementation of OcaSimCCD strategy for the Strategy Pattern
+ * Implementation of gCCDSIM strategy for the Strategy Pattern
  *
  */
 
-STROcaSimCCD::STROcaSimCCD() {
+STRgCCDSIM::STRgCCDSIM() {
 
 }
 
-STROcaSimCCD::~STROcaSimCCD() {
+STRgCCDSIM::~STRgCCDSIM() {
 
 }
 
 /*Code simulation for FITS creation goes here...*/
-std::string* STROcaSimCCD::getImage(int width, int height, int acquisitionMode,
+std::string* STRgCCDSIM::getImage(int width, int height, int acquisitionMode,
 		int numberOfAcquisitions, float exposureTime) {
 
 	iMAGES_WIDTH = width;
@@ -42,7 +42,7 @@ std::string* STROcaSimCCD::getImage(int width, int height, int acquisitionMode,
 	return filenames;
 }
 
-int STROcaSimCCD::writeImage(int frames, int fileCorrelation) {
+int STRgCCDSIM::writeImage(int frames, int fileCorrelation) {
 
 	frames--;
 	if (frames < 0)

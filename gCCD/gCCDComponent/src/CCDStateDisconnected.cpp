@@ -1,5 +1,4 @@
 #include "CCDStateDisconnected.h"
-#include "ACSErrTypeCommon.h"
 #include <iostream>
 #include "CCD.h"
 
@@ -11,7 +10,6 @@
 
 CCDStateDisconnected::CCDStateDisconnected(CCDComponent * ccd) :
 	CCDState(ccd) {
-
 }
 
 CCDStateDisconnected::~CCDStateDisconnected() {

@@ -1,22 +1,22 @@
-#include "STRTestCCD.h"
+#include "STRSBIGST7.h"
 
 /*
  *
- * Implementation of a Test strategy for the Strategy Pattern
+ * Implementation of SBIGST7 strategy for the Strategy Pattern
  *
  */
 
-STRTestCCD::STRTestCCD() {
+STRSBIGST7::STRSBIGST7() {
 
 }
 
-STRTestCCD::~STRTestCCD() {
+STRSBIGST7::~STRSBIGST7() {
 
 }
 
-std::string* STRTestCCD::getImage(int width, int height, int acquisitionMode,
+std::string* STRSBIGST7::getImage(int width, int height, int acquisitionMode,
 		int numberOfAcquisitions, float exposureTime) {
-	std::cout << "STRTestCCD::getImage()" << std::endl;
+	std::cout << "STRSBIGST7::getImage()" << std::endl;
 
 	//Test queue
 	int queueSize = 4;

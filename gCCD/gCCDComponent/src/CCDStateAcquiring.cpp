@@ -1,5 +1,4 @@
 #include "CCDStateAcquiring.h"
-#include "ACSErrTypeCommon.h"
 #include <iostream>
 #include "CCD.h"
 
@@ -11,7 +10,6 @@
 
 CCDStateAcquiring::CCDStateAcquiring(CCDComponent * ccd) :
 	CCDState(ccd) {
-
 }
 
 CCDStateAcquiring::~CCDStateAcquiring() {

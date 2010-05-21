@@ -13,7 +13,8 @@
 
 #include <CCDS.h>
 
-#include <baciRWstring.h>
+#include <baciROlong.h>
+#include <baciROstring.h>
 #include <baciROdouble.h>
 #include <baciRWdouble.h>
 #include <baciSmartPropertyPointer.h>
@@ -51,8 +52,9 @@ private:
 	/* --------------------- [ Properties START ] ----------------------*/
 	SmartPropertyPointer<ROdouble> m_actualAirTemperature_p;
 	SmartPropertyPointer<ROdouble> m_actualCCDTemperature_p;
-	SmartPropertyPointer<RWstring> m_cameraName_p;
 	SmartPropertyPointer<RWdouble> m_commandedCCDTemperature_p;
+	SmartPropertyPointer<ROstring> m_cameraName_p;
+	SmartPropertyPointer<ROlong> m_cameraModel_p;
 	/* --------------------- [ Properties END ] ------------------------*/
 
 protected:
@@ -107,7 +109,7 @@ public:
 	/**
 	 * Gets the current camera model in use
 	 */
-	CCDModels::CCDMODEL getCCDModel();
+	long getCCDModel();
 
 	/**
 	 * Functions to access the component's properties
@@ -119,10 +121,12 @@ public:
 	virtual ACS::ROdouble_ptr actualCCDTemperature()
 			throw (CORBA::SystemException);
 
-	virtual ACS::RWstring_ptr cameraName() throw (CORBA::SystemException);
-
 	virtual ACS::RWdouble_ptr commandedCCDTemperature()
 			throw (CORBA::SystemException);
+
+	virtual ACS::ROstring_ptr cameraName() throw (CORBA::SystemException);
+
+	virtual ACS::ROlong_ptr cameraModel() throw (CORBA::SystemException);
 	/* --------------------- [ CORBA interface END ] --------------------- */
 
 	/* --------------------- [ internal purpose ] -------------------- */
@@ -141,11 +145,6 @@ public:
 	 * Sends the files to the client
 	 */
 	void sendBulkData();
-
-	/**
-	 * Sets the camera model to be used
-	 */
-	void setCCDModel(CCDModels::CCDMODEL model);
 
 };
 

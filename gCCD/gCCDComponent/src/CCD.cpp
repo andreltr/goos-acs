@@ -15,9 +15,19 @@ CCDComponent::CCDComponent(const ACE_CString& name,
 		maci::ContainerServices * containerServices) :
 	CharacteristicComponentImpl(name, containerServices),
 			m_actualAirTemperature_p(this), m_actualCCDTemperature_p(this),
-			m_cameraName_p(this), m_commandedCCDTemperature_p(this) {
+			m_commandedCCDTemperature_p(this), m_cameraName_p(this), m_cameraModel_p(this) {
 
 	ACS_TRACE("CCDComponent::CCDComponent(): created");
+
+	m_actualAirTemperature_p = new ROdouble(name + ":actualAirTemperature",
+			getComponent());
+	m_actualCCDTemperature_p = new ROdouble(name + ":actualCCDTemperature",
+			getComponent());
+	m_commandedCCDTemperature_p = new RWdouble(name
+			+ ":commandedCCDTemperature", getComponent());
+	m_cameraName_p = new ROstring(name + ":cameraName", getComponent());
+	m_cameraModel_p = new ROlong(name + ":cameraModel", getComponent());
+
 	ncSupplier = 0;
 	receiver = 0;
 	sender = 0;
@@ -25,13 +35,6 @@ CCDComponent::CCDComponent(const ACE_CString& name,
 	bdStatus = false;
 	context = new CCDContext(this, STATE_DISCONNECTED);
 
-	m_actualAirTemperature_p = new ROdouble(name + ":actualAirTemperature",
-			getComponent());
-	m_actualCCDTemperature_p = new ROdouble(name + ":actualCCDTemperature",
-			getComponent());
-	m_cameraName_p = new RWstring(name + ":cameraName", getComponent());
-	m_commandedCCDTemperature_p = new RWdouble(name
-			+ ":commandedCCDTemperature", getComponent());
 }
 
 CCDComponent::~CCDComponent() {
@@ -41,7 +44,6 @@ CCDComponent::~CCDComponent() {
 		getContainerServices()->getThreadManager()->destroy(m_bdtThread_p);
 	}
 
-	//delete[] filesQueue;
 	delete context;
 }
 
@@ -76,9 +78,10 @@ CORBA::Long CCDComponent::getState() {
 	return context->getState();
 }
 
-CCDModels::CCDMODEL CCDComponent::getCCDModel() {
+long CCDComponent::getCCDModel() {
 	ACS_TRACE("CCDComponent::getCCDModel()");
-	return context->getCCDModel();
+	ACSErr::Completion_var completion;
+	return cameraModel()->get_sync(completion.out());
 }
 
 ACS::ROdouble_ptr CCDComponent::actualAirTemperature()
@@ -101,15 +104,6 @@ ACS::ROdouble_ptr CCDComponent::actualCCDTemperature()
 	return prop._retn();
 }
 
-ACS::RWstring_ptr CCDComponent::cameraName() throw (CORBA::SystemException) {
-	if (!m_cameraName_p) {
-		return ACS::RWstring::_nil();
-	}
-	ACS::RWstring_var prop = ACS::RWstring::_narrow(
-			m_cameraName_p->getCORBAReference());
-	return prop._retn();
-}
-
 ACS::RWdouble_ptr CCDComponent::commandedCCDTemperature()
 		throw (CORBA::SystemException) {
 	if (!m_commandedCCDTemperature_p) {
@@ -117,6 +111,24 @@ ACS::RWdouble_ptr CCDComponent::commandedCCDTemperature()
 	}
 	ACS::RWdouble_var prop = ACS::RWdouble::_narrow(
 			m_commandedCCDTemperature_p->getCORBAReference());
+	return prop._retn();
+}
+
+ACS::ROstring_ptr CCDComponent::cameraName() throw (CORBA::SystemException) {
+	if (!m_cameraName_p) {
+		return ACS::ROstring::_nil();
+	}
+	ACS::ROstring_var prop = ACS::ROstring::_narrow(
+			m_cameraName_p->getCORBAReference());
+	return prop._retn();
+}
+
+ACS::ROlong_ptr CCDComponent::cameraModel() throw (CORBA::SystemException) {
+	if (!m_cameraModel_p) {
+		return ACS::ROlong::_nil();
+	}
+	ACS::ROlong_var prop = ACS::ROlong::_narrow(
+			m_cameraModel_p->getCORBAReference());
 	return prop._retn();
 }
 
@@ -178,11 +190,6 @@ void CCDComponent::sendBulkData() {
 		m_bdtThread_p->restart();
 		ACS_SHORT_LOG((LM_INFO, "BDT thread restarted."));
 	}
-}
-
-void CCDComponent::setCCDModel(CCDModels::CCDMODEL model) {
-	ACS_TRACE("CCDComponent::setCCDModel(...)");
-	context->setCCDModel(model);
 }
 
 #include <maciACSComponentDefines.h>

@@ -86,7 +86,6 @@ INCLUDES        =
 # ----------------------------
 LIBRARIES       = CCDComponent NCSupplier
 CCDComponent_LIBS = CCDStubs \
-					CCDModelsStubs \
 					acscomponent \
 					bulkDataReceiverStubs \
 					bulkDataSenderStubs \
@@ -94,7 +93,6 @@ CCDComponent_LIBS = CCDStubs \
 					bulkDataCallback \
 					ACSBulkDataError 
 NCSupplier_LIBS = CCDStubs \
-			 	  CCDModelsStubs \
 				  acsnc \
 			   	  acscomponent
 LIBRARIES_L     =
@@ -104,13 +102,14 @@ LIBRARIES_L     =
 CCDComponent_OBJECTS   = CCD \
 			 			 BDTThread \
 			 			 CCDContext \
+			 			 CCDState \
 			 			 CCDStateConnected \
 			 			 CCDStateDisconnected \
 			 			 CCDStateAcquiring \
 		  	 			 STRContext \
-			 			 STRLuckyEMCCD \
-			 			 STROcaSimCCD \
-			 			 STRTestCCD	
+			 			 STRLucaEMCCD \
+			 			 STRgCCDSIM \
+			 			 STRSBIGST7	
 
 NCSupplier_OBJECTS   = NCSupplier
 
@@ -163,7 +162,7 @@ CDB_SCHEMAS = CCDComponent
 # 
 # IDL Files and flags
 # 
-IDL_FILES = CCDModels CCD
+IDL_FILES = CCD
 TAO_IDLFLAGS =
 USER_IDL =
 #

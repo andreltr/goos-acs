@@ -5,10 +5,10 @@
 #error This is a C++ include file and cannot be used from plain C
 #endif
 
-#include "STRLuckyEMCCD.h"
-#include "STROcaSimCCD.h"
-#include "STRTestCCD.h"
-#include "CCDModelsC.h"
+#include "STRLucaEMCCD.h"
+#include "STRgCCDSIM.h"
+#include "STRSBIGST7.h"
+#include "CCDModels.h"
 #include <iostream>
 
 class STRBase;
@@ -22,14 +22,15 @@ class STRBase;
 class STRContext {
 private:
 	STRBase * currentCCDModel;
-	CCDModels::CCDMODEL currentModel;
-	STRLuckyEMCCD lucky_ccd;
-	STROcaSimCCD ocasim_ccd;
-	STRTestCCD test_ccd;
+	long currentModel;
+	STRLucaEMCCD lucaem_ccd;
+	STRgCCDSIM sim_ccd;
+	STRSBIGST7 sbigst7_ccd;
 public:
 
-	STRContext(CCDModels::CCDMODEL model) {
-		setCCDModel(model);
+	STRContext(long cameraModel) {
+		std::cout << "STRContext::STRContext(...) cameraModel: " << cameraModel << std::endl;
+		setCCDModel(cameraModel);
 	}
 	~STRContext() {
 	}
@@ -39,29 +40,27 @@ public:
 		return currentCCDModel->getImage(width, height, acquisitionMode,
 				numberOfAcquisitions, exposureTime);
 	}
-	void setCCDModel(CCDModels::CCDMODEL model) {
-		currentModel = model;
-		switch (model) {
-		case CCDModels::LUCKY_EMCCD:
-			std::cout << "STRContext::setCCDModel(...) LUCKYEMCCD" << std::endl;
-			currentCCDModel = &lucky_ccd;
+	void setCCDModel(long cameraModel) {
+		currentModel = cameraModel;
+		switch (cameraModel) {
+		case LUCA_EMCCD:
+			std::cout << "STRContext::setCCDModel(...) LUCA_EMCCD" << std::endl;
+			currentCCDModel = &lucaem_ccd;
 			break;
-		case CCDModels::OCA_SIMCCD:
-			std::cout << "STRContext::setCCDModel(...) OCASIMCCD" << std::endl;
-			currentCCDModel = &ocasim_ccd;
+		case GCCD_SIM:
+			std::cout << "STRContext::setCCDModel(...) GCCD_SIM" << std::endl;
+			currentCCDModel = &sim_ccd;
 			break;
-		case CCDModels::TEST_CCD:
-			std::cout << "STRContext::setCCDModel(...) TESTCCD" << std::endl;
-			currentCCDModel = &test_ccd;
+		case SBIG_ST7:
+			std::cout << "STRContext::setCCDModel(...) SBIG_ST7" << std::endl;
+			currentCCDModel = &sbigst7_ccd;
 			break;
 		default:
-			std::cout << "STRContext::setCCDModel(...) DEFAULT" << std::endl;
+			std::cout << "STRContext::setCCDModel(...) ERROR" << std::endl;
 			//error
 		}
 	}
-	CCDModels::CCDMODEL getCCDModel() {
-		return currentModel;
-	}
+
 };
 
 #endif
