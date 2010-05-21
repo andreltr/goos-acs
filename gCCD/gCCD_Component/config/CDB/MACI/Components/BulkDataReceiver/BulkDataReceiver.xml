@@ -7,5 +7,5 @@
        Name="BulkDataReceiver"
        Code="bulkDataReceiverLibEx1"
        Type="IDL:alma/bulkdata/BulkDataReceiver:1.0"
-       Container="ReceiverCont" ImplLang="cpp"/>		     
+       Container="gCCDReceiver" ImplLang="cpp"/>		     
 
