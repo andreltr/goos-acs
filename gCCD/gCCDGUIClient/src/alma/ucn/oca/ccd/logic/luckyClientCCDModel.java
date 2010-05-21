@@ -22,11 +22,11 @@ public class luckyClientCCDModel extends ComponentClient {
 	private LinkedList<String> l_filenames;
 	private luckyClientNCEvent lastNotification;
 	private boolean consumerOn;
-	private alma.CCDModels.CCDMODEL [] modelsList;
+	private alma.CCDModels.CCDMODEL[] modelsList;
 
 	// Constructor
-	public luckyClientCCDModel(Logger logger, String managerLoc, String clientName)
-			throws Exception {
+	public luckyClientCCDModel(Logger logger, String managerLoc,
+			String clientName) throws Exception {
 		super(logger, managerLoc, clientName);
 		ccdCompReference = null;
 		m_consumer = null;
@@ -34,7 +34,7 @@ public class luckyClientCCDModel extends ComponentClient {
 		l_filenames = null;
 		lastNotification = null;
 		consumerOn = false;
-		
+
 		myStringProperty = null;
 		myDoubleProperty = null;
 	}
@@ -48,9 +48,23 @@ public class luckyClientCCDModel extends ComponentClient {
 		// Casts the object to get access to the IDL interface
 		// This should not be hard coded
 		ccdCompReference = alma.CCDmodule.CCDinterfaceHelper
-				.narrow(m_containerServices.getComponent("CCDComponent"));
+				.narrow(m_containerServices.getComponent("SBIG_ST7"));
 		ccdCompReference.on();
 		getCameraModels();
+		
+		System.out.println("---------[ Find Components Test START ]--------");
+		
+		for (String s: m_containerServices.findComponents(null, null)){
+			System.out.println("COMPONENT NAME " + m_containerServices.getComponentDescriptor(s).getName());
+			System.out.println("COMPONENT TYPE " + m_containerServices.getComponentDescriptor(s).getType());
+			for (String ss: m_containerServices.getComponentDescriptor(s).getInterfaces()){
+			System.out.println("COMPONENT INTERFACE " + ss);
+			}
+			System.out.println("COMPONENT TO STRING" + m_containerServices.getComponentDescriptor(s).toString());
+			System.out.println("------------------------------------------");
+		}
+		
+		System.out.println("---------[ Find Components Test END ]--------");
 		
 		myStringProperty = ccdCompReference.cameraName();
 		myDoubleProperty = ccdCompReference.commandedCCDTemperature();
@@ -75,11 +89,14 @@ public class luckyClientCCDModel extends ComponentClient {
 		if (l_filenames == null) {
 			l_filenames = new LinkedList<String>();
 		}
-		
-		lastNotification = new luckyClientNCEvent(newImageEvent.type.toString(), newImageEvent.id ,newImageEvent.total);
+
+		lastNotification = new luckyClientNCEvent(
+				newImageEvent.type.toString(), newImageEvent.id,
+				newImageEvent.total);
 		m_logger.info("INFO: Last notification:" + lastNotification.getID());
 		if ((newImageEvent.type.toString()).equals("FILENAME")) {
-			m_logger.info("INFO: 'FILENAME' Notification received filename: " + newImageEvent.fileName);
+			m_logger.info("INFO: 'FILENAME' Notification received filename: "
+					+ newImageEvent.fileName);
 			// The received name gets added to the list
 			l_filenames.add(newImageEvent.fileName);
 			m_logger.info("INFO: Last added: " + l_filenames.getLast());
@@ -92,11 +109,13 @@ public class luckyClientCCDModel extends ComponentClient {
 
 	// This method calls the CCD component and asks for an image.
 	// It also prepares the NC consumer to start receiving notifications.
-	public void getImage(int width, int height, int acquisitionMode, int numberOfAcc, float exposureTime) {
+	public void getImage(int width, int height, int acquisitionMode,
+			int numberOfAcc, float exposureTime) {
 		try {
 			l_filenames = null;
 			consumerOn = true;
-			m_consumer = new Consumer(alma.CCDmodule.CHANNELNAME_CCDCLIENT.value,
+			m_consumer = new Consumer(
+					alma.CCDmodule.CHANNELNAME_CCDCLIENT.value,
 					m_containerServices);
 			m_consumer
 					.addSubscription(alma.CCDmodule.ncCCDFilename.class, this);
@@ -108,7 +127,8 @@ public class luckyClientCCDModel extends ComponentClient {
 			m_logger.info("INFO: acq Mode: " + acquisitionMode);
 			m_logger.info("INFO: frames per file: " + numberOfAcc);
 			m_logger.info("INFO: exposure time: " + exposureTime);
-			ccdCompReference.getImage(width,height,acquisitionMode,numberOfAcc,exposureTime);
+			ccdCompReference.getImage(width, height, acquisitionMode,
+					numberOfAcc, exposureTime);
 		} catch (Exception e) {
 			m_logger.info("EXCEPTION: Consumer has been disconnected");
 			this.disconnectConsumer();
@@ -117,7 +137,7 @@ public class luckyClientCCDModel extends ComponentClient {
 
 	// This method disconnects the NC consumer from the channel
 	public void disconnectConsumer() {
-		if(m_consumer != null){
+		if (m_consumer != null) {
 			m_logger.info("INFO: Consumer has been disconnected");
 			m_consumer.disconnect();
 			m_consumer = null;
@@ -125,36 +145,47 @@ public class luckyClientCCDModel extends ComponentClient {
 			lastNotification = null;
 		}
 	}
-	
-	public void disconnectCamera(){
+
+	public void disconnectCamera() {
 		myStringProperty.set_sync("BLABLA");
-		System.out.println("88888888888CAMERA NAME: " + ccdCompReference.cameraName().get_sync(new alma.ACSErr.CompletionHolder()));
-		System.out.println("99999999999CAMERA NAME: " + myStringProperty.get_sync(new alma.ACSErr.CompletionHolder()));
-		
+		System.out.println("88888888888CAMERA NAME: "
+				+ ccdCompReference.cameraName().get_sync(
+						new alma.ACSErr.CompletionHolder()));
+		System.out
+				.println("99999999999CAMERA NAME: "
+						+ myStringProperty
+								.get_sync(new alma.ACSErr.CompletionHolder()));
+
 		myDoubleProperty.set_sync(12.7);
-		System.out.println("101010101010CMDCCD TEMP" + ccdCompReference.commandedCCDTemperature().get_sync(new alma.ACSErr.CompletionHolder()));
-		System.out.println("111111111111CMDCCD TEMP" + myDoubleProperty.get_sync(new alma.ACSErr.CompletionHolder()));
-		System.out.println("121212121212CMDCCD TEMP" + myDoubleProperty.min_value());
-		
-		
+		System.out.println("101010101010CMDCCD TEMP"
+				+ ccdCompReference.commandedCCDTemperature().get_sync(
+						new alma.ACSErr.CompletionHolder()));
+		System.out
+				.println("111111111111CMDCCD TEMP"
+						+ myDoubleProperty
+								.get_sync(new alma.ACSErr.CompletionHolder()));
+		System.out.println("121212121212CMDCCD TEMP"
+				+ myDoubleProperty.min_value());
+
 		disconnectConsumer();
-		ccdCompReference.off();		
+		ccdCompReference.off();
 	}
 
 	// Get method for LinkedList<String> filenames
 	public LinkedList<String> getFilenameList() {
-		if(l_filenames != null){
-		System.out.println("Filenames: " + l_filenames.getFirst().toString());
+		if (l_filenames != null) {
+			System.out.println("Filenames: "
+					+ l_filenames.getFirst().toString());
 		}
 		return l_filenames;
 	}
-	
-	public luckyClientNCEvent getLastNotification(){
+
+	public luckyClientNCEvent getLastNotification() {
 		return lastNotification;
 	}
-	
-	//Returns true if the consumer is activated
-	public boolean isConsumerOn(){
+
+	// Returns true if the consumer is activated
+	public boolean isConsumerOn() {
 		return consumerOn;
 	}
 
@@ -162,34 +193,32 @@ public class luckyClientCCDModel extends ComponentClient {
 		// TODO Auto-generated method stub
 		int listSize = 0;
 		int index = 0;
-	
-		try{
-			while(true){
+
+		try {
+			while (true) {
 				alma.CCDModels.CCDMODEL.from_int(index);
 				index++;
 				listSize++;
 			}
+		} catch (Exception ex) {
+
 		}
-		catch(Exception ex){
-			
-		}
-		
-		String [] camModels = new String[listSize];
+
+		String[] camModels = new String[listSize];
 		modelsList = new alma.CCDModels.CCDMODEL[listSize];
 		index = 0;
-		
-		for(int i=0; i<listSize;i++){
-				modelsList[i] = alma.CCDModels.CCDMODEL.from_int(i);
-				camModels[i] = modelsList[i].toString();
-				System.out.println(camModels[i]);
+
+		for (int i = 0; i < listSize; i++) {
+			modelsList[i] = alma.CCDModels.CCDMODEL.from_int(i);
+			camModels[i] = modelsList[i].toString();
+			System.out.println(camModels[i]);
 		}
-		
+
 		return camModels;
 	}
-	
-	public void setCameraModel(int model){
-		ccdCompReference.setCCDModel(modelsList[model]);
+
+	public void setCameraModel(int model) {
+		// ccdCompReference.setCCDModel(modelsList[model]);
 	}
-	
 
 }
