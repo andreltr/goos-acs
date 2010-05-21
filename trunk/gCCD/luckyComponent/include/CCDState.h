@@ -7,11 +7,10 @@
 
 #include <iostream>
 #include "CCDModelsC.h"
-#include "CCDStatesC.h"
+#include "CCDStates.h"
 #include "STRContext.h"
 #include "atmcdLXd.h"
 
-//#include "CCD.h"
 class STRContext;
 class CCDComponent;
 
@@ -35,7 +34,7 @@ public:
 	virtual void off() = 0;
 	virtual std::string* getImage(int width, int height, int acquisitionMode,
 			int numberOfAcquisitions, float exposureTime) = 0;
-	virtual CCDStates::CCDSTATE getState() = 0;
+	virtual int getState() = 0;
 	void setCCDModel(CCDModels::CCDMODEL model) {
 		strContext_p->setCCDModel(model);
 	}

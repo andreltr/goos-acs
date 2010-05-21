@@ -13,8 +13,6 @@ void BDTThread::run() {
 		/**Create an event with the filename, type, id, and total*/
 		CCDmodule::ncCCDFilename * fileEvent;
 
-		/*for(int i = 0; i < queueSize; i++)
-		 {*/
 		int i = 0;
 		while (filesQueue[i] != "null") {
 			ACS_SHORT_LOG((LM_INFO, "BDTThread::run(): startSend()"));
@@ -94,7 +92,7 @@ void BDTThread::onStart() {
 void BDTThread::onStop() {
 	ACS_TRACE("BDTThread::onStop()");
 	ACS_SHORT_LOG((LM_INFO, "BDT thread stopped."));
-	ccd_p->context->setState(CCDStates::STATE_CONNECTED);
+	ccd_p->context->setState(STATE_CONNECTED);
 }
 
 void BDTThread::setQueue(std::string * filesQ, const int qSize) {
