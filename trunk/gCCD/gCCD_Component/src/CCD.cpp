@@ -76,11 +76,6 @@ CORBA::Long CCDComponent::getState() {
 	return context->getState();
 }
 
-void CCDComponent::setCCDModel(CCDModels::CCDMODEL model) {
-	ACS_TRACE("CCDComponent::setCCDModel(...)");
-	context->setCCDModel(model);
-}
-
 CCDModels::CCDMODEL CCDComponent::getCCDModel() {
 	ACS_TRACE("CCDComponent::getCCDModel()");
 	return context->getCCDModel();
@@ -183,6 +178,11 @@ void CCDComponent::sendBulkData() {
 		m_bdtThread_p->restart();
 		ACS_SHORT_LOG((LM_INFO, "BDT thread restarted."));
 	}
+}
+
+void CCDComponent::setCCDModel(CCDModels::CCDMODEL model) {
+	ACS_TRACE("CCDComponent::setCCDModel(...)");
+	context->setCCDModel(model);
 }
 
 #include <maciACSComponentDefines.h>

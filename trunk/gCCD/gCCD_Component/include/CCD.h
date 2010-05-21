@@ -105,11 +105,6 @@ public:
 	CORBA::Long getState();
 
 	/**
-	 * Sets the camera model to be used
-	 */
-	void setCCDModel(CCDModels::CCDMODEL model);
-
-	/**
 	 * Gets the current camera model in use
 	 */
 	CCDModels::CCDMODEL getCCDModel();
@@ -131,13 +126,26 @@ public:
 	/* --------------------- [ CORBA interface END ] --------------------- */
 
 	/* --------------------- [ internal purpose ] -------------------- */
-	//! gets context
-	/*!
-	 * \return Context
+
+	/**
+	 * Gets CCDContext
 	 */
 	CCDContext* getContext();
+
+	/**
+	 * Starts the bulk data transfer components
+	 */
 	void startBulkData();
+
+	/**
+	 * Sends the files to the client
+	 */
 	void sendBulkData();
+
+	/**
+	 * Sets the camera model to be used
+	 */
+	void setCCDModel(CCDModels::CCDMODEL model);
 
 };
 
