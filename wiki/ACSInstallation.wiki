@@ -38,6 +38,12 @@ If everything is alright, install ACS, and follow the script instructions:
 
  * *sudo ACS800_installer.sh --install*
 
+Alternatively you can use the default installation executing:
+
+ * *sudo ACS800_installer.sh --install --default*
+
+This will create the *almamgr* and *almadev* accounts with the *INTROOT* folder in the *HOME* of each user.
+
 Reboot your machine and start X (startx) in the account specified in ACS installation, you will notice that bash is replaced by korn shell.
 
 = Testing the installation =
