@@ -7,5 +7,5 @@
        Name="BulkDataSenderEx1"
        Code="bulkDataSenderLibEx1"
        Type="IDL:alma/bulkdata/BulkDataSenderEx1:1.0"
-       Container="SenderCont"
+       Container="gCCDSender"
        ImplLang="cpp" />
