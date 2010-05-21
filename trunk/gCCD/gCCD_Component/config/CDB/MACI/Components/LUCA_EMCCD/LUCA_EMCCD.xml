@@ -4,8 +4,8 @@
        xmlns:baci="urn:schemas-cosylab-com:BACI:1.0" 
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 
-       Name="CCDComponent"
+       Name="LUCA_EMCCD"
        Code="CCDComponent"
        Type="IDL:alma/CCDmodule/CCDinterface:1.0"
-       Container="CCDContainer"
+       Container="gCCDLUCAEMCCD"
        ImplLang="cpp" />

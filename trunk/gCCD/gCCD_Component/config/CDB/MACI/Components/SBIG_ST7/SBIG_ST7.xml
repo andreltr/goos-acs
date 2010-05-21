@@ -4,8 +4,8 @@
        xmlns:baci="urn:schemas-cosylab-com:BACI:1.0" 
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 
-       Name="CCD_LUCKY"
+       Name="SBIG_ST7"
        Code="CCDComponent"
        Type="IDL:alma/CCDmodule/CCDinterface:1.0"
-       Container="LUCKY_CONT"
+       Container="gCCDST7"
        ImplLang="cpp" />
