@@ -25,14 +25,14 @@ void CCDStateConnected::on() {
 
 void CCDStateConnected::off() {
 	std::cout << "CCDStateConnected::off() disconnecting..." << std::endl;
-	ccd_p->getContext()->setState(CCDStates::STATE_DISCONNECTED);
+	ccd_p->getContext()->setState(STATE_DISCONNECTED);
 	return;
 }
 
 std::string* CCDStateConnected::getImage(int width, int height,
 		int acquisitionMode, int numberOfAcquisitions, float exposureTime) {
 	std::cout << "CCDStateConnected::getImage()" << std::endl;
-	ccd_p->getContext()->setState(CCDStates::STATE_ACQUIRING);
+	ccd_p->getContext()->setState(STATE_ACQUIRING);
 	return strContext_p->getImage(width, height, acquisitionMode,
 			numberOfAcquisitions, exposureTime);
 }

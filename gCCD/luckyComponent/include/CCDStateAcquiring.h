@@ -6,7 +6,6 @@
 #endif
 
 #include "CCDState.h"
-#include "CCDStatesC.h"
 
 class CCDComponent;
 
@@ -31,8 +30,8 @@ public:
 	/**
 	 * Gets the state ACQUIRING
 	 */
-	CCDStates::CCDSTATE getState() {
-		return CCDStates::STATE_ACQUIRING;
+	int getState() {
+		return STATE_ACQUIRING;
 	}
 
 	/**

@@ -5,9 +5,8 @@
 #error This is a C++ include file and cannot be used from plain C
 #endif
 
-//#include "CCDState.h"
+#include "CCDState.h"
 #include "CCDModelsC.h"
-#include "CCDStatesC.h"
 #include "CCDStateDisconnected.h"
 #include "CCDStateConnected.h"
 #include "CCDStateAcquiring.h"
@@ -22,7 +21,7 @@ class CCDComponent;
 
 class CCDContext {
 private:
-	CCDStates::CCDSTATE currState;
+	int currState;
 	CCDState * currentState;
 	CCDStateDisconnected * disconnected;
 	CCDStateConnected * connected;
@@ -32,7 +31,7 @@ public:
 	 * @param ccd CCDComponent reference
 	 * @param state initial camera state
 	 */
-	CCDContext(CCDComponent * ccd, CCDStates::CCDSTATE state) {
+	CCDContext(CCDComponent * ccd, int state) {
 		disconnected = new CCDStateDisconnected(ccd);
 		connected = new CCDStateConnected(ccd);
 		acquiring = new CCDStateAcquiring(ccd);
@@ -50,16 +49,16 @@ public:
 	 * Sets the state
 	 * @param state state to be changed
 	 */
-	void setState(CCDStates::CCDSTATE state) {
+	void setState(int state) {
 		currState = state;
 		switch (state) {
-		case CCDStates::STATE_DISCONNECTED:
+		case STATE_DISCONNECTED:
 			currentState = disconnected;
 			break;
-		case CCDStates::STATE_CONNECTED:
+		case STATE_CONNECTED:
 			currentState = connected;
 			break;
-		case CCDStates::STATE_ACQUIRING:
+		case STATE_ACQUIRING:
 			currentState = acquiring;
 			break;
 		}
@@ -97,7 +96,7 @@ public:
 	 * gets the currentState
 	 * @return current state
 	 */
-	CCDStates::CCDSTATE getState() {
+	int getState() {
 		return currState;
 	}
 

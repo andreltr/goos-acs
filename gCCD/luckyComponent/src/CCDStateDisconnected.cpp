@@ -20,7 +20,7 @@ CCDStateDisconnected::~CCDStateDisconnected() {
 
 void CCDStateDisconnected::on() {
 	std::cout << "CCDStateDisconnected::on() connecting..." << std::endl;
-	ccd_p->getContext()->setState(CCDStates::STATE_CONNECTED);
+	ccd_p->getContext()->setState(STATE_CONNECTED);
 	return;
 }
 

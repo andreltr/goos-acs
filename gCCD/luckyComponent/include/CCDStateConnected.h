@@ -6,7 +6,6 @@
 #endif
 
 #include "CCDState.h"
-#include "CCDStatesC.h"
 
 class CCDComponent;
 /**
@@ -30,8 +29,8 @@ public:
 	/**
 	 * Gets the state CONNECTED
 	 */
-	CCDStates::CCDSTATE getState() {
-		return CCDStates::STATE_CONNECTED;
+	int getState() {
+		return STATE_CONNECTED;
 	}
 	/**
 	 * Implementation of "on" function for this state.

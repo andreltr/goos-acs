@@ -6,7 +6,6 @@
 #endif
 
 #include "CCDState.h"
-#include "CCDStatesC.h"
 
 class CCDComponent;
 /**
@@ -27,8 +26,8 @@ public:
 	/**
 	 * Gets the state DISCONNECTED
 	 */
-	CCDStates::CCDSTATE getState() {
-		return CCDStates::STATE_DISCONNECTED;
+	int getState() {
+		return STATE_DISCONNECTED;
 	}
 
 	/**

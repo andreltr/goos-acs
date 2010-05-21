@@ -2,10 +2,8 @@
 #define CCD_IDL_
 
 #include <baci.idl>
-//#include <acscomponent.idl>
 #include <ACSErrTypeCommon.idl>
 #include <CCDModels.idl>
-#include <CCDStates.idl>
 
 #pragma prefix "alma"
 
@@ -37,8 +35,7 @@ module CCDmodule
     void off();
     //void resetCamera();
     void getImage(in long width, in long height, in long acquisitionMode, in long numberOfAcquisitions, in float exposureTime);
-    CCDStates::CCDSTATE getState();
-    void setCCDModel(in CCDModels::CCDMODEL model);
+    long getState();
     CCDModels::CCDMODEL getCCDModel();
 
     readonly attribute ACS::ROdouble actualAirTemperature;

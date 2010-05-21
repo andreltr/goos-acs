@@ -7,10 +7,8 @@
 
 #include <iostream>
 
-//#include <baci.h>
 #include <baciCharacteristicComponentImpl.h>
 
-//#include <acscomponentImpl.h>
 #include <ACSErrTypeCommon.h>
 
 #include <CCDS.h>
@@ -30,10 +28,6 @@
 #include "CCDContext.h"
 #include "BDTThread.h"
 
-//#include "CCDStateDisconnected.h"
-//#include "CCDStateConnected.h"
-//#include "CCDStateAcquiring.h"
-
 using namespace ACSBulkDataError;
 using namespace baci;
 
@@ -48,6 +42,7 @@ class CCDComponent: public virtual CharacteristicComponentImpl,
 		public virtual POA_CCDmodule::CCDinterface {
 private:
 
+	/* ------------------------- [ Variables START ] ----------------------- */
 	bool bdStatus;
 	BDTThread * m_bdtThread_p;
 	std::string * filesQueue;
@@ -69,18 +64,29 @@ protected:
 	friend class CCDStateAcquiring;
 
 public:
+
+	CCDmodule::NotificationSupplier_var ncSupplier;
+	bulkdata::BulkDataReceiver_var receiver;
+	bulkdata::BulkDataSender_var sender;
+	/* ------------------------- [ Variables END] ----------------------- */
+
 	/**
 	 * ACS component constructor
 	 */
 	CCDComponent(const ACE_CString& name,
 			maci::ContainerServices * containerServices);
+
+	/**
+	 * ACS component destructor
+	 */
 	virtual ~CCDComponent();
 
-	/* --------------------- [ CORBA interface ] --------------------- */
+	/* --------------------- [ CORBA interface START ] --------------------- */
 	/**
 	 * Turns on the camera
 	 */
 	void on();
+
 	/**
 	 * Turns off the camera
 	 */
@@ -94,11 +100,23 @@ public:
 			CORBA::Float exposureTime);
 
 	/**
-	 * gets the state
+	 * Gets the current state of the camera
 	 */
-	CCDStates::CCDSTATE getState();
+	CORBA::Long getState();
+
+	/**
+	 * Sets the camera model to be used
+	 */
 	void setCCDModel(CCDModels::CCDMODEL model);
+
+	/**
+	 * Gets the current camera model in use
+	 */
 	CCDModels::CCDMODEL getCCDModel();
+
+	/**
+	 * Functions to access the component's properties
+	 */
 
 	virtual ACS::ROdouble_ptr actualAirTemperature()
 			throw (CORBA::SystemException);
@@ -110,6 +128,7 @@ public:
 
 	virtual ACS::RWdouble_ptr commandedCCDTemperature()
 			throw (CORBA::SystemException);
+	/* --------------------- [ CORBA interface END ] --------------------- */
 
 	/* --------------------- [ internal purpose ] -------------------- */
 	//! gets context
@@ -119,12 +138,6 @@ public:
 	CCDContext* getContext();
 	void startBulkData();
 	void sendBulkData();
-
-	/* ------------------------- [ variables ] ----------------------- */
-
-	CCDmodule::NotificationSupplier_var ncSupplier;
-	bulkdata::BulkDataReceiver_var receiver;
-	bulkdata::BulkDataSender_var sender;
 
 };
 
