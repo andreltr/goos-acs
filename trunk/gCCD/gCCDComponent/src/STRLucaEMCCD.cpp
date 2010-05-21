@@ -1,22 +1,22 @@
-#include "STRLuckyEMCCD.h"
+#include "STRLucaEMCCD.h"
 
 /*
  *
- * Implementation of Lucky EMCCD strategy for the Strategy Pattern
+ * Implementation of Luca EMCCD strategy for the Strategy Pattern
  *
  */
 
-STRLuckyEMCCD::STRLuckyEMCCD() {
+STRLucaEMCCD::STRLucaEMCCD() {
 
 }
 
-STRLuckyEMCCD::~STRLuckyEMCCD() {
+STRLucaEMCCD::~STRLucaEMCCD() {
 
 }
 
-std::string* STRLuckyEMCCD::getImage(int width, int height,
+std::string* STRLucaEMCCD::getImage(int width, int height,
 		int acquisitionMode, int numberOfAcquisitions, float exposureTime) {
-	std::cout << "STRLuckyEMCCD::getImage()" << std::endl;
+	std::cout << "STRLucaEMCCD::getImage()" << std::endl;
 
 	//int width = 640;
 	//int height = 480;
@@ -51,7 +51,7 @@ std::string* STRLuckyEMCCD::getImage(int width, int height,
 	return 0;
 }
 
-void STRLuckyEMCCD::initialize() {
+void STRLucaEMCCD::initialize() {
 	unsigned long error = Initialize("/usr/local/etc/andor");
 	if (error != DRV_SUCCESS) {
 		std::cout << "Initialization error...exiting" << std::endl;
@@ -60,6 +60,6 @@ void STRLuckyEMCCD::initialize() {
 	sleep(2);
 }
 
-void STRLuckyEMCCD::shutDown() {
+void STRLucaEMCCD::shutDown() {
 	ShutDown();
 }

@@ -7,7 +7,6 @@
 
 #include "CCDState.h"
 
-class CCDComponent;
 /**
  * State: Connected
  * Implements CCDState

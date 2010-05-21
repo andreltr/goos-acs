@@ -6,7 +6,7 @@
 #endif
 
 #include "CCDState.h"
-#include "CCDModelsC.h"
+#include "CCDModels.h"
 #include "CCDStateDisconnected.h"
 #include "CCDStateConnected.h"
 #include "CCDStateAcquiring.h"
@@ -98,22 +98,6 @@ public:
 	 */
 	int getState() {
 		return currState;
-	}
-
-	/**
-	 * Sets the current CCDModel
-	 * @param model new CCDModel to be changed
-	 */
-	void setCCDModel(CCDModels::CCDMODEL model) {
-		currentState->setCCDModel(model);
-	}
-
-	/**
-	 * gets the current CCDModel
-	 * @return current CCDModel
-	 */
-	CCDModels::CCDMODEL getCCDModel() {
-		return currentState->getCCDModel();
 	}
 
 };

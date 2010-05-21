@@ -1,5 +1,5 @@
-#ifndef STR_OCA_SIMCCD_H_
-#define STR_OCA_SIMCCD_H_
+#ifndef STR_GCCD_SIM_H_
+#define STR_GCCD_SIM_H_
 
 #ifndef __cplusplus
 #error This is a C++ include file and cannot be used from plain C
@@ -17,11 +17,11 @@
 
 using namespace CCfits;
 
-class STROcaSimCCD: public STRBase {
+class STRgCCDSIM: public STRBase {
 
 public:
-	STROcaSimCCD();
-	~STROcaSimCCD();
+	STRgCCDSIM();
+	~STRgCCDSIM();
 
 	std::string* getImage(int width, int height, int acquisitionMode,
 			int numberOfAcquisitions, float exposureTime);

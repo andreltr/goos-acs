@@ -36,12 +36,12 @@ module CCDmodule
     //void resetCamera();
     void getImage(in long width, in long height, in long acquisitionMode, in long numberOfAcquisitions, in float exposureTime);
     long getState();
-    CCDModels::CCDMODEL getCCDModel();
 
     readonly attribute ACS::ROdouble actualAirTemperature;
     readonly attribute ACS::ROdouble actualCCDTemperature;
     readonly attribute ACS::RWdouble commandedCCDTemperature;
-    readonly attribute ACS::RWstring cameraName;
+    readonly attribute ACS::ROstring cameraName;
+    readonly attribute ACS::ROlong cameraModel;
   };
 
   //Notification channel supplier interface
