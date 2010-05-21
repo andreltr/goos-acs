@@ -7,5 +7,5 @@
        Name="NCSupplier"
        Code="NCSupplier"
        Type="IDL:alma/CCDmodule/NotificationSupplier:1.0"
-       Container="CCDContainer"
+       Container="gCCDServices"
        ImplLang="cpp" />
