@@ -3,7 +3,6 @@
 
 #include <baci.idl>
 #include <ACSErrTypeCommon.idl>
-#include <CCDModels.idl>
 
 #pragma prefix "alma"
 
