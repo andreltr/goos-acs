@@ -10,7 +10,7 @@ import alma.acs.nc.Consumer;
 import alma.ACS.ACSComponent;
 
 public class luckyClientCCDModel extends ComponentClient {
-	private alma.ACS.RWstring myStringProperty;
+	private alma.ACS.ROstring myStringProperty;
 	private alma.ACS.RWdouble myDoubleProperty;
 	// Reference to the CCD component
 	private alma.CCDmodule.CCDinterface ccdCompReference;
@@ -22,55 +22,50 @@ public class luckyClientCCDModel extends ComponentClient {
 	private LinkedList<String> l_filenames;
 	private luckyClientNCEvent lastNotification;
 	private boolean consumerOn;
-	private alma.CCDModels.CCDMODEL[] modelsList;
-
+	private LinkedList<String> modelsList;
+	private String selectedCamera;
+	
 	// Constructor
-	public luckyClientCCDModel(Logger logger, String managerLoc,
-			String clientName) throws Exception {
+	public luckyClientCCDModel(Logger logger, String managerLoc, String clientName) throws Exception {
 		super(logger, managerLoc, clientName);
+		
 		ccdCompReference = null;
 		m_consumer = null;
-		m_containerServices = null;
+		// Get the Container Services
+		m_logger.info("INFO: Container services...");
+		m_containerServices = getContainerServices();
 		l_filenames = null;
 		lastNotification = null;
 		consumerOn = false;
 
 		myStringProperty = null;
 		myDoubleProperty = null;
+
+		getCameraModelsFromCDB();
 	}
 
 	// Obtains a connection to the ACS Component
 	public void connectToComponent() throws AcsJContainerServicesEx {
-		// Get the Container Services
 		m_logger.info("INFO: Connecting to component...");
-		m_containerServices = getContainerServices();
-		m_logger.info("INFO: Container services...");
 		// Casts the object to get access to the IDL interface
-		// This should not be hard coded
+		System.out.println("aaaaaaaa" + selectedCamera);
+
 		ccdCompReference = alma.CCDmodule.CCDinterfaceHelper
-				.narrow(m_containerServices.getComponent("SBIG_ST7"));
+				.narrow(m_containerServices.getComponent(selectedCamera));
+
 		ccdCompReference.on();
-		getCameraModels();
-		
-		System.out.println("---------[ Find Components Test START ]--------");
-		
-		for (String s: m_containerServices.findComponents(null, null)){
-			System.out.println("COMPONENT NAME " + m_containerServices.getComponentDescriptor(s).getName());
-			System.out.println("COMPONENT TYPE " + m_containerServices.getComponentDescriptor(s).getType());
-			for (String ss: m_containerServices.getComponentDescriptor(s).getInterfaces()){
-			System.out.println("COMPONENT INTERFACE " + ss);
-			}
-			System.out.println("COMPONENT TO STRING" + m_containerServices.getComponentDescriptor(s).toString());
-			System.out.println("------------------------------------------");
-		}
-		
-		System.out.println("---------[ Find Components Test END ]--------");
-		
+
 		myStringProperty = ccdCompReference.cameraName();
 		myDoubleProperty = ccdCompReference.commandedCCDTemperature();
-		System.out.println("77777777777777CAMERA NAME" + myStringProperty.get_sync(new alma.ACSErr.CompletionHolder()));
-		System.out.println("77777777777777CMDCCD TEMP" + myDoubleProperty.get_sync(new alma.ACSErr.CompletionHolder()));
-				
+		System.out
+				.println("77777777777777CAMERA NAME"
+						+ myStringProperty
+								.get_sync(new alma.ACSErr.CompletionHolder()));
+		System.out
+				.println("77777777777777CMDCCD TEMP"
+						+ myDoubleProperty
+								.get_sync(new alma.ACSErr.CompletionHolder()));
+
 		m_logger.info("INFO: Connected!!!");
 	}
 
@@ -147,7 +142,7 @@ public class luckyClientCCDModel extends ComponentClient {
 	}
 
 	public void disconnectCamera() {
-		myStringProperty.set_sync("BLABLA");
+		// myStringProperty.set_sync("BLABLA");
 		System.out.println("88888888888CAMERA NAME: "
 				+ ccdCompReference.cameraName().get_sync(
 						new alma.ACSErr.CompletionHolder()));
@@ -189,36 +184,29 @@ public class luckyClientCCDModel extends ComponentClient {
 		return consumerOn;
 	}
 
-	public String[] getCameraModels() {
+	public void getCameraModelsFromCDB() throws AcsJContainerServicesEx {
 		// TODO Auto-generated method stub
-		int listSize = 0;
-		int index = 0;
+		m_logger.info("INFO: Finding components...");
+		if (modelsList == null) {
+			modelsList = new LinkedList<String>();
+			modelsList.add("<SELECT A CAMERA MODEL>");
+		}
 
-		try {
-			while (true) {
-				alma.CCDModels.CCDMODEL.from_int(index);
-				index++;
-				listSize++;
+		for (String s : m_containerServices.findComponents(null, null)) {
+			if (m_containerServices.getComponentDescriptor(s).getType().equals(
+					"IDL:alma/CCDmodule/CCDinterface:1.0")) {
+				modelsList.add(m_containerServices.getComponentDescriptor(s)
+						.getName());
 			}
-		} catch (Exception ex) {
-
 		}
+	}
 
-		String[] camModels = new String[listSize];
-		modelsList = new alma.CCDModels.CCDMODEL[listSize];
-		index = 0;
-
-		for (int i = 0; i < listSize; i++) {
-			modelsList[i] = alma.CCDModels.CCDMODEL.from_int(i);
-			camModels[i] = modelsList[i].toString();
-			System.out.println(camModels[i]);
-		}
-
-		return camModels;
+	public String[] getCameraModels() {
+		return modelsList.toArray(new String[0]);
 	}
 
 	public void setCameraModel(int model) {
-		// ccdCompReference.setCCDModel(modelsList[model]);
+		selectedCamera = modelsList.get(model);
 	}
 
 }

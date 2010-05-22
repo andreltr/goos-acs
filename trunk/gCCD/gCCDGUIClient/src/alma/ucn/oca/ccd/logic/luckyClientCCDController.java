@@ -29,7 +29,7 @@ public class luckyClientCCDController {
 					.println("Java property 'ACS.manager' must be set to the corbaloc of the ACS manager!");
 			System.exit(-1);
 		}
-		clientName = "CCDClient";
+		clientName = "gCCDGUIClient";
 
 		try {
 			if (ccd == null) {
@@ -42,19 +42,8 @@ public class luckyClientCCDController {
 
 	// Obtains a connection to the component
 	public void getConnection() throws Exception {
-		try {
-			if (ccd == null) {
-				ccd = new luckyClientCCDModel(null, managerLoc, clientName);
-			}
+		if (ccd != null) {
 			ccd.connectToComponent();
-		} catch (Exception e) {
-			try {
-				Logger logger = ccd.getContainerServices().getLogger();
-				logger.log(Level.SEVERE, "Client application failure", e);
-			} catch (Exception e2) {
-				e.printStackTrace(System.err);
-			}
-			throw e;
 		}
 	}
 
@@ -64,7 +53,19 @@ public class luckyClientCCDController {
 			try {
 				ccd.disconnectCamera();
 				ccd.tearDown();
-				ccd = null;
+				try {
+					ccd = null;
+					ccd = new luckyClientCCDModel(null, managerLoc, clientName);
+				} catch (Exception e) {
+					try {
+						Logger logger = ccd.getContainerServices().getLogger();
+						logger.log(Level.SEVERE, "Client application failure",
+								e);
+					} catch (Exception e2) {
+						e.printStackTrace(System.err);
+					}
+					throw e;
+				}
 			} catch (Exception e3) {
 				// bad luck
 				throw e3;
@@ -80,9 +81,11 @@ public class luckyClientCCDController {
 	}
 
 	// Gets the information from the Pixel structure obtained
-	public void getImage(int width, int height, int acquisitionMode, int numberOfAcc, float exposureTime) {
+	public void getImage(int width, int height, int acquisitionMode,
+			int numberOfAcc, float exposureTime) {
 		if (ccd != null) {
-			ccd.getImage(width,height,acquisitionMode,numberOfAcc,exposureTime);
+			ccd.getImage(width, height, acquisitionMode, numberOfAcc,
+					exposureTime);
 		}
 	}
 

@@ -219,23 +219,26 @@ public class luckyClientCCDGUI extends javax.swing.JFrame {
 							jLabelPercentage.setText("percentage");
 						}
 						{
-							//Camera models from the IDL
-							ComboBoxModel jCmbCamModelModel = 
-								new DefaultComboBoxModel(controller.getCameraModels());
+							// Camera models from the CDB
+							ComboBoxModel jCmbCamModelModel = new DefaultComboBoxModel(
+									controller.getCameraModels());
 							jCmbCamModel = new JComboBox();
 							jPanelInformationCamera.add(jCmbCamModel);
 							jCmbCamModel.setModel(jCmbCamModelModel);
 							jCmbCamModel.setBounds(114, 83, 105, 18);
-							jCmbCamModel.setEnabled(false);
-							jCmbCamModel.addActionListener(new ActionListener() {
-								@Override
-								public void actionPerformed(ActionEvent e) {
-									controller.setCCDModel(jCmbCamModel.getSelectedIndex());								
-								}
-							});
+							jCmbCamModel.setEnabled(true);
+							jCmbCamModel
+									.addActionListener(new ActionListener() {
+										@Override
+										public void actionPerformed(
+												ActionEvent e) {
+											controller.setCCDModel(jCmbCamModel
+													.getSelectedIndex());
+										}
+									});
 						}
 						{
-							//Camera model label
+							// Camera model label
 							jLblCamModel = new JLabel();
 							jPanelInformationCamera.add(jLblCamModel);
 							jLblCamModel.setText("Camera model:");
@@ -390,14 +393,14 @@ public class luckyClientCCDGUI extends javax.swing.JFrame {
 								});
 					}
 					{
-						//Previous frame
+						// Previous frame
 						jBtnPrevFrame = new JButton();
 						jPanelImage.add(jBtnPrevFrame);
 						jBtnPrevFrame.setText("Previous frame");
 						jBtnPrevFrame.setBounds(246, 66, 100, 30);
 					}
 					{
-						//Next frame
+						// Next frame
 						jBtnNextFrame = new JButton();
 						jPanelImage.add(jBtnNextFrame);
 						jBtnNextFrame.setText("Next frame");
@@ -439,9 +442,9 @@ public class luckyClientCCDGUI extends javax.swing.JFrame {
 				jBtnDropConnection.setEnabled(true);
 				jBtnGetConnection.setEnabled(false);
 				jBtnStartExposure.setEnabled(true);
-				jCmbCamModel.setEnabled(true);
+				jCmbCamModel.setEnabled(false);
 				controller.getConnection();
-				jCmbCamModel.setSelectedIndex(0);
+				controller.setCCDModel(jCmbCamModel.getSelectedIndex());
 				jSpinnerExposureTime.setEnabled(true);
 				jSpinnerFramesPerFile.setEnabled(true);
 
@@ -449,7 +452,7 @@ public class luckyClientCCDGUI extends javax.swing.JFrame {
 				jBtnDropConnection.setEnabled(false);
 				jBtnGetConnection.setEnabled(true);
 				jBtnStartExposure.setEnabled(false);
-				jCmbCamModel.setEnabled(false);
+				jCmbCamModel.setEnabled(true);
 				jSpinnerExposureTime.setEnabled(false);
 				jSpinnerFramesPerFile.setEnabled(false);
 				e.printStackTrace();
@@ -468,21 +471,22 @@ public class luckyClientCCDGUI extends javax.swing.JFrame {
 				jBtnSaveImage.setEnabled(false);
 				jBtnOriginalSize.setEnabled(false);
 				jBtnAdjustImage.setEnabled(false);
-				jCmbCamModel.setEnabled(false);
+				jCmbCamModel.setEnabled(true);
 				controller.dropConnection();
+				jCmbCamModel.setSelectedIndex(0);
 				jSpinnerExposureTime.setEnabled(false);
 				jSpinnerFramesPerFile.setEnabled(false);
 
 			} catch (Exception e) {
 				jBtnDropConnection.setEnabled(true);
 				jBtnGetConnection.setEnabled(false);
-				//Solving bug 3
+				// Solving bug 3
 				jBtnStartExposure.setEnabled(false);
 				jBtnCancel.setEnabled(true);
 				jBtnSaveImage.setEnabled(true);
 				jBtnOriginalSize.setEnabled(true);
 				jBtnAdjustImage.setEnabled(true);
-				jCmbCamModel.setEnabled(true);
+				jCmbCamModel.setEnabled(false);
 				jSpinnerExposureTime.setEnabled(true);
 				jSpinnerFramesPerFile.setEnabled(true);
 
@@ -517,10 +521,7 @@ public class luckyClientCCDGUI extends javax.swing.JFrame {
 				jSpinnerFramesPerFile.setEnabled(false);
 				jCmbCamModel.setEnabled(false);
 				imageListTimer.start();
-				controller.getImage(640,480,2,numberOfAcc,exposureTime);
-
-				// counterTemp = ExposureTime;
-				// jLabelcounterTemporizador.setText(String.valueOf(counterTemp));
+				controller.getImage(640, 480, 2, numberOfAcc, exposureTime);
 			} catch (Exception e) {
 				jBtnStartExposure.setEnabled(true);
 				jBtnCancel.setEnabled(false);
@@ -544,7 +545,7 @@ public class luckyClientCCDGUI extends javax.swing.JFrame {
 			jBtnAdjustImage.setEnabled(true);
 			jSpinnerExposureTime.setEnabled(true);
 			jSpinnerFramesPerFile.setEnabled(true);
-			jCmbCamModel.setEnabled(true);			
+			jCmbCamModel.setEnabled(true);
 		}
 	}
 
@@ -618,9 +619,9 @@ public class luckyClientCCDGUI extends javax.swing.JFrame {
 				jSpinnerFilename.setModel(SpinnerFilenameModel);
 
 				if (panelImagen == null) {
-					panelImagen = new luckyClientImagePanels(
-							jScrollPaneImage.getWidth() - 30, jScrollPaneImage
-									.getHeight() - 45, jSpinnerFilename
+					panelImagen = new luckyClientImagePanels(jScrollPaneImage
+							.getWidth() - 30,
+							jScrollPaneImage.getHeight() - 45, jSpinnerFilename
 									.getValue().toString());
 				}
 
@@ -649,9 +650,9 @@ public class luckyClientCCDGUI extends javax.swing.JFrame {
 				jSpinnerFilename.setModel(SpinnerFilenameModel);
 
 				if (panelImagen == null) {
-					panelImagen = new luckyClientImagePanels(
-							jScrollPaneImage.getWidth() - 30, jScrollPaneImage
-									.getHeight() - 45, jSpinnerFilename
+					panelImagen = new luckyClientImagePanels(jScrollPaneImage
+							.getWidth() - 30,
+							jScrollPaneImage.getHeight() - 45, jSpinnerFilename
 									.getValue().toString());
 				}
 
