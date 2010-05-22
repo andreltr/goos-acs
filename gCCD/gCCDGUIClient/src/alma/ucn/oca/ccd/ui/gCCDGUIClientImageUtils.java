@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-public class luckyClientImageUtils {
+public class gCCDGUIClientImageUtils {
 	
 	
 	public static BufferedImage loadBufferedImage(String fileName) throws IOException{

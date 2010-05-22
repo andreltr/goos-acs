@@ -13,16 +13,16 @@ import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
-import alma.ucn.oca.ccd.ui.luckyClientCCDGUI;
+import alma.ucn.oca.ccd.ui.gCCDGUIClient;
 
-public class luckyClientCCDController {
+public class gCCDCompController {
 	// Reference to CCDModel
-	luckyClientCCDModel ccd;
+	gCCDCompModel ccd;
 	String managerLoc;
 	String clientName;
 
 	// Constructor
-	public luckyClientCCDController() throws Exception {
+	public gCCDCompController() throws Exception {
 		managerLoc = System.getProperty("ACS.manager");
 		if (managerLoc == null) {
 			System.out
@@ -33,7 +33,7 @@ public class luckyClientCCDController {
 
 		try {
 			if (ccd == null) {
-				ccd = new luckyClientCCDModel(null, managerLoc, clientName);
+				ccd = new gCCDCompModel(null, managerLoc, clientName);
 			}
 		} catch (Exception e) {
 			throw e;
@@ -55,7 +55,7 @@ public class luckyClientCCDController {
 				ccd.tearDown();
 				try {
 					ccd = null;
-					ccd = new luckyClientCCDModel(null, managerLoc, clientName);
+					ccd = new gCCDCompModel(null, managerLoc, clientName);
 				} catch (Exception e) {
 					try {
 						Logger logger = ccd.getContainerServices().getLogger();
@@ -109,7 +109,7 @@ public class luckyClientCCDController {
 		return null;
 	}
 
-	public luckyClientNCEvent getLastNotification() {
+	public gCCDCompNCEvent getLastNotification() {
 		if (ccd != null) {
 			return ccd.getLastNotification();
 		}

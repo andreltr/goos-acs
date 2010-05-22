@@ -55,7 +55,7 @@ import alma.ucn.oca.ccd.logic.*;
  * PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR
  * ANY CORPORATE OR COMMERCIAL PURPOSE.
  */
-public class luckyClientCCDGUI extends javax.swing.JFrame {
+public class gCCDGUIClient extends javax.swing.JFrame {
 	private JButton jBtnDropConnection;
 	private JPanel jPanelInformationCamera;
 	private JButton jBtnOriginalSize;
@@ -84,13 +84,13 @@ public class luckyClientCCDGUI extends javax.swing.JFrame {
 	private JPanel Exposure;
 	private JTabbedPane jTabPaneOptions;
 	private JButton jBtnGetConnection;
-	private luckyClientImagePanels panelImagen;
+	private gCCDGUIClientImagePanels panelImagen;
 	private Timer imageListTimer;
 	private BufferedImage image;
 	JFileChooser jFileChooserDialog;
 	private int counterTemp;
 	// Logic reference
-	private luckyClientCCDController controller;
+	private gCCDCompController controller;
 	// Current exposition time
 	private int ExposureTime;
 	// Used to calculate the completed percentage
@@ -102,7 +102,7 @@ public class luckyClientCCDGUI extends javax.swing.JFrame {
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				luckyClientCCDGUI inst = new luckyClientCCDGUI();
+				gCCDGUIClient inst = new gCCDGUIClient();
 				inst.setLocationRelativeTo(null);
 				inst.setVisible(true);
 
@@ -110,7 +110,7 @@ public class luckyClientCCDGUI extends javax.swing.JFrame {
 		});
 	}
 
-	public luckyClientCCDGUI() {
+	public gCCDGUIClient() {
 		super();
 		SpinnerFilenameModel = null;
 
@@ -127,7 +127,7 @@ public class luckyClientCCDGUI extends javax.swing.JFrame {
 
 	private void initGUI() {
 		try {
-			controller = new luckyClientCCDController();
+			controller = new gCCDCompController();
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			getContentPane().setLayout(null);
 			this.setPreferredSize(new java.awt.Dimension(807, 750));
@@ -375,7 +375,7 @@ public class luckyClientCCDGUI extends javax.swing.JFrame {
 									public void stateChanged(ChangeEvent e) {
 										// Avoids creating unnecessary objects
 										if (panelImagen == null) {
-											panelImagen = new luckyClientImagePanels(
+											panelImagen = new gCCDGUIClientImagePanels(
 													jScrollPaneImage.getWidth() - 30,
 													jScrollPaneImage
 															.getHeight() - 45,
@@ -424,7 +424,7 @@ public class luckyClientCCDGUI extends javax.swing.JFrame {
 					// File selector dialog
 					jFileChooserDialog = new JFileChooser();
 					jFileChooserDialog
-							.addChoosableFileFilter(new luckyClientFileSelectorDialog());
+							.addChoosableFileFilter(new gCCDGUIClientFileSelectorDialog());
 
 				}
 			}
@@ -619,7 +619,7 @@ public class luckyClientCCDGUI extends javax.swing.JFrame {
 				jSpinnerFilename.setModel(SpinnerFilenameModel);
 
 				if (panelImagen == null) {
-					panelImagen = new luckyClientImagePanels(jScrollPaneImage
+					panelImagen = new gCCDGUIClientImagePanels(jScrollPaneImage
 							.getWidth() - 30,
 							jScrollPaneImage.getHeight() - 45, jSpinnerFilename
 									.getValue().toString());
@@ -650,7 +650,7 @@ public class luckyClientCCDGUI extends javax.swing.JFrame {
 				jSpinnerFilename.setModel(SpinnerFilenameModel);
 
 				if (panelImagen == null) {
-					panelImagen = new luckyClientImagePanels(jScrollPaneImage
+					panelImagen = new gCCDGUIClientImagePanels(jScrollPaneImage
 							.getWidth() - 30,
 							jScrollPaneImage.getHeight() - 45, jSpinnerFilename
 									.getValue().toString());

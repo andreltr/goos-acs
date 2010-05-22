@@ -25,7 +25,7 @@ import magick.util.*;
  * PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR
  * ANY CORPORATE OR COMMERCIAL PURPOSE.
  */
-public class luckyClientImagePanels extends JPanel {
+public class gCCDGUIClientImagePanels extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private int width, height;
@@ -33,7 +33,7 @@ public class luckyClientImagePanels extends JPanel {
 	int preferenceWidthPanel;
 	int preferenceHeightPanel;
 
-	public luckyClientImagePanels(int widthx, int heightx, String filename) {
+	public gCCDGUIClientImagePanels(int widthx, int heightx, String filename) {
 		try {
 			preferenceHeightPanel = heightx;
 			preferenceWidthPanel = widthx;
