@@ -18,12 +18,12 @@ import alma.ucn.oca.ccd.ui.CCDGUI;
  * 
  */
 
-public class luckyClientCCDControllerGetImage implements Runnable {
+public class gCCDCompControllerGetImage implements Runnable {
 	//Array to save the received data
 	int[] imgData = new int[640 * 480 * 3];
 
 	//Reference to the controller object
-	luckyClientCCDController controller;
+	gCCDCompController controller;
 
 	@Override
 	public void run() {
@@ -70,7 +70,7 @@ public class luckyClientCCDControllerGetImage implements Runnable {
 	}
 
 	//Set method to get the CCD connection reference
-	public void setController(luckyClientCCDController _controller) {
+	public void setController(gCCDCompController _controller) {
 	    controller = _controller;
 	}
 

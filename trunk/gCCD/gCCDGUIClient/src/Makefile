@@ -118,11 +118,11 @@ USER_IDL =
 #
 # Jarfiles and their directories
 #
-JARFILES= luckyClientCCDClient
-luckyClientCCDClient_DIRS= \
+JARFILES= gCCDGUIClient
+gCCDGUIClient_DIRS= \
 	alma/ucn/oca/ccd/logic \
 	alma/ucn/oca/ccd/ui \
-#CCDClient_EXTRAS= alma/ucn/oca/ccd/ui \
+#gCCDGUIClient_EXTRAS= alma/ucn/oca/ccd/ui \
 #
 # java sources in Jarfile on/off
 DEBUG= on
@@ -156,7 +156,6 @@ MAN8 =
 # ---------------
 MANl =
 
-#alma/ucn/oca/ccd/ui/luckyCameraFileSelectorDialog.java
 # ASCII file to be converted into Framemaker-MIF
 # --------------------
 ASCII_TO_MIF = 

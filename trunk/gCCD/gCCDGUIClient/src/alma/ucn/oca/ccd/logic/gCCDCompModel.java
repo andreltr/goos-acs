@@ -9,7 +9,7 @@ import alma.acs.container.ContainerServices;
 import alma.acs.nc.Consumer;
 import alma.ACS.ACSComponent;
 
-public class luckyClientCCDModel extends ComponentClient {
+public class gCCDCompModel extends ComponentClient {
 	private alma.ACS.ROstring myStringProperty;
 	private alma.ACS.RWdouble myDoubleProperty;
 	// Reference to the CCD component
@@ -20,15 +20,16 @@ public class luckyClientCCDModel extends ComponentClient {
 	private ContainerServices m_containerServices;
 	// List of the received filenames
 	private LinkedList<String> l_filenames;
-	private luckyClientNCEvent lastNotification;
+	private gCCDCompNCEvent lastNotification;
 	private boolean consumerOn;
 	private LinkedList<String> modelsList;
 	private String selectedCamera;
-	
+
 	// Constructor
-	public luckyClientCCDModel(Logger logger, String managerLoc, String clientName) throws Exception {
+	public gCCDCompModel(Logger logger, String managerLoc, String clientName)
+			throws Exception {
 		super(logger, managerLoc, clientName);
-		
+
 		ccdCompReference = null;
 		m_consumer = null;
 		// Get the Container Services
@@ -48,8 +49,6 @@ public class luckyClientCCDModel extends ComponentClient {
 	public void connectToComponent() throws AcsJContainerServicesEx {
 		m_logger.info("INFO: Connecting to component...");
 		// Casts the object to get access to the IDL interface
-		System.out.println("aaaaaaaa" + selectedCamera);
-
 		ccdCompReference = alma.CCDmodule.CCDinterfaceHelper
 				.narrow(m_containerServices.getComponent(selectedCamera));
 
@@ -58,11 +57,11 @@ public class luckyClientCCDModel extends ComponentClient {
 		myStringProperty = ccdCompReference.cameraName();
 		myDoubleProperty = ccdCompReference.commandedCCDTemperature();
 		System.out
-				.println("77777777777777CAMERA NAME"
+				.println("[TRACE] CAMERA NAME"
 						+ myStringProperty
 								.get_sync(new alma.ACSErr.CompletionHolder()));
 		System.out
-				.println("77777777777777CMDCCD TEMP"
+				.println("[TRACE] CMDCCD TEMP"
 						+ myDoubleProperty
 								.get_sync(new alma.ACSErr.CompletionHolder()));
 
@@ -76,18 +75,15 @@ public class luckyClientCCDModel extends ComponentClient {
 
 	// This method is called whenever a new notificacion is received
 	public void receive(alma.CCDmodule.ncCCDFilename newImageEvent) {
-		// TODO: NCSupplier must send a "no more images" notification to
-		// disconnect
-		// m_logger.info(newImageEvent.fileName);
+		m_logger.info(newImageEvent.fileName);
 		m_logger.info("INFO: Notification received");
 		// The list gets instantiated
 		if (l_filenames == null) {
 			l_filenames = new LinkedList<String>();
 		}
 
-		lastNotification = new luckyClientNCEvent(
-				newImageEvent.type.toString(), newImageEvent.id,
-				newImageEvent.total);
+		lastNotification = new gCCDCompNCEvent(newImageEvent.type.toString(),
+				newImageEvent.id, newImageEvent.total);
 		m_logger.info("INFO: Last notification:" + lastNotification.getID());
 		if ((newImageEvent.type.toString()).equals("FILENAME")) {
 			m_logger.info("INFO: 'FILENAME' Notification received filename: "
@@ -143,24 +139,24 @@ public class luckyClientCCDModel extends ComponentClient {
 
 	public void disconnectCamera() {
 		// myStringProperty.set_sync("BLABLA");
-		System.out.println("88888888888CAMERA NAME: "
+		System.out.println("[TRACE] CAMERA NAME: "
 				+ ccdCompReference.cameraName().get_sync(
 						new alma.ACSErr.CompletionHolder()));
 		System.out
-				.println("99999999999CAMERA NAME: "
+				.println("[TRACE] CAMERA NAME: "
 						+ myStringProperty
 								.get_sync(new alma.ACSErr.CompletionHolder()));
 
 		myDoubleProperty.set_sync(12.7);
-		System.out.println("101010101010CMDCCD TEMP"
+		System.out.println("[TRACE] CMDCCD TEMP"
 				+ ccdCompReference.commandedCCDTemperature().get_sync(
 						new alma.ACSErr.CompletionHolder()));
 		System.out
-				.println("111111111111CMDCCD TEMP"
+				.println("[TRACE] CMDCCD TEMP"
 						+ myDoubleProperty
 								.get_sync(new alma.ACSErr.CompletionHolder()));
-		System.out.println("121212121212CMDCCD TEMP"
-				+ myDoubleProperty.min_value());
+		System.out
+				.println("[TRACE] CMDCCD TEMP" + myDoubleProperty.min_value());
 
 		disconnectConsumer();
 		ccdCompReference.off();
@@ -175,7 +171,7 @@ public class luckyClientCCDModel extends ComponentClient {
 		return l_filenames;
 	}
 
-	public luckyClientNCEvent getLastNotification() {
+	public gCCDCompNCEvent getLastNotification() {
 		return lastNotification;
 	}
 

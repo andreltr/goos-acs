@@ -1,7 +1,7 @@
 package alma.ucn.oca.ccd.ui;
 import java.io.File;
 
-public class luckyClientFileSelectorDialog extends javax.swing.filechooser.FileFilter{
+public class gCCDGUIClientFileSelectorDialog extends javax.swing.filechooser.FileFilter{
 	
 	public boolean accept(File f){
 		if(f.isDirectory())return true;

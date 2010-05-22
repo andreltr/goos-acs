@@ -1,16 +1,16 @@
 package alma.ucn.oca.ccd.logic;
 
-public class luckyClientNCEvent {
+public class gCCDCompNCEvent {
 
 	private String type;
 	private long id;
 	private long total;
 	
-	public luckyClientNCEvent(){
+	public gCCDCompNCEvent(){
 		
 	}
 	
-	public luckyClientNCEvent(String _type, long _id, long _total){
+	public gCCDCompNCEvent(String _type, long _id, long _total){
 		type = _type;
 		id = _id;
 		total = _total;		
