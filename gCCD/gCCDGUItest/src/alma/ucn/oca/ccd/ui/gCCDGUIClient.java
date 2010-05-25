@@ -3,8 +3,13 @@ package alma.ucn.oca.ccd.ui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
+import javax.swing.*;
+import javax.swing.border.BevelBorder;
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -51,6 +56,9 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JLabel jLabelCCDTemp;
 	private JLabel jLabelCCDModels;
 	private JButton jButtonCCDOn;
+	private JDialog jDialogAbout;
+	private JPanel jPanel2;
+	private JPanel jPanel1;
 	private JMenuItem jMenuItemHelpAbout;
 	private JSeparator jSeparator8;
 	private JMenuItem jMenuItemImageOptionsNext;
@@ -145,6 +153,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 				inst.pack();
 				inst.setLocationRelativeTo(null);
 				inst.setMinimumSize(inst.getSize());
+				inst.addWindowListener(new WindowCloseManager());
 				inst.setVisible(true);
 			}
 		});
@@ -180,15 +189,21 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 						jTabbedPaneOptions.setMaximumSize(new java.awt.Dimension(32767, 200));
 						{
 							jPanelCCDSetup = new JPanel();
+							GridBagLayout jPanelCCDSetupLayout = new GridBagLayout();
 							jTabbedPaneOptions.addTab("CCD Setup", null, jPanelCCDSetup, null);
+							jPanelCCDSetupLayout.rowWeights = new double[] {0.1, 0.1, 0.1, 0.1};
+							jPanelCCDSetupLayout.rowHeights = new int[] {7, 7, 7, 7};
+							jPanelCCDSetupLayout.columnWeights = new double[] {0.1, 0.1, 0.1, 0.1};
+							jPanelCCDSetupLayout.columnWidths = new int[] {7, 7, 7, 7};
+							jPanelCCDSetup.setLayout(jPanelCCDSetupLayout);
 							{
 								jLabelCCDSetup = new JLabel();
-								jPanelCCDSetup.add(jLabelCCDSetup);
+								jPanelCCDSetup.add(jLabelCCDSetup, new GridBagConstraints(0, 0, 4, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 								jLabelCCDSetup.setText("CCD Setup");
 							}
 							{
 								jLabelCCDModels = new JLabel();
-								jPanelCCDSetup.add(jLabelCCDModels);
+								jPanelCCDSetup.add(jLabelCCDModels, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 								jLabelCCDModels.setText("Select CCD Model:");
 							}
 							{
@@ -196,31 +211,37 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 									new DefaultComboBoxModel(
 											new String[] { "Item One", "Item Two" });
 								jComboBoxCCDModels = new JComboBox();
-								jPanelCCDSetup.add(jComboBoxCCDModels);
+								jPanelCCDSetup.add(jComboBoxCCDModels, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 								jComboBoxCCDModels.setModel(jComboBoxCCDModelsModel);
 							}
 							{
 								jButtonCCDConnect = new JButton();
-								jPanelCCDSetup.add(jButtonCCDConnect);
+								jPanelCCDSetup.add(jButtonCCDConnect, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 								jButtonCCDConnect.setText("Connect");
 							}
 							{
 								jButtonDisconnect = new JButton();
-								jPanelCCDSetup.add(jButtonDisconnect);
+								jPanelCCDSetup.add(jButtonDisconnect, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 								jButtonDisconnect.setText("Disconnect");
 							}
 						}
 						{
 							jPanelCCDSettings = new JPanel();
+							GridBagLayout jPanelCCDSettingsLayout = new GridBagLayout();
 							jTabbedPaneOptions.addTab("CCD Settings", null, jPanelCCDSettings, null);
+							jPanelCCDSettingsLayout.rowWeights = new double[] {0.1, 0.1, 0.1, 0.1};
+							jPanelCCDSettingsLayout.rowHeights = new int[] {7, 7, 7, 7};
+							jPanelCCDSettingsLayout.columnWeights = new double[] {0.1, 0.1, 0.1, 0.1};
+							jPanelCCDSettingsLayout.columnWidths = new int[] {7, 7, 7, 7};
+							jPanelCCDSettings.setLayout(jPanelCCDSettingsLayout);
 							{
 								jLabelCCDSettings = new JLabel();
-								jPanelCCDSettings.add(jLabelCCDSettings);
+								jPanelCCDSettings.add(jLabelCCDSettings, new GridBagConstraints(0, 0, 4, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 								jLabelCCDSettings.setText("CCD Settings");
 							}
 							{
 								jLabelCCDTemp = new JLabel();
-								jPanelCCDSettings.add(jLabelCCDTemp);
+								jPanelCCDSettings.add(jLabelCCDTemp, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 								jLabelCCDTemp.setText("Cooling Temperature (ºC):");
 							}
 							{
@@ -228,12 +249,12 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 									new SpinnerListModel(
 											new String[] { "Sun", "Mon" , "Tue" , "Wed" , "Thu" , "Fri" , "Sat" });
 								jSpinnerCCDTemp = new JSpinner();
-								jPanelCCDSettings.add(jSpinnerCCDTemp);
+								jPanelCCDSettings.add(jSpinnerCCDTemp, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 								jSpinnerCCDTemp.setModel(jSpinnerCCDTempModel);
 							}
 							{
 								jLabelCCDExpTime = new JLabel();
-								jPanelCCDSettings.add(jLabelCCDExpTime);
+								jPanelCCDSettings.add(jLabelCCDExpTime, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 								jLabelCCDExpTime.setText("Exposure Time (s):");
 							}
 							{
@@ -241,12 +262,12 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 									new SpinnerListModel(
 											new String[] { "Sun", "Mon" , "Tue" , "Wed" , "Thu" , "Fri" , "Sat" });
 								jSpinnerCCDExpTime = new JSpinner();
-								jPanelCCDSettings.add(jSpinnerCCDExpTime);
+								jPanelCCDSettings.add(jSpinnerCCDExpTime, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 								jSpinnerCCDExpTime.setModel(jSpinnerCCDExpTimeModel);
 							}
 							{
 								jLabelCCDNAcc = new JLabel();
-								jPanelCCDSettings.add(jLabelCCDNAcc);
+								jPanelCCDSettings.add(jLabelCCDNAcc, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 								jLabelCCDNAcc.setText("Accumulations:");
 							}
 							{
@@ -254,44 +275,56 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 									new SpinnerListModel(
 											new String[] { "Sun", "Mon" , "Tue" , "Wed" , "Thu" , "Fri" , "Sat" });
 								jSpinnerCCDNAcc = new JSpinner();
-								jPanelCCDSettings.add(jSpinnerCCDNAcc);
+								jPanelCCDSettings.add(jSpinnerCCDNAcc, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 								jSpinnerCCDNAcc.setModel(jSpinnerCCDNAccModel);
 							}
 							{
 								jLabelCCDScanType = new JLabel();
-								jPanelCCDSettings.add(jLabelCCDScanType);
-								jPanelCCDSettings.add(getJRadioButtonCCDScanTypeSingle());
-								jPanelCCDSettings.add(getJRadioButtonCCDScanTypeAcc());
+								jPanelCCDSettings.add(jLabelCCDScanType, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+								jPanelCCDSettings.add(getJRadioButtonCCDScanTypeSingle(), new GridBagConstraints(3, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+								jPanelCCDSettings.add(getJRadioButtonCCDScanTypeAcc(), new GridBagConstraints(3, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 								jLabelCCDScanType.setText("Scan Type:");
 							}
 						}
 						{
 							jPanelCCDControl = new JPanel();
+							GridBagLayout jPanelCCDControlLayout = new GridBagLayout();
 							jTabbedPaneOptions.addTab("CCD Control", null, jPanelCCDControl, null);
+							jPanelCCDControlLayout.rowWeights = new double[] {0.1, 0.1, 0.1, 0.1};
+							jPanelCCDControlLayout.rowHeights = new int[] {7, 7, 7, 7};
+							jPanelCCDControlLayout.columnWeights = new double[] {0.1, 0.1, 0.1, 0.1};
+							jPanelCCDControlLayout.columnWidths = new int[] {7, 7, 7, 7};
+							jPanelCCDControl.setLayout(jPanelCCDControlLayout);
 							{
 								jLabelCCDControl = new JLabel();
-								jPanelCCDControl.add(jLabelCCDControl);
-								jPanelCCDControl.add(getJButtonCCDOn());
-								jPanelCCDControl.add(getJButtonCCDOff());
-								jPanelCCDControl.add(getJButtonCCDReset());
-								jPanelCCDControl.add(getJButtonCCDStartExp());
-								jPanelCCDControl.add(getJButtonCCDStopExp());
-								jPanelCCDControl.add(getJButtonCCDStartCooler());
-								jPanelCCDControl.add(getJButtonCCDStopCooler());
+								jPanelCCDControl.add(jLabelCCDControl, new GridBagConstraints(0, 0, 4, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+								jPanelCCDControl.add(getJButtonCCDOn(), new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+								jPanelCCDControl.add(getJButtonCCDOff(), new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+								jPanelCCDControl.add(getJButtonCCDReset(), new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+								jPanelCCDControl.add(getJButtonCCDStartExp(), new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+								jPanelCCDControl.add(getJButtonCCDStopExp(), new GridBagConstraints(2, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+								jPanelCCDControl.add(getJButtonCCDStartCooler(), new GridBagConstraints(3, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+								jPanelCCDControl.add(getJButtonCCDStopCooler(), new GridBagConstraints(3, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 								jLabelCCDControl.setText("CCD Control");
 							}
 						}
 						{
 							jPanelImageOptions = new JPanel();
+							GridBagLayout jPanelImageOptionsLayout = new GridBagLayout();
 							jTabbedPaneOptions.addTab("Image Options", null, jPanelImageOptions, null);
+							jPanelImageOptionsLayout.rowWeights = new double[] {0.1, 0.1, 0.1, 0.1};
+							jPanelImageOptionsLayout.rowHeights = new int[] {7, 7, 7, 7};
+							jPanelImageOptionsLayout.columnWeights = new double[] {0.1, 0.1, 0.1, 0.1};
+							jPanelImageOptionsLayout.columnWidths = new int[] {7, 7, 7, 7};
+							jPanelImageOptions.setLayout(jPanelImageOptionsLayout);
 							{
 								jLabelImageOptions = new JLabel();
-								jPanelImageOptions.add(jLabelImageOptions);
-								jPanelImageOptions.add(getJButtonImageFitSize());
-								jPanelImageOptions.add(getJButtonImageNormalSize());
-								jPanelImageOptions.add(getJButtonImageSaveAs());
-								jPanelImageOptions.add(getJButtonImagePrev());
-								jPanelImageOptions.add(getJButtonImageNext());
+								jPanelImageOptions.add(jLabelImageOptions, new GridBagConstraints(0, 0, 4, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+								jPanelImageOptions.add(getJButtonImageFitSize(), new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+								jPanelImageOptions.add(getJButtonImageNormalSize(), new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+								jPanelImageOptions.add(getJButtonImageSaveAs(), new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+								jPanelImageOptions.add(getJButtonImagePrev(), new GridBagConstraints(2, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+								jPanelImageOptions.add(getJButtonImageNext(), new GridBagConstraints(3, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 								jLabelImageOptions.setText("Image Options");
 							}
 						}
@@ -303,27 +336,15 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 						jSplitPaneHorizontal.setResizeWeight(1.0);
 						{
 							jPanelImageInfo = new JPanel();
+							BoxLayout jPanelImageInfoLayout = new BoxLayout(jPanelImageInfo, javax.swing.BoxLayout.Y_AXIS);
+							jPanelImageInfo.setLayout(jPanelImageInfoLayout);
 							jSplitPaneHorizontal.add(jPanelImageInfo, JSplitPane.RIGHT);
 							jPanelImageInfo.setMinimumSize(new java.awt.Dimension(200, 400));
 							jPanelImageInfo.setSize(200, 400);
 							jPanelImageInfo.setPreferredSize(new java.awt.Dimension(200, 400));
 							jPanelImageInfo.setMaximumSize(new java.awt.Dimension(200, 32767));
-							jPanelImageInfo.add(getJLabelImageInfo());
-							jPanelImageInfo.add(getJLabelImageInfoWidth());
-							jPanelImageInfo.add(getJLabelImageInfoW());
-							jPanelImageInfo.add(getJLabelImageInfoHeight());
-							jPanelImageInfo.add(getJLabelImageInfoH());
-							jPanelImageInfo.add(getJLabelImageInfoFileSize());
-							jPanelImageInfo.add(getJLabelImageInfoFileSz());
-							jPanelImageInfo.add(getJLabelImageInfoFrames());
-							jPanelImageInfo.add(getJLabelImageInfoFr());
-							jPanelImageInfo.add(getJLabelCCDInfo());
-							jPanelImageInfo.add(getJLabelCCDInfoCurrTemp());
-							jPanelImageInfo.add(getJLabelCCDInfoCurrT());
-							jPanelImageInfo.add(getJLabelCCDInfoCoolerState());
-							jPanelImageInfo.add(getJLabelCCDInfoCoolerSt());
-							jPanelImageInfo.add(getJLabelCCDInfoCameraState());
-							jPanelImageInfo.add(getJLabelCCDInfoCameaSt());
+							jPanelImageInfo.add(getJPanel2());
+							jPanelImageInfo.add(getJPanel1());
 						}
 						{
 							jScrollPaneImage = new JScrollPane();
@@ -419,10 +440,10 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 					jMenuCCDSettings = new JMenu();
 					jMenuBar.add(jMenuCCDSettings);
 					jMenuCCDSettings.setText("CCD Settings");
-					jMenuCCDSettings.add(getJMenuItemCCDSettingsCoolerTemp());
 					jMenuCCDSettings.add(getJMenuItemCCDSettingsExpTime());
 					jMenuCCDSettings.add(getJMenuItemCCDSettingsNAcc());
 					jMenuCCDSettings.add(getJMenuCCDSettingsScanType());
+					jMenuCCDSettings.add(getJMenuItemCCDSettingsCoolerTemp());
 				}
 				{
 					jMenuCCDControl = new JMenu();
@@ -697,7 +718,8 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JLabel getJLabelCCDInfoCoolerSt() {
 		if(jLabelCCDInfoCoolerSt == null) {
 			jLabelCCDInfoCoolerSt = new JLabel();
-			jLabelCCDInfoCoolerSt.setText("On/Off");
+			jLabelCCDInfoCoolerSt.setText("Off");
+			jLabelCCDInfoCoolerSt.setToolTipText("On/Off");
 		}
 		return jLabelCCDInfoCoolerSt;
 	}
@@ -713,7 +735,8 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JLabel getJLabelCCDInfoCameaSt() {
 		if(jLabelCCDInfoCameaSt == null) {
 			jLabelCCDInfoCameaSt = new JLabel();
-			jLabelCCDInfoCameaSt.setText("Working/On/Off/Disconnected/Connected");
+			jLabelCCDInfoCameaSt.setText("Disconnected");
+			jLabelCCDInfoCameaSt.setToolTipText("Working/On/Off/Disconnected/Connected");
 		}
 		return jLabelCCDInfoCameaSt;
 	}
@@ -981,8 +1004,81 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if(jMenuItemHelpAbout == null) {
 			jMenuItemHelpAbout = new JMenuItem();
 			jMenuItemHelpAbout.setText("About gCCD...");
+			jMenuItemHelpAbout.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent evt) {
+					System.out.println("jMenuItemHelpAbout.actionPerformed, event="+evt);
+					//TODO add your code for jMenuItemHelpAbout.actionPerformed
+					getJDialogAbout();
+				}
+			});
 		}
 		return jMenuItemHelpAbout;
 	}
+	
+	private JPanel getJPanel1() {
+		if(jPanel1 == null) {
+			jPanel1 = new JPanel();
+			GridBagLayout jPanel1Layout = new GridBagLayout();
+			jPanel1.setPreferredSize(new java.awt.Dimension(200, 112));
+			jPanel1Layout.rowWeights = new double[] {0.1, 0.1, 0.1, 0.1};
+			jPanel1Layout.rowHeights = new int[] {7, 7, 7, 7};
+			jPanel1Layout.columnWeights = new double[] {0.1, 0.1};
+			jPanel1Layout.columnWidths = new int[] {7, 7};
+			jPanel1.setLayout(jPanel1Layout);
+			jPanel1.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+			jPanel1.add(getJLabelCCDInfoCameaSt(), new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
+			jPanel1.add(getJLabelCCDInfoCameraState(), new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
+			jPanel1.add(getJLabelCCDInfoCoolerSt(), new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
+			jPanel1.add(getJLabelCCDInfoCoolerState(), new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
+			jPanel1.add(getJLabelCCDInfoCurrT(), new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
+			jPanel1.add(getJLabelCCDInfoCurrTemp(), new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
+			jPanel1.add(getJLabelCCDInfo(), new GridBagConstraints(0, 0, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		}
+		return jPanel1;
+	}
+	
+	private JPanel getJPanel2() {
+		if(jPanel2 == null) {
+			jPanel2 = new JPanel();
+			GridBagLayout jPanel2Layout = new GridBagLayout();
+			jPanel2.setPreferredSize(new java.awt.Dimension(99, 144));
+			jPanel2Layout.rowWeights = new double[] {0.1, 0.1, 0.1, 0.1, 0.1};
+			jPanel2Layout.rowHeights = new int[] {7, 7, 7, 7, 7};
+			jPanel2Layout.columnWeights = new double[] {0.1, 0.1};
+			jPanel2Layout.columnWidths = new int[] {7, 7};
+			jPanel2.setLayout(jPanel2Layout);
+			jPanel2.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+			jPanel2.add(getJLabelImageInfoFr(), new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
+			jPanel2.add(getJLabelImageInfoFrames(), new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
+			jPanel2.add(getJLabelImageInfoFileSz(), new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
+			jPanel2.add(getJLabelImageInfoFileSize(), new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
+			jPanel2.add(getJLabelImageInfoH(), new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
+			jPanel2.add(getJLabelImageInfoHeight(), new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
+			jPanel2.add(getJLabelImageInfoW(), new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
+			jPanel2.add(getJLabelImageInfoWidth(), new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 0, 0), 0, 0));
+			jPanel2.add(getJLabelImageInfo(), new GridBagConstraints(0, 0, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		}
+		return jPanel2;
+	}
+	
+	private JDialog getJDialogAbout() {
+		if(jDialogAbout == null) {
+			jDialogAbout = new JDialog(this);
+			jDialogAbout.setTitle("About gCCD...");
+			jDialogAbout.setMinimumSize(new java.awt.Dimension(300, 200));
+			jDialogAbout.setMaximumSize(new java.awt.Dimension(300, 200));
+			jDialogAbout.setSize(300, 200);
+		}
+		jDialogAbout.pack();
+		jDialogAbout.setLocationRelativeTo(null);
+		jDialogAbout.setVisible(true);
+		return jDialogAbout;
+	}
+	
+	private static class WindowCloseManager extends WindowAdapter{
+        public void windowClosing(WindowEvent evt){
+            System.exit(0);
+        }
+    }
 
 }
