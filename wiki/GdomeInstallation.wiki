@@ -1,4 +1,4 @@
-#summary gCCD Installation Manual
+#summary gDome Installation Manual
 
 
    * [ACSInstallation]
