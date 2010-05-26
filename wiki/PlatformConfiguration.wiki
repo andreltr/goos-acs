@@ -8,7 +8,7 @@ In order to compile the software you must install some libraries. This guide wil
 
 To install Image Magick you must download the source code of version 6.4.0 from http://downloads.jmagick.org/ and decompress it:
 
-Note: Replace <ver> with the version you downloaded, it should be 6.4.0.
+Note: Replace /<ver> with the version you downloaded, it should be 6.4.0.
 
  * *tar -xvzf ImageMagick<ver>.tar.gz
 
