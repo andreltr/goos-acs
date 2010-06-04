@@ -20,9 +20,9 @@ public:
 	void initialize();
 	void shutDown();
 private:
-	OpenDeviceParams* odp;
-	CSBIGCam* p_Cam = (CSBIGCam *) 0;
-	CSBIGImg* p_Img = (CSBIGImg *) 0;
+	OpenDeviceParams odp;
+	CSBIGCam* p_Cam;
+	CSBIGImg* p_Img;
 };
 
 #endif
