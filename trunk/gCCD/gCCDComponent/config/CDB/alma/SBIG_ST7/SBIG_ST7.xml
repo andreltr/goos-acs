@@ -10,4 +10,16 @@
 	<commandedCCDTemperature default_timer_trig="2.0" description="The temperature the CCD is to be cooled down to." format="%9.4f" units="Degrees Celsius" default_value="25.0" min_value="-55.0" max_value="45.0"/>
 	<cameraName default_timer_trig="2.0" description="Name of the used camera. Set to luckyEMCCD, luckyTESTCCD or luckySIMCCD." format="%s" units="-" default_value="SBIG_ST7"/>
 	<cameraModel default_timer_trig="2.0" description="Model of the used camera." format="%l" units="-" default_value="2"/>
+	<filterName default_timer_trig="2.0" description="Name of the used filter." format="%s" units="-" archive_priority="3" default_value="V"/>
+	<objectName default_timer_trig="2.0" description="Name of object observed." format="%s" units="-" default_value="Dummy star."/>
+	<observerName default_timer_trig="2.0" description="Name of observer(s)." format="%s" units="-" default_value="Software group of AIRUB, Bochum, Germany"/>
+	<exposureTime default_timer_trig="2.0" description="Exposure time." format="%9.4f" units="s" default_value="0.1" min_value="0.0" max_value="21600.0"/>
+	<focalLength default_timer_trig="2.0" description="Focal length of used (imaginary) telescope." format="%10.7f" units="m" default_value="12.00453"/>
+	<gain default_timer_trig="2.0" description="Gain of the CCD." format="%12.9f" units="e-/ADU" default_value="1.297016861"/>
+	<xPixelSize default_timer_trig="2.0" description="Pixel size (X) in metres." format="%11.10f" units="m" default_value="0.000009"/>
+	<yPixelSize default_timer_trig="2.0" description="Pixel size (Y) in metres." format="%11.10f" units="m" default_value="0.000009"/>
+	<xStart default_timer_trig="2.0" description="Upper left corner of CCD image (X)." format="%d" units="pixel" min_value="0" max_value="766" default_value="0"/>
+	<xEnd default_timer_trig="2.0" description="Lower right corner of CCD image (X)." format="%d" units="pixel" min_value="1" max_value="767" default_value="767"/>
+	<yStart default_timer_trig="2.0" description="Upper left corner of CCD image (Y)." format="%d" units="pixel" min_value="0" max_value="510" default_value="0"/>
+	<yEnd default_timer_trig="2.0" description="Lower right corner of CCD image (Y)." format="%d" units="pixel" min_value="1" max_value="511" default_value="511"/>
 </CCDComponent>
