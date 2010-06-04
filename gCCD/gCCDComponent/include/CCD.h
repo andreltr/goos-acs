@@ -16,6 +16,8 @@
 #include <baciROlong.h>
 #include <baciROstring.h>
 #include <baciROdouble.h>
+#include <baciRWlong.h>
+#include <baciRWstring.h>
 #include <baciRWdouble.h>
 #include <baciSmartPropertyPointer.h>
 
@@ -55,6 +57,19 @@ private:
 	SmartPropertyPointer<RWdouble> m_commandedCCDTemperature_p;
 	SmartPropertyPointer<ROstring> m_cameraName_p;
 	SmartPropertyPointer<ROlong> m_cameraModel_p;
+	SmartPropertyPointer<RWstring> m_filterName_p;
+	SmartPropertyPointer<RWstring> m_objectName_p;
+	SmartPropertyPointer<RWstring> m_observerName_p;
+	SmartPropertyPointer<RWdouble> m_exposureTime_p;
+	SmartPropertyPointer<RWdouble> m_focalLength_p;
+	SmartPropertyPointer<ROdouble> m_gain_p;
+	SmartPropertyPointer<ROdouble> m_xPixelSize_p;
+	SmartPropertyPointer<ROdouble> m_yPixelSize_p;
+	SmartPropertyPointer<RWlong> m_xStart_p;
+	SmartPropertyPointer<RWlong> m_xEnd_p;
+	SmartPropertyPointer<RWlong> m_yStart_p;
+	SmartPropertyPointer<RWlong> m_yEnd_p;
+
 	/* --------------------- [ Properties END ] ------------------------*/
 
 protected:
@@ -127,6 +142,31 @@ public:
 	virtual ACS::ROstring_ptr cameraName() throw (CORBA::SystemException);
 
 	virtual ACS::ROlong_ptr cameraModel() throw (CORBA::SystemException);
+
+	virtual ACS::RWstring_ptr filterName() throw (CORBA::SystemException);
+
+	virtual ACS::RWstring_ptr objectName() throw (CORBA::SystemException);
+
+	virtual ACS::RWstring_ptr observerName() throw (CORBA::SystemException);
+
+	virtual ACS::RWdouble_ptr exposureTime() throw (CORBA::SystemException);
+
+	virtual ACS::RWdouble_ptr focalLength() throw (CORBA::SystemException);
+
+	virtual ACS::ROdouble_ptr gain() throw (CORBA::SystemException);
+
+	virtual ACS::ROdouble_ptr xPixelSize() throw (CORBA::SystemException);
+
+	virtual ACS::ROdouble_ptr yPixelSize() throw (CORBA::SystemException);
+
+	virtual ACS::RWlong_ptr xStart() throw (CORBA::SystemException);
+
+	virtual ACS::RWlong_ptr xEnd() throw (CORBA::SystemException);
+
+	virtual ACS::RWlong_ptr yStart() throw (CORBA::SystemException);
+
+	virtual ACS::RWlong_ptr yEnd() throw (CORBA::SystemException);
+
 	/* --------------------- [ CORBA interface END ] --------------------- */
 
 	/* --------------------- [ internal purpose ] -------------------- */
