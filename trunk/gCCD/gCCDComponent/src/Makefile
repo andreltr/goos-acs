@@ -24,7 +24,8 @@
 #
 # additional include and library search paths
 #USER_INC = -I$(QTDIR)/include -I$(QWTDIR)/include
-#USER_INC = -I/usr/local/include/CCfits/
+USER_INC = -I/home/almadev/Desktop/SBIG/sbig/sbig_class_library/ \
+	-I/usr/include/cfitsio/
 
 USER_LIB = -lACE \
 	-lTAO \
@@ -52,7 +53,8 @@ USER_LIB = -lACE \
 	-lacstime \
 	-lACSErrTypeCommon \
 	-L/usr/lib /usr/lib/libCCfits.so  -L. -lcfitsio -lm -lnsl \
-	-landor
+	-L/usr/local/lib/libsbigudrv.so -lsbigudrv -lm \
+	-landor 
 
 #
 # MODULE CODE DESCRIPTION:
@@ -109,7 +111,9 @@ CCDComponent_OBJECTS   = CCD \
 		  	 			 STRContext \
 			 			 STRLucaEMCCD \
 			 			 STRgCCDSIM \
-			 			 STRSBIGST7	
+			 			 STRSBIGST7 \
+						 csbigcam \
+						 csbigimg
 
 NCSupplier_OBJECTS   = NCSupplier
 
