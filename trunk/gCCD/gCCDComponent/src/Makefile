@@ -24,8 +24,7 @@
 #
 # additional include and library search paths
 #USER_INC = -I$(QTDIR)/include -I$(QWTDIR)/include
-USER_INC = -I/home/almadev/Desktop/SBIG/sbig/sbig_class_library/ \
-	-I/usr/include/cfitsio/
+USER_INC = -I/usr/include/cfitsio/
 
 USER_LIB = -lACE \
 	-lTAO \
