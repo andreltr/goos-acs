@@ -2,7 +2,7 @@
 
 = Introduction =
 
-Add your content here.
+Here you will learn how to deploy, install and how to configure the software in a distributed enviroment.
 
 = Requirements =
 
