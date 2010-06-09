@@ -6,15 +6,17 @@ Add your content here.
 
 = Requirements =
 
-In order for the software to work, you must first have ACS installed and working. See these pages:
+In order for the software to work, you must first have ACS installed and working on each host where the software will be deployed. See these pages:
 
- * *PlatformConfiguration*
- * *[ACSInstallation ACS Installation]*
+ * *[PlatformConfiguration Platform configuration]*
+ * *[ACSInstallation ACS installation]*
 
 = Deployment =
 
 = Installation =
 
-== Client host ==
-
 == CCD host ==
+
+=== ACS Daemons ===
+
+== Client host ==
