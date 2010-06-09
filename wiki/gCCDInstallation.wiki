@@ -11,4 +11,10 @@ In order for the software to work, you must first have ACS installed and working
  * *PlatformConfiguration*
  * *[ACSInstallation ACS Installation]*
 
+= Deployment =
+
 = Installation =
+
+== Client host ==
+
+== CCD host ==
