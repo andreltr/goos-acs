@@ -13,6 +13,28 @@ In order for the software to work, you must first have ACS installed and working
 
 = Deployment =
 
+gCCD uses ACS as a framework to enable distributed deplyoment of the system. The software is divided roughly in three different logical parts:
+
+*The CCD camera component
+*The GUI client
+*The Bulk data transfer and notificacion system
+
+== The CCD camera component ==
+
+This is the software that offers the ACS interface to manipulate the supported cameras.
+
+== The GUI client ==
+
+This is the graphical user interface that the operator uses to control de CCD through the CCD component.
+
+== Bulk data transfer and notification system ==
+
+The bulk data transfer system provided by ACS consists of a "sender" and "receiver" component that allow the transference of big files. The notification system also provided by ACS is used in order to inform the client of the arrival of files.
+
+== Deployment scenario ==
+
+Since this software has been built as a distributed system the basic deployment scenario consists of three host machines 
+
 = Installation =
 
 == CCD host ==
