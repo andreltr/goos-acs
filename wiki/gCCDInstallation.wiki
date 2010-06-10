@@ -45,7 +45,7 @@ Since this software has been built as a distributed system the basic deployment 
 
 In order to avoid setup of the system (containers, acs, etc) each time you use it, you can use the ACS daemons to start containers on-demand whenever a component is requested from the client (or any other ACS/CORBA component to that matter).
 
-The processes _acscontainerdaemon_ and _acsservicesdaemon_ are responsible of starting and stopping containers and ACS services respectively.  
+The processes _acscontainerdaemon_ and _acsservicesdaemon_ are responsible of starting and stopping containers and ACS services respectively. This processes must be started manually or at boot time on the host machines.
 
 The CDB container configuration files found in config/MACI/Containers/ for each container must be modified to contain the hostname of the machine where the container is supposed to run on. Here is an example:
 
