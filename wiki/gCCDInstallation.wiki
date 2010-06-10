@@ -33,12 +33,43 @@ The bulk data transfer system provided by ACS consists of a "sender" and "receiv
 
 == Deployment scenario ==
 
-Since this software has been built as a distributed system the basic deployment scenario consists of three host machines 
+Since this software has been built as a distributed system the basic deployment scenario consists of three host machines:
+
+-->Insert diagram here<--
 
 = Installation =
 
 == CCD host ==
 
 === ACS Daemons ===
+
+In order to avoid setup of the system (containers, acs, etc) each time you use it, you can use the ACS daemons to start containers on-demand whenever a component is requested from the client (or any other ACS/CORBA component to that matter).
+
+The CDB container configuration files found in config/MACI/Containers/ for each container must be modified to contain the hostname of the machine where the container is supposed to run on. Here is an example:
+
+{{{
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Container xmlns="urn:schemas-cosylab-com:Container:1.0" 
+           xmlns:cdb="urn:schemas-cosylab-com:CDB:1.0" 
+           xmlns:baci="urn:schemas-cosylab-com:BACI:1.0" 
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+           xmlns:log="urn:schemas-cosylab-com:LoggingConfig:1.0" 
+           Timeout="20.0" 
+           UseIFR="1" 
+           ManagerRetry="10" 
+           ImplLang="cpp">
+  <Autoload>
+    <cdb:_ string="baci" />
+  </Autoload>
+  <DeployInfo Host="alma" Flags="" KeepAliveTime="0"/>
+  <LoggingConfig 
+             centralizedLogger="Log" 
+             minLogLevel="2" 
+             dispatchPacketSize="10" 
+             immediateDispatchLevel="99">
+  </LoggingConfig>
+</Container>
+
+}}}
 
 == Client host ==
