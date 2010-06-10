@@ -12,6 +12,7 @@
     <cdb:_ string="baci" />
     <cdb:_ string="bulkDataSenderLibEx1"/>
   </Autoload>
+  <DeployInfo Host="alma" Flags="" KeepAliveTime="0"/>
   <LoggingConfig 
              centralizedLogger="Log" 
              minLogLevel="2" 

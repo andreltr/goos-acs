@@ -11,6 +11,7 @@
   <Autoload>
     <cdb:_ string="baci" />
   </Autoload>
+  <DeployInfo Host="alma" Flags="" KeepAliveTime="0"/>
   <LoggingConfig 
              centralizedLogger="Log" 
              minLogLevel="2" 
