@@ -1,12 +1,3 @@
-/*
- * DocumentModel.java
- *
- * Created on January 22, 2007, 3:12 PM
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
-
 package alma.ucn.oca.ccd.model;
 
 import java.util.logging.Level;
@@ -55,6 +46,7 @@ public class gCCDComponentDAO extends ComponentClient {
 
 		getCameraModelsFromCDB();
 	}
+
 	// Obtains a connection to the ACS Component
 	public void connectToComponent() throws AcsJContainerServicesEx {
 		m_logger.info("INFO: Connecting to component...");
