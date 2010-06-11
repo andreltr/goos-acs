@@ -41,6 +41,7 @@ public class DefaultController extends AbstractController {
 	public static final String COMP_Y_END = "yEnd";
 	public static final String COMP_ORIGINAL_SIZE = "OriginalSize";
 	public static final String COMP_CURRENT_IMAGE = "CurrentImage";
+	public static final String COMP_CURRENT_STATE = "CurrentState";
 
 	public void changeCompCCDTemp(double newTemp) {
 		setModelProperty(COMP_COMMANDED_CCD_TEMP, newTemp);
@@ -96,6 +97,10 @@ public class DefaultController extends AbstractController {
 
 	public void changeCompCurrentImage(int newCurrentImage) {
 		setModelProperty(COMP_CURRENT_IMAGE, newCurrentImage);
+	}
+	
+	public void changeCompCurrentState(String newCurrentState) {
+		setModelProperty(COMP_CURRENT_STATE, newCurrentState);
 	}
 
 }
