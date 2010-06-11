@@ -45,6 +45,12 @@ public:
 	void off();
 
 	/**
+	 * Implementation of "resetCamera" function for this state.
+	 * The camera is acquiring, it should do nothing
+	 */
+	void resetCamera();
+
+	/**
 	 * Implementation of "getImage" function for this state.
 	 * The camera is acquiring, it should do nothing
 	 * @param width Image width
@@ -56,6 +62,12 @@ public:
 	 */
 	std::string* getImage(int width, int height, int acquisitionMode,
 			int numberOfAcquisitions, float exposureTime);
+
+	/**
+	 * Implementation of "stopExposure" function for this state.
+	 * The camera is acquiring, it should stop the operation
+	 */
+	void stopExposure();
 };
 
 #endif

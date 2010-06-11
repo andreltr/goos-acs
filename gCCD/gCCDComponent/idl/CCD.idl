@@ -32,8 +32,10 @@ module CCDmodule
   {
     void on();
     void off();
-    //void resetCamera();
-    void getImage(in long width, in long height, in long acquisitionMode, in long numberOfAcquisitions, in float exposureTime);
+    void resetCamera();
+    //void getImage(in long width, in long height, in long acquisitionMode, in long numberOfAcquisitions, in float exposureTime);
+    void startExposure();
+    void stopExposure();
     long getState();
 
     readonly attribute ACS::ROdouble actualAirTemperature;
@@ -45,6 +47,8 @@ module CCDmodule
 	readonly attribute ACS::RWstring objectName;
 	readonly attribute ACS::RWstring observerName;
 	readonly attribute ACS::RWdouble exposureTime;
+	readonly attribute ACS::RWlong acquisitionMode;
+	readonly attribute ACS::RWlong numberOfAcquisitions;
 	readonly attribute ACS::RWdouble focalLength;
 	readonly attribute ACS::ROdouble gain;
 	readonly attribute ACS::ROdouble xPixelSize;

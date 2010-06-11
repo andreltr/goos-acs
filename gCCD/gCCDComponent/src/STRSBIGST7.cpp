@@ -17,6 +17,18 @@ STRSBIGST7::~STRSBIGST7() {
 
 }
 
+void STRSBIGST7::on() {
+
+}
+
+void STRSBIGST7::off() {
+
+}
+
+void STRSBIGST7::resetCamera() {
+
+}
+
 std::string* STRSBIGST7::getImage(int width, int height, int acquisitionMode,
 		int numberOfAcquisitions, float exposureTime) {
 	std::cout << "STRSBIGST7::getImage()" << std::endl;
@@ -34,6 +46,11 @@ std::string* STRSBIGST7::getImage(int width, int height, int acquisitionMode,
 	shutDown();
 
 	return filenames;
+}
+
+
+void STRSBIGST7::stopExposure() {
+
 }
 
 void STRSBIGST7::initialize() {

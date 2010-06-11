@@ -32,13 +32,31 @@ public:
 		std::cout << "STRContext::STRContext(...) cameraModel: " << cameraModel << std::endl;
 		setCCDModel(cameraModel);
 	}
-	~STRContext() {
+	virtual ~STRContext() {
 	}
+
+	virtual void on(){
+		std::cout << "STRContext::on()" << std::endl;
+		return currentCCDModel->on();
+	}
+	virtual void off(){
+		std::cout << "STRContext::off()" << std::endl;
+		return currentCCDModel->off();
+	}
+	virtual void resetCamera() {
+		std::cout << "STRContext::resetCamera()" << std::endl;
+		return currentCCDModel->resetCamera();
+	}
+
 	std::string* getImage(int width, int height, int acquisitionMode,
 			int numberOfAcquisitions, float exposureTime) {
 		std::cout << "STRContext::getImage(...)" << std::endl;
 		return currentCCDModel->getImage(width, height, acquisitionMode,
 				numberOfAcquisitions, exposureTime);
+	}
+	virtual void stopExposure() {
+		std::cout << "STRContext::stopExposure()" << std::endl;
+		return currentCCDModel->stopExposure();
 	}
 	void setCCDModel(long cameraModel) {
 		currentModel = cameraModel;

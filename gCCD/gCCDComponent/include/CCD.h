@@ -61,6 +61,8 @@ private:
 	SmartPropertyPointer<RWstring> m_objectName_p;
 	SmartPropertyPointer<RWstring> m_observerName_p;
 	SmartPropertyPointer<RWdouble> m_exposureTime_p;
+	SmartPropertyPointer<RWlong> m_acquisitionMode_p;
+	SmartPropertyPointer<RWlong> m_numberOfAcquisitions_p;
 	SmartPropertyPointer<RWdouble> m_focalLength_p;
 	SmartPropertyPointer<ROdouble> m_gain_p;
 	SmartPropertyPointer<ROdouble> m_xPixelSize_p;
@@ -110,11 +112,22 @@ public:
 	void off();
 
 	/**
+	 * Resets the camera to its initial state
+	 */
+	void resetCamera();
+
+	/**
 	 * Obtains an image from the current camera
 	 */
-	void getImage(CORBA::Long width, CORBA::Long height,
-			CORBA::Long acquisitionMode, CORBA::Long numberOfAcquisitions,
-			CORBA::Float exposureTime);
+	void startExposure();
+	/*void getImage(CORBA::Long width, CORBA::Long height,
+	 CORBA::Long acquisitionMode, CORBA::Long numberOfAcquisitions,
+	 CORBA::Float exposureTime);*/
+
+	/**
+	 * Stops the current acquisition operation
+	 */
+	void stopExposure();
 
 	/**
 	 * Gets the current state of the camera
@@ -150,6 +163,11 @@ public:
 	virtual ACS::RWstring_ptr observerName() throw (CORBA::SystemException);
 
 	virtual ACS::RWdouble_ptr exposureTime() throw (CORBA::SystemException);
+
+	virtual ACS::RWlong_ptr acquisitionMode() throw (CORBA::SystemException);
+
+	virtual ACS::RWlong_ptr numberOfAcquisitions()
+			throw (CORBA::SystemException);
 
 	virtual ACS::RWdouble_ptr focalLength() throw (CORBA::SystemException);
 

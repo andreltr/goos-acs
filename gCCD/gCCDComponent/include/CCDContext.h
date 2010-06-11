@@ -78,6 +78,13 @@ public:
 	}
 
 	/**
+	 * depending of the current state, resets the camera
+	 */
+	void resetCamera() {
+		currentState->resetCamera();
+	}
+
+	/**
 	 * depending of the current state, it gets an image
 	 * @param width Image width
 	 * @param height Image height
@@ -90,6 +97,13 @@ public:
 			int numberOfAcquisitions, float exposureTime) {
 		return currentState->getImage(width, height, acquisitionMode,
 				numberOfAcquisitions, exposureTime);
+	}
+
+	/**
+	 * depending of the current state, stops the image acquisition
+	 */
+	void stopExposure() {
+		currentState->stopExposure();
 	}
 
 	/**

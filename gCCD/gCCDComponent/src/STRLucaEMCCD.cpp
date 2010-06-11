@@ -14,6 +14,18 @@ STRLucaEMCCD::~STRLucaEMCCD() {
 
 }
 
+void STRLucaEMCCD::on() {
+
+}
+
+void STRLucaEMCCD::off() {
+
+}
+
+void STRLucaEMCCD::resetCamera() {
+
+}
+
 std::string* STRLucaEMCCD::getImage(int width, int height,
 		int acquisitionMode, int numberOfAcquisitions, float exposureTime) {
 	std::cout << "STRLucaEMCCD::getImage()" << std::endl;
@@ -49,6 +61,10 @@ std::string* STRLucaEMCCD::getImage(int width, int height,
 	/*This should be returning a std::string* with the file names*/
 	shutDown();
 	return 0;
+}
+
+void STRLucaEMCCD::stopExposure() {
+
 }
 
 void STRLucaEMCCD::initialize() {

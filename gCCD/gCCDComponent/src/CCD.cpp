@@ -17,11 +17,11 @@ CCDComponent::CCDComponent(const ACE_CString& name,
 			m_actualAirTemperature_p(this), m_actualCCDTemperature_p(this),
 			m_commandedCCDTemperature_p(this), m_cameraName_p(this),
 			m_cameraModel_p(this), m_filterName_p(this), m_objectName_p(this),
-			m_observerName_p(this), m_exposureTime_p(this), m_focalLength_p(
-					this), m_gain_p(this), m_xPixelSize_p(this),
+			m_observerName_p(this), m_exposureTime_p(this),
+			m_acquisitionMode_p(this), m_numberOfAcquisitions_p(this),
+			m_focalLength_p(this), m_gain_p(this), m_xPixelSize_p(this),
 			m_yPixelSize_p(this), m_xStart_p(this), m_xEnd_p(this), m_yStart_p(
-					this), m_yEnd_p(this)
-{
+					this), m_yEnd_p(this) {
 
 	ACS_TRACE("CCDComponent::CCDComponent(): created");
 
@@ -37,6 +37,9 @@ CCDComponent::CCDComponent(const ACE_CString& name,
 	m_objectName_p = new RWstring(name + ":objectName", getComponent());
 	m_observerName_p = new RWstring(name + ":observerName", getComponent());
 	m_exposureTime_p = new RWdouble(name + ":exposureTime", getComponent());
+	m_acquisitionMode_p = new RWlong(name + ":acquisitionMode", getComponent());
+	m_numberOfAcquisitions_p = new RWlong(name + ":numberOfAcquisitions",
+			getComponent());
 	m_focalLength_p = new RWdouble(name + ":focalLength", getComponent());
 	m_gain_p = new ROdouble(name + ":gain", getComponent());
 	m_xPixelSize_p = new ROdouble(name + ":xPixelSize", getComponent());
@@ -77,19 +80,44 @@ void CCDComponent::off() {
 	context->off();
 }
 
-void CCDComponent::getImage(CORBA::Long width, CORBA::Long height,
-		CORBA::Long acquisitionMode, CORBA::Long numberOfAcquisitions,
-		CORBA::Float exposureTime) {
-	ACS_TRACE("CCDComponent::getImage()");
+void CCDComponent::resetCamera() {
+	ACS_TRACE("CCDComponent::resetCamera()");
+	context->resetCamera();
+}
 
-	filesQueue = context->getImage((int) width, (int) height,
-			(int) acquisitionMode, (int) numberOfAcquisitions,
-			(float) exposureTime);
+void CCDComponent::startExposure() {
+	ACS_TRACE("CCDComponent::startExposure()");
+	ACSErr::Completion_var completion;
+
+	filesQueue = context->getImage(640, 480, (int) acquisitionMode()->get_sync(
+			completion.out()), (int) numberOfAcquisitions()->get_sync(
+			completion.out()), (float) exposureTime()->get_sync(
+			completion.out()));
 	if (filesQueue != 0) {
 		startBulkData();
 		sendBulkData();
 	}
 }
+
+void CCDComponent::stopExposure() {
+	ACS_TRACE("CCDComponent::stopExposure()");
+	context->stopExposure();
+}
+
+/*
+ void CCDComponent::getImage(CORBA::Long width, CORBA::Long height,
+ CORBA::Long acquisitionMode, CORBA::Long numberOfAcquisitions,
+ CORBA::Float exposureTime) {
+ ACS_TRACE("CCDComponent::getImage()");
+
+ filesQueue = context->getImage((int) width, (int) height,
+ (int) acquisitionMode, (int) numberOfAcquisitions,
+ (float) exposureTime);
+ if (filesQueue != 0) {
+ startBulkData();
+ sendBulkData();
+ }
+ }*/
 
 CORBA::Long CCDComponent::getState() {
 	ACS_TRACE("CCDComponent::getState()");
@@ -183,6 +211,24 @@ ACS::RWdouble_ptr CCDComponent::exposureTime() throw (CORBA::SystemException) {
 	}
 	ACS::RWdouble_var prop = ACS::RWdouble::_narrow(
 			m_exposureTime_p->getCORBAReference());
+	return prop._retn();
+}
+
+ACS::RWlong_ptr CCDComponent::acquisitionMode() throw (CORBA::SystemException) {
+	if (!m_acquisitionMode_p) {
+		return ACS::RWlong::_nil();
+	}
+	ACS::RWlong_var prop =
+			ACS::RWlong::_narrow(m_acquisitionMode_p->getCORBAReference());
+	return prop._retn();
+}
+
+ACS::RWlong_ptr CCDComponent::numberOfAcquisitions() throw (CORBA::SystemException) {
+	if (!m_numberOfAcquisitions_p) {
+		return ACS::RWlong::_nil();
+	}
+	ACS::RWlong_var prop =
+			ACS::RWlong::_narrow(m_numberOfAcquisitions_p->getCORBAReference());
 	return prop._retn();
 }
 
