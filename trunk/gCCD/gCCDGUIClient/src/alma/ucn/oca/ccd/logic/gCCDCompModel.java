@@ -113,13 +113,13 @@ public class gCCDCompModel extends ComponentClient {
 			m_logger.info("INFO: Channel subscription has been added");
 			m_consumer.consumerReady();
 			m_logger.info("INFO: Consumer is ready");
-			m_logger.info("INFO: width: " + width);
-			m_logger.info("INFO: height: " + height);
 			m_logger.info("INFO: acq Mode: " + acquisitionMode);
-			m_logger.info("INFO: frames per file: " + numberOfAcc);
+			m_logger.info("INFO: fpf number of acc: " + numberOfAcc);
 			m_logger.info("INFO: exposure time: " + exposureTime);
-			ccdCompReference.getImage(width, height, acquisitionMode,
-					numberOfAcc, exposureTime);
+			ccdCompReference.acquisitionMode().set_sync(acquisitionMode);
+			ccdCompReference.numberOfAcquisitions().set_sync(numberOfAcc);
+			ccdCompReference.exposureTime().set_sync(exposureTime);
+			ccdCompReference.startExposure();
 		} catch (Exception e) {
 			m_logger.info("EXCEPTION: Consumer has been disconnected");
 			this.disconnectConsumer();

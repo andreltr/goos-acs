@@ -13,6 +13,18 @@ STRgCCDSIM::~STRgCCDSIM() {
 
 }
 
+void STRgCCDSIM::on() {
+
+}
+
+void STRgCCDSIM::off() {
+
+}
+
+void STRgCCDSIM::resetCamera() {
+
+}
+
 /*Code simulation for FITS creation goes here...*/
 std::string* STRgCCDSIM::getImage(int width, int height, int acquisitionMode,
 		int numberOfAcquisitions, float exposureTime) {
@@ -40,6 +52,10 @@ std::string* STRgCCDSIM::getImage(int width, int height, int acquisitionMode,
 	}
 
 	return filenames;
+}
+
+void STRgCCDSIM::stopExposure() {
+
 }
 
 int STRgCCDSIM::writeImage(int frames, int fileCorrelation) {

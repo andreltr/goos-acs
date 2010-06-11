@@ -27,8 +27,18 @@ void CCDStateDisconnected::off() {
 	return;
 }
 
+void CCDStateDisconnected::resetCamera() {
+	std::cout << "CCDStateDisconnected::resetCamera() nothing to do" << std::endl;
+	return;
+}
+
 std::string* CCDStateDisconnected::getImage(int width, int height,
 		int acquisitionMode, int numberOfAcquisitions, float exposureTime) {
-	std::cout << "CCDStateDisconnected::getImage() nothing to do" << std::endl;
+	std::cout << "CCDStateDisconnected::getImage(...) nothing to do" << std::endl;
 	return 0;
+}
+
+void CCDStateDisconnected::stopExposure() {
+	std::cout << "CCDStateDisconnected::stopExposure() nothing to do" << std::endl;
+	return;
 }

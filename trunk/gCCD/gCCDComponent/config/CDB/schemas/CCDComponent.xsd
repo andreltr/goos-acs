@@ -85,6 +85,24 @@
 					</xs:complexContent>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="acquisitionMode">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="baci:RWlong">
+							<xs:attribute default="acquisitionMode" name="description" type="xs:string" use="optional"/>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="numberOfAcquisitions">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="baci:RWlong">
+							<xs:attribute default="numberOfAcquisitions" name="description" type="xs:string" use="optional"/>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="focalLength">
 				<xs:complexType>
 					<xs:complexContent>

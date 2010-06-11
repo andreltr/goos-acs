@@ -44,6 +44,12 @@ public:
 	void off();
 
 	/**
+	 * Implementation of "resetCamera" function for this state
+	 * It should change do reset the camera
+	 */
+	void resetCamera();
+
+	/**
 	 * Implementation of "getImage" function for this state.
 	 * The camera is on, it should obtain an image.
 	 * @param width Image width
@@ -55,6 +61,12 @@ public:
 	 */
 	std::string* getImage(int width, int height, int acquisitionMode,
 			int numberOfAcquisitions, float exposureTime);
+
+	/**
+	 * Implementation of "stopExposure" function for this state
+	 * It should change do nothing
+	 */
+	void stopExposure();
 };
 
 #endif

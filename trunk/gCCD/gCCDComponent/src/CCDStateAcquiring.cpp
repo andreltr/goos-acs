@@ -26,8 +26,20 @@ void CCDStateAcquiring::off() {
 	return;
 }
 
+void CCDStateAcquiring::resetCamera() {
+	std::cout << "CCDStateAcquiring::resetCamera() nothing to do" << std::endl;
+	return;
+}
+
 std::string* CCDStateAcquiring::getImage(int width, int height,
 		int acquisitionMode, int numberOfAcquisitions, float exposureTime) {
 	std::cout << "CCDStateAcquiring::getImage() nothing to do" << std::endl;
 	return 0;
+}
+
+void CCDStateAcquiring::stopExposure() {
+	std::cout << "CCDStateAcquiring::stopExposure()" << std::endl;
+	strContext_p->stopExposure();
+	ccd_p->getContext()->setState(STATE_CONNECTED);
+	return;
 }

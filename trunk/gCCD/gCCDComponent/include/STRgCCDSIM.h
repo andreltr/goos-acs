@@ -23,8 +23,14 @@ public:
 	STRgCCDSIM();
 	~STRgCCDSIM();
 
+	void on();
+	void off();
+	void resetCamera();
+
 	std::string* getImage(int width, int height, int acquisitionMode,
 			int numberOfAcquisitions, float exposureTime);
+
+	void stopExposure();
 
 	int writeImage(int frames, int fileCorrelation);
 
