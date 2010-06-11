@@ -1,6 +1,8 @@
 package alma.ucn.oca.ccd.model;
 
 import alma.ucn.oca.ccd.controller.DefaultController;
+import alma.ucn.oca.ccd.dao.gCCDComponentDAO;
+
 import java.beans.PropertyChangeEvent;
 
 public class gCCDComponentModel extends AbstractModel {

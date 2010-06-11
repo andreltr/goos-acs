@@ -1,4 +1,4 @@
-package alma.ucn.oca.ccd.model;
+package alma.ucn.oca.ccd.dao;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
