@@ -31,6 +31,9 @@ public class gCCDComponentModel extends AbstractModel {
 	private long xEnd;
 	private long yStart;
 	private long yEnd;
+	
+	//
+	private int currentState;
 
 	// GUI properties
 	private String[] ccdModels;
@@ -467,5 +470,19 @@ public class gCCDComponentModel extends AbstractModel {
 	 */
 	public int getCurrentImage() {
 		return currentImage;
+	}
+
+	/**
+	 * @param currentState the currentState to set
+	 */
+	/*public void setCurrentState(int currentState) {
+		this.currentState = currentState;
+	}*/
+
+	/**
+	 * @return the currentState
+	 */
+	public String getCurrentState() {
+		return ccd_dao.getCurrentState();
 	}
 }

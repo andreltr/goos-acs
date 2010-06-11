@@ -335,6 +335,13 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 												new Insets(0, 0, 0, 0), 0, 0));
 								jSpinnerCCDExpTime
 										.setModel(jSpinnerCCDExpTimeModel);
+								jSpinnerCCDExpTime
+										.addChangeListener(new javax.swing.event.ChangeListener() {
+											public void stateChanged(
+													javax.swing.event.ChangeEvent evt) {
+												exposureTimeSpinnerStateChanged(evt);
+											}
+										});
 							}
 							{
 								jLabelCCDNAcc = new JLabel();
@@ -356,6 +363,13 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 												GridBagConstraints.NONE,
 												new Insets(0, 0, 0, 0), 0, 0));
 								jSpinnerCCDNAcc.setModel(jSpinnerCCDNAccModel);
+								jSpinnerCCDNAcc
+										.addChangeListener(new javax.swing.event.ChangeListener() {
+											public void stateChanged(
+													javax.swing.event.ChangeEvent evt) {
+												numberAccSpinnerStateChanged(evt);
+											}
+										});
 							}
 							{
 								jLabelCCDScanType = new JLabel();
@@ -1319,44 +1333,54 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	 */
 	public void modelPropertyChange(PropertyChangeEvent evt) {
 
-		if (evt.getPropertyName().equals(
-				DefaultController.COMP_COMMANDED_CCD_TEMP)) {
-			documentNameLabel.setText((String) evt.getNewValue());
+		if (evt.getPropertyName().equals(DefaultController.COMP_CURRENT_STATE)) {
+			String newStringValue = evt.getNewValue().toString();
+
+			if (!jLabelCCDInfoCameaSt.getText().equals(newStringValue))
+				jLabelCCDInfoCameaSt.setText(newStringValue);
 		}
 
 		else if (evt.getPropertyName().equals(
-				DefaultController.DOCUMENT_WIDTH_PROPERTY)) {
+				DefaultController.COMP_ORIGINAL_SIZE)) {
+			boolean newBooleanValue = (Boolean) evt.getNewValue();
 
-			Dimension newSize = new Dimension((Integer) evt.getNewValue(),
-					displayPanel.getHeight());
-
-			displayPanel.setPreferredSize(newSize);
-			displayPanel.setSize(newSize);
-
+			if (!buttonGroupImageOptionsMenuImageSize
+					.isSelected(jRadioButtonMenuItemImageOptionsNormalSize
+							.getModel()) != newBooleanValue) {
+				if (newBooleanValue) {
+					buttonGroupImageOptionsMenuImageSize.setSelected(
+							jRadioButtonMenuItemImageOptionsNormalSize
+									.getModel(), newBooleanValue);
+				}
+			}
 		}
 
-		//revalidate();
+		// revalidate();
 		repaint();
 
 	}
-	
-    private void rotationSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rotationSpinnerStateChanged
 
-        controller.changeElementRotation((Integer)rotationSpinner.getValue());
-        
-    }
+	private void exposureTimeSpinnerStateChanged(
+			javax.swing.event.ChangeEvent evt) {
 
- 
-    private void textDocumentChanged(DocumentEvent evt) {
-    
-        Document document = evt.getDocument();
-        
-        try {
-            controller.changeElementText(document.getText(0, document.getLength()));
-        } catch (BadLocationException ex) {
-            //  Handle exception
-        }
-         
-    }
+		controller.changeCompExposureTime((Double) jSpinnerCCDExpTime
+				.getValue());
+
+	}
+
+	private void numberAccSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {
+
+		controller.changeCompNumberAcquisitions((Long) jSpinnerCCDNAcc
+				.getValue());
+
+		/*
+		 * Document document = evt.getDocument();
+		 * 
+		 * try { controller.changeElementText(document.getText(0, document
+		 * .getLength())); } catch (BadLocationException ex) { // Handle
+		 * exception }
+		 */
+
+	}
 
 }

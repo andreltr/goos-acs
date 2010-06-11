@@ -207,4 +207,19 @@ public class gCCDComponentDAO extends ComponentClient {
 		selectedCamera = modelsList.get(model);
 	}
 
+	public String getCurrentState() {
+		switch (ccdCompReference.getState()) {
+		case 0:
+			return "Disconnected";
+			break;
+		case 1:
+			return "Connected";
+			break;
+		case 2:
+			return "Acquiring";
+			break;
+		}
+		return "Error determining state";
+	}
+
 }
