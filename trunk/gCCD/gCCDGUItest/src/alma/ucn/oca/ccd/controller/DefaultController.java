@@ -13,125 +13,89 @@ import java.awt.Font;
 
 /**
  * This controller implements the required methods and provides the properties
- * necessary to work with the DisplayViewPanel and PropertyViewPanel views. Each of
- * methods in this class can be called upon by the views to update to state of the
- * registered models.
- *
+ * necessary to work with the DisplayViewPanel and PropertyViewPanel views. Each
+ * of methods in this class can be called upon by the views to update to state
+ * of the registered models.
+ * 
  * @author Robert Eckstein
  */
-public class DefaultController extends AbstractController
-{
+public class DefaultController extends AbstractController {
 
-    //  Properties this controller expects to be stored in one or more registered models
-    
-    /**
-     * The document's name
-     */
-    public static final String DOCUMENT_NAME_PROPERTY = "Name";
-    /**
-     * The document's width
-     */
-    public static final String DOCUMENT_WIDTH_PROPERTY = "Width";
-    /**
-     * The document's height
-     */
-    public static final String DOCUMENT_HEIGHT_PROPERTY = "Height";    
-    /**
-     * The text element's string
-     */
-    public static final String ELEMENT_TEXT_PROPERTY = "Text";
-    /**
-     * The text element's font
-     */
-    public static final String ELEMENT_FONT_PROPERTY = "Font";
-    /**
-     * The text element's X position
-     */
-    public static final String ELEMENT_X_PROPERTY = "X";
-    /**
-     * The text element's Y position
-     */
-    public static final String ELEMENT_Y_PROPERTY = "Y";
-    /**
-     * The text element's opacity
-     */
-    public static final String ELEMENT_OPACITY_PROPERTY = "Opacity";
-    /**
-     * The text element's rotation
-     */
-    public static final String ELEMENT_ROTATION_PROPERTY = "Rotation";
-    
-    /**
-     * Change the document name in the model
-     * @param newName The new document name
-     */
-    public void changeDocumentName(String newName) {
-        setModelProperty(DOCUMENT_NAME_PROPERTY, newName);                                 
-    }
-    
-    /**
-     * Change the document width in the model
-     * @param newWidth The new doucment width
-     */
-    public void changeDocumentWidth(int newWidth) {
-        setModelProperty(DOCUMENT_WIDTH_PROPERTY, newWidth);                                 
-    }
-    
-    /**
-     * Change the document height in the model
-     * @param newHeight The new document height
-     */
-    public void changeDocumentHeight(int newHeight) {
-        setModelProperty(DOCUMENT_HEIGHT_PROPERTY, newHeight);                         
-    }
-    
-    
-    /**
-     * Change the text element string in the model
-     * @param newText The new text element string
-     */
-    public void changeElementText(String newText) {
-        setModelProperty(ELEMENT_TEXT_PROPERTY, newText);                 
-    }
-    
-    /**
-     * Change the text element font in the model
-     * @param newFont The new text element font
-     */
-    public void changeElementFont(Font newFont) {
-        setModelProperty(ELEMENT_FONT_PROPERTY, newFont);
-    }
-    
-    /**
-     * Change the text element X position value in the model
-     * @param newX The new text element X position
-     */
-    public void changeElementXPosition(int newX) {
-        setModelProperty(ELEMENT_X_PROPERTY, newX);         
-    }
-    
-    /**
-     * Change the text element Y position value in the model
-     * @param newY The new text element Y position
-     */
-    public void changeElementYPosition(int newY) {
-        setModelProperty(ELEMENT_Y_PROPERTY, newY);        
-    }
-    
-    /**
-     * Change the text element opacity value in the model
-     * @param newOpacity The new text element opacity value
-     */
-    public void changeElementOpacity(int newOpacity) {
-        setModelProperty(ELEMENT_OPACITY_PROPERTY, newOpacity);
-    }
-    
-    /**
-     * Change the text element rotation value in the model
-     * @param newRotation The new text element rotation value
-     */
-    public void changeElementRotation(int newRotation) {
-        setModelProperty(ELEMENT_ROTATION_PROPERTY, newRotation);        
-    }
-    
+	// Properties this controller expects to be stored in one or more registered
+	// models
+
+	/**
+	 * The document's name
+	 */
+	public static final String COMP_COMMANDED_CCD_TEMP = "CommandedCCDTemperature";
+	public static final String COMP_FILTER_NAME = "FilterName";
+	public static final String COMP_OBJECT_NAME = "ObjectName";
+	public static final String COMP_OBSERVER_NAME = "ObserverName";
+	public static final String COMP_EXPOSURE_TIME = "ExposureTime";
+	public static final String COMP_ACQ_MODE = "AcquisitionMode";
+	public static final String COMP_NUMBER_ACQ = "NumberOfAcquisitions";
+	public static final String COMP_FOCAL_LENGTH = "FocalLength";
+	public static final String COMP_X_START = "xStart";
+	public static final String COMP_X_END = "xEnd";
+	public static final String COMP_Y_START = "yStart";
+	public static final String COMP_Y_END = "yEnd";
+	public static final String COMP_ORIGINAL_SIZE = "OriginalSize";
+	public static final String COMP_CURRENT_IMAGE = "CurrentImage";
+
+	public void changeCompCCDTemp(double newTemp) {
+		setModelProperty(COMP_COMMANDED_CCD_TEMP, newTemp);
+	}
+
+	public void changeCompFilterName(String newFilterName) {
+		setModelProperty(COMP_FILTER_NAME, newFilterName);
+	}
+
+	public void changeCompObjectName(String newObjectName) {
+		setModelProperty(COMP_OBJECT_NAME, newObjectName);
+	}
+
+	public void changeCompObserverName(String newObserverName) {
+		setModelProperty(COMP_OBSERVER_NAME, newObserverName);
+	}
+
+	public void changeCompExposureTime(double newExposureTime) {
+		setModelProperty(COMP_EXPOSURE_TIME, newExposureTime);
+	}
+
+	public void changeCompAcquisitionMode(long newAcqMode) {
+		setModelProperty(COMP_ACQ_MODE, newAcqMode);
+	}
+
+	public void changeCompNumberAcquisitions(long newNumberAcq) {
+		setModelProperty(COMP_NUMBER_ACQ, newNumberAcq);
+	}
+
+	public void changeCompFocalLength(double newFocalLength) {
+		setModelProperty(COMP_FOCAL_LENGTH, newFocalLength);
+	}
+
+	public void changeCompxStart(long newxStart) {
+		setModelProperty(COMP_X_START, newxStart);
+	}
+
+	public void changeCompxEnd(long newxEnd) {
+		setModelProperty(COMP_X_END, newxEnd);
+	}
+
+	public void changeCompyStart(long newyStart) {
+		setModelProperty(COMP_Y_START, newyStart);
+	}
+
+	public void changeCompyEnd(long newyEnd) {
+		setModelProperty(COMP_Y_END, newyEnd);
+	}
+
+	public void changeCompOriginalSize(boolean newOriginalSize) {
+		setModelProperty(COMP_ORIGINAL_SIZE, newOriginalSize);
+	}
+
+	public void changeCompCurrentImage(int newCurrentImage) {
+		setModelProperty(COMP_CURRENT_IMAGE, newCurrentImage);
+	}
+
 }

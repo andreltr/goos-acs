@@ -11,6 +11,11 @@ import java.beans.PropertyChangeEvent;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+
+import alma.ucn.oca.ccd.controller.DefaultController;
 
 /**
  * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
@@ -162,6 +167,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		super();
 		this.controller = controller;
 		initGUI();
+		this.addWindowListener(new WindowCloseManager());
 	}
 
 	private void initGUI() {
@@ -1314,7 +1320,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	public void modelPropertyChange(PropertyChangeEvent evt) {
 
 		if (evt.getPropertyName().equals(
-				DefaultController.DOCUMENT_NAME_PROPERTY)) {
+				DefaultController.COMP_COMMANDED_CCD_TEMP)) {
 			documentNameLabel.setText((String) evt.getNewValue());
 		}
 
@@ -1329,50 +1335,28 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 
 		}
 
-		else if (evt.getPropertyName().equals(
-				DefaultController.DOCUMENT_HEIGHT_PROPERTY)) {
-
-			Dimension newSize = new Dimension(displayPanel.getWidth(),
-					(Integer) evt.getNewValue());
-
-			displayPanel.setPreferredSize(newSize);
-			displayPanel.setSize(newSize);
-
-		}
-
-		else if (evt.getPropertyName().equals(
-				DefaultController.ELEMENT_X_PROPERTY)) {
-			paintedString.xPosition = (Integer) evt.getNewValue();
-		}
-
-		else if (evt.getPropertyName().equals(
-				DefaultController.ELEMENT_Y_PROPERTY)) {
-			paintedString.yPosition = (Integer) evt.getNewValue();
-		}
-
-		else if (evt.getPropertyName().equals(
-				DefaultController.ELEMENT_TEXT_PROPERTY)) {
-			paintedString.text = (String) evt.getNewValue();
-		}
-
-		else if (evt.getPropertyName().equals(
-				DefaultController.ELEMENT_FONT_PROPERTY)) {
-			paintedString.font = (Font) evt.getNewValue();
-		}
-
-		else if (evt.getPropertyName().equals(
-				DefaultController.ELEMENT_ROTATION_PROPERTY)) {
-			paintedString.rotation = (Integer) evt.getNewValue();
-		}
-
-		else if (evt.getPropertyName().equals(
-				DefaultController.ELEMENT_OPACITY_PROPERTY)) {
-			paintedString.opacity = (Integer) evt.getNewValue();
-		}
-
-		revalidate();
+		//revalidate();
 		repaint();
 
 	}
+	
+    private void rotationSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rotationSpinnerStateChanged
+
+        controller.changeElementRotation((Integer)rotationSpinner.getValue());
+        
+    }
+
+ 
+    private void textDocumentChanged(DocumentEvent evt) {
+    
+        Document document = evt.getDocument();
+        
+        try {
+            controller.changeElementText(document.getText(0, document.getLength()));
+        } catch (BadLocationException ex) {
+            //  Handle exception
+        }
+         
+    }
 
 }
