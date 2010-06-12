@@ -122,7 +122,7 @@ public abstract class AbstractController implements PropertyChangeListener {
 		}
 	}
 
-	protected void useMethod(String propertyName) {
+	protected void useMethod(String propertyName) throws Exception {
 
 		for (AbstractModel model : registeredModels) {
 			try {
@@ -132,6 +132,7 @@ public abstract class AbstractController implements PropertyChangeListener {
 
 			} catch (Exception ex) {
 				// Handle exception
+				throw ex;
 			}
 		}
 	}
