@@ -18,13 +18,11 @@ Then download the required packages (available in the Downloads section):
 
  * *itcl-3.2-92.2.i386.rpm*
  * *pdksh-5.2.14-30.i386.rpm*
- * *unrar-3.6.8-1.el5.rf.i386.rpm*
 
 Then install the packages under sudo mode or using the root account, you can do this with by double-clickin in the RPM files or in bash :
 
  * *sudo rpm -ivh itcl-3.2-92.2.i386.rpm*
  * *sudo rpm -ivh pdksh-5.2.14-30.i386.rpm*
- * *sudo rpm -ivh unrar-3.6.8-1.el5.rf.i386.rpm*
 
 = Installing ACS =
 
