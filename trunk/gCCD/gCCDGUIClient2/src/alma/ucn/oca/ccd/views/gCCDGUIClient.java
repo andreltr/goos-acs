@@ -1,9 +1,9 @@
 package alma.ucn.oca.ccd.views;
 
+import javax.swing.JOptionPane;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -18,7 +18,7 @@ import alma.ucn.oca.ccd.controller.DefaultController;
 /**
  * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
  * Builder, which is free for non-commercial use. If Jigloo is being used
- * commercially (ie, by a corporation, company or business for any purpose
+ * commercially (i.e., by a corporation, company or business for any purpose
  * whatever) then you should purchase a license for each developer using Jigloo.
  * Please visit www.cloudgarden.com for details. Use of Jigloo implies
  * acceptance of these licensing terms. A COMMERCIAL LICENSE HAS NOT BEEN
@@ -56,19 +56,21 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private ButtonGroup buttonGroupCCDSettingsMenuScanType;
 	private JLabel jLabelCCDScanType;
 	private JSpinner jSpinnerCCDNAcc;
+	private JSpinner jSpinnerCCDNAccDialog;
 	private JLabel jLabelCCDNAcc;
 	private JSpinner jSpinnerCCDExpTime;
+	private JSpinner jSpinnerCCDExpTimeDialog;
 	private JLabel jLabelCCDExpTime;
 	private JSpinner jSpinnerCCDTemp;
+	private JSpinner jSpinnerCCDTempDialog;
 	private JLabel jLabelCCDTemp;
 	private JLabel jLabelCCDModels;
 	private JButton jButtonCCDOn;
-	private JDialog jDialogAbout;
-	private JDialog jDialogError;
-	private JDialog jDialogSelectCamera;
-	private JDialog jDialogExposureTime;
-	private JDialog jDialogAccumulations;
-	private JDialog jDialogCoolerTemp;
+	private JFrame jFrameAboutDialog;
+	private JFrame jFrameErrorDialog;
+	private JFrame jFrameCoolerTempDialog;
+	private JFrame jFrameExpTimeDialog;
+	private JFrame jFrameAccDialog;
 	private JPanel jPanel2;
 	private JPanel jPanel1;
 	private JMenuItem jMenuItemHelpAbout;
@@ -328,16 +330,32 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 										.setText("Cooling Temperature (ºC):");
 							}
 							{
-								SpinnerListModel jSpinnerCCDTempModel = new SpinnerListModel(
-										new String[] { "Sun", "Mon", "Tue",
-												"Wed", "Thu", "Fri", "Sat" });
+								SpinnerNumberModel jSpinnerCCDTempModel = new SpinnerNumberModel(
+										-20D, -55D, 10D, 0.1D);
 								jSpinnerCCDTemp = new JSpinner();
+								jSpinnerCCDTempDialog = new JSpinner();
 								jPanelCCDSettings.add(jSpinnerCCDTemp,
 										new GridBagConstraints(1, 3, 1, 1, 0.0,
 												0.0, GridBagConstraints.CENTER,
 												GridBagConstraints.NONE,
 												new Insets(0, 0, 0, 0), 0, 0));
 								jSpinnerCCDTemp.setModel(jSpinnerCCDTempModel);
+								jSpinnerCCDTempDialog
+										.setModel(jSpinnerCCDTempModel);							
+								jSpinnerCCDTemp
+										.addChangeListener(new javax.swing.event.ChangeListener() {
+											public void stateChanged(
+													javax.swing.event.ChangeEvent evt) {
+												coolerTempSpinnerStateChanged(evt);
+											}
+										});
+								jSpinnerCCDTempDialog
+										.addChangeListener(new javax.swing.event.ChangeListener() {
+											public void stateChanged(
+													javax.swing.event.ChangeEvent evt) {
+												coolerTempSpinnerStateChanged(evt);
+											}
+										});
 							}
 							{
 								jLabelCCDExpTime = new JLabel();
@@ -349,10 +367,10 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 								jLabelCCDExpTime.setText("Exposure Time (s):");
 							}
 							{
-								SpinnerListModel jSpinnerCCDExpTimeModel = new SpinnerListModel(
-										new String[] { "Sun", "Mon", "Tue",
-												"Wed", "Thu", "Fri", "Sat" });
+								SpinnerNumberModel jSpinnerCCDExpTimeModel = new SpinnerNumberModel(
+										1D, 0D, 10D, 0.1D);
 								jSpinnerCCDExpTime = new JSpinner();
+								jSpinnerCCDExpTimeDialog = new JSpinner();
 								jPanelCCDSettings.add(jSpinnerCCDExpTime,
 										new GridBagConstraints(1, 1, 1, 1, 0.0,
 												0.0, GridBagConstraints.CENTER,
@@ -360,7 +378,16 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 												new Insets(0, 0, 0, 0), 0, 0));
 								jSpinnerCCDExpTime
 										.setModel(jSpinnerCCDExpTimeModel);
+								jSpinnerCCDExpTimeDialog
+										.setModel(jSpinnerCCDExpTimeModel);
 								jSpinnerCCDExpTime
+										.addChangeListener(new javax.swing.event.ChangeListener() {
+											public void stateChanged(
+													javax.swing.event.ChangeEvent evt) {
+												exposureTimeSpinnerStateChanged(evt);
+											}
+										});
+								jSpinnerCCDExpTimeDialog
 										.addChangeListener(new javax.swing.event.ChangeListener() {
 											public void stateChanged(
 													javax.swing.event.ChangeEvent evt) {
@@ -378,17 +405,26 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 								jLabelCCDNAcc.setText("Accumulations:");
 							}
 							{
-								SpinnerListModel jSpinnerCCDNAccModel = new SpinnerListModel(
-										new String[] { "Sun", "Mon", "Tue",
-												"Wed", "Thu", "Fri", "Sat" });
+								SpinnerNumberModel jSpinnerCCDNAccModel = new SpinnerNumberModel(
+										(Long)1L, (Long)0L, (Long)10L, (Long)1L);
 								jSpinnerCCDNAcc = new JSpinner();
+								jSpinnerCCDNAccDialog = new JSpinner();
 								jPanelCCDSettings.add(jSpinnerCCDNAcc,
 										new GridBagConstraints(1, 2, 1, 1, 0.0,
 												0.0, GridBagConstraints.CENTER,
 												GridBagConstraints.NONE,
 												new Insets(0, 0, 0, 0), 0, 0));
 								jSpinnerCCDNAcc.setModel(jSpinnerCCDNAccModel);
+								jSpinnerCCDNAccDialog
+										.setModel(jSpinnerCCDNAccModel);
 								jSpinnerCCDNAcc
+										.addChangeListener(new javax.swing.event.ChangeListener() {
+											public void stateChanged(
+													javax.swing.event.ChangeEvent evt) {
+												numberAccSpinnerStateChanged(evt);
+											}
+										});
+								jSpinnerCCDNAccDialog
 										.addChangeListener(new javax.swing.event.ChangeListener() {
 											public void stateChanged(
 													javax.swing.event.ChangeEvent evt) {
@@ -1069,11 +1105,12 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jMenuItemCCDSettingsCoolerTemp == null) {
 			jMenuItemCCDSettingsCoolerTemp = new JMenuItem();
 			jMenuItemCCDSettingsCoolerTemp.setText("Cooler Temperature...");
-			jMenuItemCCDSettingsCoolerTemp.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent evt) {
-					getJDialogCoolerTemp();
-				}
-			});
+			jMenuItemCCDSettingsCoolerTemp
+					.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent evt) {
+							getJDialogCoolerTemp();
+						}
+					});
 		}
 		return jMenuItemCCDSettingsCoolerTemp;
 	}
@@ -1437,100 +1474,68 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		return jPanel2;
 	}
 
-	private JDialog getJDialogAbout() {
-		if (jDialogAbout == null) {
-			jDialogAbout = new JDialog(this);
-			jDialogAbout.setTitle("About gCCD...");
-			jDialogAbout.setMinimumSize(new java.awt.Dimension(300, 200));
-			jDialogAbout.setMaximumSize(new java.awt.Dimension(300, 200));
-			jDialogAbout.setSize(300, 200);
+	private void getJDialogAbout() {
+		if (jFrameAboutDialog == null) {
+			jFrameAboutDialog = new JFrame();
 		}
-		jDialogAbout.setModalityType(ModalityType.APPLICATION_MODAL);
-		jDialogAbout.pack();
-		jDialogAbout.setLocationRelativeTo(null);
-		jDialogAbout.setVisible(true);
-		return jDialogAbout;
+		JOptionPane.showMessageDialog(jFrameAboutDialog, "gCCD 2009 - 2010",
+				"About...", JOptionPane.INFORMATION_MESSAGE);
 	}
 
-	private JDialog getJDialogError() {
-		if (jDialogError == null) {
-			jDialogError = new JDialog(this);
-			jDialogError.setTitle("An error has ocurred...");
-			jDialogError.setMinimumSize(new java.awt.Dimension(300, 200));
-			jDialogError.setMaximumSize(new java.awt.Dimension(300, 200));
-			jDialogError.setSize(300, 200);
+	private void getJDialogError() {
+		if (jFrameErrorDialog == null) {
+			jFrameErrorDialog = new JFrame();
 		}
-		jDialogError.setModalityType(ModalityType.APPLICATION_MODAL);
-		jDialogError.pack();
-		jDialogError.setLocationRelativeTo(null);
-		jDialogError.setVisible(true);
-		return jDialogError;
+		JOptionPane.showMessageDialog(jFrameErrorDialog, "Error code: ",
+				"An error has occured...", JOptionPane.ERROR_MESSAGE);
 	}
 
-	private JDialog getJDialogSelectCamera() {
-		if (jDialogSelectCamera == null) {
-			jDialogSelectCamera = new JDialog(this);
-			jDialogSelectCamera.setTitle("Select camera model...");
-			jDialogSelectCamera
-					.setMinimumSize(new java.awt.Dimension(300, 200));
-			jDialogSelectCamera
-					.setMaximumSize(new java.awt.Dimension(300, 200));
-			jDialogSelectCamera.setSize(300, 200);
+	private void getJDialogSelectCamera() {
+		int size = jComboBoxCCDModels.getModel().getSize();
+		Object[] cameraModels = new Object[size];
+		for (int i = 0; i < size; i++) {
+			cameraModels[i] = jComboBoxCCDModels.getModel().getElementAt(i);
 		}
-		jDialogSelectCamera.setModalityType(ModalityType.APPLICATION_MODAL);
-		jDialogSelectCamera.pack();
-		jDialogSelectCamera.setLocationRelativeTo(null);
-		jDialogSelectCamera.setVisible(true);
-		return jDialogSelectCamera;
+
+		String s = (String) JOptionPane.showInputDialog(jFrameErrorDialog,
+				"Select the camera model:\n", "Select camera model...",
+				JOptionPane.PLAIN_MESSAGE, null, cameraModels, null);
+
+		if ((s != null) && (s.length() > 0)) {
+			for (int i = 0; i < size; i++) {
+				if (s.equals(jComboBoxCCDModels.getModel().getElementAt(i))) {
+					jComboBoxCCDModels.setSelectedIndex(i);
+					break;
+				}
+			}
+		}
 	}
 
-	private JDialog getJDialogCoolerTemp() {
-		if (jDialogCoolerTemp == null) {
-			jDialogCoolerTemp = new JDialog(this);
-			jDialogCoolerTemp.setTitle("Set cooler temperature...");
-			jDialogCoolerTemp.setMinimumSize(new java.awt.Dimension(300, 200));
-			jDialogCoolerTemp.setMaximumSize(new java.awt.Dimension(300, 200));
-			jDialogCoolerTemp.setSize(300, 200);
+	private void getJDialogCoolerTemp() {
+		if (jFrameCoolerTempDialog == null) {
+			jFrameCoolerTempDialog = new JFrame();
 		}
-		jDialogCoolerTemp.setModalityType(ModalityType.APPLICATION_MODAL);
-		jDialogCoolerTemp.pack();
-		jDialogCoolerTemp.setLocationRelativeTo(null);
-		jDialogCoolerTemp.setVisible(true);
-		return jDialogCoolerTemp;
+		Object[] message = { "Set temperature (ºC): ", jSpinnerCCDTempDialog };
+		JOptionPane.showMessageDialog(jFrameCoolerTempDialog, message,
+				"Set cooler temperature...", JOptionPane.OK_CANCEL_OPTION);
 	}
 
-	private JDialog getJDialogExposureTime() {
-		if (jDialogExposureTime == null) {
-			jDialogExposureTime = new JDialog(this);
-			jDialogExposureTime.setTitle("Set exposure time...");
-			jDialogExposureTime
-					.setMinimumSize(new java.awt.Dimension(300, 200));
-			jDialogExposureTime
-					.setMaximumSize(new java.awt.Dimension(300, 200));
-			jDialogExposureTime.setSize(300, 200);
+	private void getJDialogExposureTime() {
+		if (jFrameExpTimeDialog == null) {
+			jFrameExpTimeDialog = new JFrame();
 		}
-		jDialogExposureTime.setModalityType(ModalityType.APPLICATION_MODAL);
-		jDialogExposureTime.pack();
-		jDialogExposureTime.setLocationRelativeTo(null);
-		jDialogExposureTime.setVisible(true);
-		return jDialogExposureTime;
+		Object[] message = { "Set exposure time: ", jSpinnerCCDExpTimeDialog };
+		JOptionPane.showMessageDialog(jFrameExpTimeDialog, message,
+				"Set exposure time...", JOptionPane.OK_CANCEL_OPTION);
 	}
 
-	private JDialog getJDialogAccumulations() {
-		if (jDialogAccumulations == null) {
-			jDialogAccumulations = new JDialog(this);
-			jDialogAccumulations.setTitle("Set number of accumulations...");
-			jDialogAccumulations
-					.setMinimumSize(new java.awt.Dimension(300, 200));
-			jDialogAccumulations
-					.setMaximumSize(new java.awt.Dimension(300, 200));
-			jDialogAccumulations.setSize(300, 200);
+	private void getJDialogAccumulations() {
+		if (jFrameAccDialog == null) {
+			jFrameAccDialog = new JFrame();
 		}
-		jDialogAccumulations.setModalityType(ModalityType.APPLICATION_MODAL);
-		jDialogAccumulations.pack();
-		jDialogAccumulations.setLocationRelativeTo(null);
-		jDialogAccumulations.setVisible(true);
-		return jDialogAccumulations;
+		Object[] message = { "Set number of accumulations: ", jSpinnerCCDNAccDialog };
+		JOptionPane.showMessageDialog(jFrameExpTimeDialog, message,
+				"Set number of accumulations...", JOptionPane.OK_CANCEL_OPTION);
 	}
 
 	private static class WindowCloseManager extends WindowAdapter {
@@ -1575,7 +1580,6 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			String[] newStringValue = (String[]) evt.getNewValue();
 			jComboBoxCCDModels
 					.setModel(new DefaultComboBoxModel(newStringValue));
-			getJMenuCCDSetupModels();
 		}
 
 		// revalidate();
@@ -1588,6 +1592,12 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 
 		controller.changeCompExposureTime((Double) jSpinnerCCDExpTime
 				.getValue());
+
+	}
+
+	private void coolerTempSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {
+
+		controller.changeCompCCDTemp((Double) jSpinnerCCDTemp.getValue());
 
 	}
 
@@ -1613,6 +1623,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 					+ jComboBoxCCDModels.getModel().getSelectedItem()
 							.toString() + "]");
 			jComboBoxCCDModels.setEnabled(false);
+			jMenuItemCCDSetupModels.setEnabled(false);
 
 			jButtonCCDConnect.setEnabled(false);
 			jButtonDisconnect.setEnabled(true);
@@ -1636,6 +1647,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			this.setTitle("gCCD - [Disconnected]");
 			controller.disconnectFromCamera();
 			jComboBoxCCDModels.setEnabled(true);
+			jMenuItemCCDSetupModels.setEnabled(true);
 
 			jButtonCCDConnect.setEnabled(true);
 			jButtonDisconnect.setEnabled(false);
