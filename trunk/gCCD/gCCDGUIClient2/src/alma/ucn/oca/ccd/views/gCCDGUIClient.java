@@ -11,16 +11,14 @@ import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.io.File;
 import java.util.LinkedList;
-import javax.swing.filechooser.*;
 import javax.swing.JFileChooser;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
 import magick.*;
-import magick.util.*;
-
 import alma.ucn.oca.ccd.controller.DefaultController;
+import alma.ucn.oca.ccd.utils.gCCDGUIClientFileSelectorDialog;
 import alma.ucn.oca.ccd.utils.gCCDGUIClientImagePanels;
 
 /**
@@ -1617,6 +1615,16 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 				"Set number of accumulations...", JOptionPane.OK_CANCEL_OPTION);
 	}
 
+	private JFileChooser getJDialogFilechooser() {
+		if (jFileChooserDialog == null) {
+			// File selector dialog
+			jFileChooserDialog = new JFileChooser();
+			jFileChooserDialog
+					.addChoosableFileFilter(new gCCDGUIClientFileSelectorDialog());
+		}
+		return jFileChooserDialog;
+	}
+
 	private static class WindowCloseManager extends WindowAdapter {
 		public void windowClosing(WindowEvent evt) {
 			System.exit(0);
@@ -1668,8 +1676,8 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 					.getNewValue();
 			listFiles = newStringValue;
 			imgMax = listFiles.size();
+			showImageAction(null, 0);
 		}
-
 		repaint();
 	}
 
@@ -1858,55 +1866,38 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	}
 
 	protected void nextImageAction(ActionEvent e) {
-		if (imgIndex < imgMax) {
+		if (imgIndex < imgMax - 1) {
 			imgIndex++;
-			if (imagePanel == null) {
-				imagePanel = new gCCDGUIClientImagePanels(jScrollPaneImage
-						.getWidth() - 30, jScrollPaneImage.getHeight() - 45,
-						listFiles.get(imgIndex));
-			}
-
-			imagePanel.setImage(listFiles.get(imgIndex));
-			jScrollPaneImage.setViewportView(imagePanel);
+			showImageAction(e, imgIndex);
 		} else {
 			imgIndex = 0;
-			if (imagePanel == null) {
-				imagePanel = new gCCDGUIClientImagePanels(jScrollPaneImage
-						.getWidth() - 30, jScrollPaneImage.getHeight() - 45,
-						listFiles.get(imgIndex));
-			}
-
-			imagePanel.setImage(listFiles.get(imgIndex));
-			jScrollPaneImage.setViewportView(imagePanel);
+			showImageAction(e, imgIndex);
 		}
 	}
 
 	protected void previousImageAction(ActionEvent e) {
 		if (imgIndex > 0) {
 			imgIndex--;
-			if (imagePanel == null) {
-				imagePanel = new gCCDGUIClientImagePanels(jScrollPaneImage
-						.getWidth() - 30, jScrollPaneImage.getHeight() - 45,
-						listFiles.get(imgIndex));
-			}
-
-			imagePanel.setImage(listFiles.get(imgIndex));
-			jScrollPaneImage.setViewportView(imagePanel);
+			showImageAction(e, imgIndex);
 		} else {
-			imgIndex = imgMax;
-			if (imagePanel == null) {
-				imagePanel = new gCCDGUIClientImagePanels(jScrollPaneImage
-						.getWidth() - 30, jScrollPaneImage.getHeight() - 45,
-						listFiles.get(imgIndex));
-			}
-
-			imagePanel.setImage(listFiles.get(imgIndex));
-			jScrollPaneImage.setViewportView(imagePanel);
+			imgIndex = imgMax - 1;
+			showImageAction(e, imgIndex);
 		}
 	}
 
+	protected void showImageAction(ActionEvent e, int imgIndex) {
+		if (imagePanel == null) {
+			imagePanel = new gCCDGUIClientImagePanels(jScrollPaneImage
+					.getWidth() - 30, jScrollPaneImage.getHeight() - 45,
+					listFiles.get(imgIndex));
+		}
+
+		imagePanel.setImage(listFiles.get(imgIndex));
+		jScrollPaneImage.setViewportView(imagePanel);
+	}
+
 	protected void saveAsImageAction(ActionEvent e) {
-		int result = jFileChooserDialog.showSaveDialog(this);
+		int result = getJDialogFilechooser().showSaveDialog(this);
 		File fileObj = jFileChooserDialog.getSelectedFile();// We get the
 		// path to save the image
 		if (result == JFileChooser.APPROVE_OPTION) {
@@ -1932,7 +1923,6 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 
 	public void saveImage(String imagePath, String currentImage)
 			throws MagickException {
-
 		// The received image is saved as a BMP file, and then converted to FITS
 		ImageInfo info2 = new ImageInfo("/diska/home/almadev/" + currentImage);
 		MagickImage image2 = new MagickImage(info2);

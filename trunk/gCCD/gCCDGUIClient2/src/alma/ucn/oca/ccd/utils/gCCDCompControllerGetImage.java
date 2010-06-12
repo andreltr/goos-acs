@@ -1,10 +1,10 @@
 package alma.ucn.oca.ccd.utils;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+//import java.awt.image.BufferedImage;
+//import java.io.File;
+//import java.io.IOException;
 
-import javax.imageio.ImageIO;
+//import javax.imageio.ImageIO;
 
 //import alma.ucn.oca.ccd.ui.CCDGUI;
 

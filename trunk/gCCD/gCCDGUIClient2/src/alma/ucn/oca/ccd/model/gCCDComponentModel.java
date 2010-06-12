@@ -3,7 +3,7 @@ package alma.ucn.oca.ccd.model;
 import alma.ucn.oca.ccd.controller.DefaultController;
 import alma.ucn.oca.ccd.dao.gCCDComponentDAO;
 
-import java.beans.PropertyChangeEvent;
+//import java.beans.PropertyChangeEvent;
 import java.util.LinkedList;
 
 public class gCCDComponentModel extends AbstractModel {

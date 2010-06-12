@@ -9,8 +9,6 @@
 
 package alma.ucn.oca.ccd.controller;
 
-import java.awt.Font;
-
 /**
  * This controller implements the required methods and provides the properties
  * necessary to work with the DisplayViewPanel and PropertyViewPanel views. Each
