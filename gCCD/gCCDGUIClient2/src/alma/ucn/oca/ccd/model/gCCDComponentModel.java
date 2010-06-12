@@ -73,12 +73,7 @@ public class gCCDComponentModel extends AbstractModel {
 	// DAO interface
 
 	public void connectToCamera() throws Exception {
-		try {
-			ccd_dao.connectToComponent(ccdModels[selectedCamera]);
-		} catch (Exception e) {
-			System.out.println("EXXXXXXXXXXXXXXXXXXX");
-			throw new Exception();
-		}
+		ccd_dao.connectToComponent(ccdModels[selectedCamera]);
 	}
 
 	public void disconnectFromCamera() {

@@ -126,39 +126,39 @@ public class DefaultController extends AbstractController {
 	}
 
 	//
-	public void connectToCamera() {
+	public void connectToCamera() throws Exception {
 		useMethod(COMP_CONNECT_METHOD);
 	}
 
-	public void disconnectFromCamera() {
+	public void disconnectFromCamera() throws Exception {
 		useMethod(COMP_DISCONNECT_METHOD);
 	}
 
-	public void startCamera() {
+	public void startCamera() throws Exception {
 		useMethod(COMP_START_CCD_METHOD);
 	}
 
-	public void shutdownCamera() {
+	public void shutdownCamera() throws Exception {
 		useMethod(COMP_SHUTDOWN_CCD_METHOD);
 	}
 
-	public void resetCamera() {
+	public void resetCamera() throws Exception {
 		useMethod(COMP_RESET_CCD_METHOD);
 	}
 
-	public void startExposure() {
+	public void startExposure() throws Exception {
 		useMethod(COMP_START_EXP_METHOD);
 	}
 
-	public void stopExposure() {
+	public void stopExposure() throws Exception {
 		useMethod(COMP_STOP_EXP_METHOD);
 	}
-	
-	public void startCooler() {
+
+	public void startCooler() throws Exception {
 		useMethod(COMP_START_COOLER_METHOD);
 	}
 
-	public void stopCooler() {
+	public void stopCooler() throws Exception {
 		useMethod(COMP_STOP_COOLER_METHOD);
 	}
 }

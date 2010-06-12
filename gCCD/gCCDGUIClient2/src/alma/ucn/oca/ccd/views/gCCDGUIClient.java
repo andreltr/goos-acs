@@ -1625,99 +1625,130 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jMenuCCDSettings.setEnabled(true);
 			jMenuCCDControl.setEnabled(true);
 			jMenuImageOptions.setEnabled(true);
-		} catch (Exception e1) {
+		} catch (Throwable e1) {
 			getJDialogError();
 			e1.printStackTrace();
 		}
 	}
 
 	protected void disconnectAction(ActionEvent e) {
-		this.setTitle("gCCD - [Disconnected]");
-		controller.disconnectFromCamera();
-		jComboBoxCCDModels.setEnabled(true);
+		try {
+			this.setTitle("gCCD - [Disconnected]");
+			controller.disconnectFromCamera();
+			jComboBoxCCDModels.setEnabled(true);
 
-		jButtonCCDConnect.setEnabled(true);
-		jButtonDisconnect.setEnabled(false);
-		jTabbedPaneOptions.setEnabledAt(1, false);
-		jTabbedPaneOptions.setEnabledAt(2, false);
-		jTabbedPaneOptions.setEnabledAt(3, false);
+			jButtonCCDConnect.setEnabled(true);
+			jButtonDisconnect.setEnabled(false);
+			jTabbedPaneOptions.setEnabledAt(1, false);
+			jTabbedPaneOptions.setEnabledAt(2, false);
+			jTabbedPaneOptions.setEnabledAt(3, false);
 
-		jMenuItemCCDSetupConnect.setEnabled(true);
-		jMenuItemCCDSetupDisconnect.setEnabled(false);
-		jMenuCCDSettings.setEnabled(false);
-		jMenuCCDControl.setEnabled(false);
-		jMenuImageOptions.setEnabled(false);
+			jMenuItemCCDSetupConnect.setEnabled(true);
+			jMenuItemCCDSetupDisconnect.setEnabled(false);
+			jMenuCCDSettings.setEnabled(false);
+			jMenuCCDControl.setEnabled(false);
+			jMenuImageOptions.setEnabled(false);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	protected void startCameraAction(ActionEvent e) {
-		controller.startCamera();
-		jButtonCCDOn.setEnabled(false);
-		jButtonCCDOff.setEnabled(true);
-		jButtonCCDStartExp.setEnabled(true);
-		jButtonCCDStartCooler.setEnabled(true);
+		try {
+			controller.startCamera();
+			jButtonCCDOn.setEnabled(false);
+			jButtonCCDOff.setEnabled(true);
+			jButtonCCDStartExp.setEnabled(true);
+			jButtonCCDStartCooler.setEnabled(true);
 
-		jMenuItemCCDControlOn.setEnabled(false);
-		jMenuItemCCDControlOff.setEnabled(true);
-		jMenuItemCCDControlStartExp.setEnabled(true);
-		jMenuItemCCDControlStartCooler.setEnabled(true);
+			jMenuItemCCDControlOn.setEnabled(false);
+			jMenuItemCCDControlOff.setEnabled(true);
+			jMenuItemCCDControlStartExp.setEnabled(true);
+			jMenuItemCCDControlStartCooler.setEnabled(true);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	protected void shutdownCameraAction(ActionEvent e) {
-		controller.shutdownCamera();
-		jButtonCCDOn.setEnabled(true);
-		jButtonCCDOff.setEnabled(false);
-		jButtonCCDStartExp.setEnabled(false);
-		jButtonCCDStartCooler.setEnabled(false);
+		try {
+			controller.shutdownCamera();
+			jButtonCCDOn.setEnabled(true);
+			jButtonCCDOff.setEnabled(false);
+			jButtonCCDStartExp.setEnabled(false);
+			jButtonCCDStartCooler.setEnabled(false);
 
-		jMenuItemCCDControlOn.setEnabled(true);
-		jMenuItemCCDControlOff.setEnabled(false);
-		jMenuItemCCDControlStartExp.setEnabled(false);
-		jMenuItemCCDControlStartCooler.setEnabled(false);
+			jMenuItemCCDControlOn.setEnabled(true);
+			jMenuItemCCDControlOff.setEnabled(false);
+			jMenuItemCCDControlStartExp.setEnabled(false);
+			jMenuItemCCDControlStartCooler.setEnabled(false);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	protected void resetCameraAction(ActionEvent e) {
-		controller.resetCamera();
+		try {
+			controller.resetCamera();
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	protected void startExposureAction(ActionEvent e) {
-		controller.startExposure();
-		jButtonCCDStopExp.setEnabled(true);
-		jButtonCCDStartExp.setEnabled(false);
-		jButtonCCDReset.setEnabled(false);
+		try {
+			controller.startExposure();
+			jButtonCCDStopExp.setEnabled(true);
+			jButtonCCDStartExp.setEnabled(false);
+			jButtonCCDReset.setEnabled(false);
 
-		jMenuItemCCDControlStopExp.setEnabled(true);
-		jMenuItemCCDControlStartExp.setEnabled(false);
-		jMenuItemCCDControlReset.setEnabled(false);
+			jMenuItemCCDControlStopExp.setEnabled(true);
+			jMenuItemCCDControlStartExp.setEnabled(false);
+			jMenuItemCCDControlReset.setEnabled(false);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	protected void stopExposureAction(ActionEvent e) {
-		controller.stopExposure();
-		jButtonCCDStopExp.setEnabled(false);
-		jButtonCCDStartExp.setEnabled(true);
-		jButtonCCDReset.setEnabled(true);
+		try {
+			controller.stopExposure();
+			jButtonCCDStopExp.setEnabled(false);
+			jButtonCCDStartExp.setEnabled(true);
+			jButtonCCDReset.setEnabled(true);
 
-		jMenuItemCCDControlStopExp.setEnabled(false);
-		jMenuItemCCDControlStartExp.setEnabled(true);
-		jMenuItemCCDControlReset.setEnabled(true);
-
+			jMenuItemCCDControlStopExp.setEnabled(false);
+			jMenuItemCCDControlStartExp.setEnabled(true);
+			jMenuItemCCDControlReset.setEnabled(true);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	protected void startCoolerAction(ActionEvent e) {
-		controller.startCooler();
-		jButtonCCDStartCooler.setEnabled(false);
-		jButtonCCDStopCooler.setEnabled(true);
+		try {
+			controller.startCooler();
+			jButtonCCDStartCooler.setEnabled(false);
+			jButtonCCDStopCooler.setEnabled(true);
 
-		jMenuItemCCDControlStartCooler.setEnabled(false);
-		jMenuItemCCDControlStopCooler.setEnabled(true);
+			jMenuItemCCDControlStartCooler.setEnabled(false);
+			jMenuItemCCDControlStopCooler.setEnabled(true);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	protected void stopCoolerAction(ActionEvent e) {
-		controller.stopCooler();
-		jButtonCCDStartCooler.setEnabled(true);
-		jButtonCCDStopCooler.setEnabled(false);
+		try {
+			controller.stopCooler();
+			jButtonCCDStartCooler.setEnabled(true);
+			jButtonCCDStopCooler.setEnabled(false);
 
-		jMenuItemCCDControlStartCooler.setEnabled(true);
-		jMenuItemCCDControlStopCooler.setEnabled(false);
+			jMenuItemCCDControlStartCooler.setEnabled(true);
+			jMenuItemCCDControlStopCooler.setEnabled(false);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	protected void changeCCD(ActionEvent e) {
