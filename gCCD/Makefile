@@ -4,7 +4,7 @@ client:
 	@echo "*********************************************"
 	@echo "* Making gCCD Client...                     *"
 	@echo "*********************************************"
-	@cd ./gCCDGUIClient/src/ && $(MAKE) clean all install
+	@cd ./gCCDGUIClient2/src/ && $(MAKE) clean all install
 
 component:
 	@echo "*********************************************"
@@ -23,7 +23,7 @@ clean:
 	@echo "*********************************************"
 	@echo "* Cleaning all...                           *"
 	@echo "*********************************************"
-	@cd ./gCCDGUIClient/src/ && $(MAKE) clean
+	@cd ./gCCDGUIClient2/src/ && $(MAKE) clean
 	@cd ./gCCDComponent/src/ && $(MAKE) clean
 	@cd ./gCCDBDT/src/ && $(MAKE) clean
 	@cd ./gCCDBDT/test/ && $(MAKE) clean
