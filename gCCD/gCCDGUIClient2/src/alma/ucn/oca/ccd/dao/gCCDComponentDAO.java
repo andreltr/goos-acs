@@ -1,16 +1,19 @@
 package alma.ucn.oca.ccd.dao;
 
+import alma.ucn.oca.ccd.model.gCCDComponentModel;
 import alma.ucn.oca.ccd.utils.gCCDNCEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.LinkedList;
 import alma.JavaContainerError.wrappers.AcsJContainerServicesEx;
+import alma.maciErrType.wrappers.AcsJCannotGetComponentEx;
 import alma.acs.component.client.ComponentClient;
 import alma.acs.container.ContainerServices;
 import alma.acs.nc.Consumer;
 import alma.ACS.ACSComponent;
 
 public class gCCDComponentDAO extends ComponentClient {
+	private gCCDComponentModel model;
 	private alma.ACS.ROstring myStringProperty;
 	private alma.ACS.RWdouble myDoubleProperty;
 	// Reference to the CCD component
@@ -24,13 +27,14 @@ public class gCCDComponentDAO extends ComponentClient {
 	private gCCDNCEvent lastNotification;
 	private boolean consumerOn;
 	private LinkedList<String> modelsList;
-	private String selectedCamera;
+
+	// private String selectedCamera;
 
 	/**
 	 * Default constructor
 	 */
-	public gCCDComponentDAO(Logger logger, String managerLoc, String clientName)
-			throws Exception {
+	public gCCDComponentDAO(Logger logger, String managerLoc,
+			String clientName, gCCDComponentModel model) throws Exception {
 		super(logger, managerLoc, clientName);
 
 		ccdCompReference = null;
@@ -45,17 +49,23 @@ public class gCCDComponentDAO extends ComponentClient {
 		myStringProperty = null;
 		myDoubleProperty = null;
 
+		setModel(model);
+
 		getCameraModelsFromCDB();
 	}
 
+	public void init() {
+		model.setCCDModels(getCameraModels());
+		model.setCurrentState("Disconnected");
+	}
+
 	// Obtains a connection to the ACS Component
-	public void connectToComponent() throws AcsJContainerServicesEx {
+	public void connectToComponent(String selectedCamera)
+			throws AcsJContainerServicesEx, AcsJCannotGetComponentEx {
 		m_logger.info("INFO: Connecting to component...");
 		// Casts the object to get access to the IDL interface
 		ccdCompReference = alma.CCDmodule.CCDinterfaceHelper
 				.narrow(m_containerServices.getComponent(selectedCamera));
-
-		ccdCompReference.on();
 
 		myStringProperty = ccdCompReference.cameraName();
 		myDoubleProperty = ccdCompReference.commandedCCDTemperature();
@@ -69,6 +79,113 @@ public class gCCDComponentDAO extends ComponentClient {
 								.get_sync(new alma.ACSErr.CompletionHolder()));
 
 		m_logger.info("INFO: Connected!!!");
+		getCurrentState();
+	}
+
+	public void disconnectFromComponent() {
+		m_logger.info("INFO: Disconnecting from component...");
+		// myStringProperty.set_sync("BLABLA");
+		System.out.println("[TRACE] CAMERA NAME: "
+				+ ccdCompReference.cameraName().get_sync(
+						new alma.ACSErr.CompletionHolder()));
+		System.out
+				.println("[TRACE] CAMERA NAME: "
+						+ myStringProperty
+								.get_sync(new alma.ACSErr.CompletionHolder()));
+
+		myDoubleProperty.set_sync(12.7);
+		System.out.println("[TRACE] CMDCCD TEMP"
+				+ ccdCompReference.commandedCCDTemperature().get_sync(
+						new alma.ACSErr.CompletionHolder()));
+		System.out
+				.println("[TRACE] CMDCCD TEMP"
+						+ myDoubleProperty
+								.get_sync(new alma.ACSErr.CompletionHolder()));
+		System.out
+				.println("[TRACE] CMDCCD TEMP" + myDoubleProperty.min_value());
+
+		disconnectConsumer();
+		m_logger.info("INFO: Disconnected!!!");
+		getCurrentState();
+	}
+
+	public void startCamera() {
+		m_logger.info("INFO: Starting camera...");
+		ccdCompReference.on();
+		getCurrentState();
+	}
+
+	public void shutdownCamera() {
+		m_logger.info("INFO: Shutting down camera...");
+		ccdCompReference.off();
+		getCurrentState();
+	}
+
+	public void resetCamera() {
+		m_logger.info("INFO: Resetting camera...");
+		ccdCompReference.resetCamera();
+		getCurrentState();
+	}
+
+	// This method calls the CCD component and asks for an image.
+	// It also prepares the NC consumer to start receiving notifications.
+	public void startExposure(int width, int height, int acquisitionMode,
+			int numberOfAcc, float exposureTime) {
+		m_logger.info("INFO: Starting exposure...");
+		try {
+			l_filenames = null;
+			consumerOn = true;
+			m_consumer = new Consumer(
+					alma.CCDmodule.CHANNELNAME_CCDCLIENT.value,
+					m_containerServices);
+			m_consumer
+					.addSubscription(alma.CCDmodule.ncCCDFilename.class, this);
+			m_logger.info("INFO: Channel subscription has been added");
+			m_consumer.consumerReady();
+			m_logger.info("INFO: Consumer is ready");
+			m_logger.info("INFO: acq Mode: " + acquisitionMode);
+			m_logger.info("INFO: fpf number of acc: " + numberOfAcc);
+			m_logger.info("INFO: exposure time: " + exposureTime);
+			ccdCompReference.acquisitionMode().set_sync(acquisitionMode);
+			ccdCompReference.numberOfAcquisitions().set_sync(numberOfAcc);
+			ccdCompReference.exposureTime().set_sync(exposureTime);
+			ccdCompReference.startExposure();
+			getCurrentState();
+		} catch (Exception e) {
+			m_logger.info("EXCEPTION: Consumer has been disconnected");
+			this.disconnectConsumer();
+		}
+	}
+
+	public void stopExposure() {
+		m_logger.info("INFO: Stopping exposure...");
+		ccdCompReference.stopExposure();
+		getCurrentState();
+	}
+
+	public void startCooler() {
+		m_logger.info("INFO: Starting cooler...");
+	}
+
+	public void stopCooler() {
+		m_logger.info("INFO: Stopping cooler...");
+	}
+
+	public void getCurrentState() {
+		switch (ccdCompReference.getState()) {
+		case 0:
+			model.setCurrentState("Disconnected");
+			break;
+		case 1:
+			model.setCurrentState("Connected");
+			break;
+		case 2:
+			model.setCurrentState("Acquiring");
+			break;
+		default:
+			model.setCurrentState("Error determining state");
+			break;
+		}
 	}
 
 	// Returns a reference to the ACS component
@@ -101,34 +218,6 @@ public class gCCDComponentDAO extends ComponentClient {
 		}
 	}
 
-	// This method calls the CCD component and asks for an image.
-	// It also prepares the NC consumer to start receiving notifications.
-	public void getImage(int width, int height, int acquisitionMode,
-			int numberOfAcc, float exposureTime) {
-		try {
-			l_filenames = null;
-			consumerOn = true;
-			m_consumer = new Consumer(
-					alma.CCDmodule.CHANNELNAME_CCDCLIENT.value,
-					m_containerServices);
-			m_consumer
-					.addSubscription(alma.CCDmodule.ncCCDFilename.class, this);
-			m_logger.info("INFO: Channel subscription has been added");
-			m_consumer.consumerReady();
-			m_logger.info("INFO: Consumer is ready");
-			m_logger.info("INFO: acq Mode: " + acquisitionMode);
-			m_logger.info("INFO: fpf number of acc: " + numberOfAcc);
-			m_logger.info("INFO: exposure time: " + exposureTime);
-			ccdCompReference.acquisitionMode().set_sync(acquisitionMode);
-			ccdCompReference.numberOfAcquisitions().set_sync(numberOfAcc);
-			ccdCompReference.exposureTime().set_sync(exposureTime);
-			ccdCompReference.startExposure();
-		} catch (Exception e) {
-			m_logger.info("EXCEPTION: Consumer has been disconnected");
-			this.disconnectConsumer();
-		}
-	}
-
 	// This method disconnects the NC consumer from the channel
 	public void disconnectConsumer() {
 		if (m_consumer != null) {
@@ -138,31 +227,6 @@ public class gCCDComponentDAO extends ComponentClient {
 			consumerOn = false;
 			lastNotification = null;
 		}
-	}
-
-	public void disconnectCamera() {
-		// myStringProperty.set_sync("BLABLA");
-		System.out.println("[TRACE] CAMERA NAME: "
-				+ ccdCompReference.cameraName().get_sync(
-						new alma.ACSErr.CompletionHolder()));
-		System.out
-				.println("[TRACE] CAMERA NAME: "
-						+ myStringProperty
-								.get_sync(new alma.ACSErr.CompletionHolder()));
-
-		myDoubleProperty.set_sync(12.7);
-		System.out.println("[TRACE] CMDCCD TEMP"
-				+ ccdCompReference.commandedCCDTemperature().get_sync(
-						new alma.ACSErr.CompletionHolder()));
-		System.out
-				.println("[TRACE] CMDCCD TEMP"
-						+ myDoubleProperty
-								.get_sync(new alma.ACSErr.CompletionHolder()));
-		System.out
-				.println("[TRACE] CMDCCD TEMP" + myDoubleProperty.min_value());
-
-		disconnectConsumer();
-		ccdCompReference.off();
 	}
 
 	// Get method for LinkedList<String> filenames
@@ -204,20 +268,11 @@ public class gCCDComponentDAO extends ComponentClient {
 		return modelsList.toArray(new String[0]);
 	}
 
-	public void setCameraModel(int model) {
-		selectedCamera = modelsList.get(model);
+	public void setModel(gCCDComponentModel model) {
+		this.model = model;
 	}
 
-	public String getCurrentState() {
-		switch (ccdCompReference.getState()) {
-		case 0:
-			return "Disconnected";
-		case 1:
-			return "Connected";
-		case 2:
-			return "Acquiring";
-		}
-		return "Error determining state";
+	public gCCDComponentModel getModel() {
+		return this.model;
 	}
-
 }

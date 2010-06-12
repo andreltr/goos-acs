@@ -31,14 +31,15 @@ public class gCCDComponentModel extends AbstractModel {
 	private long xEnd;
 	private long yStart;
 	private long yEnd;
-	
+
 	//
-	private int currentState;
+	private String currentState;
 
 	// GUI properties
 	private String[] ccdModels;
 	private boolean originalSize;
 	private int currentImage;
+	private int selectedCamera;
 
 	/**
 	 * Default constructor
@@ -54,7 +55,8 @@ public class gCCDComponentModel extends AbstractModel {
 
 		try {
 			if (ccd_dao == null) {
-				ccd_dao = new gCCDComponentDAO(null, managerLoc, clientName);
+				ccd_dao = new gCCDComponentDAO(null, managerLoc, clientName,
+						this);
 			}
 		} catch (Exception e) {
 			throw e;
@@ -64,11 +66,112 @@ public class gCCDComponentModel extends AbstractModel {
 	/**
 	 * Provides the means to set or reset the model to a default state.
 	 */
-	public void initDefault() {
+	public void init() {
+		ccd_dao.init();
+	}
 
+	// DAO interface
+
+	public void connectToCamera() throws Exception {
+		try {
+			ccd_dao.connectToComponent(ccdModels[selectedCamera]);
+		} catch (Exception e) {
+			System.out.println("EXXXXXXXXXXXXXXXXXXX");
+			throw new Exception();
+		}
+	}
+
+	public void disconnectFromCamera() {
+		ccd_dao.disconnectFromComponent();
+	}
+
+	// Component interface
+
+	public void startCamera() {
+		ccd_dao.startCamera();
+	}
+
+	public void shutdownCamera() {
+		ccd_dao.shutdownCamera();
+	}
+
+	public void resetCamera() {
+		ccd_dao.resetCamera();
+	}
+
+	public void startExposure() {
+		ccd_dao.startExposure(640, 480, (int) acquisitionMode,
+				(int) numberOfAcquisitions, (float) exposureTime);
+	}
+
+	public void stopExposure() {
+		ccd_dao.stopExposure();
+	}
+
+	public void startCooler() {
+		ccd_dao.startCooler();
+	}
+
+	public void stopCooler() {
+		ccd_dao.stopCooler();
+	}
+
+	/**
+	 * @return the currentState
+	 */
+	public String getCurrentState() {
+		return currentState;
 	}
 
 	// Accessors
+
+	public void setCurrentState(String currentState) {
+		String oldCurrentState = this.currentState;
+		this.currentState = currentState;
+
+		firePropertyChange(DefaultController.COMP_CURRENT_STATE,
+				oldCurrentState, currentState);
+	}
+
+	/**
+	 * @param ccdModels
+	 *            the ccdModels to set
+	 */
+
+	public void setCCDModels(String[] ccdModels) {
+		String[] oldCcdModels = this.ccdModels;
+		this.ccdModels = ccdModels;
+
+		firePropertyChange(DefaultController.COMP_CAMERA_MODELS, oldCcdModels,
+				ccdModels);
+	}
+
+	/**
+	 * @return the ccdModels
+	 */
+	public String[] getCCDModels() {
+		return ccdModels;
+	}
+
+	/**
+	 * @param ccdModels
+	 *            the ccdModels to set
+	 */
+
+	public void setSelectedCamera(Integer selectedCamera) {
+		Integer oldSelectedCamera = this.selectedCamera;
+		this.selectedCamera = selectedCamera;
+
+		firePropertyChange(DefaultController.COMP_SELECTED_MODEL,
+				oldSelectedCamera, selectedCamera);
+	}
+
+	/**
+	 * @return the ccdModels
+	 */
+	public String[] getSelectedCamera() {
+		return ccdModels;
+	}
 
 	/**
 	 * @param actualAirTemperature
@@ -419,22 +522,6 @@ public class gCCDComponentModel extends AbstractModel {
 	}
 
 	/**
-	 * @param ccdModels
-	 *            the ccdModels to set
-	 */
-	/*
-	 * public void setCCDModels(String[] ccdModels) { this.ccdModels =
-	 * ccdModels; }
-	 */
-
-	/**
-	 * @return the ccdModels
-	 */
-	public String[] getCCDModels() {
-		return ccdModels;
-	}
-
-	/**
 	 * @param originalSize
 	 *            the originalSize to set
 	 */
@@ -470,19 +557,5 @@ public class gCCDComponentModel extends AbstractModel {
 	 */
 	public int getCurrentImage() {
 		return currentImage;
-	}
-
-	/**
-	 * @param currentState the currentState to set
-	 */
-	/*public void setCurrentState(int currentState) {
-		this.currentState = currentState;
-	}*/
-
-	/**
-	 * @return the currentState
-	 */
-	public String getCurrentState() {
-		return ccd_dao.getCurrentState();
 	}
 }

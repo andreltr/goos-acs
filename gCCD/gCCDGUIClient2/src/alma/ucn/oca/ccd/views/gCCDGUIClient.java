@@ -3,6 +3,7 @@ package alma.ucn.oca.ccd.views;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -11,9 +12,6 @@ import java.beans.PropertyChangeEvent;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
 
 import alma.ucn.oca.ccd.controller.DefaultController;
 
@@ -66,6 +64,11 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JLabel jLabelCCDModels;
 	private JButton jButtonCCDOn;
 	private JDialog jDialogAbout;
+	private JDialog jDialogError;
+	private JDialog jDialogSelectCamera;
+	private JDialog jDialogExposureTime;
+	private JDialog jDialogAccumulations;
+	private JDialog jDialogCoolerTemp;
 	private JPanel jPanel2;
 	private JPanel jPanel1;
 	private JMenuItem jMenuItemHelpAbout;
@@ -97,10 +100,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JMenuItem jMenuItemCCDSettingsCoolerTemp;
 	private JMenuItem jMenuItemCCDSetupDisconnect;
 	private JMenuItem jMenuItemCCDSetupConnect;
-	private ButtonGroup buttonGroupCCDSetupMenuModels;
-	private JMenu jMenuCCDSetupModels;
-	private JRadioButtonMenuItem jRadioButtonMenuItem2;
-	private JRadioButtonMenuItem jRadioButtonMenuItem1;
+	private JMenuItem jMenuItemCCDSetupModels;
 	private JLabel jLabelCCDInfoCameaSt;
 	private JLabel jLabelCCDInfoCameraState;
 	private JLabel jLabelCCDInfoCoolerSt;
@@ -248,6 +248,14 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 												new Insets(0, 0, 0, 0), 0, 0));
 								jComboBoxCCDModels
 										.setModel(jComboBoxCCDModelsModel);
+								jComboBoxCCDModels
+										.addActionListener(new ActionListener() {
+											@Override
+											public void actionPerformed(
+													ActionEvent e) {
+												changeCCD(e);
+											}
+										});
 							}
 							{
 								jButtonCCDConnect = new JButton();
@@ -257,6 +265,14 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 												GridBagConstraints.NONE,
 												new Insets(0, 0, 0, 0), 0, 0));
 								jButtonCCDConnect.setText("Connect");
+								jButtonCCDConnect
+										.addActionListener(new ActionListener() {
+											@Override
+											public void actionPerformed(
+													ActionEvent e) {
+												connectAction(e);
+											}
+										});
 							}
 							{
 								jButtonDisconnect = new JButton();
@@ -266,6 +282,15 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 												GridBagConstraints.NONE,
 												new Insets(0, 0, 0, 0), 0, 0));
 								jButtonDisconnect.setText("Disconnect");
+								jButtonDisconnect.setEnabled(false);
+								jButtonDisconnect
+										.addActionListener(new ActionListener() {
+											@Override
+											public void actionPerformed(
+													ActionEvent e) {
+												disconnectAction(e);
+											}
+										});
 							}
 						}
 						{
@@ -300,7 +325,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 												GridBagConstraints.NONE,
 												new Insets(0, 0, 0, 0), 0, 0));
 								jLabelCCDTemp
-										.setText("Cooling Temperature (�C):");
+										.setText("Cooling Temperature (ºC):");
 							}
 							{
 								SpinnerListModel jSpinnerCCDTempModel = new SpinnerListModel(
@@ -458,6 +483,11 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 							GridBagLayout jPanelImageOptionsLayout = new GridBagLayout();
 							jTabbedPaneOptions.addTab("Image Options", null,
 									jPanelImageOptions, null);
+
+							jTabbedPaneOptions.setEnabledAt(1, false);
+							jTabbedPaneOptions.setEnabledAt(2, false);
+							jTabbedPaneOptions.setEnabledAt(3, false);
+
 							jPanelImageOptionsLayout.rowWeights = new double[] {
 									0.1, 0.1, 0.1, 0.1 };
 							jPanelImageOptionsLayout.rowHeights = new int[] {
@@ -668,6 +698,11 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 					jMenuImageOptions.add(getJMenuItemImageOptionsPrev());
 					jMenuImageOptions.add(getJMenuItemImageOptionsNext());
 				}
+
+				jMenuCCDSettings.setEnabled(false);
+				jMenuCCDControl.setEnabled(false);
+				jMenuImageOptions.setEnabled(false);
+
 				{
 					jMenuHelp = new JMenu();
 					jMenuBar.add(jMenuHelp);
@@ -717,6 +752,12 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jButtonCCDOn == null) {
 			jButtonCCDOn = new JButton();
 			jButtonCCDOn.setText("Start CCD");
+			jButtonCCDOn.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					startCameraAction(e);
+				}
+			});
 		}
 		return jButtonCCDOn;
 	}
@@ -725,6 +766,13 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jButtonCCDOff == null) {
 			jButtonCCDOff = new JButton();
 			jButtonCCDOff.setText("Shutdown CCD");
+			jButtonCCDOff.setEnabled(false);
+			jButtonCCDOff.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					shutdownCameraAction(e);
+				}
+			});
 		}
 		return jButtonCCDOff;
 	}
@@ -733,6 +781,13 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jButtonCCDReset == null) {
 			jButtonCCDReset = new JButton();
 			jButtonCCDReset.setText("Reset CCD");
+			jButtonCCDReset.setEnabled(false);
+			jButtonCCDReset.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					resetCameraAction(e);
+				}
+			});
 		}
 		return jButtonCCDReset;
 	}
@@ -741,6 +796,13 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jButtonCCDStartExp == null) {
 			jButtonCCDStartExp = new JButton();
 			jButtonCCDStartExp.setText("Start Exposure");
+			jButtonCCDStartExp.setEnabled(false);
+			jButtonCCDStartExp.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					startExposureAction(e);
+				}
+			});
 		}
 		return jButtonCCDStartExp;
 	}
@@ -749,6 +811,13 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jButtonCCDStopExp == null) {
 			jButtonCCDStopExp = new JButton();
 			jButtonCCDStopExp.setText("Stop Exposure");
+			jButtonCCDStopExp.setEnabled(false);
+			jButtonCCDStopExp.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					stopExposureAction(e);
+				}
+			});
 		}
 		return jButtonCCDStopExp;
 	}
@@ -757,6 +826,13 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jButtonCCDStartCooler == null) {
 			jButtonCCDStartCooler = new JButton();
 			jButtonCCDStartCooler.setText("Start Cooler");
+			jButtonCCDStartCooler.setEnabled(false);
+			jButtonCCDStartCooler.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					startCoolerAction(e);
+				}
+			});
 		}
 		return jButtonCCDStartCooler;
 	}
@@ -765,6 +841,13 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jButtonCCDStopCooler == null) {
 			jButtonCCDStopCooler = new JButton();
 			jButtonCCDStopCooler.setText("Stop Cooler");
+			jButtonCCDStopCooler.setEnabled(false);
+			jButtonCCDStopCooler.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					stopCoolerAction(e);
+				}
+			});
 		}
 		return jButtonCCDStopCooler;
 	}
@@ -892,7 +975,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JLabel getJLabelCCDInfoCurrTemp() {
 		if (jLabelCCDInfoCurrTemp == null) {
 			jLabelCCDInfoCurrTemp = new JLabel();
-			jLabelCCDInfoCurrTemp.setText("Current Temperature (�C):");
+			jLabelCCDInfoCurrTemp.setText("Current Temperature (ºC):");
 		}
 		return jLabelCCDInfoCurrTemp;
 	}
@@ -933,54 +1016,36 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JLabel getJLabelCCDInfoCameaSt() {
 		if (jLabelCCDInfoCameaSt == null) {
 			jLabelCCDInfoCameaSt = new JLabel();
-			jLabelCCDInfoCameaSt.setText("Disconnected");
+			jLabelCCDInfoCameaSt.setText("---");
 			jLabelCCDInfoCameaSt
 					.setToolTipText("Working/On/Off/Disconnected/Connected");
 		}
 		return jLabelCCDInfoCameaSt;
 	}
 
-	private JRadioButtonMenuItem getJRadioButtonMenuItem1() {
-		if (jRadioButtonMenuItem1 == null) {
-			jRadioButtonMenuItem1 = new JRadioButtonMenuItem();
-			jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
-			jRadioButtonMenuItem1.setBounds(88, -21, 152, 21);
-			getButtonGroupCCDSetupMenuModels().add(jRadioButtonMenuItem1);
+	private JMenuItem getJMenuCCDSetupModels() {
+		if (jMenuItemCCDSetupModels == null) {
+			jMenuItemCCDSetupModels = new JMenuItem();
+			jMenuItemCCDSetupModels.setText("Select camera model...");
+			jMenuItemCCDSetupModels.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent evt) {
+					getJDialogSelectCamera();
+				}
+			});
 		}
-		return jRadioButtonMenuItem1;
-	}
-
-	private JRadioButtonMenuItem getJRadioButtonMenuItem2() {
-		if (jRadioButtonMenuItem2 == null) {
-			jRadioButtonMenuItem2 = new JRadioButtonMenuItem();
-			jRadioButtonMenuItem2.setText("jRadioButtonMenuItem2");
-			jRadioButtonMenuItem2.setBounds(88, -21, 152, 21);
-			getButtonGroupCCDSetupMenuModels().add(jRadioButtonMenuItem2);
-		}
-		return jRadioButtonMenuItem2;
-	}
-
-	private JMenu getJMenuCCDSetupModels() {
-		if (jMenuCCDSetupModels == null) {
-			jMenuCCDSetupModels = new JMenu();
-			jMenuCCDSetupModels.setText("CCD Models");
-			jMenuCCDSetupModels.add(getJRadioButtonMenuItem2());
-			jMenuCCDSetupModels.add(getJRadioButtonMenuItem1());
-		}
-		return jMenuCCDSetupModels;
-	}
-
-	private ButtonGroup getButtonGroupCCDSetupMenuModels() {
-		if (buttonGroupCCDSetupMenuModels == null) {
-			buttonGroupCCDSetupMenuModels = new ButtonGroup();
-		}
-		return buttonGroupCCDSetupMenuModels;
+		return jMenuItemCCDSetupModels;
 	}
 
 	private JMenuItem getJMenuItemCCDSetupConnect() {
 		if (jMenuItemCCDSetupConnect == null) {
 			jMenuItemCCDSetupConnect = new JMenuItem();
 			jMenuItemCCDSetupConnect.setText("Connect");
+			jMenuItemCCDSetupConnect.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					connectAction(e);
+				}
+			});
 		}
 		return jMenuItemCCDSetupConnect;
 	}
@@ -989,6 +1054,13 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jMenuItemCCDSetupDisconnect == null) {
 			jMenuItemCCDSetupDisconnect = new JMenuItem();
 			jMenuItemCCDSetupDisconnect.setText("Disconnect");
+			jMenuItemCCDSetupDisconnect.setEnabled(false);
+			jMenuItemCCDSetupDisconnect.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					disconnectAction(e);
+				}
+			});
 		}
 		return jMenuItemCCDSetupDisconnect;
 	}
@@ -997,6 +1069,11 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jMenuItemCCDSettingsCoolerTemp == null) {
 			jMenuItemCCDSettingsCoolerTemp = new JMenuItem();
 			jMenuItemCCDSettingsCoolerTemp.setText("Cooler Temperature...");
+			jMenuItemCCDSettingsCoolerTemp.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent evt) {
+					getJDialogCoolerTemp();
+				}
+			});
 		}
 		return jMenuItemCCDSettingsCoolerTemp;
 	}
@@ -1005,6 +1082,11 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jMenuItemCCDSettingsExpTime == null) {
 			jMenuItemCCDSettingsExpTime = new JMenuItem();
 			jMenuItemCCDSettingsExpTime.setText("Exposure Time...");
+			jMenuItemCCDSettingsExpTime.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent evt) {
+					getJDialogExposureTime();
+				}
+			});
 		}
 		return jMenuItemCCDSettingsExpTime;
 	}
@@ -1013,6 +1095,11 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jMenuItemCCDSettingsNAcc == null) {
 			jMenuItemCCDSettingsNAcc = new JMenuItem();
 			jMenuItemCCDSettingsNAcc.setText("Accumulations...");
+			jMenuItemCCDSettingsNAcc.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent evt) {
+					getJDialogAccumulations();
+				}
+			});
 		}
 		return jMenuItemCCDSettingsNAcc;
 	}
@@ -1060,6 +1147,12 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jMenuItemCCDControlOn == null) {
 			jMenuItemCCDControlOn = new JMenuItem();
 			jMenuItemCCDControlOn.setText("Start CCD");
+			jMenuItemCCDControlOn.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					startCameraAction(e);
+				}
+			});
 		}
 		return jMenuItemCCDControlOn;
 	}
@@ -1068,6 +1161,13 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jMenuItemCCDControlOff == null) {
 			jMenuItemCCDControlOff = new JMenuItem();
 			jMenuItemCCDControlOff.setText("Shutdown CCD");
+			jMenuItemCCDControlOff.setEnabled(false);
+			jMenuItemCCDControlOff.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					shutdownCameraAction(e);
+				}
+			});
 		}
 		return jMenuItemCCDControlOff;
 	}
@@ -1083,6 +1183,13 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jMenuItemCCDControlReset == null) {
 			jMenuItemCCDControlReset = new JMenuItem();
 			jMenuItemCCDControlReset.setText("Reset CCD");
+			jMenuItemCCDControlReset.setEnabled(false);
+			jMenuItemCCDControlReset.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					resetCameraAction(e);
+				}
+			});
 		}
 		return jMenuItemCCDControlReset;
 	}
@@ -1098,6 +1205,13 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jMenuItemCCDControlStartExp == null) {
 			jMenuItemCCDControlStartExp = new JMenuItem();
 			jMenuItemCCDControlStartExp.setText("Start Exposure");
+			jMenuItemCCDControlStartExp.setEnabled(false);
+			jMenuItemCCDControlStartExp.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					startExposureAction(e);
+				}
+			});
 		}
 		return jMenuItemCCDControlStartExp;
 	}
@@ -1106,6 +1220,13 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jMenuItemCCDControlStopExp == null) {
 			jMenuItemCCDControlStopExp = new JMenuItem();
 			jMenuItemCCDControlStopExp.setText("Stop Exposure");
+			jMenuItemCCDControlStopExp.setEnabled(false);
+			jMenuItemCCDControlStopExp.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					stopExposureAction(e);
+				}
+			});
 		}
 		return jMenuItemCCDControlStopExp;
 	}
@@ -1121,6 +1242,14 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jMenuItemCCDControlStartCooler == null) {
 			jMenuItemCCDControlStartCooler = new JMenuItem();
 			jMenuItemCCDControlStartCooler.setText("Start Cooler");
+			jMenuItemCCDControlStartCooler.setEnabled(false);
+			jMenuItemCCDControlStartCooler
+					.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							startCoolerAction(e);
+						}
+					});
 		}
 		return jMenuItemCCDControlStartCooler;
 	}
@@ -1129,6 +1258,14 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jMenuItemCCDControlStopCooler == null) {
 			jMenuItemCCDControlStopCooler = new JMenuItem();
 			jMenuItemCCDControlStopCooler.setText("Stop Cooler");
+			jMenuItemCCDControlStopCooler.setEnabled(false);
+			jMenuItemCCDControlStopCooler
+					.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							stopCoolerAction(e);
+						}
+					});
 		}
 		return jMenuItemCCDControlStopCooler;
 	}
@@ -1213,10 +1350,6 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jMenuItemHelpAbout.setText("About gCCD...");
 			jMenuItemHelpAbout.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent evt) {
-					System.out
-							.println("jMenuItemHelpAbout.actionPerformed, event="
-									+ evt);
-					// TODO add your code for jMenuItemHelpAbout.actionPerformed
 					getJDialogAbout();
 				}
 			});
@@ -1312,10 +1445,92 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jDialogAbout.setMaximumSize(new java.awt.Dimension(300, 200));
 			jDialogAbout.setSize(300, 200);
 		}
+		jDialogAbout.setModalityType(ModalityType.APPLICATION_MODAL);
 		jDialogAbout.pack();
 		jDialogAbout.setLocationRelativeTo(null);
 		jDialogAbout.setVisible(true);
 		return jDialogAbout;
+	}
+
+	private JDialog getJDialogError() {
+		if (jDialogError == null) {
+			jDialogError = new JDialog(this);
+			jDialogError.setTitle("An error has ocurred...");
+			jDialogError.setMinimumSize(new java.awt.Dimension(300, 200));
+			jDialogError.setMaximumSize(new java.awt.Dimension(300, 200));
+			jDialogError.setSize(300, 200);
+		}
+		jDialogError.setModalityType(ModalityType.APPLICATION_MODAL);
+		jDialogError.pack();
+		jDialogError.setLocationRelativeTo(null);
+		jDialogError.setVisible(true);
+		return jDialogError;
+	}
+
+	private JDialog getJDialogSelectCamera() {
+		if (jDialogSelectCamera == null) {
+			jDialogSelectCamera = new JDialog(this);
+			jDialogSelectCamera.setTitle("Select camera model...");
+			jDialogSelectCamera
+					.setMinimumSize(new java.awt.Dimension(300, 200));
+			jDialogSelectCamera
+					.setMaximumSize(new java.awt.Dimension(300, 200));
+			jDialogSelectCamera.setSize(300, 200);
+		}
+		jDialogSelectCamera.setModalityType(ModalityType.APPLICATION_MODAL);
+		jDialogSelectCamera.pack();
+		jDialogSelectCamera.setLocationRelativeTo(null);
+		jDialogSelectCamera.setVisible(true);
+		return jDialogSelectCamera;
+	}
+
+	private JDialog getJDialogCoolerTemp() {
+		if (jDialogCoolerTemp == null) {
+			jDialogCoolerTemp = new JDialog(this);
+			jDialogCoolerTemp.setTitle("Set cooler temperature...");
+			jDialogCoolerTemp.setMinimumSize(new java.awt.Dimension(300, 200));
+			jDialogCoolerTemp.setMaximumSize(new java.awt.Dimension(300, 200));
+			jDialogCoolerTemp.setSize(300, 200);
+		}
+		jDialogCoolerTemp.setModalityType(ModalityType.APPLICATION_MODAL);
+		jDialogCoolerTemp.pack();
+		jDialogCoolerTemp.setLocationRelativeTo(null);
+		jDialogCoolerTemp.setVisible(true);
+		return jDialogCoolerTemp;
+	}
+
+	private JDialog getJDialogExposureTime() {
+		if (jDialogExposureTime == null) {
+			jDialogExposureTime = new JDialog(this);
+			jDialogExposureTime.setTitle("Set exposure time...");
+			jDialogExposureTime
+					.setMinimumSize(new java.awt.Dimension(300, 200));
+			jDialogExposureTime
+					.setMaximumSize(new java.awt.Dimension(300, 200));
+			jDialogExposureTime.setSize(300, 200);
+		}
+		jDialogExposureTime.setModalityType(ModalityType.APPLICATION_MODAL);
+		jDialogExposureTime.pack();
+		jDialogExposureTime.setLocationRelativeTo(null);
+		jDialogExposureTime.setVisible(true);
+		return jDialogExposureTime;
+	}
+
+	private JDialog getJDialogAccumulations() {
+		if (jDialogAccumulations == null) {
+			jDialogAccumulations = new JDialog(this);
+			jDialogAccumulations.setTitle("Set number of accumulations...");
+			jDialogAccumulations
+					.setMinimumSize(new java.awt.Dimension(300, 200));
+			jDialogAccumulations
+					.setMaximumSize(new java.awt.Dimension(300, 200));
+			jDialogAccumulations.setSize(300, 200);
+		}
+		jDialogAccumulations.setModalityType(ModalityType.APPLICATION_MODAL);
+		jDialogAccumulations.pack();
+		jDialogAccumulations.setLocationRelativeTo(null);
+		jDialogAccumulations.setVisible(true);
+		return jDialogAccumulations;
 	}
 
 	private static class WindowCloseManager extends WindowAdapter {
@@ -1355,6 +1570,14 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			}
 		}
 
+		else if (evt.getPropertyName().equals(
+				DefaultController.COMP_CAMERA_MODELS)) {
+			String[] newStringValue = (String[]) evt.getNewValue();
+			jComboBoxCCDModels
+					.setModel(new DefaultComboBoxModel(newStringValue));
+			getJMenuCCDSetupModels();
+		}
+
 		// revalidate();
 		repaint();
 
@@ -1383,4 +1606,122 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 
 	}
 
+	protected void connectAction(ActionEvent e) {
+		try {
+			controller.connectToCamera();
+			this.setTitle("gCCD - [Connected to "
+					+ jComboBoxCCDModels.getModel().getSelectedItem()
+							.toString() + "]");
+			jComboBoxCCDModels.setEnabled(false);
+
+			jButtonCCDConnect.setEnabled(false);
+			jButtonDisconnect.setEnabled(true);
+			jTabbedPaneOptions.setEnabledAt(1, true);
+			jTabbedPaneOptions.setEnabledAt(2, true);
+			jTabbedPaneOptions.setEnabledAt(3, true);
+
+			jMenuItemCCDSetupConnect.setEnabled(false);
+			jMenuItemCCDSetupDisconnect.setEnabled(true);
+			jMenuCCDSettings.setEnabled(true);
+			jMenuCCDControl.setEnabled(true);
+			jMenuImageOptions.setEnabled(true);
+		} catch (Exception e1) {
+			getJDialogError();
+			e1.printStackTrace();
+		}
+	}
+
+	protected void disconnectAction(ActionEvent e) {
+		this.setTitle("gCCD - [Disconnected]");
+		controller.disconnectFromCamera();
+		jComboBoxCCDModels.setEnabled(true);
+
+		jButtonCCDConnect.setEnabled(true);
+		jButtonDisconnect.setEnabled(false);
+		jTabbedPaneOptions.setEnabledAt(1, false);
+		jTabbedPaneOptions.setEnabledAt(2, false);
+		jTabbedPaneOptions.setEnabledAt(3, false);
+
+		jMenuItemCCDSetupConnect.setEnabled(true);
+		jMenuItemCCDSetupDisconnect.setEnabled(false);
+		jMenuCCDSettings.setEnabled(false);
+		jMenuCCDControl.setEnabled(false);
+		jMenuImageOptions.setEnabled(false);
+	}
+
+	protected void startCameraAction(ActionEvent e) {
+		controller.startCamera();
+		jButtonCCDOn.setEnabled(false);
+		jButtonCCDOff.setEnabled(true);
+		jButtonCCDStartExp.setEnabled(true);
+		jButtonCCDStartCooler.setEnabled(true);
+
+		jMenuItemCCDControlOn.setEnabled(false);
+		jMenuItemCCDControlOff.setEnabled(true);
+		jMenuItemCCDControlStartExp.setEnabled(true);
+		jMenuItemCCDControlStartCooler.setEnabled(true);
+	}
+
+	protected void shutdownCameraAction(ActionEvent e) {
+		controller.shutdownCamera();
+		jButtonCCDOn.setEnabled(true);
+		jButtonCCDOff.setEnabled(false);
+		jButtonCCDStartExp.setEnabled(false);
+		jButtonCCDStartCooler.setEnabled(false);
+
+		jMenuItemCCDControlOn.setEnabled(true);
+		jMenuItemCCDControlOff.setEnabled(false);
+		jMenuItemCCDControlStartExp.setEnabled(false);
+		jMenuItemCCDControlStartCooler.setEnabled(false);
+	}
+
+	protected void resetCameraAction(ActionEvent e) {
+		controller.resetCamera();
+	}
+
+	protected void startExposureAction(ActionEvent e) {
+		controller.startExposure();
+		jButtonCCDStopExp.setEnabled(true);
+		jButtonCCDStartExp.setEnabled(false);
+		jButtonCCDReset.setEnabled(false);
+
+		jMenuItemCCDControlStopExp.setEnabled(true);
+		jMenuItemCCDControlStartExp.setEnabled(false);
+		jMenuItemCCDControlReset.setEnabled(false);
+	}
+
+	protected void stopExposureAction(ActionEvent e) {
+		controller.stopExposure();
+		jButtonCCDStopExp.setEnabled(false);
+		jButtonCCDStartExp.setEnabled(true);
+		jButtonCCDReset.setEnabled(true);
+
+		jMenuItemCCDControlStopExp.setEnabled(false);
+		jMenuItemCCDControlStartExp.setEnabled(true);
+		jMenuItemCCDControlReset.setEnabled(true);
+
+	}
+
+	protected void startCoolerAction(ActionEvent e) {
+		controller.startCooler();
+		jButtonCCDStartCooler.setEnabled(false);
+		jButtonCCDStopCooler.setEnabled(true);
+
+		jMenuItemCCDControlStartCooler.setEnabled(false);
+		jMenuItemCCDControlStopCooler.setEnabled(true);
+	}
+
+	protected void stopCoolerAction(ActionEvent e) {
+		controller.stopCooler();
+		jButtonCCDStartCooler.setEnabled(true);
+		jButtonCCDStopCooler.setEnabled(false);
+
+		jMenuItemCCDControlStartCooler.setEnabled(true);
+		jMenuItemCCDControlStopCooler.setEnabled(false);
+	}
+
+	protected void changeCCD(ActionEvent e) {
+		controller.changeCompSelectedCamera(((JComboBox) e.getSource())
+				.getSelectedIndex());
+	}
 }
