@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  * This class provides base level functionality for each controller. This
- * includes the ability to register multiple models and views, propogating model
+ * includes the ability to register multiple models and views, propagating model
  * change events to each of the views, and providing a utility function to
  * broadcast model property changes when necessary.
  * 
@@ -32,7 +32,7 @@ public abstract class AbstractController implements PropertyChangeListener {
 
 	/**
 	 * Binds a model to this controller. Once added, the controller will listen
-	 * for all model property changes and propogate them on to registered views.
+	 * for all model property changes and propagate them on to registered views.
 	 * In addition, it is also responsible for resetting the model properties
 	 * when a view changes state.
 	 * 
@@ -76,7 +76,7 @@ public abstract class AbstractController implements PropertyChangeListener {
 		registeredViews.remove(view);
 	}
 
-	// Used to observe property changes from registered models and propogate
+	// Used to observe property changes from registered models and propagate
 	// them on to all the views.
 
 	/**
@@ -95,7 +95,7 @@ public abstract class AbstractController implements PropertyChangeListener {
 	}
 
 	/**
-	 * Convienence method that subclasses can call upon to fire off property
+	 * Convenience method that subclasses can call upon to fire off property
 	 * changes back to the models. This method used reflection to inspect each
 	 * of the model classes to determine if it is the owner of the property in
 	 * question. If it isn't, a NoSuchMethodException is throws (which the
@@ -115,6 +115,20 @@ public abstract class AbstractController implements PropertyChangeListener {
 						"set" + propertyName,
 						new Class[] { newValue.getClass() });
 				method.invoke(model, newValue);
+
+			} catch (Exception ex) {
+				// Handle exception
+			}
+		}
+	}
+
+	protected void useMethod(String propertyName) {
+
+		for (AbstractModel model : registeredModels) {
+			try {
+
+				Method method = model.getClass().getMethod(propertyName);
+				method.invoke(model);
 
 			} catch (Exception ex) {
 				// Handle exception

@@ -12,17 +12,6 @@ public class Main {
 
 	/** Creates a new instance of Main */
 	public Main() {
-
-		// TextElementModel textElementModel = new TextElementModel();
-		// DocumentModel documentModel = new DocumentModel();
-		gCCDComponentModel componentModel = null;
-		try {
-			componentModel = new gCCDComponentModel();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 		DefaultController controller = new DefaultController();
 
 		// DisplayViewPanel displayViewPanel = new DisplayViewPanel(controller);
@@ -30,11 +19,23 @@ public class Main {
 		// PropertiesViewPanel(controller);
 		gCCDGUIClient userInterface = new gCCDGUIClient(controller);
 
-		// controller.addView(displayViewPanel);
-		controller.addView(userInterface);
+		// TextElementModel textElementModel = new TextElementModel();
+		// DocumentModel documentModel = new DocumentModel();
+		gCCDComponentModel componentModel = null;
+		
+		try {
+			componentModel = new gCCDComponentModel();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// controller.addModel(textElementModel);
 		controller.addModel(componentModel);
+		// controller.addView(displayViewPanel);
+		controller.addView(userInterface);
 
+		componentModel.init();
+		
 		// textElementModel.initDefault();
 		// documentModel.initDefault();
 
@@ -67,7 +68,7 @@ public class Main {
 	 *            the command line arguments
 	 */
 	public static void main(String[] args) {
-		Main main = new Main();
+		new Main();
 	}
 
 }

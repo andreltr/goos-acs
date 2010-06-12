@@ -41,7 +41,21 @@ public class DefaultController extends AbstractController {
 	public static final String COMP_Y_END = "yEnd";
 	public static final String COMP_ORIGINAL_SIZE = "OriginalSize";
 	public static final String COMP_CURRENT_IMAGE = "CurrentImage";
+
 	public static final String COMP_CURRENT_STATE = "CurrentState";
+	public static final String COMP_CAMERA_MODELS = "CCDModels";
+	public static final String COMP_SELECTED_MODEL = "SelectedCamera";
+
+	public static final String COMP_CONNECT_METHOD = "connectToCamera";
+	public static final String COMP_DISCONNECT_METHOD = "disconnectFromCamera";
+
+	public static final String COMP_START_CCD_METHOD = "startCamera";
+	public static final String COMP_SHUTDOWN_CCD_METHOD = "shutdownCamera";
+	public static final String COMP_RESET_CCD_METHOD = "resetCamera";
+	public static final String COMP_START_EXP_METHOD = "startExposure";
+	public static final String COMP_STOP_EXP_METHOD = "stopExposure";
+	public static final String COMP_START_COOLER_METHOD = "startCooler";
+	public static final String COMP_STOP_COOLER_METHOD = "stopCooler";
 
 	public void changeCompCCDTemp(double newTemp) {
 		setModelProperty(COMP_COMMANDED_CCD_TEMP, newTemp);
@@ -98,9 +112,53 @@ public class DefaultController extends AbstractController {
 	public void changeCompCurrentImage(int newCurrentImage) {
 		setModelProperty(COMP_CURRENT_IMAGE, newCurrentImage);
 	}
-	
+
 	public void changeCompCurrentState(String newCurrentState) {
 		setModelProperty(COMP_CURRENT_STATE, newCurrentState);
 	}
 
+	public void changeCompCCDModels(String newCCDModels) {
+		setModelProperty(COMP_CAMERA_MODELS, newCCDModels);
+	}
+
+	public void changeCompSelectedCamera(int newSelectedCamera) {
+		setModelProperty(COMP_SELECTED_MODEL, newSelectedCamera);
+	}
+
+	//
+	public void connectToCamera() {
+		useMethod(COMP_CONNECT_METHOD);
+	}
+
+	public void disconnectFromCamera() {
+		useMethod(COMP_DISCONNECT_METHOD);
+	}
+
+	public void startCamera() {
+		useMethod(COMP_START_CCD_METHOD);
+	}
+
+	public void shutdownCamera() {
+		useMethod(COMP_SHUTDOWN_CCD_METHOD);
+	}
+
+	public void resetCamera() {
+		useMethod(COMP_RESET_CCD_METHOD);
+	}
+
+	public void startExposure() {
+		useMethod(COMP_START_EXP_METHOD);
+	}
+
+	public void stopExposure() {
+		useMethod(COMP_STOP_EXP_METHOD);
+	}
+	
+	public void startCooler() {
+		useMethod(COMP_START_COOLER_METHOD);
+	}
+
+	public void stopCooler() {
+		useMethod(COMP_STOP_COOLER_METHOD);
+	}
 }
