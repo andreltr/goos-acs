@@ -2,15 +2,12 @@ package alma.ucn.oca.ccd.dao;
 
 import alma.ucn.oca.ccd.model.gCCDComponentModel;
 import alma.ucn.oca.ccd.utils.gCCDNCEvent;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.LinkedList;
 import alma.JavaContainerError.wrappers.AcsJContainerServicesEx;
-import alma.maciErrType.wrappers.AcsJCannotGetComponentEx;
 import alma.acs.component.client.ComponentClient;
 import alma.acs.container.ContainerServices;
 import alma.acs.nc.Consumer;
-import alma.ACS.ACSComponent;
 
 public class gCCDComponentDAO extends ComponentClient {
 	private gCCDComponentModel model;
@@ -61,7 +58,7 @@ public class gCCDComponentDAO extends ComponentClient {
 
 	// Obtains a connection to the ACS Component
 	public void connectToComponent(String selectedCamera)
-			throws AcsJContainerServicesEx, AcsJCannotGetComponentEx {
+			throws AcsJContainerServicesEx {
 		m_logger.info("INFO: Connecting to component...");
 		// Casts the object to get access to the IDL interface
 		ccdCompReference = alma.CCDmodule.CCDinterfaceHelper
@@ -164,10 +161,13 @@ public class gCCDComponentDAO extends ComponentClient {
 	}
 
 	public void startCooler() {
+		//TODO
 		m_logger.info("INFO: Starting cooler...");
+		//ccdCompReference.acquisitionMode().set_sync(coolerTemp);
 	}
 
 	public void stopCooler() {
+		//TODO
 		m_logger.info("INFO: Stopping cooler...");
 	}
 
@@ -194,6 +194,7 @@ public class gCCDComponentDAO extends ComponentClient {
 	}
 
 	// This method is called whenever a new notificacion is received
+	@SuppressWarnings("unchecked")
 	public void receive(alma.CCDmodule.ncCCDFilename newImageEvent) {
 		m_logger.info(newImageEvent.fileName);
 		m_logger.info("INFO: Notification received");
@@ -210,7 +211,8 @@ public class gCCDComponentDAO extends ComponentClient {
 					+ newImageEvent.fileName);
 			// The received name gets added to the list
 			l_filenames.add(newImageEvent.fileName);
-			model.setListFiles(l_filenames);
+			//To actually update the list
+			model.setListFiles((LinkedList<String>)l_filenames.clone());
 			m_logger.info("INFO: Last added: " + l_filenames.getLast());
 		} else if ((newImageEvent.type.toString()).equals("END_SUBSCRIPTION")) {
 			m_logger.info("INFO: 'END_SUBSCRIPTION' Notification received");
@@ -249,7 +251,6 @@ public class gCCDComponentDAO extends ComponentClient {
 	}
 
 	public void getCameraModelsFromCDB() throws AcsJContainerServicesEx {
-		// TODO Auto-generated method stub
 		m_logger.info("INFO: Finding components...");
 		if (modelsList == null) {
 			modelsList = new LinkedList<String>();
