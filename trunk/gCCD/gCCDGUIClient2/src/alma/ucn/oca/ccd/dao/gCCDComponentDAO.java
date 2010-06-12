@@ -210,6 +210,7 @@ public class gCCDComponentDAO extends ComponentClient {
 					+ newImageEvent.fileName);
 			// The received name gets added to the list
 			l_filenames.add(newImageEvent.fileName);
+			model.setListFiles(l_filenames);
 			m_logger.info("INFO: Last added: " + l_filenames.getLast());
 		} else if ((newImageEvent.type.toString()).equals("END_SUBSCRIPTION")) {
 			m_logger.info("INFO: 'END_SUBSCRIPTION' Notification received");

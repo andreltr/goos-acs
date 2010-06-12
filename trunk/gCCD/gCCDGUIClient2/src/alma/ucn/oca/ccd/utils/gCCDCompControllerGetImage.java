@@ -1,4 +1,4 @@
-package alma.ucn.oca.ccd.logic;
+package alma.ucn.oca.ccd.utils;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import alma.ucn.oca.ccd.ui.CCDGUI;
+//import alma.ucn.oca.ccd.ui.CCDGUI;
 
 /*
  * 
@@ -23,12 +23,12 @@ public class gCCDCompControllerGetImage implements Runnable {
 	int[] imgData = new int[640 * 480 * 3];
 
 	//Reference to the controller object
-	gCCDCompController controller;
+	//gCCDCompController controller;
 
 	@Override
 	public void run() {
 		
-		if(controller.getFilenameList() != null){
+		//if(controller.getFilenameList() != null){
 			
 			
 		}
@@ -67,11 +67,11 @@ public class gCCDCompControllerGetImage implements Runnable {
 		} catch (IOException e) {
 			e.printStackTrace();
 			}*/
-	}
+	//}
 
 	//Set method to get the CCD connection reference
-	public void setController(gCCDCompController _controller) {
-	    controller = _controller;
-	}
+	//public void setController(gCCDCompController _controller) {
+	    //controller = _controller;
+	//}
 
 }

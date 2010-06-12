@@ -1,4 +1,4 @@
-package alma.ucn.oca.ccd.ui;
+package alma.ucn.oca.ccd.utils;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -80,7 +80,7 @@ public class gCCDGUIClientImagePanels extends JPanel {
 	}
 
 	// Adjusts image to its original size
-	public void panelToAdjustImage() {
+	public void originalSizeImage() {
 		this.setSize(width, height);
 		this.setPreferredSize(new java.awt.Dimension(width, height));
 		setOpaque(false);
