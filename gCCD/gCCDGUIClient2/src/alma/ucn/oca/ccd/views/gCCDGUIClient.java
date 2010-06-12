@@ -9,11 +9,19 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
+import java.io.File;
+import java.util.LinkedList;
+import javax.swing.filechooser.*;
+import javax.swing.JFileChooser;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
+import magick.*;
+import magick.util.*;
+
 import alma.ucn.oca.ccd.controller.DefaultController;
+import alma.ucn.oca.ccd.utils.gCCDGUIClientImagePanels;
 
 /**
  * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
@@ -153,6 +161,11 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JMenuItem newFileMenuItem;
 	private JMenu jMenuFile;
 	private JMenuBar jMenuBar;
+	private LinkedList<String> listFiles;
+	private gCCDGUIClientImagePanels imagePanel;
+	private int imgIndex = 0;
+	private int imgMax;
+	private JFileChooser jFileChooserDialog;
 
 	/**
 	 * Auto-generated main method to display this JFrame
@@ -341,7 +354,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 												new Insets(0, 0, 0, 0), 0, 0));
 								jSpinnerCCDTemp.setModel(jSpinnerCCDTempModel);
 								jSpinnerCCDTempDialog
-										.setModel(jSpinnerCCDTempModel);							
+										.setModel(jSpinnerCCDTempModel);
 								jSpinnerCCDTemp
 										.addChangeListener(new javax.swing.event.ChangeListener() {
 											public void stateChanged(
@@ -406,7 +419,8 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 							}
 							{
 								SpinnerNumberModel jSpinnerCCDNAccModel = new SpinnerNumberModel(
-										(Long)1L, (Long)0L, (Long)10L, (Long)1L);
+										(Long) 1L, (Long) 0L, (Long) 10L,
+										(Long) 1L);
 								jSpinnerCCDNAcc = new JSpinner();
 								jSpinnerCCDNAccDialog = new JSpinner();
 								jPanelCCDSettings.add(jSpinnerCCDNAcc,
@@ -600,7 +614,9 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 							jPanelImageInfo.add(getJPanel1());
 						}
 						{
-							jScrollPaneImage = new JScrollPane();
+							jScrollPaneImage = new JScrollPane(
+									ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+									ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 							jSplitPaneHorizontal.add(jScrollPaneImage,
 									JSplitPane.LEFT);
 							jScrollPaneImage
@@ -892,6 +908,12 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jButtonImageFitSize == null) {
 			jButtonImageFitSize = new JButton();
 			jButtonImageFitSize.setText("Fit Image To Panel");
+			jButtonImageFitSize.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					fitSizeImageAction(e);
+				}
+			});
 		}
 		return jButtonImageFitSize;
 	}
@@ -900,6 +922,12 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jButtonImageNormalSize == null) {
 			jButtonImageNormalSize = new JButton();
 			jButtonImageNormalSize.setText("Original Image Size");
+			jButtonImageNormalSize.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					originalSizeImageAction(e);
+				}
+			});
 		}
 		return jButtonImageNormalSize;
 	}
@@ -908,6 +936,12 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jButtonImageSaveAs == null) {
 			jButtonImageSaveAs = new JButton();
 			jButtonImageSaveAs.setText("Save Image As...");
+			jButtonImageSaveAs.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					saveAsImageAction(e);
+				}
+			});
 		}
 		return jButtonImageSaveAs;
 	}
@@ -916,6 +950,12 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jButtonImageNext == null) {
 			jButtonImageNext = new JButton();
 			jButtonImageNext.setText("Next Image");
+			jButtonImageNext.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					nextImageAction(e);
+				}
+			});
 		}
 		return jButtonImageNext;
 	}
@@ -924,6 +964,12 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jButtonImagePrev == null) {
 			jButtonImagePrev = new JButton();
 			jButtonImagePrev.setText("Previous Image");
+			jButtonImagePrev.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					previousImageAction(e);
+				}
+			});
 		}
 		return jButtonImagePrev;
 	}
@@ -1321,6 +1367,13 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 					.setText("Fit Image To Panel");
 			getButtonGroupImageOptionsMenuImageSize().add(
 					jRadioButtonMenuItemImageOptionsFitSize);
+			jRadioButtonMenuItemImageOptionsFitSize
+					.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							fitSizeImageAction(e);
+						}
+					});
 		}
 		return jRadioButtonMenuItemImageOptionsFitSize;
 	}
@@ -1332,6 +1385,13 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 					.setText("Original Image Size");
 			getButtonGroupImageOptionsMenuImageSize().add(
 					jRadioButtonMenuItemImageOptionsNormalSize);
+			jRadioButtonMenuItemImageOptionsNormalSize
+					.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							originalSizeImageAction(e);
+						}
+					});
 		}
 		return jRadioButtonMenuItemImageOptionsNormalSize;
 	}
@@ -1347,6 +1407,12 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jMenuItemImageOptionsSaveAs == null) {
 			jMenuItemImageOptionsSaveAs = new JMenuItem();
 			jMenuItemImageOptionsSaveAs.setText("Save Image As...");
+			jMenuItemImageOptionsSaveAs.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					saveAsImageAction(e);
+				}
+			});
 		}
 		return jMenuItemImageOptionsSaveAs;
 	}
@@ -1362,6 +1428,12 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jMenuItemImageOptionsPrev == null) {
 			jMenuItemImageOptionsPrev = new JMenuItem();
 			jMenuItemImageOptionsPrev.setText("Previous Image");
+			jMenuItemImageOptionsPrev.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					previousImageAction(e);
+				}
+			});
 		}
 		return jMenuItemImageOptionsPrev;
 	}
@@ -1370,6 +1442,12 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jMenuItemImageOptionsNext == null) {
 			jMenuItemImageOptionsNext = new JMenuItem();
 			jMenuItemImageOptionsNext.setText("Next Image");
+			jMenuItemImageOptionsNext.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					nextImageAction(e);
+				}
+			});
 		}
 		return jMenuItemImageOptionsNext;
 	}
@@ -1533,7 +1611,8 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jFrameAccDialog == null) {
 			jFrameAccDialog = new JFrame();
 		}
-		Object[] message = { "Set number of accumulations: ", jSpinnerCCDNAccDialog };
+		Object[] message = { "Set number of accumulations: ",
+				jSpinnerCCDNAccDialog };
 		JOptionPane.showMessageDialog(jFrameExpTimeDialog, message,
 				"Set number of accumulations...", JOptionPane.OK_CANCEL_OPTION);
 	}
@@ -1551,6 +1630,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	 * @param evt
 	 *            The property change event
 	 */
+	@SuppressWarnings("unchecked")
 	public void modelPropertyChange(PropertyChangeEvent evt) {
 
 		if (evt.getPropertyName().equals(DefaultController.COMP_CURRENT_STATE)) {
@@ -1582,9 +1662,15 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 					.setModel(new DefaultComboBoxModel(newStringValue));
 		}
 
-		// revalidate();
-		repaint();
+		else if (evt.getPropertyName()
+				.equals(DefaultController.COMP_LIST_FILES)) {
+			LinkedList<String> newStringValue = (LinkedList<String>) evt
+					.getNewValue();
+			listFiles = newStringValue;
+			imgMax = listFiles.size();
+		}
 
+		repaint();
 	}
 
 	private void exposureTimeSpinnerStateChanged(
@@ -1605,15 +1691,6 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 
 		controller.changeCompNumberAcquisitions((Long) jSpinnerCCDNAcc
 				.getValue());
-
-		/*
-		 * Document document = evt.getDocument();
-		 * 
-		 * try { controller.changeElementText(document.getText(0, document
-		 * .getLength())); } catch (BadLocationException ex) { // Handle
-		 * exception }
-		 */
-
 	}
 
 	protected void connectAction(ActionEvent e) {
@@ -1766,5 +1843,101 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	protected void changeCCD(ActionEvent e) {
 		controller.changeCompSelectedCamera(((JComboBox) e.getSource())
 				.getSelectedIndex());
+	}
+
+	protected void fitSizeImageAction(ActionEvent e) {
+		if (imagePanel != null) {
+			imagePanel.adjustImage();
+		}
+	}
+
+	protected void originalSizeImageAction(ActionEvent e) {
+		if (imagePanel != null) {
+			imagePanel.originalSizeImage();
+		}
+	}
+
+	protected void nextImageAction(ActionEvent e) {
+		if (imgIndex < imgMax) {
+			imgIndex++;
+			if (imagePanel == null) {
+				imagePanel = new gCCDGUIClientImagePanels(jScrollPaneImage
+						.getWidth() - 30, jScrollPaneImage.getHeight() - 45,
+						listFiles.get(imgIndex));
+			}
+
+			imagePanel.setImage(listFiles.get(imgIndex));
+			jScrollPaneImage.setViewportView(imagePanel);
+		} else {
+			imgIndex = 0;
+			if (imagePanel == null) {
+				imagePanel = new gCCDGUIClientImagePanels(jScrollPaneImage
+						.getWidth() - 30, jScrollPaneImage.getHeight() - 45,
+						listFiles.get(imgIndex));
+			}
+
+			imagePanel.setImage(listFiles.get(imgIndex));
+			jScrollPaneImage.setViewportView(imagePanel);
+		}
+	}
+
+	protected void previousImageAction(ActionEvent e) {
+		if (imgIndex > 0) {
+			imgIndex--;
+			if (imagePanel == null) {
+				imagePanel = new gCCDGUIClientImagePanels(jScrollPaneImage
+						.getWidth() - 30, jScrollPaneImage.getHeight() - 45,
+						listFiles.get(imgIndex));
+			}
+
+			imagePanel.setImage(listFiles.get(imgIndex));
+			jScrollPaneImage.setViewportView(imagePanel);
+		} else {
+			imgIndex = imgMax;
+			if (imagePanel == null) {
+				imagePanel = new gCCDGUIClientImagePanels(jScrollPaneImage
+						.getWidth() - 30, jScrollPaneImage.getHeight() - 45,
+						listFiles.get(imgIndex));
+			}
+
+			imagePanel.setImage(listFiles.get(imgIndex));
+			jScrollPaneImage.setViewportView(imagePanel);
+		}
+	}
+
+	protected void saveAsImageAction(ActionEvent e) {
+		int result = jFileChooserDialog.showSaveDialog(this);
+		File fileObj = jFileChooserDialog.getSelectedFile();// We get the
+		// path to save the image
+		if (result == JFileChooser.APPROVE_OPTION) {
+			try {
+				// We append the .fits extension if it's not found
+				if (jFileChooserDialog.getFileFilter().accept(fileObj) == true) {
+					saveImage(fileObj.getAbsolutePath(), listFiles
+							.get(imgIndex));
+				} else {
+					saveImage(fileObj.getAbsolutePath() + ".fits", listFiles
+							.get(imgIndex));
+				}
+
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		} else {
+			if (result == JFileChooser.CANCEL_OPTION) {
+
+			}
+		}
+	}
+
+	public void saveImage(String imagePath, String currentImage)
+			throws MagickException {
+
+		// The received image is saved as a BMP file, and then converted to FITS
+		ImageInfo info2 = new ImageInfo("/diska/home/almadev/" + currentImage);
+		MagickImage image2 = new MagickImage(info2);
+
+		image2.setFileName(imagePath);
+		image2.writeImage(info2);
 	}
 }

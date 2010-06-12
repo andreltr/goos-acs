@@ -1,4 +1,4 @@
-package alma.ucn.oca.ccd.ui;
+package alma.ucn.oca.ccd.utils;
 import java.io.File;
 
 public class gCCDGUIClientFileSelectorDialog extends javax.swing.filechooser.FileFilter{

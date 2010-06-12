@@ -4,6 +4,7 @@ import alma.ucn.oca.ccd.controller.DefaultController;
 import alma.ucn.oca.ccd.dao.gCCDComponentDAO;
 
 import java.beans.PropertyChangeEvent;
+import java.util.LinkedList;
 
 public class gCCDComponentModel extends AbstractModel {
 	// Connection properties
@@ -40,6 +41,7 @@ public class gCCDComponentModel extends AbstractModel {
 	private boolean originalSize;
 	private int currentImage;
 	private int selectedCamera;
+	private LinkedList<String> listFiles;
 
 	/**
 	 * Default constructor
@@ -552,5 +554,23 @@ public class gCCDComponentModel extends AbstractModel {
 	 */
 	public int getCurrentImage() {
 		return currentImage;
+	}
+
+	/**
+	 * @param listFiles the listFiles to set
+	 */
+	public void setListFiles(LinkedList<String> listFiles) {
+		LinkedList<String> oldListFiles = this.listFiles;
+		this.listFiles = listFiles;
+
+		firePropertyChange(DefaultController.COMP_LIST_FILES,
+				oldListFiles, listFiles);
+	}
+
+	/**
+	 * @return the listFiles
+	 */
+	public LinkedList<String> getListFiles() {
+		return listFiles;
 	}
 }

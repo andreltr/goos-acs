@@ -45,6 +45,7 @@ public class DefaultController extends AbstractController {
 	public static final String COMP_CURRENT_STATE = "CurrentState";
 	public static final String COMP_CAMERA_MODELS = "CCDModels";
 	public static final String COMP_SELECTED_MODEL = "SelectedCamera";
+	public static final String COMP_LIST_FILES = "ListFiles";
 
 	public static final String COMP_CONNECT_METHOD = "connectToCamera";
 	public static final String COMP_DISCONNECT_METHOD = "disconnectFromCamera";
@@ -123,6 +124,10 @@ public class DefaultController extends AbstractController {
 
 	public void changeCompSelectedCamera(int newSelectedCamera) {
 		setModelProperty(COMP_SELECTED_MODEL, newSelectedCamera);
+	}
+	
+	public void changeCompListFiles(int newListFiles) {
+		setModelProperty(COMP_LIST_FILES, newListFiles);
 	}
 
 	//
