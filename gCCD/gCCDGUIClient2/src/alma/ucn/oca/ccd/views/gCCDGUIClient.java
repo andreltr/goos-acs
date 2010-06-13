@@ -38,7 +38,6 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	 */
 
 	// The controller used by this view
-
 	private DefaultController controller;
 
 	private static final long serialVersionUID = 1L;
@@ -295,7 +294,6 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 												GridBagConstraints.NONE,
 												new Insets(0, 0, 0, 0), 0, 0));
 								jButtonDisconnect.setText("Disconnect");
-								jButtonDisconnect.setEnabled(false);
 								jButtonDisconnect
 										.addActionListener(new ActionListener() {
 											@Override
@@ -342,7 +340,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 							}
 							{
 								SpinnerNumberModel jSpinnerCCDTempModel = new SpinnerNumberModel(
-										-20D, -55D, 10D, 0.1D);
+										-20D, -55D, 45D, 0.1D);
 								jSpinnerCCDTemp = new JSpinner();
 								jSpinnerCCDTempDialog = new JSpinner();
 								jPanelCCDSettings.add(jSpinnerCCDTemp,
@@ -531,10 +529,6 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 							GridBagLayout jPanelImageOptionsLayout = new GridBagLayout();
 							jTabbedPaneOptions.addTab("Image Options", null,
 									jPanelImageOptions, null);
-
-							jTabbedPaneOptions.setEnabledAt(1, false);
-							jTabbedPaneOptions.setEnabledAt(2, false);
-							jTabbedPaneOptions.setEnabledAt(3, false);
 
 							jPanelImageOptionsLayout.rowWeights = new double[] {
 									0.1, 0.1, 0.1, 0.1 };
@@ -748,11 +742,6 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 					jMenuImageOptions.add(getJMenuItemImageOptionsPrev());
 					jMenuImageOptions.add(getJMenuItemImageOptionsNext());
 				}
-
-				jMenuCCDSettings.setEnabled(false);
-				jMenuCCDControl.setEnabled(false);
-				jMenuImageOptions.setEnabled(false);
-
 				{
 					jMenuHelp = new JMenu();
 					jMenuBar.add(jMenuHelp);
@@ -769,6 +758,18 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		initValues();
+	}
+
+	private void initValues() {
+		jButtonDisconnect.setEnabled(false);
+		jTabbedPaneOptions.setEnabledAt(1, false);
+		jTabbedPaneOptions.setEnabledAt(2, false);
+		jTabbedPaneOptions.setEnabledAt(3, false);
+
+		jMenuCCDSettings.setEnabled(false);
+		jMenuCCDControl.setEnabled(false);
+		jMenuImageOptions.setEnabled(false);
 	}
 
 	private ButtonGroup getButtonGroupCCDSettingsMenuScanType() {
@@ -1649,21 +1650,6 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		}
 
 		else if (evt.getPropertyName().equals(
-				DefaultController.COMP_ORIGINAL_SIZE)) {
-			boolean newBooleanValue = (Boolean) evt.getNewValue();
-
-			if (!buttonGroupImageOptionsMenuImageSize
-					.isSelected(jRadioButtonMenuItemImageOptionsNormalSize
-							.getModel()) != newBooleanValue) {
-				if (newBooleanValue) {
-					buttonGroupImageOptionsMenuImageSize.setSelected(
-							jRadioButtonMenuItemImageOptionsNormalSize
-									.getModel(), newBooleanValue);
-				}
-			}
-		}
-
-		else if (evt.getPropertyName().equals(
 				DefaultController.COMP_CAMERA_MODELS)) {
 			String[] newStringValue = (String[]) evt.getNewValue();
 			jComboBoxCCDModels
@@ -1677,9 +1663,39 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			listFiles = newStringValue;
 			imgMax = listFiles.size();
 			showImageAction(null, 0);
+		} else if (evt.getPropertyName().equals(
+				DefaultController.COMP_END_SUBSCRIPTION)) {
+			jButtonCCDStopExp.setEnabled(false);
+			jButtonCCDStartExp.setEnabled(true);
+			jButtonCCDReset.setEnabled(true);
+
+			jMenuItemCCDControlStopExp.setEnabled(false);
+			jMenuItemCCDControlStartExp.setEnabled(true);
+			jMenuItemCCDControlReset.setEnabled(true);
 		}
+
+		else if (evt.getPropertyName().equals(
+				DefaultController.COMP_EXPOSURE_TIME)) {
+			Double newDoubleValue = (Double) evt.getNewValue();
+			jSpinnerCCDExpTime.setValue(newDoubleValue);
+		}
+
+		else if (evt.getPropertyName()
+				.equals(DefaultController.COMP_NUMBER_ACQ)) {
+			Long newLongValue = (Long) evt.getNewValue();
+			jSpinnerCCDNAcc.setValue(newLongValue);
+		}
+
+		else if (evt.getPropertyName().equals(
+				DefaultController.COMP_COMMANDED_CCD_TEMP)) {
+			Double newDoubleValue = (Double) evt.getNewValue();
+			jSpinnerCCDTemp.setValue(newDoubleValue);
+		}
+
 		repaint();
 	}
+
+	// Methods that change the model
 
 	private void exposureTimeSpinnerStateChanged(
 			javax.swing.event.ChangeEvent evt) {
@@ -1700,6 +1716,8 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		controller.changeCompNumberAcquisitions((Long) jSpinnerCCDNAcc
 				.getValue());
 	}
+
+	// GUI events
 
 	protected void connectAction(ActionEvent e) {
 		try {
@@ -1755,11 +1773,13 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			controller.startCamera();
 			jButtonCCDOn.setEnabled(false);
 			jButtonCCDOff.setEnabled(true);
+			jButtonCCDReset.setEnabled(true);
 			jButtonCCDStartExp.setEnabled(true);
 			jButtonCCDStartCooler.setEnabled(true);
 
 			jMenuItemCCDControlOn.setEnabled(false);
 			jMenuItemCCDControlOff.setEnabled(true);
+			jMenuItemCCDControlReset.setEnabled(true);
 			jMenuItemCCDControlStartExp.setEnabled(true);
 			jMenuItemCCDControlStartCooler.setEnabled(true);
 		} catch (Exception e1) {
@@ -1772,11 +1792,13 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			controller.shutdownCamera();
 			jButtonCCDOn.setEnabled(true);
 			jButtonCCDOff.setEnabled(false);
+			jButtonCCDReset.setEnabled(false);
 			jButtonCCDStartExp.setEnabled(false);
 			jButtonCCDStartCooler.setEnabled(false);
 
 			jMenuItemCCDControlOn.setEnabled(true);
 			jMenuItemCCDControlOff.setEnabled(false);
+			jMenuItemCCDControlReset.setEnabled(false);
 			jMenuItemCCDControlStartExp.setEnabled(false);
 			jMenuItemCCDControlStartCooler.setEnabled(false);
 		} catch (Exception e1) {
@@ -1798,10 +1820,16 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jButtonCCDStopExp.setEnabled(true);
 			jButtonCCDStartExp.setEnabled(false);
 			jButtonCCDReset.setEnabled(false);
+			jButtonCCDOff.setEnabled(false);
+			jButtonCCDStartCooler.setEnabled(false);
+			jButtonCCDStopCooler.setEnabled(false);
 
 			jMenuItemCCDControlStopExp.setEnabled(true);
 			jMenuItemCCDControlStartExp.setEnabled(false);
 			jMenuItemCCDControlReset.setEnabled(false);
+			jMenuItemCCDControlOff.setEnabled(false);
+			jMenuItemCCDControlStartCooler.setEnabled(false);
+			jMenuItemCCDControlStopCooler.setEnabled(false);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -1813,10 +1841,18 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jButtonCCDStopExp.setEnabled(false);
 			jButtonCCDStartExp.setEnabled(true);
 			jButtonCCDReset.setEnabled(true);
+			jButtonCCDOff.setEnabled(true);
+			//
+			jButtonCCDStartCooler.setEnabled(true);
+			jButtonCCDStopCooler.setEnabled(true);
 
 			jMenuItemCCDControlStopExp.setEnabled(false);
 			jMenuItemCCDControlStartExp.setEnabled(true);
 			jMenuItemCCDControlReset.setEnabled(true);
+			jMenuItemCCDControlOff.setEnabled(true);
+			//
+			jMenuItemCCDControlStartCooler.setEnabled(true);
+			jMenuItemCCDControlStopCooler.setEnabled(true);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -1855,13 +1891,23 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 
 	protected void fitSizeImageAction(ActionEvent e) {
 		if (imagePanel != null) {
+			imagePanel
+					.setPreferenceHeightPanel(jScrollPaneImage.getHeight() - 45);
+			imagePanel
+					.setPreferenceWidthPanel(jScrollPaneImage.getWidth() - 30);
 			imagePanel.adjustImage();
+			jRadioButtonMenuItemImageOptionsFitSize.setSelected(true);
 		}
 	}
 
 	protected void originalSizeImageAction(ActionEvent e) {
 		if (imagePanel != null) {
+			imagePanel
+					.setPreferenceHeightPanel(jScrollPaneImage.getHeight() - 45);
+			imagePanel
+					.setPreferenceWidthPanel(jScrollPaneImage.getWidth() - 30);
 			imagePanel.originalSizeImage();
+			jRadioButtonMenuItemImageOptionsNormalSize.setSelected(true);
 		}
 	}
 
@@ -1891,7 +1937,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 					.getWidth() - 30, jScrollPaneImage.getHeight() - 45,
 					listFiles.get(imgIndex));
 		}
-
+		originalSizeImageAction(null);
 		imagePanel.setImage(listFiles.get(imgIndex));
 		jScrollPaneImage.setViewportView(imagePanel);
 	}
@@ -1924,7 +1970,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	public void saveImage(String imagePath, String currentImage)
 			throws MagickException {
 		// The received image is saved as a BMP file, and then converted to FITS
-		ImageInfo info2 = new ImageInfo("/diska/home/almadev/" + currentImage);
+		ImageInfo info2 = new ImageInfo("/home/almadev/" + currentImage);
 		MagickImage image2 = new MagickImage(info2);
 
 		image2.setFileName(imagePath);
