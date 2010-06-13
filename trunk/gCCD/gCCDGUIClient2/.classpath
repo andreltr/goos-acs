@@ -97,7 +97,6 @@
 	<classpathentry kind="var" path="ACSROOT/lib/acsQoSErrType.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/acssamp.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/acssampAbeans.jar"/>
-	<classpathentry kind="var" path="ACSROOT/lib/acssampGUI.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/acstestcomp.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/acsTestEntities.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/acsthreadErrType.jar"/>
@@ -128,8 +127,6 @@
 	<classpathentry kind="var" path="ACSROOT/lib/archiveLogger.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/archiveLoggerImpl.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/ArchiveManager.jar"/>
-	<classpathentry kind="var" path="ACSROOT/lib/ArchiveMonitorDataErrType.jar"/>
-	<classpathentry kind="var" path="ACSROOT/lib/archiveMonitorReceiver.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/ArchiveSubsystemMasterIF.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/asdemo.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/avalon-framework.jar"/>
@@ -174,7 +171,6 @@
 	<classpathentry kind="var" path="ACSROOT/lib/cosyicons-1.0.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/cosyicons.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/demoComponents.jar"/>
-	<classpathentry kind="var" path="ACSROOT/lib/dom4j-1.6.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/ebe.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/enumpropStd.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/enumpropStdAbeans.jar"/>
@@ -190,7 +186,6 @@
 	<classpathentry kind="var" path="ACSROOT/lib/HelloWorld.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/icons.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/infobus.jar"/>
-	<classpathentry kind="var" path="ACSROOT/lib/j2ssh-core-0.2.6.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/jACSCommon.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/jacstime.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/jACSUtil.jar"/>
@@ -217,7 +212,6 @@
 	<classpathentry kind="var" path="ACSROOT/lib/jmanagerErrType.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/jms.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/jnlp.jar"/>
-	<classpathentry kind="var" path="ACSROOT/lib/jta.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/junit.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/LampAccess.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/LampCallback.jar"/>
@@ -242,7 +236,6 @@
 	<classpathentry kind="var" path="ACSROOT/lib/mail.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/mastercomp_if.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/mastercomp.jar"/>
-	<classpathentry kind="var" path="ACSROOT/lib/miglayout-3.5.5.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/monitor_stream_if.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/monitor_stream_store.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/ngasapi.jar"/>
@@ -297,6 +290,6 @@
 	<classpathentry kind="var" path="ACSROOT/lib/xmljbind.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/xmlrpc-1.2.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/xsddoc.jar"/>
-	<classpathentry kind="lib" path="/usr/local/lib/jmagick-6.4.0.jar"/>
+	<classpathentry kind="var" path="USER_LIBS/jmagick-6.4.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
