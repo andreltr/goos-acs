@@ -28,13 +28,13 @@ public class gCCDGUIClientImagePanels extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private int width, height;
 	private BufferedImage imagen;
-	int preferenceWidthPanel;
-	int preferenceHeightPanel;
+	private int preferenceWidthPanel;
+	private int preferenceHeightPanel;
 
 	public gCCDGUIClientImagePanels(int widthx, int heightx, String filename) {
 		try {
-			preferenceHeightPanel = heightx;
-			preferenceWidthPanel = widthx;
+			setPreferenceHeightPanel(heightx);
+			setPreferenceWidthPanel(widthx);
 			
 			//We read using ImageMagick
 			ImageInfo info = new ImageInfo("/home/almadev/" + filename);
@@ -71,9 +71,9 @@ public class gCCDGUIClientImagePanels extends JPanel {
 
 	// Adjusts the image to the panel size
 	public void adjustImage() {
-		this.setSize(preferenceWidthPanel, preferenceHeightPanel);
-		this.setPreferredSize(new java.awt.Dimension(preferenceWidthPanel,
-				preferenceHeightPanel));
+		this.setSize(getPreferenceWidthPanel(), getPreferenceHeightPanel());
+		this.setPreferredSize(new java.awt.Dimension(getPreferenceWidthPanel(),
+				getPreferenceHeightPanel()));
 		setOpaque(false);
 	}
 
@@ -147,5 +147,21 @@ public class gCCDGUIClientImagePanels extends JPanel {
 		}
 
 		super.paint(g);
+	}
+
+	public void setPreferenceWidthPanel(int preferenceWidthPanel) {
+		this.preferenceWidthPanel = preferenceWidthPanel;
+	}
+
+	public int getPreferenceWidthPanel() {
+		return preferenceWidthPanel;
+	}
+
+	public void setPreferenceHeightPanel(int preferenceHeightPanel) {
+		this.preferenceHeightPanel = preferenceHeightPanel;
+	}
+
+	public int getPreferenceHeightPanel() {
+		return preferenceHeightPanel;
 	}
 }

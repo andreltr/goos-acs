@@ -25,7 +25,11 @@ public class DefaultController extends AbstractController {
 	/**
 	 * The document's name
 	 */
+	public static final String COMP_ACTUAL_AIR_TEMP = "ActualAirTemperature";
+	public static final String COMP_ACTUAL_CCD_TEMP = "ActualCCDTemperature";
 	public static final String COMP_COMMANDED_CCD_TEMP = "CommandedCCDTemperature";
+	public static final String COMP_CAMERA_NAME = "CameraName";
+	public static final String COMP_CAMERA_MODEL = "CameraModel";
 	public static final String COMP_FILTER_NAME = "FilterName";
 	public static final String COMP_OBJECT_NAME = "ObjectName";
 	public static final String COMP_OBSERVER_NAME = "ObserverName";
@@ -33,6 +37,9 @@ public class DefaultController extends AbstractController {
 	public static final String COMP_ACQ_MODE = "AcquisitionMode";
 	public static final String COMP_NUMBER_ACQ = "NumberOfAcquisitions";
 	public static final String COMP_FOCAL_LENGTH = "FocalLength";
+	public static final String COMP_GAIN = "Gain";
+	public static final String COMP_XPIXEL_SIZE = "xPixelSize";
+	public static final String COMP_YPIXEL_SIZE = "yPixelSize";
 	public static final String COMP_X_START = "xStart";
 	public static final String COMP_X_END = "xEnd";
 	public static final String COMP_Y_START = "yStart";
@@ -44,6 +51,7 @@ public class DefaultController extends AbstractController {
 	public static final String COMP_CAMERA_MODELS = "CCDModels";
 	public static final String COMP_SELECTED_MODEL = "SelectedCamera";
 	public static final String COMP_LIST_FILES = "ListFiles";
+	public static final String COMP_END_SUBSCRIPTION = "endSubscription";
 
 	public static final String COMP_CONNECT_METHOD = "connectToCamera";
 	public static final String COMP_DISCONNECT_METHOD = "disconnectFromCamera";
@@ -56,8 +64,23 @@ public class DefaultController extends AbstractController {
 	public static final String COMP_START_COOLER_METHOD = "startCooler";
 	public static final String COMP_STOP_COOLER_METHOD = "stopCooler";
 
+	public void changeCompActualAirTemp(double newTemp) {
+		setModelProperty(COMP_ACTUAL_AIR_TEMP, newTemp);
+	}
+	public void changeCompActualCCDTemp(double newTemp) {
+		setModelProperty(COMP_ACTUAL_CCD_TEMP, newTemp);
+	}
+	
 	public void changeCompCCDTemp(double newTemp) {
 		setModelProperty(COMP_COMMANDED_CCD_TEMP, newTemp);
+	}
+	
+	public void changeCompCameraName(String newCameraName) {
+		setModelProperty(COMP_CAMERA_NAME, newCameraName);
+	}
+	
+	public void changeCompCameraModel(long newCameraModel) {
+		setModelProperty(COMP_CAMERA_MODEL, newCameraModel);
 	}
 
 	public void changeCompFilterName(String newFilterName) {
@@ -86,6 +109,18 @@ public class DefaultController extends AbstractController {
 
 	public void changeCompFocalLength(double newFocalLength) {
 		setModelProperty(COMP_FOCAL_LENGTH, newFocalLength);
+	}
+	
+	public void changeCompGain(double newGain) {
+		setModelProperty(COMP_GAIN, newGain);
+	}
+	
+	public void changeCompXPixelSize(double newXPixelSize) {
+		setModelProperty(COMP_XPIXEL_SIZE, newXPixelSize);
+	}
+	
+	public void changeCompYPixelSize(double newYPixelSize) {
+		setModelProperty(COMP_YPIXEL_SIZE, newYPixelSize);
 	}
 
 	public void changeCompxStart(long newxStart) {
@@ -126,6 +161,10 @@ public class DefaultController extends AbstractController {
 	
 	public void changeCompListFiles(int newListFiles) {
 		setModelProperty(COMP_LIST_FILES, newListFiles);
+	}
+	
+	public void changeCompEndSubscription() throws Exception {
+		useMethod(COMP_END_SUBSCRIPTION);
 	}
 
 	//

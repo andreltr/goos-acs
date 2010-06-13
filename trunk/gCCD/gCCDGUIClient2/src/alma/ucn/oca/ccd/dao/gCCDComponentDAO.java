@@ -74,7 +74,7 @@ public class gCCDComponentDAO extends ComponentClient {
 				.println("[TRACE] CMDCCD TEMP"
 						+ myDoubleProperty
 								.get_sync(new alma.ACSErr.CompletionHolder()));
-
+		setModelValuesFromCDB();
 		m_logger.info("INFO: Connected!!!");
 		getCurrentState();
 	}
@@ -161,14 +161,16 @@ public class gCCDComponentDAO extends ComponentClient {
 	}
 
 	public void startCooler() {
-		//TODO
+		// TODO
 		m_logger.info("INFO: Starting cooler...");
-		//ccdCompReference.acquisitionMode().set_sync(coolerTemp);
+		// ccdCompReference.commandedCCDTemperature().set_sync(coolerTemp);
+		// ccdCompReference.startCooler();
 	}
 
 	public void stopCooler() {
-		//TODO
+		// TODO
 		m_logger.info("INFO: Stopping cooler...");
+		// ccdCompReference.stopCooler();
 	}
 
 	public void getCurrentState() {
@@ -186,6 +188,59 @@ public class gCCDComponentDAO extends ComponentClient {
 			model.setCurrentState("Error determining state");
 			break;
 		}
+	}
+
+	//
+	public void setModelValuesFromCDB() {
+		System.out.println("ASSDSADASDASDASDSD"+ccdCompReference
+				.exposureTime().get_sync(
+						new alma.ACSErr.CompletionHolder()));
+		System.out.println("ASSDSADASDASDASDSD"+(long) ccdCompReference
+				.numberOfAcquisitions().get_sync(
+						new alma.ACSErr.CompletionHolder()));
+		System.out.println("ASSDSADASDASDASDSD"+ ccdCompReference
+				.commandedCCDTemperature().get_sync(
+						new alma.ACSErr.CompletionHolder()));
+		model.setActualAirTemperature(ccdCompReference.actualAirTemperature()
+				.get_sync(new alma.ACSErr.CompletionHolder()));
+		model.setActualCCDTemperature(ccdCompReference.actualCCDTemperature()
+				.get_sync(new alma.ACSErr.CompletionHolder()));
+		model.setCommandedCCDTemperature(ccdCompReference
+				.commandedCCDTemperature().get_sync(
+						new alma.ACSErr.CompletionHolder()));
+		model.setCameraName(ccdCompReference.cameraName().get_sync(
+				new alma.ACSErr.CompletionHolder()));
+		model.setCameraModel((long) ccdCompReference.cameraModel().get_sync(
+				new alma.ACSErr.CompletionHolder()));
+		model.setFilterName(ccdCompReference.filterName().get_sync(
+				new alma.ACSErr.CompletionHolder()));
+		model.setObjectName(ccdCompReference.objectName().get_sync(
+				new alma.ACSErr.CompletionHolder()));
+		model.setObserverName(ccdCompReference.observerName().get_sync(
+				new alma.ACSErr.CompletionHolder()));
+		model.setExposureTime(ccdCompReference.exposureTime().get_sync(
+				new alma.ACSErr.CompletionHolder()));
+		model.setAcquisitionMode((long) ccdCompReference.acquisitionMode()
+				.get_sync(new alma.ACSErr.CompletionHolder()));
+		model.setNumberOfAcquisitions((long) ccdCompReference
+				.numberOfAcquisitions().get_sync(
+						new alma.ACSErr.CompletionHolder()));
+		model.setFocalLength(ccdCompReference.focalLength().get_sync(
+				new alma.ACSErr.CompletionHolder()));
+		model.setGain(ccdCompReference.gain().get_sync(
+				new alma.ACSErr.CompletionHolder()));
+		model.setxPixelSize(ccdCompReference.xPixelSize().get_sync(
+				new alma.ACSErr.CompletionHolder()));
+		model.setyPixelSize(ccdCompReference.yPixelSize().get_sync(
+				new alma.ACSErr.CompletionHolder()));
+		model.setxStart((long) ccdCompReference.xStart().get_sync(
+				new alma.ACSErr.CompletionHolder()));
+		model.setxEnd((long)ccdCompReference.xEnd().get_sync(
+				new alma.ACSErr.CompletionHolder()));
+		model.setyStart((long)ccdCompReference.yStart().get_sync(
+				new alma.ACSErr.CompletionHolder()));
+		model.setyEnd((long)ccdCompReference.yEnd().get_sync(
+				new alma.ACSErr.CompletionHolder()));
 	}
 
 	// Returns a reference to the ACS component
@@ -211,12 +266,13 @@ public class gCCDComponentDAO extends ComponentClient {
 					+ newImageEvent.fileName);
 			// The received name gets added to the list
 			l_filenames.add(newImageEvent.fileName);
-			//To actually update the list
-			model.setListFiles((LinkedList<String>)l_filenames.clone());
+			// To actually update the list
+			model.setListFiles((LinkedList<String>) l_filenames.clone());
 			m_logger.info("INFO: Last added: " + l_filenames.getLast());
 		} else if ((newImageEvent.type.toString()).equals("END_SUBSCRIPTION")) {
 			m_logger.info("INFO: 'END_SUBSCRIPTION' Notification received");
 			// Disconnect the consumer
+			model.endSubscription();
 			this.disconnectConsumer();
 		}
 	}

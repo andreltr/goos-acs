@@ -120,6 +120,10 @@ public class gCCDComponentModel extends AbstractModel {
 		return currentState;
 	}
 
+	public void endSubscription() {
+		firePropertyChange(DefaultController.COMP_END_SUBSCRIPTION, null, null);
+	}
+
 	// Accessors
 
 	public void setCurrentState(String currentState) {
@@ -174,14 +178,14 @@ public class gCCDComponentModel extends AbstractModel {
 	 * @param actualAirTemperature
 	 *            the actualAirTemperature to set
 	 */
-	/*
-	 * public void setActualAirTemperature(Double actualAirTemperature) { Double
-	 * oldActualAirTemperature = this.actualAirTemperature;
-	 * this.actualAirTemperature = actualAirTemperature;
-	 * 
-	 * firePropertyChange(DefaultController.COMP_ACTUAL_AIR_TEMP,
-	 * oldActualAirTemperature, actualAirTemperature); }
-	 */
+
+	public void setActualAirTemperature(Double actualAirTemperature) {
+		Double oldActualAirTemperature = this.actualAirTemperature;
+		this.actualAirTemperature = actualAirTemperature;
+
+		firePropertyChange(DefaultController.COMP_ACTUAL_AIR_TEMP,
+				oldActualAirTemperature, actualAirTemperature);
+	}
 
 	/**
 	 * @return the actualAirTemperature
@@ -194,10 +198,14 @@ public class gCCDComponentModel extends AbstractModel {
 	 * @param actualCCDTemperature
 	 *            the actualCCDTemperature to set
 	 */
-	/*
-	 * public void setActualCCDTemperature(double actualCCDTemperature) {
-	 * this.actualCCDTemperature = actualCCDTemperature; }
-	 */
+
+	public void setActualCCDTemperature(Double actualCCDTemperature) {
+		Double oldActualCCDTemperature = this.actualCCDTemperature;
+		this.actualCCDTemperature = actualCCDTemperature;
+
+		firePropertyChange(DefaultController.COMP_ACTUAL_CCD_TEMP,
+				oldActualCCDTemperature, actualCCDTemperature);
+	}
 
 	/**
 	 * @return the actualCCDTemperature
@@ -229,10 +237,14 @@ public class gCCDComponentModel extends AbstractModel {
 	 * @param cameraName
 	 *            the cameraName to set
 	 */
-	/*
-	 * public void setCameraName(String cameraName) { this.cameraName =
-	 * cameraName; }
-	 */
+
+	public void setCameraName(String cameraName) {
+		String oldCameraName = this.cameraName;
+		this.cameraName = cameraName;
+
+		firePropertyChange(DefaultController.COMP_CAMERA_NAME, oldCameraName,
+				cameraName);
+	}
 
 	/**
 	 * @return the cameraName
@@ -245,8 +257,13 @@ public class gCCDComponentModel extends AbstractModel {
 	 * @param cameraModel
 	 *            the cameraModel to set
 	 */
-	public void setCameraModel(long cameraModel) {
+	public void setCameraModel(Long cameraModel) {
 		// this.cameraModel = cameraModel;
+		Long oldCameraModel = this.cameraModel;
+		this.cameraModel = cameraModel;
+
+		firePropertyChange(DefaultController.COMP_CAMERA_MODEL, oldCameraModel,
+				cameraModel);
 	}
 
 	/**
@@ -398,14 +415,14 @@ public class gCCDComponentModel extends AbstractModel {
 	 * @param gain
 	 *            the gain to set
 	 */
-	/*
-	 * public void setGain(Double gain) { Double oldGain = this.gain; this.gain
-	 * = gain;
-	 * 
-	 * firePropertyChange(DefaultController.COMP_GAIN, oldGain, gain);
-	 * 
-	 * }
-	 */
+
+	public void setGain(Double gain) {
+		Double oldGain = this.gain;
+		this.gain = gain;
+
+		firePropertyChange(DefaultController.COMP_GAIN, oldGain, gain);
+
+	}
 
 	/**
 	 * @return the gain
@@ -418,10 +435,14 @@ public class gCCDComponentModel extends AbstractModel {
 	 * @param xPixelSize
 	 *            the xPixelSize to set
 	 */
-	/*
-	 * public void setxPixelSize(double xPixelSize) { this.xPixelSize =
-	 * xPixelSize; }
-	 */
+
+	public void setxPixelSize(Double xPixelSize) {
+		Double oldxPixelSize = this.xPixelSize;
+		this.xPixelSize = xPixelSize;
+
+		firePropertyChange(DefaultController.COMP_XPIXEL_SIZE, oldxPixelSize,
+				xPixelSize);
+	}
 
 	/**
 	 * @return the xPixelSize
@@ -434,10 +455,14 @@ public class gCCDComponentModel extends AbstractModel {
 	 * @param yPixelSize
 	 *            the yPixelSize to set
 	 */
-	/*
-	 * public void setyPixelSize(double yPixelSize) { this.yPixelSize =
-	 * yPixelSize; }
-	 */
+
+	public void setyPixelSize(Double yPixelSize) {
+		Double oldyPixelSize = this.yPixelSize;
+		this.yPixelSize = yPixelSize;
+
+		firePropertyChange(DefaultController.COMP_YPIXEL_SIZE, oldyPixelSize,
+				yPixelSize);
+	}
 
 	/**
 	 * @return the yPixelSize
@@ -504,7 +529,7 @@ public class gCCDComponentModel extends AbstractModel {
 	 * @param yEnd
 	 *            the yEnd to set
 	 */
-	public void setyEnd(long yEnd) {
+	public void setyEnd(Long yEnd) {
 		Long oldyEnd = this.yEnd;
 		this.yEnd = yEnd;
 
@@ -557,14 +582,15 @@ public class gCCDComponentModel extends AbstractModel {
 	}
 
 	/**
-	 * @param listFiles the listFiles to set
+	 * @param listFiles
+	 *            the listFiles to set
 	 */
 	public void setListFiles(LinkedList<String> listFiles) {
 		LinkedList<String> oldListFiles = this.listFiles;
 		this.listFiles = listFiles;
 
-		firePropertyChange(DefaultController.COMP_LIST_FILES,
-				oldListFiles, listFiles);
+		firePropertyChange(DefaultController.COMP_LIST_FILES, oldListFiles,
+				listFiles);
 	}
 
 	/**
