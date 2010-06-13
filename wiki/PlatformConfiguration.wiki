@@ -8,9 +8,7 @@ In order to compile the software you must install some libraries. This guide wil
 
 To install Image Magick you must download the source code of version 6.4.0 from http://downloads.jmagick.org/ and decompress it:
 
-Note: Replace -ver- with the version you downloaded, it should be 6.4.0.
-
- * *tar -xvzf ImageMagick-ver-.tar.gz
+ * *tar -xvzf ImageMagick-6.4.0.tar.gz
 
 Enter the directory and execute configure:
 
@@ -32,7 +30,7 @@ Also you must add libMagick.so to the LD_LIBRARY_PATH enviroment variable:
 
 Download the source code of version 6.4.0 from http://downloads.jmagick.org and decompress it:
 
- * *tar -xvzf JMagick-ver-.tar.gz
+ * *tar -xvzf jmagick-6.4.0.tar.gz
 
 Enter the new directory and execute autoconf:
 
@@ -46,13 +44,17 @@ To compile it, you must execute make:
 
  * *make all*
 
-After it's done, install it with:
+After it's done, install it with (as root):
 
  * *make install*
 
 You must add jmagick-ver-.jar to the CLASSPATH enviroment variable:
 
- * *export CLASSPATH=/usr/lib/jmagick-ver-.jar:$CLASSPATH*
+ * *export CLASSPATH=/usr/lib/jmagick-6.4.0.jar:$CLASSPATH*
+
+== Known problems ==
+
+=== JAVA_HOME not found ===
 
 = CCFITS =
 
@@ -74,3 +76,7 @@ Go to the new directory from a terminal and execute (as sudo):
  * *sudo ./install_andor*
 
 Select you camera type from the list and wait for the script to finish.
+
+= SBIG Linux Development Tools =
+
+Todo
