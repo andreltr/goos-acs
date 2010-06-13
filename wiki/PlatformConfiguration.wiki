@@ -56,6 +56,8 @@ You must add jmagick-ver-.jar to the CLASSPATH enviroment variable:
 
 === JAVA_HOME not found ===
 
+Todo
+
 = CCFITS =
 
 To install CCfits, you must download the rpm files available in the Downloads section of this site and install them:
