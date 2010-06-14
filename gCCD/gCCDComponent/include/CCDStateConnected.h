@@ -29,7 +29,7 @@ public:
 	 * Gets the state CONNECTED
 	 */
 	int getState() {
-		return STATE_CONNECTED;
+		return STATE_CONNECTED_COOLER_OFF;
 	}
 	/**
 	 * Implementation of "on" function for this state.
@@ -67,6 +67,9 @@ public:
 	 * It should change do nothing
 	 */
 	void stopExposure();
+
+	void startCooler(float commandedCCDTemp);
+	void stopCooler();
 };
 
 #endif

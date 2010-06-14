@@ -40,6 +40,16 @@ std::string* CCDStateAcquiring::getImage(int width, int height,
 void CCDStateAcquiring::stopExposure() {
 	std::cout << "CCDStateAcquiring::stopExposure()" << std::endl;
 	strContext_p->stopExposure();
-	ccd_p->getContext()->setState(STATE_CONNECTED);
+	ccd_p->getContext()->setState(ccd_p->getContext()->getLastState());
+	return;
+}
+
+void CCDStateAcquiring::startCooler(float commandedCCDTemp) {
+	std::cout << "CCDStateAcquiring::startCooler(...) nothing to do" << std::endl;
+	return;
+}
+
+void CCDStateAcquiring::stopCooler(){
+	std::cout << "CCDStateAcquiring::stopCooler() nothing to do" << std::endl;
 	return;
 }

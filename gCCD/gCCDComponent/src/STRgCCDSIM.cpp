@@ -144,3 +144,11 @@ int STRgCCDSIM::writeImage(int frames, int fileCorrelation) {
 	return 0;
 }
 
+void STRgCCDSIM::startCooler(float commandedCCDTemp) {
+	return;
+}
+
+void STRgCCDSIM::stopCooler() {
+	return;
+}
+

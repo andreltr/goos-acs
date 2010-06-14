@@ -36,6 +36,8 @@ module CCDmodule
     //void getImage(in long width, in long height, in long acquisitionMode, in long numberOfAcquisitions, in float exposureTime);
     void startExposure();
     void stopExposure();
+    void startCooler();
+    void stopCooler();
     long getState();
 
     readonly attribute ACS::ROdouble actualAirTemperature;

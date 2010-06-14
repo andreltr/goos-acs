@@ -18,7 +18,7 @@ CCDStateDisconnected::~CCDStateDisconnected() {
 
 void CCDStateDisconnected::on() {
 	std::cout << "CCDStateDisconnected::on() connecting..." << std::endl;
-	ccd_p->getContext()->setState(STATE_CONNECTED);
+	ccd_p->getContext()->setState(STATE_CONNECTED_COOLER_OFF);
 	return;
 }
 
@@ -40,5 +40,15 @@ std::string* CCDStateDisconnected::getImage(int width, int height,
 
 void CCDStateDisconnected::stopExposure() {
 	std::cout << "CCDStateDisconnected::stopExposure() nothing to do" << std::endl;
+	return;
+}
+
+void CCDStateDisconnected::startCooler(float commandedCCDTemp) {
+	std::cout << "CCDStateAcquiring::startCooler(...) nothing to do" << std::endl;
+	return;
+}
+
+void CCDStateDisconnected::stopCooler(){
+	std::cout << "CCDStateAcquiring::stopCooler() nothing to do" << std::endl;
 	return;
 }

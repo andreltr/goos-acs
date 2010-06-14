@@ -65,6 +65,9 @@ public:
 	 * The camera is off, so it should not do nothing
 	 */
 	void stopExposure();
+
+	void startCooler(float commandedCCDTemp);
+	void stopCooler();
 };
 
 #endif

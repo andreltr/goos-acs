@@ -130,6 +130,16 @@ public:
 	void stopExposure();
 
 	/**
+	 * Starts the cooler from the camera using the commandedCCDTemperature
+	 */
+	void startCooler();
+
+	/**
+	 * Stops the cooler from the camera
+	 */
+	void stopCooler();
+
+	/**
 	 * Gets the current state of the camera
 	 */
 	CORBA::Long getState();
@@ -202,7 +212,7 @@ public:
 	/**
 	 * Sends the files to the client
 	 */
-	void sendBulkData();
+	void sendBulkData(int lastState);
 
 };
 

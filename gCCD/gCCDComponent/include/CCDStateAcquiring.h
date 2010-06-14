@@ -68,6 +68,9 @@ public:
 	 * The camera is acquiring, it should stop the operation
 	 */
 	void stopExposure();
+
+	void startCooler(float commandedCCDTemp);
+	void stopCooler();
 };
 
 #endif

@@ -34,5 +34,8 @@ public:
 
 	virtual void stopExposure() = 0;
 
+	virtual void startCooler(float commandedCCDTemp) = 0;
+	virtual void stopCooler() = 0;
+
 };
 #endif

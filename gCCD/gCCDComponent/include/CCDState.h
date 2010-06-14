@@ -33,6 +33,8 @@ public:
 	virtual std::string* getImage(int width, int height, int acquisitionMode,
 			int numberOfAcquisitions, float exposureTime) = 0;
 	virtual void stopExposure() = 0;
+	virtual void startCooler(float commandedCCDTemp) = 0;
+	virtual void stopCooler() = 0;
 	virtual int getState() = 0;
 
 };
