@@ -5,6 +5,8 @@ import alma.ucn.oca.ccd.dao.gCCDComponentDAO;
 
 //import java.beans.PropertyChangeEvent;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class gCCDComponentModel extends AbstractModel {
 	// Connection properties
@@ -34,11 +36,10 @@ public class gCCDComponentModel extends AbstractModel {
 	private long yEnd;
 
 	//
-	private String currentState;
+	private int currentState;
 
 	// GUI properties
 	private String[] ccdModels;
-	private boolean originalSize;
 	private int currentImage;
 	private int selectedCamera;
 	private LinkedList<String> listFiles;
@@ -47,6 +48,27 @@ public class gCCDComponentModel extends AbstractModel {
 	 * Default constructor
 	 */
 	public gCCDComponentModel() throws Exception {
+
+		actualAirTemperature = -999;
+		actualCCDTemperature = -999;
+		commandedCCDTemperature = -999;
+		cameraName = "none";
+		cameraModel = -1;
+		filterName = "none";
+		objectName = "none";
+		observerName = "none";
+		exposureTime = -1;
+		acquisitionMode = -1;
+		numberOfAcquisitions = -1;
+		focalLength = -999;
+		gain = -999;
+		xPixelSize = -999;
+		yPixelSize = -999;
+		xStart = -1;
+		xEnd = -1;
+		yStart = -1;
+		yEnd = -1;
+
 		managerLoc = System.getProperty("ACS.manager");
 		if (managerLoc == null) {
 			System.out
@@ -75,48 +97,94 @@ public class gCCDComponentModel extends AbstractModel {
 	// DAO interface
 
 	public void connectToCamera() throws Exception {
-		ccd_dao.connectToComponent(ccdModels[selectedCamera]);
+		try {
+			if (ccd_dao == null) {
+				ccd_dao = new gCCDComponentDAO(null, managerLoc, clientName,
+						this);
+
+			}
+			if (ccd_dao != null) {
+				ccd_dao.connectToComponent(ccdModels[selectedCamera]);
+			}
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
-	public void disconnectFromCamera() {
-		ccd_dao.disconnectFromComponent();
+	public void disconnectFromCamera() throws Exception {
+		if (ccd_dao != null) {
+			try {
+				ccd_dao.disconnectFromComponent();
+				ccd_dao.tearDown();
+				try {
+					ccd_dao = null;
+				} catch (Exception e) {
+					try {
+						Logger logger = ccd_dao.getContainerServices()
+								.getLogger();
+						logger.log(Level.SEVERE, "Client application failure",
+								e);
+					} catch (Exception e2) {
+						e.printStackTrace(System.err);
+					}
+					throw e;
+				}
+			} catch (Exception e3) {
+				// bad luck
+				throw e3;
+			}
+		}
 	}
 
 	// Component interface
 
 	public void startCamera() {
-		ccd_dao.startCamera();
+		if (ccd_dao != null) {
+			ccd_dao.startCamera();
+		}
 	}
 
 	public void shutdownCamera() {
-		ccd_dao.shutdownCamera();
+		if (ccd_dao != null) {
+			ccd_dao.shutdownCamera();
+		}
 	}
 
 	public void resetCamera() {
-		ccd_dao.resetCamera();
+		if (ccd_dao != null) {
+			ccd_dao.resetCamera();
+		}
 	}
 
 	public void startExposure() {
-		ccd_dao.startExposure(640, 480, (int) acquisitionMode,
-				(int) numberOfAcquisitions, (float) exposureTime);
+		if (ccd_dao != null) {
+			ccd_dao.startExposure(640, 480, (int) acquisitionMode,
+					(int) numberOfAcquisitions, (float) exposureTime);
+		}
 	}
 
 	public void stopExposure() {
-		ccd_dao.stopExposure();
+		if (ccd_dao != null) {
+			ccd_dao.stopExposure();
+		}
 	}
 
 	public void startCooler() {
-		ccd_dao.startCooler();
+		if (ccd_dao != null) {
+			ccd_dao.startCooler();
+		}
 	}
 
 	public void stopCooler() {
-		ccd_dao.stopCooler();
+		if (ccd_dao != null) {
+			ccd_dao.stopCooler();
+		}
 	}
 
 	/**
 	 * @return the currentState
 	 */
-	public String getCurrentState() {
+	public int getCurrentState() {
 		return currentState;
 	}
 
@@ -126,8 +194,8 @@ public class gCCDComponentModel extends AbstractModel {
 
 	// Accessors
 
-	public void setCurrentState(String currentState) {
-		String oldCurrentState = this.currentState;
+	public void setCurrentState(Integer currentState) {
+		Integer oldCurrentState = this.currentState;
 		this.currentState = currentState;
 
 		firePropertyChange(DefaultController.COMP_CURRENT_STATE,
@@ -362,7 +430,6 @@ public class gCCDComponentModel extends AbstractModel {
 
 		firePropertyChange(DefaultController.COMP_ACQ_MODE, oldAcquisitionMode,
 				acquisitionMode);
-
 	}
 
 	/**
@@ -541,25 +608,6 @@ public class gCCDComponentModel extends AbstractModel {
 	 */
 	public long getyEnd() {
 		return yEnd;
-	}
-
-	/**
-	 * @param originalSize
-	 *            the originalSize to set
-	 */
-	public void setOriginalSize(Boolean originalSize) {
-		Boolean oldOriginalSize = this.originalSize;
-		this.originalSize = originalSize;
-
-		firePropertyChange(DefaultController.COMP_ORIGINAL_SIZE,
-				oldOriginalSize, originalSize);
-	}
-
-	/**
-	 * @return the originalSize
-	 */
-	public boolean isOriginalSize() {
-		return originalSize;
 	}
 
 	/**

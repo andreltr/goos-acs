@@ -25,8 +25,6 @@ public class gCCDComponentDAO extends ComponentClient {
 	private boolean consumerOn;
 	private LinkedList<String> modelsList;
 
-	// private String selectedCamera;
-
 	/**
 	 * Default constructor
 	 */
@@ -53,7 +51,6 @@ public class gCCDComponentDAO extends ComponentClient {
 
 	public void init() {
 		model.setCCDModels(getCameraModels());
-		model.setCurrentState("Disconnected");
 	}
 
 	// Obtains a connection to the ACS Component
@@ -139,19 +136,19 @@ public class gCCDComponentDAO extends ComponentClient {
 					.addSubscription(alma.CCDmodule.ncCCDFilename.class, this);
 			m_logger.info("INFO: Channel subscription has been added");
 			m_consumer.consumerReady();
-			m_logger.info("INFO: Consumer is ready");
-			m_logger.info("INFO: acq Mode: " + acquisitionMode);
-			m_logger.info("INFO: fpf number of acc: " + numberOfAcc);
-			m_logger.info("INFO: exposure time: " + exposureTime);
-			ccdCompReference.acquisitionMode().set_sync(acquisitionMode);
-			ccdCompReference.numberOfAcquisitions().set_sync(numberOfAcc);
-			ccdCompReference.exposureTime().set_sync(exposureTime);
-			ccdCompReference.startExposure();
-			getCurrentState();
 		} catch (Exception e) {
 			m_logger.info("EXCEPTION: Consumer has been disconnected");
 			this.disconnectConsumer();
 		}
+		m_logger.info("INFO: Consumer is ready");
+		m_logger.info("INFO: acq Mode: " + acquisitionMode);
+		m_logger.info("INFO: fpf number of acc: " + numberOfAcc);
+		m_logger.info("INFO: exposure time: " + exposureTime);
+		ccdCompReference.acquisitionMode().set_sync(acquisitionMode);
+		ccdCompReference.numberOfAcquisitions().set_sync(numberOfAcc);
+		ccdCompReference.exposureTime().set_sync(exposureTime);
+		ccdCompReference.startExposure();
+		getCurrentState();
 	}
 
 	public void stopExposure() {
@@ -161,45 +158,36 @@ public class gCCDComponentDAO extends ComponentClient {
 	}
 
 	public void startCooler() {
-		// TODO
 		m_logger.info("INFO: Starting cooler...");
-		// ccdCompReference.commandedCCDTemperature().set_sync(coolerTemp);
-		// ccdCompReference.startCooler();
+		ccdCompReference.commandedCCDTemperature().set_sync(
+				model.getCommandedCCDTemperature());
+		ccdCompReference.startCooler();
+		getCurrentState();
 	}
 
 	public void stopCooler() {
-		// TODO
 		m_logger.info("INFO: Stopping cooler...");
-		// ccdCompReference.stopCooler();
+		ccdCompReference.stopCooler();
+		getCurrentState();
 	}
 
 	public void getCurrentState() {
-		switch (ccdCompReference.getState()) {
-		case 0:
-			model.setCurrentState("Disconnected");
-			break;
-		case 1:
-			model.setCurrentState("Connected");
-			break;
-		case 2:
-			model.setCurrentState("Acquiring");
-			break;
-		default:
-			model.setCurrentState("Error determining state");
-			break;
-		}
+		model.setCurrentState(ccdCompReference.getState());
 	}
 
 	//
 	public void setModelValuesFromCDB() {
-		System.out.println("ASSDSADASDASDASDSD"+ccdCompReference
-				.exposureTime().get_sync(
+		System.out.println("ASSDSADASDASDASDSD"
+				+ ccdCompReference.exposureTime().get_sync(
 						new alma.ACSErr.CompletionHolder()));
-		System.out.println("ASSDSADASDASDASDSD"+(long) ccdCompReference
-				.numberOfAcquisitions().get_sync(
+		System.out.println("ASSDSADASDASDASDSD"
+				+ (long) ccdCompReference.numberOfAcquisitions().get_sync(
 						new alma.ACSErr.CompletionHolder()));
-		System.out.println("ASSDSADASDASDASDSD"+ ccdCompReference
-				.commandedCCDTemperature().get_sync(
+		System.out.println("ASSDSADASDASDASDSD"
+				+ ccdCompReference.commandedCCDTemperature().get_sync(
+						new alma.ACSErr.CompletionHolder()));
+		System.out.println("ASSDSADASDASDASDSD"
+				+ ccdCompReference.acquisitionMode().get_sync(
 						new alma.ACSErr.CompletionHolder()));
 		model.setActualAirTemperature(ccdCompReference.actualAirTemperature()
 				.get_sync(new alma.ACSErr.CompletionHolder()));
@@ -235,11 +223,11 @@ public class gCCDComponentDAO extends ComponentClient {
 				new alma.ACSErr.CompletionHolder()));
 		model.setxStart((long) ccdCompReference.xStart().get_sync(
 				new alma.ACSErr.CompletionHolder()));
-		model.setxEnd((long)ccdCompReference.xEnd().get_sync(
+		model.setxEnd((long) ccdCompReference.xEnd().get_sync(
 				new alma.ACSErr.CompletionHolder()));
-		model.setyStart((long)ccdCompReference.yStart().get_sync(
+		model.setyStart((long) ccdCompReference.yStart().get_sync(
 				new alma.ACSErr.CompletionHolder()));
-		model.setyEnd((long)ccdCompReference.yEnd().get_sync(
+		model.setyEnd((long) ccdCompReference.yEnd().get_sync(
 				new alma.ACSErr.CompletionHolder()));
 	}
 
@@ -274,6 +262,7 @@ public class gCCDComponentDAO extends ComponentClient {
 			// Disconnect the consumer
 			model.endSubscription();
 			this.disconnectConsumer();
+			getCurrentState();
 		}
 	}
 

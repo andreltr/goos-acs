@@ -147,7 +147,7 @@ public class DefaultController extends AbstractController {
 		setModelProperty(COMP_CURRENT_IMAGE, newCurrentImage);
 	}
 
-	public void changeCompCurrentState(String newCurrentState) {
+	public void changeCompCurrentState(int newCurrentState) {
 		setModelProperty(COMP_CURRENT_STATE, newCurrentState);
 	}
 
