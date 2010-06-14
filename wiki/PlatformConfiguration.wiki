@@ -62,10 +62,10 @@ If you get a "JAVA_HOME dirrectories not found" error when executing *./configur
 
 If it's not, then add to your *.bashrc* the lines:
 
- * *export JAVA_HOME=<java_installation_path>*
+ * *export JAVA_HOME=_java_installation_path_*
  * *export PATH=$JAVA_HOME/bin:$PATH*
 
-Where you must replace *<java_installation_path>* with your path to the JDK e.g.: */usr/java/jdk1.6.0_19*. Then you must logout and login again or source your *.bashrc*:
+Where you must replace *_java_installation_path_* with your path to the JDK e.g.: */usr/java/jdk1.6.0_19*. Then you must logout and login again or source your *.bashrc*:
 
  * *source .bashrc*
 
