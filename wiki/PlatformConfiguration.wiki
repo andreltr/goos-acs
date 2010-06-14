@@ -69,6 +69,8 @@ Where you must replace *_java_installation_path_* with your path to the JDK e.g.
 
  * *source .bashrc*
 
+Then you can execute *./configure* again and follow the rest of the installation.
+
 = CCFITS =
 
 To install CCfits, you must download the rpm files available in the Downloads section of this site and install them:
