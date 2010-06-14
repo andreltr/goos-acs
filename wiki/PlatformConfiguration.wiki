@@ -56,7 +56,18 @@ You must add jmagick-ver-.jar to the CLASSPATH enviroment variable:
 
 === JAVA_HOME not found ===
 
-Todo
+If you get a "JAVA_HOME dirrectories not found" error when executing *./configure* then there is a problem with your Java JDK installation. You must download and install the Java JDK. After that you must make sure that the JAVA_HOME environment variable points to the directory where the JDK is installed:
+
+ * *echo $JAVA_HOME*
+
+If it's not, then add to your *.bashrc* the lines:
+
+ * *export JAVA_HOME=<java_installation_path>*
+ * *export PATH=$JAVA_HOME/bin:$PATH*
+
+Where you must replace *<java_installation_path>* with your path to the JDK e.g.: */usr/java/jdk1.6.0_19*. Then you must logout and login again or source your *.bashrc*:
+
+ * *source .bashrc*
 
 = CCFITS =
 
