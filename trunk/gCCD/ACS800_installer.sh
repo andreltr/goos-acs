@@ -292,30 +292,6 @@ then
 	cp -rf /alma/ACS-8.0/ACSSW/config/.acs/ /home/$vusername
 	cp -rf /alma/ACS-8.0/ACSSW/config/.acs/ /home/$vusernamedev
 
-	#We append the neccesary lines to /home/$vusername/.bashrc
-
-	echo "source /home/$vusername/.acs/.bash_profile.acs" >> /home/$vusername/.bashrc
-	echo "source /home/$vusernamedev/.acs/.bash_profile.acs" >> /home/$vusernamedev/.bashrc
-
-	#If /usr/lib wasn't found
-	if [ $usrlib -gt 1 ]
-	then
-		echo "export LD_LIBRARY_PATH=/usr/lib:\$LD_LIBRARY_PATH" >> /home/$vusername/.bashrc
-		echo "export LD_LIBRARY_PATH=/usr/lib:\$LD_LIBRARY_PATH" >> /home/$vusernamedev/.bashrc
-		echo ""
-	fi
-
-	#If /usr/local/lib wasn't found
-	if [ $usrlocallib -gt 1 ]
-	then
-		echo "export LD_LIBRARY_PATH=/usr/local/lib:\$LD_LIBRARY_PATH" >> /home/$vusername/.bashrc
-		echo "export LD_LIBRARY_PATH=/usr/local/lib:\$LD_LIBRARY_PATH" >> /home/$vusernamedev/.bashrc
-		echo ""
-	fi
-
-	echo "export PYTHON_PATH=\$PYTHONPATH" >> /home/$vusername/.bashrc
-	echo "export PYTHON_PATH=\$PYTHONPATH" >> /home/$vusernamedev/.bashrc
-
 	#We configure the integration area for ACS (INTROOT)
 	vintroot="/home/$vusername/INTROOT"
 	vintrootdev="/home/$vusernamedev/INTROOT"
@@ -368,14 +344,37 @@ then
 		done
 	fi
 
-
 	echo $bold "The integration area for the developer account was created in" $eformat
 	echo $bold$vintrootdev $eformat
 
 	echo "export ACS_RETAIN=1"  >> /home/$vusernamedev/.bashrc
 	echo "export INTROOT=$vintrootdev" >> /home/$vusernamedev/.bashrc
 	echo "export ACS_CDB=$vintrootdev/config/" >> /home/$vusernamedev/.bashrc
+	
+	#We append the neccesary lines to /home/$vusername/.bashrc
 
+	echo "source /home/$vusername/.acs/.bash_profile.acs" >> /home/$vusername/.bashrc
+	echo "source /home/$vusernamedev/.acs/.bash_profile.acs" >> /home/$vusernamedev/.bashrc
+
+	#If /usr/lib wasn't found
+	if [ $usrlib -gt 1 ]
+	then
+		echo "export LD_LIBRARY_PATH=/usr/lib:\$LD_LIBRARY_PATH" >> /home/$vusername/.bashrc
+		echo "export LD_LIBRARY_PATH=/usr/lib:\$LD_LIBRARY_PATH" >> /home/$vusernamedev/.bashrc
+		echo ""
+	fi
+
+	#If /usr/local/lib wasn't found
+	if [ $usrlocallib -gt 1 ]
+	then
+		echo "export LD_LIBRARY_PATH=/usr/local/lib:\$LD_LIBRARY_PATH" >> /home/$vusername/.bashrc
+		echo "export LD_LIBRARY_PATH=/usr/local/lib:\$LD_LIBRARY_PATH" >> /home/$vusernamedev/.bashrc
+		echo ""
+	fi
+
+	echo "export PYTHON_PATH=\$PYTHONPATH" >> /home/$vusername/.bashrc
+	echo "export PYTHON_PATH=\$PYTHONPATH" >> /home/$vusernamedev/.bashrc
+	
 	chown -R $vusernamedev:$vgroupname /home/$vusernamedev
 
 	#We create the directory structure for INTROOT

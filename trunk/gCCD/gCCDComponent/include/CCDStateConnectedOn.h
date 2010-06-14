@@ -1,5 +1,5 @@
-#ifndef CCDSTATE_CONNECTED_H_
-#define CCDSTATE_CONNECTED_H_
+#ifndef CCDSTATE_CONNECTED_ON_H_
+#define CCDSTATE_CONNECTED_ON_H_
 
 #ifndef __cplusplus
 #error This is a C++ include file and cannot be used from plain C
@@ -8,28 +8,28 @@
 #include "CCDState.h"
 
 /**
- * State: Connected
+ * State: Connected with cooler on
  * Implements CCDState
  */
-class CCDStateConnected: public CCDState {
+class CCDStateConnectedOn: public CCDState {
 
 public:
 	/**
 	 * Constructor
 	 * @param ccd CCDComponent reference
 	 */
-	CCDStateConnected(CCDComponent * ccd);
+	CCDStateConnectedOn(CCDComponent * ccd);
 
 	/**
 	 * Destructor
 	 */
-	~CCDStateConnected();
+	~CCDStateConnectedOn();
 
 	/**
 	 * Gets the state CONNECTED
 	 */
 	int getState() {
-		return STATE_CONNECTED_COOLER_OFF;
+		return STATE_CONNECTED_COOLER_ON;
 	}
 	/**
 	 * Implementation of "on" function for this state.

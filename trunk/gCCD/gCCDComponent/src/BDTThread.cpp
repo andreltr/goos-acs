@@ -43,6 +43,7 @@ void BDTThread::run() {
 					(LM_INFO, "BDTThread::run(): sendNotification(...) FILENAME"));
 			/**Send the notification to the client*/
 			ccd_p->ncSupplier->sendNotification(*fileEvent);
+			//delete fileEvent;
 			ACS_SHORT_LOG((LM_INFO, "BDTThread::run(): notification sent!"));
 			i++;
 		}
@@ -83,11 +84,6 @@ void BDTThread::onStart() {
 
 void BDTThread::onStop() {
 	ACS_TRACE("BDTThread::onStop()");
-	ACS_SHORT_LOG((LM_INFO, "BDTThread::onStop(): disconnect()"));
-	ccd_p->sender->disconnect();
-
-	ACS_SHORT_LOG((LM_INFO, "BDTThread::onStop(): closeReceiver()"));
-	ccd_p->receiver->closeReceiver();
 
 	CCDmodule::ncCCDFilename * fileEvent;
 	/**create an event with the filename, type, id, and total*/
@@ -104,7 +100,15 @@ void BDTThread::onStop() {
 	ACS_SHORT_LOG(
 			(LM_INFO, "BDTThread::onStop(): sendNotification(...) END_SUBSCRIPTION"));
 	ccd_p->ncSupplier->sendNotification(*fileEvent);
+	//delete fileEvent;
 	ACS_SHORT_LOG((LM_INFO, "BDTThread::onStop(): notification sent!"));
+
+	ACS_SHORT_LOG((LM_INFO, "BDTThread::onStop(): disconnect()"));
+	ccd_p->sender->disconnect();
+
+	ACS_SHORT_LOG((LM_INFO, "BDTThread::onStop(): closeReceiver()"));
+	ccd_p->receiver->closeReceiver();
+
 	ACS_SHORT_LOG((LM_INFO, "BDT thread stopped."));
 }
 

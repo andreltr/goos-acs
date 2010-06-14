@@ -100,6 +100,18 @@ public:
 	 */
 	virtual ~CCDComponent();
 
+	/* ----------------- [ ACS component lifecycle START ] ----------------- */
+
+	virtual void initialize()
+			throw (acsErrTypeLifeCycle::acsErrTypeLifeCycleExImpl);
+
+	virtual void execute()
+			throw (acsErrTypeLifeCycle::acsErrTypeLifeCycleExImpl);
+
+	virtual void cleanUp();
+
+	virtual void aboutToAbort();
+
 	/* --------------------- [ CORBA interface START ] --------------------- */
 	/**
 	 * Turns on the camera

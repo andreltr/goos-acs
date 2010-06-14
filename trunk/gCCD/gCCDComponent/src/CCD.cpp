@@ -48,6 +48,17 @@ CCDComponent::CCDComponent(const ACE_CString& name,
 	m_xEnd_p = new RWlong(name + ":xEnd", getComponent());
 	m_yStart_p = new RWlong(name + ":yStart", getComponent());
 	m_yEnd_p = new RWlong(name + ":yEnd", getComponent());
+}
+
+CCDComponent::~CCDComponent() {
+	ACS_TRACE("CCDComponent::~CCDComponent(): destroyed");
+}
+
+/* ----------------- [ ACS component lifecycle START ] ----------------- */
+
+void CCDComponent::initialize()
+		throw (acsErrTypeLifeCycle::acsErrTypeLifeCycleExImpl) {
+	ACS_TRACE("CCDComponent::initialize()");
 
 	ncSupplier = 0;
 	receiver = 0;
@@ -55,12 +66,26 @@ CCDComponent::CCDComponent(const ACE_CString& name,
 	m_bdtThread_p = 0;
 	bdStatus = false;
 	context = new CCDContext(this, STATE_DISCONNECTED);
+}
+
+void CCDComponent::execute()
+		throw (acsErrTypeLifeCycle::acsErrTypeLifeCycleExImpl) {
+	ACS_TRACE("CCDComponent::execute()");
 
 }
 
-CCDComponent::~CCDComponent() {
+void CCDComponent::cleanUp() {
+	ACS_TRACE("CCDComponent::cleanUp()");
 
-	ACS_TRACE("CCDComponent::~CCDComponent(): destroyed");
+	if (m_bdtThread_p != 0) {
+		getContainerServices()->getThreadManager()->destroy(m_bdtThread_p);
+	}
+
+	delete context;
+}
+
+void CCDComponent::aboutToAbort() {
+	ACS_TRACE("CCDComponent::aboutToAbort()");
 	if (m_bdtThread_p != 0) {
 		getContainerServices()->getThreadManager()->destroy(m_bdtThread_p);
 	}
@@ -355,6 +380,7 @@ void CCDComponent::sendBulkData(int lastState) {
 		m_bdtThread_p->resume();
 	} else if (m_bdtThread_p->isStopped()) {
 		//Pass the filesQueue
+		m_bdtThread_p->setLastState(lastState);
 		m_bdtThread_p->setQueue(filesQueue, queueSize);
 
 		m_bdtThread_p->restart();

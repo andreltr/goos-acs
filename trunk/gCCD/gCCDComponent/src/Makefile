@@ -87,32 +87,35 @@ INCLUDES        =
 # ----------------------------
 LIBRARIES       = CCDComponent NCSupplier
 CCDComponent_LIBS = CCDStubs \
-					acscomponent \
-					bulkDataReceiverStubs \
-					bulkDataSenderStubs \
-					bulkDataStubs \
-					bulkDataCallback \
-					ACSBulkDataError 
+			acscomponent \
+			bulkDataReceiverStubs \
+			bulkDataSenderStubs \
+			bulkDataStubs \
+			bulkDataCallback \
+			ACSBulkDataError
+ 
 NCSupplier_LIBS = CCDStubs \
-				  acsnc \
-			   	  acscomponent
+			acsnc \
+			acscomponent
+
 LIBRARIES_L     =
 
 #
 # <brief description of lllll library>
 CCDComponent_OBJECTS   = CCD \
-			 			 BDTThread \
-			 			 CCDContext \
-			 			 CCDState \
-			 			 CCDStateConnected \
-			 			 CCDStateDisconnected \
-			 			 CCDStateAcquiring \
-		  	 			 STRContext \
-			 			 STRLucaEMCCD \
-			 			 STRgCCDSIM \
-			 			 STRSBIGST7 \
-						 csbigcam \
-						 csbigimg
+			BDTThread \
+			CCDContext \
+			CCDState \
+			CCDStateConnectedOff \
+			CCDStateConnectedOn \
+			CCDStateDisconnected \
+			CCDStateAcquiring \
+			STRContext \
+			STRLucaEMCCD \
+			STRgCCDSIM \
+			STRSBIGST7 \
+			csbigcam \
+			csbigimg
 
 NCSupplier_OBJECTS   = NCSupplier
 
