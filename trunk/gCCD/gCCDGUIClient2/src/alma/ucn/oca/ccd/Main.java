@@ -14,53 +14,27 @@ public class Main {
 	public Main() {
 		DefaultController controller = new DefaultController();
 
-		// DisplayViewPanel displayViewPanel = new DisplayViewPanel(controller);
-		// PropertiesViewPanel propertiesViewPanel = new
-		// PropertiesViewPanel(controller);
 		gCCDGUIClient userInterface = new gCCDGUIClient(controller);
 
-		// TextElementModel textElementModel = new TextElementModel();
-		// DocumentModel documentModel = new DocumentModel();
 		gCCDComponentModel componentModel = null;
-		
+
 		try {
 			componentModel = new gCCDComponentModel();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// controller.addModel(textElementModel);
+
 		controller.addModel(componentModel);
-		// controller.addView(displayViewPanel);
+
 		controller.addView(userInterface);
 
 		componentModel.init();
-		
-		// textElementModel.initDefault();
-		// documentModel.initDefault();
-
-		// JFrame displayFrame = new JFrame("Display (View 1)");
-		// displayFrame.getContentPane().add(displayViewPanel,
-		// BorderLayout.CENTER);
-		// displayFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		// displayFrame.pack();
-
-		// JDialog propertiesDialog = new JDialog(displayFrame,
-		// "Properties (View 2)");
-		// propertiesDialog.setModal(false);
-		// propertiesDialog.getContentPane().add(propertiesViewPanel,
-		// BorderLayout.CENTER);
-		// propertiesDialog.pack();
-
-		// displayFrame.setVisible(true);
-		// propertiesDialog.setVisible(true);
 
 		userInterface.pack();
 		userInterface.setLocationRelativeTo(null);
 		userInterface.setMinimumSize(userInterface.getSize());
-		// userInterface.addWindowListener(new WindowCloseManager());
 		userInterface.setVisible(true);
-
 	}
 
 	/**

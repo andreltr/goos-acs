@@ -33,10 +33,6 @@ import alma.ucn.oca.ccd.utils.gCCDGUIClientImagePanels;
  */
 public class gCCDGUIClient extends javax.swing.JFrame {
 
-	/**
-	 * 
-	 */
-
 	// The controller used by this view
 	private DefaultController controller;
 
@@ -99,8 +95,8 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JMenuItem jMenuItemCCDControlOff;
 	private JMenuItem jMenuItemCCDControlOn;
 	private ButtonGroup buttonGroupCCDSettingsTabScanType;
-	private JRadioButtonMenuItem jRadioButtonCCDSettingsScanTypeAccumulative;
-	private JRadioButtonMenuItem jRadioButtonCCDSettingsScanTypeSingle;
+	private JRadioButtonMenuItem jRadioButtonMenuItemCCDSettingsScanTypeAccumulative;
+	private JRadioButtonMenuItem jRadioButtonMenuItemCCDSettingsScanTypeSingle;
 	private JMenu jMenuCCDSettingsScanType;
 	private JMenuItem jMenuItemCCDSettingsNAcc;
 	private JMenuItem jMenuItemCCDSettingsExpTime;
@@ -163,6 +159,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private int imgIndex = 0;
 	private int imgMax;
 	private JFileChooser jFileChooserDialog;
+	private boolean coolerOn;
 
 	/**
 	 * Auto-generated main method to display this JFrame
@@ -415,8 +412,8 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 							}
 							{
 								SpinnerNumberModel jSpinnerCCDNAccModel = new SpinnerNumberModel(
-										(Long) 1L, (Long) 0L, (Long) 10L,
-										(Long) 1L);
+										new Long(1), new Long(0), new Long(20),
+										new Long(1));
 								jSpinnerCCDNAcc = new JSpinner();
 								jSpinnerCCDNAccDialog = new JSpinner();
 								jPanelCCDSettings.add(jSpinnerCCDNAcc,
@@ -785,6 +782,12 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jRadioButtonCCDScanTypeSingle.setText("Single Scan");
 			getButtonGroupCCDSettingsTabScanType().add(
 					jRadioButtonCCDScanTypeSingle);
+			jRadioButtonCCDScanTypeSingle
+					.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							acqModeTabStateChanged(e);
+						}
+					});
 		}
 		return jRadioButtonCCDScanTypeSingle;
 	}
@@ -795,6 +798,11 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jRadioButtonCCDScanTypeAcc.setText("Accumulative");
 			getButtonGroupCCDSettingsTabScanType().add(
 					jRadioButtonCCDScanTypeAcc);
+			jRadioButtonCCDScanTypeAcc.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					acqModeTabStateChanged(e);
+				}
+			});
 		}
 		return jRadioButtonCCDScanTypeAcc;
 	}
@@ -992,7 +1000,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JLabel getJLabelImageInfoW() {
 		if (jLabelImageInfoW == null) {
 			jLabelImageInfoW = new JLabel();
-			jLabelImageInfoW.setText("999");
+			jLabelImageInfoW.setText("---");
 		}
 		return jLabelImageInfoW;
 	}
@@ -1008,7 +1016,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JLabel getJLabelImageInfoH() {
 		if (jLabelImageInfoH == null) {
 			jLabelImageInfoH = new JLabel();
-			jLabelImageInfoH.setText("999");
+			jLabelImageInfoH.setText("---");
 		}
 		return jLabelImageInfoH;
 	}
@@ -1024,7 +1032,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JLabel getJLabelImageInfoFileSz() {
 		if (jLabelImageInfoFileSz == null) {
 			jLabelImageInfoFileSz = new JLabel();
-			jLabelImageInfoFileSz.setText("999");
+			jLabelImageInfoFileSz.setText("---");
 		}
 		return jLabelImageInfoFileSz;
 	}
@@ -1040,7 +1048,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JLabel getJLabelImageInfoFr() {
 		if (jLabelImageInfoFr == null) {
 			jLabelImageInfoFr = new JLabel();
-			jLabelImageInfoFr.setText("999");
+			jLabelImageInfoFr.setText("---");
 		}
 		return jLabelImageInfoFr;
 	}
@@ -1064,7 +1072,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JLabel getJLabelCCDInfoCurrT() {
 		if (jLabelCCDInfoCurrT == null) {
 			jLabelCCDInfoCurrT = new JLabel();
-			jLabelCCDInfoCurrT.setText("999");
+			jLabelCCDInfoCurrT.setText("---");
 		}
 		return jLabelCCDInfoCurrT;
 	}
@@ -1080,7 +1088,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JLabel getJLabelCCDInfoCoolerSt() {
 		if (jLabelCCDInfoCoolerSt == null) {
 			jLabelCCDInfoCoolerSt = new JLabel();
-			jLabelCCDInfoCoolerSt.setText("Off");
+			jLabelCCDInfoCoolerSt.setText("---");
 			jLabelCCDInfoCoolerSt.setToolTipText("On/Off");
 		}
 		return jLabelCCDInfoCoolerSt;
@@ -1098,8 +1106,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		if (jLabelCCDInfoCameaSt == null) {
 			jLabelCCDInfoCameaSt = new JLabel();
 			jLabelCCDInfoCameaSt.setText("---");
-			jLabelCCDInfoCameaSt
-					.setToolTipText("Working/On/Off/Disconnected/Connected");
+			jLabelCCDInfoCameaSt.setToolTipText("On/Off/Acquiring");
 		}
 		return jLabelCCDInfoCameaSt;
 	}
@@ -1206,23 +1213,37 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	}
 
 	private JRadioButtonMenuItem getJRadioButtonCCDSettingsScanTypeSingle() {
-		if (jRadioButtonCCDSettingsScanTypeSingle == null) {
-			jRadioButtonCCDSettingsScanTypeSingle = new JRadioButtonMenuItem();
-			jRadioButtonCCDSettingsScanTypeSingle.setText("Single Scan");
+		if (jRadioButtonMenuItemCCDSettingsScanTypeSingle == null) {
+			jRadioButtonMenuItemCCDSettingsScanTypeSingle = new JRadioButtonMenuItem();
+			jRadioButtonMenuItemCCDSettingsScanTypeSingle
+					.setText("Single Scan");
 			getButtonGroupCCDSettingsMenuScanType().add(
-					jRadioButtonCCDSettingsScanTypeSingle);
+					jRadioButtonMenuItemCCDSettingsScanTypeSingle);
+			jRadioButtonMenuItemCCDSettingsScanTypeSingle
+					.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							acqModeMenuStateChanged(e);
+						}
+					});
 		}
-		return jRadioButtonCCDSettingsScanTypeSingle;
+		return jRadioButtonMenuItemCCDSettingsScanTypeSingle;
 	}
 
 	private JRadioButtonMenuItem getJRadioButtonCCDSettingsScanTypeAccumulated() {
-		if (jRadioButtonCCDSettingsScanTypeAccumulative == null) {
-			jRadioButtonCCDSettingsScanTypeAccumulative = new JRadioButtonMenuItem();
-			jRadioButtonCCDSettingsScanTypeAccumulative.setText("Accumulative");
+		if (jRadioButtonMenuItemCCDSettingsScanTypeAccumulative == null) {
+			jRadioButtonMenuItemCCDSettingsScanTypeAccumulative = new JRadioButtonMenuItem();
+			jRadioButtonMenuItemCCDSettingsScanTypeAccumulative
+					.setText("Accumulative");
 			getButtonGroupCCDSettingsMenuScanType().add(
-					jRadioButtonCCDSettingsScanTypeAccumulative);
+					jRadioButtonMenuItemCCDSettingsScanTypeAccumulative);
+			jRadioButtonMenuItemCCDSettingsScanTypeAccumulative
+					.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							acqModeMenuStateChanged(e);
+						}
+					});
 		}
-		return jRadioButtonCCDSettingsScanTypeAccumulative;
+		return jRadioButtonMenuItemCCDSettingsScanTypeAccumulative;
 	}
 
 	private JMenuItem getJMenuItemCCDControlOn() {
@@ -1643,10 +1664,30 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	public void modelPropertyChange(PropertyChangeEvent evt) {
 
 		if (evt.getPropertyName().equals(DefaultController.COMP_CURRENT_STATE)) {
-			String newStringValue = evt.getNewValue().toString();
+			Integer newIntegerValue = (Integer) evt.getNewValue();
 
-			if (!jLabelCCDInfoCameaSt.getText().equals(newStringValue))
-				jLabelCCDInfoCameaSt.setText(newStringValue);
+			if (!jLabelCCDInfoCameaSt.getText().equals(newIntegerValue)) {
+				switch (newIntegerValue) {
+				case 0:
+					jLabelCCDInfoCameaSt.setText("Off");
+					jLabelCCDInfoCameaSt.setText("Off");
+					coolerOn = false;
+					break;
+				case 1:
+					jLabelCCDInfoCameaSt.setText("On");
+					jLabelCCDInfoCoolerSt.setText("Off");
+					coolerOn = false;
+					break;
+				case 2:
+					jLabelCCDInfoCameaSt.setText("Acquiring");
+					break;
+				case 3:
+					jLabelCCDInfoCameaSt.setText("On");
+					jLabelCCDInfoCoolerSt.setText("On");
+					coolerOn = true;
+					break;
+				}
+			}
 		}
 
 		else if (evt.getPropertyName().equals(
@@ -1668,10 +1709,18 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jButtonCCDStopExp.setEnabled(false);
 			jButtonCCDStartExp.setEnabled(true);
 			jButtonCCDReset.setEnabled(true);
+			jButtonCCDOff.setEnabled(true);
+			//
+			jButtonCCDStartCooler.setEnabled(!coolerOn);
+			jButtonCCDStopCooler.setEnabled(coolerOn);
 
 			jMenuItemCCDControlStopExp.setEnabled(false);
 			jMenuItemCCDControlStartExp.setEnabled(true);
 			jMenuItemCCDControlReset.setEnabled(true);
+			jMenuItemCCDControlOff.setEnabled(true);
+			//
+			jMenuItemCCDControlStartCooler.setEnabled(!coolerOn);
+			jMenuItemCCDControlStopCooler.setEnabled(coolerOn);
 		}
 
 		else if (evt.getPropertyName().equals(
@@ -1686,10 +1735,37 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jSpinnerCCDNAcc.setValue(newLongValue);
 		}
 
+		else if (evt.getPropertyName().equals(DefaultController.COMP_ACQ_MODE)) {
+			Long newLongValue = (Long) evt.getNewValue();
+
+			switch (newLongValue.intValue()) {
+			case 0:
+				buttonGroupCCDSettingsTabScanType.setSelected(
+						jRadioButtonCCDScanTypeSingle.getModel(), true);
+				buttonGroupCCDSettingsMenuScanType.setSelected(
+						jRadioButtonMenuItemCCDSettingsScanTypeSingle
+								.getModel(), true);
+				break;
+			case 1:
+				buttonGroupCCDSettingsTabScanType.setSelected(
+						jRadioButtonCCDScanTypeAcc.getModel(), true);
+				buttonGroupCCDSettingsMenuScanType.setSelected(
+						jRadioButtonMenuItemCCDSettingsScanTypeAccumulative
+								.getModel(), true);
+				break;
+			}
+		}
+
 		else if (evt.getPropertyName().equals(
 				DefaultController.COMP_COMMANDED_CCD_TEMP)) {
 			Double newDoubleValue = (Double) evt.getNewValue();
 			jSpinnerCCDTemp.setValue(newDoubleValue);
+		}
+
+		else if (evt.getPropertyName().equals(
+				DefaultController.COMP_ACTUAL_CCD_TEMP)) {
+			Double newDoubleValue = (Double) evt.getNewValue();
+			jLabelCCDInfoCurrT.setText(newDoubleValue.toString());
 		}
 
 		repaint();
@@ -1715,6 +1791,30 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 
 		controller.changeCompNumberAcquisitions((Long) jSpinnerCCDNAcc
 				.getValue());
+
+	}
+
+	private void acqModeTabStateChanged(ActionEvent e) {
+		int acqMode = 0;
+		if (jRadioButtonCCDScanTypeSingle.isSelected()) {
+			acqMode = 0;
+		} else if (jRadioButtonCCDScanTypeAcc.isSelected()) {
+			acqMode = 1;
+		}
+
+		controller.changeCompAcquisitionMode(new Long((long) acqMode));
+	}
+
+	private void acqModeMenuStateChanged(ActionEvent e) {
+		int acqMode = 0;
+		if (jRadioButtonMenuItemCCDSettingsScanTypeSingle.isSelected()) {
+			acqMode = 0;
+		} else if (jRadioButtonMenuItemCCDSettingsScanTypeAccumulative
+				.isSelected()) {
+			acqMode = 1;
+		}
+
+		controller.changeCompAcquisitionMode(new Long((long) acqMode));
 	}
 
 	// GUI events
@@ -1764,6 +1864,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jMenuCCDControl.setEnabled(false);
 			jMenuImageOptions.setEnabled(false);
 		} catch (Exception e1) {
+			getJDialogError();
 			e1.printStackTrace();
 		}
 	}
@@ -1843,16 +1944,16 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jButtonCCDReset.setEnabled(true);
 			jButtonCCDOff.setEnabled(true);
 			//
-			jButtonCCDStartCooler.setEnabled(true);
-			jButtonCCDStopCooler.setEnabled(true);
+			jButtonCCDStartCooler.setEnabled(!coolerOn);
+			jButtonCCDStopCooler.setEnabled(coolerOn);
 
 			jMenuItemCCDControlStopExp.setEnabled(false);
 			jMenuItemCCDControlStartExp.setEnabled(true);
 			jMenuItemCCDControlReset.setEnabled(true);
 			jMenuItemCCDControlOff.setEnabled(true);
 			//
-			jMenuItemCCDControlStartCooler.setEnabled(true);
-			jMenuItemCCDControlStopCooler.setEnabled(true);
+			jMenuItemCCDControlStartCooler.setEnabled(!coolerOn);
+			jMenuItemCCDControlStopCooler.setEnabled(coolerOn);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -1903,11 +2004,11 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	protected void originalSizeImageAction(ActionEvent e) {
 		if (imagePanel != null) {
 			imagePanel
-					.setPreferenceHeightPanel(jScrollPaneImage.getHeight() - 45);
-			imagePanel
-					.setPreferenceWidthPanel(jScrollPaneImage.getWidth() - 30);
+					.setPreferenceHeightPanel(imagePanel.getImageHeight() - 45);
+			imagePanel.setPreferenceWidthPanel(imagePanel.getImageWidth() - 30);
 			imagePanel.originalSizeImage();
 			jRadioButtonMenuItemImageOptionsNormalSize.setSelected(true);
+			jScrollPaneImage.setPreferredSize(imagePanel.getWidthHeight());
 		}
 	}
 
@@ -1938,8 +2039,15 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 					listFiles.get(imgIndex));
 		}
 		originalSizeImageAction(null);
-		imagePanel.setImage(listFiles.get(imgIndex));
+		if (listFiles != null) {
+			imagePanel.setImage(listFiles.get(imgIndex));
+		}
 		jScrollPaneImage.setViewportView(imagePanel);
+
+		jLabelImageInfoFileSz.setText("" + imagePanel.getImageSize());
+		jLabelImageInfoFr.setText("" + imagePanel.getImageFrames());
+		jLabelImageInfoH.setText("" + imagePanel.getImageHeight());
+		jLabelImageInfoW.setText("" + imagePanel.getImageWidth());
 	}
 
 	protected void saveAsImageAction(ActionEvent e) {
