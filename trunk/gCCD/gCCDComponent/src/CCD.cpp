@@ -88,6 +88,7 @@ void CCDComponent::resetCamera() {
 void CCDComponent::startExposure() {
 	ACS_TRACE("CCDComponent::startExposure()");
 	ACSErr::Completion_var completion;
+	int lastState = getState();
 
 	filesQueue = context->getImage(640, 480, (int) acquisitionMode()->get_sync(
 			completion.out()), (int) numberOfAcquisitions()->get_sync(
@@ -95,7 +96,7 @@ void CCDComponent::startExposure() {
 			completion.out()));
 	if (filesQueue != 0) {
 		startBulkData();
-		sendBulkData();
+		sendBulkData(lastState);
 	}
 }
 
@@ -104,20 +105,15 @@ void CCDComponent::stopExposure() {
 	context->stopExposure();
 }
 
-/*
- void CCDComponent::getImage(CORBA::Long width, CORBA::Long height,
- CORBA::Long acquisitionMode, CORBA::Long numberOfAcquisitions,
- CORBA::Float exposureTime) {
- ACS_TRACE("CCDComponent::getImage()");
-
- filesQueue = context->getImage((int) width, (int) height,
- (int) acquisitionMode, (int) numberOfAcquisitions,
- (float) exposureTime);
- if (filesQueue != 0) {
- startBulkData();
- sendBulkData();
- }
- }*/
+void CCDComponent::startCooler() {
+	ACS_TRACE("CCDComponent::startCooler()");
+	ACSErr::Completion_var completion;
+	context->startCooler(commandedCCDTemperature()->get_sync(completion.out()));
+}
+void CCDComponent::stopCooler() {
+	ACS_TRACE("CCDComponent::stopCooler()");
+	context->stopCooler();
+}
 
 CORBA::Long CCDComponent::getState() {
 	ACS_TRACE("CCDComponent::getState()");
@@ -218,17 +214,18 @@ ACS::RWlong_ptr CCDComponent::acquisitionMode() throw (CORBA::SystemException) {
 	if (!m_acquisitionMode_p) {
 		return ACS::RWlong::_nil();
 	}
-	ACS::RWlong_var prop =
-			ACS::RWlong::_narrow(m_acquisitionMode_p->getCORBAReference());
+	ACS::RWlong_var prop = ACS::RWlong::_narrow(
+			m_acquisitionMode_p->getCORBAReference());
 	return prop._retn();
 }
 
-ACS::RWlong_ptr CCDComponent::numberOfAcquisitions() throw (CORBA::SystemException) {
+ACS::RWlong_ptr CCDComponent::numberOfAcquisitions()
+		throw (CORBA::SystemException) {
 	if (!m_numberOfAcquisitions_p) {
 		return ACS::RWlong::_nil();
 	}
-	ACS::RWlong_var prop =
-			ACS::RWlong::_narrow(m_numberOfAcquisitions_p->getCORBAReference());
+	ACS::RWlong_var prop = ACS::RWlong::_narrow(
+			m_numberOfAcquisitions_p->getCORBAReference());
 	return prop._retn();
 }
 
@@ -338,8 +335,10 @@ void CCDComponent::startBulkData() {
 	}
 	/**Bulk Data and notification channel components are activated*/
 	bdStatus = true;
+	//set current state of the CCD
+
 }
-void CCDComponent::sendBulkData() {
+void CCDComponent::sendBulkData(int lastState) {
 	ACS_TRACE("CCDComponent::sendBulkData()");
 	/** Initialize control loop thread*/
 	if (m_bdtThread_p == 0) {
@@ -349,6 +348,7 @@ void CCDComponent::sendBulkData() {
 		selfPtr); /** pass a ptr to this as parameter to thread so it can call back to us*/
 
 		//Pass the filesQueue
+		m_bdtThread_p->setLastState(lastState);
 		m_bdtThread_p->setQueue(filesQueue, queueSize);
 
 		ACS_SHORT_LOG((LM_INFO, "BDT thread spawned."));

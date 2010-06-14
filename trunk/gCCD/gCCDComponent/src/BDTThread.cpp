@@ -13,6 +13,11 @@ void BDTThread::run() {
 		/**Create an event with the filename, type, id, and total*/
 		CCDmodule::ncCCDFilename * fileEvent;
 
+		int totalFiles = 0;
+		while (filesQueue[totalFiles] != "null") {
+			totalFiles++;
+		}
+
 		int i = 0;
 		while (filesQueue[i] != "null") {
 			ACS_SHORT_LOG((LM_INFO, "BDTThread::run(): startSend()"));
@@ -32,28 +37,15 @@ void BDTThread::run() {
 			ACE_OS::strcat(fName, "_out.fits");
 			fileEvent->fileName = fName;
 			fileEvent->id = i + 1;
-			fileEvent->total = 3;
+			fileEvent->total = totalFiles;
 
 			ACS_SHORT_LOG(
-					(LM_INFO, "BDTThread::run(): sendNotification() FILENAME"));
+					(LM_INFO, "BDTThread::run(): sendNotification(...) FILENAME"));
 			/**Send the notification to the client*/
 			ccd_p->ncSupplier->sendNotification(*fileEvent);
 			ACS_SHORT_LOG((LM_INFO, "BDTThread::run(): notification sent!"));
 			i++;
 		}
-		/**change event type to END_SUBSCRIPTION*/
-		fileEvent->type = CCDmodule::END_SUBSCRIPTION;
-		/**Send the notification to the client*/
-		ACS_SHORT_LOG(
-				(LM_INFO, "BDTThread::run(): sendNotification() END_SUBSCRIPTION"));
-		ccd_p->ncSupplier->sendNotification(*fileEvent);
-		ACS_SHORT_LOG((LM_INFO, "BDTThread::run(): notification sent!"));
-
-		ACS_SHORT_LOG((LM_INFO, "BDTThread::run(): disconnect()"));
-		ccd_p->sender->disconnect();
-
-		ACS_SHORT_LOG((LM_INFO, "BDTThread::run(): closeReceiver()"));
-		ccd_p->receiver->closeReceiver();
 	}
 
 	catch (AVConnectErrorEx & ex) {
@@ -91,11 +83,36 @@ void BDTThread::onStart() {
 
 void BDTThread::onStop() {
 	ACS_TRACE("BDTThread::onStop()");
+	ACS_SHORT_LOG((LM_INFO, "BDTThread::onStop(): disconnect()"));
+	ccd_p->sender->disconnect();
+
+	ACS_SHORT_LOG((LM_INFO, "BDTThread::onStop(): closeReceiver()"));
+	ccd_p->receiver->closeReceiver();
+
+	CCDmodule::ncCCDFilename * fileEvent;
+	/**create an event with the filename, type, id, and total*/
+	fileEvent = new CCDmodule::ncCCDFilename;
+	fileEvent->type = CCDmodule::END_SUBSCRIPTION;
+	char fName[256];
+	ACE_OS::strcpy(fName, "END_SUBSCRIPTION");
+	fileEvent->fileName = fName;
+	fileEvent->id = 0;
+	fileEvent->total = 0;
+
+	ccd_p->context->setState(lastState);
+	/**Send the notification to the client*/
+	ACS_SHORT_LOG(
+			(LM_INFO, "BDTThread::onStop(): sendNotification(...) END_SUBSCRIPTION"));
+	ccd_p->ncSupplier->sendNotification(*fileEvent);
+	ACS_SHORT_LOG((LM_INFO, "BDTThread::onStop(): notification sent!"));
 	ACS_SHORT_LOG((LM_INFO, "BDT thread stopped."));
-	ccd_p->context->setState(STATE_CONNECTED);
 }
 
 void BDTThread::setQueue(std::string * filesQ, const int qSize) {
 	queueSize = qSize;
 	filesQueue = filesQ;
+}
+
+void BDTThread::setLastState(int lastSt) {
+	lastState = lastSt;
 }

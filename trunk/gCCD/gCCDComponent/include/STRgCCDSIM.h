@@ -32,6 +32,9 @@ public:
 
 	void stopExposure();
 
+	void startCooler(float commandedCCDTemp);
+	void stopCooler();
+
 	int writeImage(int frames, int fileCorrelation);
 
 private:

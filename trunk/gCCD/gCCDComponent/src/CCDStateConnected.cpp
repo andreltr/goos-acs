@@ -36,6 +36,7 @@ void CCDStateConnected::resetCamera() {
 std::string* CCDStateConnected::getImage(int width, int height,
 		int acquisitionMode, int numberOfAcquisitions, float exposureTime) {
 	std::cout << "CCDStateConnected::getImage()" << std::endl;
+	ccd_p->getContext()->setLastState(ccd_p->getContext()->getState());
 	ccd_p->getContext()->setState(STATE_ACQUIRING);
 	return strContext_p->getImage(width, height, acquisitionMode,
 			numberOfAcquisitions, exposureTime);
@@ -43,5 +44,16 @@ std::string* CCDStateConnected::getImage(int width, int height,
 
 void CCDStateConnected::stopExposure() {
 	std::cout << "CCDStateConnected::stopExposure() nothing to do" << std::endl;
+	return;
+}
+
+void CCDStateConnected::startCooler(float commandedCCDTemp) {
+	std::cout << "CCDStateAcquiring::startCooler(...)" << std::endl;
+	strContext_p->startCooler(commandedCCDTemp);
+	return;
+}
+
+void CCDStateConnected::stopCooler(){
+	std::cout << "CCDStateAcquiring::stopCooler() nothing to do" << std::endl;
 	return;
 }

@@ -29,6 +29,7 @@ public:
 	virtual void run();
 
 	void setQueue(std::string * filesQ, const int qSize);
+	void setLastState(int lastState);
 
 	/****************** [ variables ] *****************/
 private:
@@ -36,6 +37,7 @@ private:
 	std::string * filesQueue;
 	int queueSize;
 	CCDComponent * ccd_p;
+	int lastState;
 };
 
 #endif

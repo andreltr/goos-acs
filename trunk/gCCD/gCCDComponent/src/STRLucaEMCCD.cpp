@@ -67,6 +67,15 @@ void STRLucaEMCCD::stopExposure() {
 
 }
 
+
+void STRLucaEMCCD::startCooler(float commandedCCDTemp) {
+	return;
+}
+
+void STRLucaEMCCD::stopCooler() {
+	return;
+}
+
 void STRLucaEMCCD::initialize() {
 	unsigned long error = Initialize("/usr/local/etc/andor");
 	if (error != DRV_SUCCESS) {

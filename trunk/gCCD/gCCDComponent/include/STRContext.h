@@ -58,6 +58,16 @@ public:
 		std::cout << "STRContext::stopExposure()" << std::endl;
 		return currentCCDModel->stopExposure();
 	}
+
+	virtual void startCooler(float commandedCCDTemp){
+		std::cout << "STRContext::startCooler(...)" << std::endl;
+		return currentCCDModel->startCooler(commandedCCDTemp);
+	}
+	virtual void stopCooler(){
+		std::cout << "STRContext::stopCooler()" << std::endl;
+		return currentCCDModel->stopCooler();
+	}
+
 	void setCCDModel(long cameraModel) {
 		currentModel = cameraModel;
 		switch (cameraModel) {

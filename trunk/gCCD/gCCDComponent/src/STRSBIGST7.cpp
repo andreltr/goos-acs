@@ -53,6 +53,14 @@ void STRSBIGST7::stopExposure() {
 
 }
 
+void STRSBIGST7::startCooler(float commandedCCDTemp) {
+	return;
+}
+
+void STRSBIGST7::stopCooler() {
+	return;
+}
+
 void STRSBIGST7::initialize() {
 	this->odp.deviceType = DEV_ETH;
 	this->odp.ipAddress = IP_ADRESS;

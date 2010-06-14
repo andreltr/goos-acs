@@ -21,6 +21,9 @@ public:
 			int numberOfAcquisitions, float exposureTime);
 	void stopExposure();
 
+	void startCooler(float commandedCCDTemp);
+	void stopCooler();
+
 	void initialize();
 	void shutDown();
 };

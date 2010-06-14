@@ -22,6 +22,7 @@ class CCDComponent;
 class CCDContext {
 private:
 	int currState;
+	int lastState;
 	CCDState * currentState;
 	CCDStateDisconnected * disconnected;
 	CCDStateConnected * connected;
@@ -55,7 +56,7 @@ public:
 		case STATE_DISCONNECTED:
 			currentState = disconnected;
 			break;
-		case STATE_CONNECTED:
+		case STATE_CONNECTED_COOLER_OFF:
 			currentState = connected;
 			break;
 		case STATE_ACQUIRING:
@@ -107,11 +108,33 @@ public:
 	}
 
 	/**
+	 * depending of the current state, starts the cooler with commandCCDTemperature
+	 */
+	void startCooler(float commandedCCDTemp) {
+		currentState->startCooler(commandedCCDTemp);
+	}
+
+	/**
+	 * depending of the current state, stops the cooler
+	 */
+	void stopCooler() {
+		currentState->stopCooler();
+	}
+
+	/**
 	 * gets the currentState
 	 * @return current state
 	 */
 	int getState() {
 		return currState;
+	}
+
+	void setLastState(int state) {
+		lastState = getState();
+	}
+
+	int getLastState() {
+		return lastState;
 	}
 
 };
