@@ -12,7 +12,6 @@
     <cdb:_ string="baci" />
     <cdb:_ string="bulkDataReceiverLibEx1"/>
   </Autoload>
-  <DeployInfo Host="magi2" Flags="" KeepAliveTime="0"/>
   <LoggingConfig 
              centralizedLogger="Log" 
              minLogLevel="2" 
