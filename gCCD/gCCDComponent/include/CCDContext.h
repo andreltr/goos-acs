@@ -8,7 +8,8 @@
 #include "CCDState.h"
 #include "CCDModels.h"
 #include "CCDStateDisconnected.h"
-#include "CCDStateConnected.h"
+#include "CCDStateConnectedOff.h"
+#include "CCDStateConnectedOn.h"
 #include "CCDStateAcquiring.h"
 #include <iostream>
 
@@ -25,7 +26,8 @@ private:
 	int lastState;
 	CCDState * currentState;
 	CCDStateDisconnected * disconnected;
-	CCDStateConnected * connected;
+	CCDStateConnectedOff * connected_off;
+	CCDStateConnectedOn * connected_on;
 	CCDStateAcquiring * acquiring;
 public:
 	/**
@@ -34,7 +36,8 @@ public:
 	 */
 	CCDContext(CCDComponent * ccd, int state) {
 		disconnected = new CCDStateDisconnected(ccd);
-		connected = new CCDStateConnected(ccd);
+		connected_off = new CCDStateConnectedOff(ccd);
+		connected_on = new CCDStateConnectedOn(ccd);
 		acquiring = new CCDStateAcquiring(ccd);
 		setState(state);
 	}
@@ -43,7 +46,8 @@ public:
 	 */
 	~CCDContext() {
 		delete disconnected;
-		delete connected;
+		delete connected_off;
+		delete connected_on;
 		delete acquiring;
 	}
 	/**
@@ -57,7 +61,10 @@ public:
 			currentState = disconnected;
 			break;
 		case STATE_CONNECTED_COOLER_OFF:
-			currentState = connected;
+			currentState = connected_off;
+			break;
+		case STATE_CONNECTED_COOLER_ON:
+			currentState = connected_on;
 			break;
 		case STATE_ACQUIRING:
 			currentState = acquiring;
@@ -130,7 +137,7 @@ public:
 	}
 
 	void setLastState(int state) {
-		lastState = getState();
+		lastState = currState;
 	}
 
 	int getLastState() {

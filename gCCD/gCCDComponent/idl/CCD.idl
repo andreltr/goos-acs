@@ -1,6 +1,7 @@
 #ifndef CCD_IDL_
 #define CCD_IDL_
 
+#include <acscomponent.idl>
 #include <baci.idl>
 #include <ACSErrTypeCommon.idl>
 
