@@ -45,10 +45,18 @@ public:
 	 * Destructor
 	 */
 	~CCDContext() {
-		delete disconnected;
-		delete connected_off;
-		delete connected_on;
-		delete acquiring;
+		if (disconnected != 0) {
+			delete disconnected;
+		}
+		if (connected_off != 0) {
+			delete connected_off;
+		}
+		if (connected_on != 0) {
+			delete connected_on;
+		}
+		if (acquiring != 0) {
+			delete acquiring;
+		}
 	}
 	/**
 	 * Sets the state

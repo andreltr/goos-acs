@@ -24,7 +24,9 @@ protected:
 public:
 	CCDState(CCDComponent * ccd);
 	virtual ~CCDState() {
-		delete strContext_p;
+		if (strContext_p != 0) {
+			delete strContext_p;
+		}
 	}
 
 	virtual void on() = 0;
