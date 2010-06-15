@@ -2008,31 +2008,28 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	}
 
 	protected void fitSizeImageAction(ActionEvent e) {
-		Dimension fitSize = new Dimension(jScrollPaneImage.getWidth() - 3,
-				jScrollPaneImage.getHeight() - 3);
-
-		imageContainer.setPreferredSize(fitSize);
-		imagePanel.setPreferredSize(fitSize);
-		imagePanel.setSize(fitSize);
-
-		jScrollPaneImage.validate();
-
 		if (imagePanel != null) {
+			Dimension fitSize = new Dimension(jScrollPaneImage.getWidth() - 3,
+					jScrollPaneImage.getHeight() - 3);
 
+			imageContainer.setPreferredSize(fitSize);
+			imagePanel.setPreferredSize(fitSize);
+			imagePanel.setSize(fitSize);
+
+			jScrollPaneImage.validate();
 		}
 		jRadioButtonMenuItemImageOptionsFitSize.setSelected(true);
 	}
 
 	protected void originalSizeImageAction(ActionEvent e) {
-		Dimension originalSize = imagePanel.getWidthHeight();
-
-		imagePanel.setPreferredSize(originalSize);
-		imagePanel.setSize(originalSize);
-		imageContainer.setPreferredSize(originalSize);
-
-		jScrollPaneImage.validate();
 		if (imagePanel != null) {
+			Dimension originalSize = imagePanel.getWidthHeight();
 
+			imagePanel.setPreferredSize(originalSize);
+			imagePanel.setSize(originalSize);
+			imageContainer.setPreferredSize(originalSize);
+
+			jScrollPaneImage.validate();
 		}
 		jRadioButtonMenuItemImageOptionsNormalSize.setSelected(true);
 	}
