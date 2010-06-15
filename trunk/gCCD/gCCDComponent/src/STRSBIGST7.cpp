@@ -1,5 +1,5 @@
 #include "STRSBIGST7.h"
-#define IP_ADRESS	0xC0A8010C
+#define IP_ADDRESS	0xC0A8010C
 
 /*
  *
@@ -8,12 +8,18 @@
  */
 
 STRSBIGST7::STRSBIGST7() {
+	p_Cam = 0;
+	p_Img = 0;
 
 }
 
 STRSBIGST7::~STRSBIGST7() {
-	delete p_Cam;
-	delete p_Img;
+	if (p_Cam != 0) {
+		delete p_Cam;
+	}
+	if (p_Img != 0) {
+		delete p_Img;
+	}
 
 }
 
@@ -48,7 +54,6 @@ std::string* STRSBIGST7::getImage(int width, int height, int acquisitionMode,
 	return filenames;
 }
 
-
 void STRSBIGST7::stopExposure() {
 
 }
@@ -63,7 +68,7 @@ void STRSBIGST7::stopCooler() {
 
 void STRSBIGST7::initialize() {
 	this->odp.deviceType = DEV_ETH;
-	this->odp.ipAddress = IP_ADRESS;
+	this->odp.ipAddress = IP_ADDRESS;
 	p_Cam = new CSBIGCam(odp);
 	p_Cam->EstablishLink();
 }

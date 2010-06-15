@@ -20,9 +20,7 @@ public:
 		queueSize = 0;
 	}
 
-	~BDTThread() {
-		ACS_TRACE("BDTThread::~BDTThread");
-	}
+	~BDTThread();
 
 	virtual void onStart();
 	virtual void onStop();

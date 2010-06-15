@@ -81,7 +81,9 @@ void CCDComponent::cleanUp() {
 		getContainerServices()->getThreadManager()->destroy(m_bdtThread_p);
 	}
 
-	delete context;
+	if (context != 0) {
+		delete context;
+	}
 }
 
 void CCDComponent::aboutToAbort() {
@@ -90,7 +92,9 @@ void CCDComponent::aboutToAbort() {
 		getContainerServices()->getThreadManager()->destroy(m_bdtThread_p);
 	}
 
-	delete context;
+	if (context != 0) {
+		delete context;
+	}
 }
 
 /*********************** [ CORBA interface ] ***********************/

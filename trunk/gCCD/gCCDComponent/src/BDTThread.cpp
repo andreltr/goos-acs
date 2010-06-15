@@ -4,6 +4,10 @@
  * Implementation of BDThread. Used to ensure GUI responsiveness
  */
 
+BDTThread::~BDTThread() {
+	ACS_TRACE("BDTThread::~BDTThread");
+}
+
 void BDTThread::run() {
 	ACS_TRACE("BDTThread::run()");
 	try {
@@ -43,7 +47,6 @@ void BDTThread::run() {
 					(LM_INFO, "BDTThread::run(): sendNotification(...) FILENAME"));
 			/**Send the notification to the client*/
 			ccd_p->ncSupplier->sendNotification(*fileEvent);
-			//delete fileEvent;
 			ACS_SHORT_LOG((LM_INFO, "BDTThread::run(): notification sent!"));
 			i++;
 		}
@@ -100,7 +103,7 @@ void BDTThread::onStop() {
 	ACS_SHORT_LOG(
 			(LM_INFO, "BDTThread::onStop(): sendNotification(...) END_SUBSCRIPTION"));
 	ccd_p->ncSupplier->sendNotification(*fileEvent);
-	//delete fileEvent;
+
 	ACS_SHORT_LOG((LM_INFO, "BDTThread::onStop(): notification sent!"));
 
 	ACS_SHORT_LOG((LM_INFO, "BDTThread::onStop(): disconnect()"));
