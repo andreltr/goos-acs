@@ -10,9 +10,9 @@
            ImplLang="cpp">
   <Autoload>
     <cdb:_ string="baci" />
-    <cdb:_ string="bulkDataSenderLibEx1"/>
+    <cdb:_ string="bulkDataReceiverLibEx1"/>
   </Autoload>
-  <DeployInfo Host="magi3" Flags="" KeepAliveTime="0"/>
+  <DeployInfo Host="magi2" Flags="" KeepAliveTime="-1"/>
   <LoggingConfig 
              centralizedLogger="Log" 
              minLogLevel="2" 
