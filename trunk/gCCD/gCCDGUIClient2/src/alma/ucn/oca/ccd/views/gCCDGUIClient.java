@@ -1,6 +1,7 @@
 package alma.ucn.oca.ccd.views;
 
 import javax.swing.JOptionPane;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -18,8 +19,8 @@ import javax.swing.border.BevelBorder;
 
 import magick.*;
 import alma.ucn.oca.ccd.controller.DefaultController;
-import alma.ucn.oca.ccd.utils.gCCDGUIClientFileSelectorDialog;
-import alma.ucn.oca.ccd.utils.gCCDGUIClientImagePanels;
+import alma.ucn.oca.ccd.utils.gCCDFileSelectorDialog;
+import alma.ucn.oca.ccd.utils.gCCDImagePanel;
 
 /**
  * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
@@ -43,6 +44,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JPanel jPanelCCDSetup;
 	private JPanel jPanelImageInfo;
 	private JScrollPane jScrollPaneImage;
+	private JPanel imageContainer;
 	private JSplitPane jSplitPaneHorizontal;
 	private JTabbedPane jTabbedPaneOptions;
 	private JSplitPane jSplitPaneVertical;
@@ -155,7 +157,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JMenu jMenuFile;
 	private JMenuBar jMenuBar;
 	private LinkedList<String> listFiles;
-	private gCCDGUIClientImagePanels imagePanel;
+	private gCCDImagePanel imagePanel;
 	private int imgIndex = 0;
 	private int imgMax;
 	private JFileChooser jFileChooserDialog;
@@ -164,14 +166,6 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	/**
 	 * Auto-generated main method to display this JFrame
 	 */
-	/*
-	 * public static void main(String[] args) { SwingUtilities.invokeLater(new
-	 * Runnable() { public void run() { gCCDGUIClient inst = new
-	 * gCCDGUIClient(); inst.pack(); inst.setLocationRelativeTo(null);
-	 * inst.setMinimumSize(inst.getSize()); inst.addWindowListener(new
-	 * WindowCloseManager()); inst.setVisible(true); } }); }
-	 */
-
 	public gCCDGUIClient(DefaultController controller) {
 		super();
 		this.controller = controller;
@@ -188,7 +182,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 				thisLayout.columnWeights = new double[] { 0.1 };
 				thisLayout.columnWidths = new int[] { 7 };
 				getContentPane().setLayout(thisLayout);
-				this.setTitle("gCCD - [No camera selected]");
+				this.setTitle("gCCD - [Disconnected]");
 				{
 					jSplitPaneVertical = new JSplitPane();
 					getContentPane().add(
@@ -1642,7 +1636,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			// File selector dialog
 			jFileChooserDialog = new JFileChooser();
 			jFileChooserDialog
-					.addChoosableFileFilter(new gCCDGUIClientFileSelectorDialog());
+					.addChoosableFileFilter(new gCCDFileSelectorDialog());
 		}
 		return jFileChooserDialog;
 	}
@@ -1991,25 +1985,35 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	}
 
 	protected void fitSizeImageAction(ActionEvent e) {
+		Dimension fitSize = new Dimension(jScrollPaneImage.getWidth() - 3,
+				jScrollPaneImage.getHeight() - 3);
+
+		imageContainer.setPreferredSize(fitSize);
+		imagePanel.setPreferredSize(fitSize);
+		imagePanel.setSize(fitSize);
+		// imagePanel.setPreferredSize(imageContainer.getPreferredSize());
+		// imagePanel.setSize(imageContainer.getPreferredSize());
+
+		jScrollPaneImage.validate();
+
 		if (imagePanel != null) {
-			imagePanel
-					.setPreferenceHeightPanel(jScrollPaneImage.getHeight() - 45);
-			imagePanel
-					.setPreferenceWidthPanel(jScrollPaneImage.getWidth() - 30);
-			imagePanel.adjustImage();
-			jRadioButtonMenuItemImageOptionsFitSize.setSelected(true);
+
 		}
+		jRadioButtonMenuItemImageOptionsFitSize.setSelected(true);
 	}
 
 	protected void originalSizeImageAction(ActionEvent e) {
+		Dimension originalSize = imagePanel.getWidthHeight();
+
+		imagePanel.setPreferredSize(originalSize);
+		imagePanel.setSize(originalSize);
+		imageContainer.setPreferredSize(originalSize);
+
+		jScrollPaneImage.validate();
 		if (imagePanel != null) {
-			imagePanel
-					.setPreferenceHeightPanel(imagePanel.getImageHeight() - 45);
-			imagePanel.setPreferenceWidthPanel(imagePanel.getImageWidth() - 30);
-			imagePanel.originalSizeImage();
-			jRadioButtonMenuItemImageOptionsNormalSize.setSelected(true);
-			jScrollPaneImage.setPreferredSize(imagePanel.getWidthHeight());
+
 		}
+		jRadioButtonMenuItemImageOptionsNormalSize.setSelected(true);
 	}
 
 	protected void nextImageAction(ActionEvent e) {
@@ -2034,15 +2038,19 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 
 	protected void showImageAction(ActionEvent e, int imgIndex) {
 		if (imagePanel == null) {
-			imagePanel = new gCCDGUIClientImagePanels(jScrollPaneImage
-					.getWidth() - 30, jScrollPaneImage.getHeight() - 45,
-					listFiles.get(imgIndex));
+			imageContainer = new JPanel(new GridBagLayout());
+
+			imagePanel = new gCCDImagePanel(listFiles.get(imgIndex));
+
+			originalSizeImageAction(null);
+
+			imageContainer.add(imagePanel);
+
+			jScrollPaneImage.setViewportView(imageContainer);
 		}
-		originalSizeImageAction(null);
 		if (listFiles != null) {
 			imagePanel.setImage(listFiles.get(imgIndex));
 		}
-		jScrollPaneImage.setViewportView(imagePanel);
 
 		jLabelImageInfoFileSz.setText("" + imagePanel.getImageSize());
 		jLabelImageInfoFr.setText("" + imagePanel.getImageFrames());

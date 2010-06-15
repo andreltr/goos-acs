@@ -29,7 +29,12 @@ public class Main {
 
 		controller.addView(userInterface);
 
-		componentModel.init();
+		try {
+			componentModel.init();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		userInterface.pack();
 		userInterface.setLocationRelativeTo(null);

@@ -11,8 +11,6 @@ import alma.acs.nc.Consumer;
 
 public class gCCDComponentDAO extends ComponentClient {
 	private gCCDComponentModel model;
-	private alma.ACS.ROstring myStringProperty;
-	private alma.ACS.RWdouble myDoubleProperty;
 	// Reference to the CCD component
 	private alma.CCDmodule.CCDinterface ccdCompReference;
 	// Instance of Notification Channel consumer
@@ -27,6 +25,8 @@ public class gCCDComponentDAO extends ComponentClient {
 
 	/**
 	 * Default constructor
+	 * 
+	 * @throws Exception
 	 */
 	public gCCDComponentDAO(Logger logger, String managerLoc,
 			String clientName, gCCDComponentModel model) throws Exception {
@@ -41,16 +41,13 @@ public class gCCDComponentDAO extends ComponentClient {
 		lastNotification = null;
 		consumerOn = false;
 
-		myStringProperty = null;
-		myDoubleProperty = null;
-
 		setModel(model);
 
-		getCameraModelsFromCDB();
+		model.setCCDModels(getCameraModelsFromCDB());
 	}
 
-	public void init() {
-		model.setCCDModels(getCameraModels());
+	public void init() throws AcsJContainerServicesEx {
+		model.setCCDModels(getCameraModelsFromCDB());
 	}
 
 	// Obtains a connection to the ACS Component
@@ -61,16 +58,6 @@ public class gCCDComponentDAO extends ComponentClient {
 		ccdCompReference = alma.CCDmodule.CCDinterfaceHelper
 				.narrow(m_containerServices.getComponent(selectedCamera));
 
-		myStringProperty = ccdCompReference.cameraName();
-		myDoubleProperty = ccdCompReference.commandedCCDTemperature();
-		System.out
-				.println("[TRACE] CAMERA NAME"
-						+ myStringProperty
-								.get_sync(new alma.ACSErr.CompletionHolder()));
-		System.out
-				.println("[TRACE] CMDCCD TEMP"
-						+ myDoubleProperty
-								.get_sync(new alma.ACSErr.CompletionHolder()));
 		setModelValuesFromCDB();
 		m_logger.info("INFO: Connected!!!");
 		getCurrentState();
@@ -78,26 +65,6 @@ public class gCCDComponentDAO extends ComponentClient {
 
 	public void disconnectFromComponent() {
 		m_logger.info("INFO: Disconnecting from component...");
-		// myStringProperty.set_sync("BLABLA");
-		System.out.println("[TRACE] CAMERA NAME: "
-				+ ccdCompReference.cameraName().get_sync(
-						new alma.ACSErr.CompletionHolder()));
-		System.out
-				.println("[TRACE] CAMERA NAME: "
-						+ myStringProperty
-								.get_sync(new alma.ACSErr.CompletionHolder()));
-
-		myDoubleProperty.set_sync(12.7);
-		System.out.println("[TRACE] CMDCCD TEMP"
-				+ ccdCompReference.commandedCCDTemperature().get_sync(
-						new alma.ACSErr.CompletionHolder()));
-		System.out
-				.println("[TRACE] CMDCCD TEMP"
-						+ myDoubleProperty
-								.get_sync(new alma.ACSErr.CompletionHolder()));
-		System.out
-				.println("[TRACE] CMDCCD TEMP" + myDoubleProperty.min_value());
-
 		disconnectConsumer();
 		m_logger.info("INFO: Disconnected!!!");
 		getCurrentState();
@@ -177,18 +144,6 @@ public class gCCDComponentDAO extends ComponentClient {
 
 	//
 	public void setModelValuesFromCDB() {
-		System.out.println("ASSDSADASDASDASDSD"
-				+ ccdCompReference.exposureTime().get_sync(
-						new alma.ACSErr.CompletionHolder()));
-		System.out.println("ASSDSADASDASDASDSD"
-				+ (long) ccdCompReference.numberOfAcquisitions().get_sync(
-						new alma.ACSErr.CompletionHolder()));
-		System.out.println("ASSDSADASDASDASDSD"
-				+ ccdCompReference.commandedCCDTemperature().get_sync(
-						new alma.ACSErr.CompletionHolder()));
-		System.out.println("ASSDSADASDASDASDSD"
-				+ ccdCompReference.acquisitionMode().get_sync(
-						new alma.ACSErr.CompletionHolder()));
 		model.setActualAirTemperature(ccdCompReference.actualAirTemperature()
 				.get_sync(new alma.ACSErr.CompletionHolder()));
 		model.setActualCCDTemperature(ccdCompReference.actualCCDTemperature()
@@ -295,7 +250,7 @@ public class gCCDComponentDAO extends ComponentClient {
 		return consumerOn;
 	}
 
-	public void getCameraModelsFromCDB() throws AcsJContainerServicesEx {
+	public String[] getCameraModelsFromCDB() throws AcsJContainerServicesEx {
 		m_logger.info("INFO: Finding components...");
 		if (modelsList == null) {
 			modelsList = new LinkedList<String>();
@@ -309,9 +264,6 @@ public class gCCDComponentDAO extends ComponentClient {
 						.getName());
 			}
 		}
-	}
-
-	public String[] getCameraModels() {
 		return modelsList.toArray(new String[0]);
 	}
 

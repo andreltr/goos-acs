@@ -89,8 +89,10 @@ public class gCCDComponentModel extends AbstractModel {
 
 	/**
 	 * Provides the means to set or reset the model to a default state.
+	 * 
+	 * @throws Exception
 	 */
-	public void init() {
+	public void init() throws Exception {
 		ccd_dao.init();
 	}
 
