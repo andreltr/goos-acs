@@ -63,22 +63,24 @@ public class DefaultController extends AbstractController {
 	public static final String COMP_STOP_EXP_METHOD = "stopExposure";
 	public static final String COMP_START_COOLER_METHOD = "startCooler";
 	public static final String COMP_STOP_COOLER_METHOD = "stopCooler";
+	public static final String COMP_GET_CCD_VALUES = "getCCDValues";
 
 	public void changeCompActualAirTemp(double newTemp) {
 		setModelProperty(COMP_ACTUAL_AIR_TEMP, newTemp);
 	}
+
 	public void changeCompActualCCDTemp(double newTemp) {
 		setModelProperty(COMP_ACTUAL_CCD_TEMP, newTemp);
 	}
-	
+
 	public void changeCompCCDTemp(double newTemp) {
 		setModelProperty(COMP_COMMANDED_CCD_TEMP, newTemp);
 	}
-	
+
 	public void changeCompCameraName(String newCameraName) {
 		setModelProperty(COMP_CAMERA_NAME, newCameraName);
 	}
-	
+
 	public void changeCompCameraModel(long newCameraModel) {
 		setModelProperty(COMP_CAMERA_MODEL, newCameraModel);
 	}
@@ -110,15 +112,15 @@ public class DefaultController extends AbstractController {
 	public void changeCompFocalLength(double newFocalLength) {
 		setModelProperty(COMP_FOCAL_LENGTH, newFocalLength);
 	}
-	
+
 	public void changeCompGain(double newGain) {
 		setModelProperty(COMP_GAIN, newGain);
 	}
-	
+
 	public void changeCompXPixelSize(double newXPixelSize) {
 		setModelProperty(COMP_XPIXEL_SIZE, newXPixelSize);
 	}
-	
+
 	public void changeCompYPixelSize(double newYPixelSize) {
 		setModelProperty(COMP_YPIXEL_SIZE, newYPixelSize);
 	}
@@ -158,11 +160,11 @@ public class DefaultController extends AbstractController {
 	public void changeCompSelectedCamera(int newSelectedCamera) {
 		setModelProperty(COMP_SELECTED_MODEL, newSelectedCamera);
 	}
-	
+
 	public void changeCompListFiles(int newListFiles) {
 		setModelProperty(COMP_LIST_FILES, newListFiles);
 	}
-	
+
 	public void changeCompEndSubscription() throws Exception {
 		useMethod(COMP_END_SUBSCRIPTION);
 	}
@@ -202,5 +204,9 @@ public class DefaultController extends AbstractController {
 
 	public void stopCooler() throws Exception {
 		useMethod(COMP_STOP_COOLER_METHOD);
+	}
+
+	public void getCCDValues() throws Exception {
+		useMethod(COMP_GET_CCD_VALUES);
 	}
 }

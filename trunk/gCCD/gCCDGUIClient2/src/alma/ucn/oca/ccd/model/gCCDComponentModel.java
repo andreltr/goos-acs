@@ -189,6 +189,13 @@ public class gCCDComponentModel extends AbstractModel {
 	public int getCurrentState() {
 		return currentState;
 	}
+	
+	
+	public void getCCDValues(){
+		if (ccd_dao != null) {
+			ccd_dao.setCurrentModelValuesFromComponent();
+		}
+	}
 
 	public void endSubscription() {
 		firePropertyChange(DefaultController.COMP_END_SUBSCRIPTION, null, null);
