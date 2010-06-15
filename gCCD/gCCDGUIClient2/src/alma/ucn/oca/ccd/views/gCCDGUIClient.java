@@ -39,6 +39,8 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = 1L;
 
+	private Timer updateGUIValues;
+
 	private JMenuItem helpMenuItem;
 	private JMenu jMenuHelp;
 	private JPanel jPanelCCDSetup;
@@ -1866,6 +1868,22 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	protected void startCameraAction(ActionEvent e) {
 		try {
 			controller.startCamera();
+
+			if (updateGUIValues == null) {
+				updateGUIValues = new Timer(5000, new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						try {
+							controller.getCCDValues();
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
+					}
+				});
+			}
+
+			updateGUIValues.start();
+
 			jButtonCCDOn.setEnabled(false);
 			jButtonCCDOff.setEnabled(true);
 			jButtonCCDReset.setEnabled(true);
@@ -1885,6 +1903,9 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	protected void shutdownCameraAction(ActionEvent e) {
 		try {
 			controller.shutdownCamera();
+
+			updateGUIValues.stop();
+
 			jButtonCCDOn.setEnabled(true);
 			jButtonCCDOff.setEnabled(false);
 			jButtonCCDReset.setEnabled(false);
@@ -1912,6 +1933,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	protected void startExposureAction(ActionEvent e) {
 		try {
 			controller.startExposure();
+
 			jButtonCCDStopExp.setEnabled(true);
 			jButtonCCDStartExp.setEnabled(false);
 			jButtonCCDReset.setEnabled(false);
@@ -1933,6 +1955,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	protected void stopExposureAction(ActionEvent e) {
 		try {
 			controller.stopExposure();
+
 			jButtonCCDStopExp.setEnabled(false);
 			jButtonCCDStartExp.setEnabled(true);
 			jButtonCCDReset.setEnabled(true);
@@ -1991,8 +2014,6 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		imageContainer.setPreferredSize(fitSize);
 		imagePanel.setPreferredSize(fitSize);
 		imagePanel.setSize(fitSize);
-		// imagePanel.setPreferredSize(imageContainer.getPreferredSize());
-		// imagePanel.setSize(imageContainer.getPreferredSize());
 
 		jScrollPaneImage.validate();
 

@@ -42,8 +42,6 @@ public class gCCDComponentDAO extends ComponentClient {
 		consumerOn = false;
 
 		setModel(model);
-
-		model.setCCDModels(getCameraModelsFromCDB());
 	}
 
 	public void init() throws AcsJContainerServicesEx {
@@ -58,7 +56,7 @@ public class gCCDComponentDAO extends ComponentClient {
 		ccdCompReference = alma.CCDmodule.CCDinterfaceHelper
 				.narrow(m_containerServices.getComponent(selectedCamera));
 
-		setModelValuesFromCDB();
+		setInitialModelValuesFromCDB();
 		m_logger.info("INFO: Connected!!!");
 		getCurrentState();
 	}
@@ -142,8 +140,27 @@ public class gCCDComponentDAO extends ComponentClient {
 		model.setCurrentState(ccdCompReference.getState());
 	}
 
+	public void setCurrentModelValuesFromComponent() {
+		model.setActualAirTemperature(ccdCompReference.actualAirTemperature()
+				.get_sync(new alma.ACSErr.CompletionHolder()));
+		model.setActualCCDTemperature(ccdCompReference.actualCCDTemperature()
+				.get_sync(new alma.ACSErr.CompletionHolder()));
+
+		model.setCameraName(ccdCompReference.cameraName().get_sync(
+				new alma.ACSErr.CompletionHolder()));
+		model.setCameraModel((long) ccdCompReference.cameraModel().get_sync(
+				new alma.ACSErr.CompletionHolder()));
+
+		model.setGain(ccdCompReference.gain().get_sync(
+				new alma.ACSErr.CompletionHolder()));
+		model.setxPixelSize(ccdCompReference.xPixelSize().get_sync(
+				new alma.ACSErr.CompletionHolder()));
+		model.setyPixelSize(ccdCompReference.yPixelSize().get_sync(
+				new alma.ACSErr.CompletionHolder()));
+	}
+
 	//
-	public void setModelValuesFromCDB() {
+	public void setInitialModelValuesFromCDB() {
 		model.setActualAirTemperature(ccdCompReference.actualAirTemperature()
 				.get_sync(new alma.ACSErr.CompletionHolder()));
 		model.setActualCCDTemperature(ccdCompReference.actualCCDTemperature()
