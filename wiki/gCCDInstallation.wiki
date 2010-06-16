@@ -39,7 +39,13 @@ Since this software has been built as a distributed system the basic deployment 
 
 = Installation =
 
+To install the system you must compile it from source. Dowload the release file from the Downloads section on this site and follow the instructions below.
+
 == CCD host ==
+
+The CCD host must have the component binaries and the bulk data binary files installed. To do this, you must enter the root directory of the source and execute:
+
+ * *make component_host*
 
 === ACS Daemons ===
 
