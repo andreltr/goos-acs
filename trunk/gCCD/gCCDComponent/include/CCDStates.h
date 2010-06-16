@@ -1,0 +1,10 @@
+#ifndef CCDSTATES_H_
+#define CCDSTATES_H_
+
+//Camera states
+#define STATE_DISCONNECTED			0
+#define STATE_CONNECTED_COOLER_OFF	1
+#define STATE_ACQUIRING				2
+#define STATE_CONNECTED_COOLER_ON	3
+
+#endif
