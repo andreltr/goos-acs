@@ -164,6 +164,8 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private int imgMax;
 	private JFileChooser jFileChooserDialog;
 	private boolean coolerOn;
+	private boolean ccdOn;
+	private boolean acquiring;
 
 	/**
 	 * Auto-generated main method to display this JFrame
@@ -1667,20 +1669,28 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 				case 0:
 					jLabelCCDInfoCameaSt.setText("Off");
 					jLabelCCDInfoCameaSt.setText("Off");
+
+					ccdOn = false;
 					coolerOn = false;
+					acquiring = false;
 					break;
 				case 1:
 					jLabelCCDInfoCameaSt.setText("On");
 					jLabelCCDInfoCoolerSt.setText("Off");
+					ccdOn = true;
 					coolerOn = false;
+					acquiring = false;
 					break;
 				case 2:
 					jLabelCCDInfoCameaSt.setText("Acquiring");
+					acquiring = true;
 					break;
 				case 3:
 					jLabelCCDInfoCameaSt.setText("On");
 					jLabelCCDInfoCoolerSt.setText("On");
+					ccdOn = true;
 					coolerOn = true;
+					acquiring = false;
 					break;
 				}
 			}
@@ -1842,6 +1852,15 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	}
 
 	protected void disconnectAction(ActionEvent e) {
+
+		if (acquiring) {
+			stopExposureAction(e);
+		}
+
+		if (ccdOn) {
+			shutdownCameraAction(e);
+		}
+
 		try {
 			this.setTitle("gCCD - [Disconnected]");
 			controller.disconnectFromCamera();
@@ -1901,6 +1920,11 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	}
 
 	protected void shutdownCameraAction(ActionEvent e) {
+
+		if (coolerOn) {
+			stopCoolerAction(e);
+		}
+
 		try {
 			controller.shutdownCamera();
 
