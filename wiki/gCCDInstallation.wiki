@@ -83,3 +83,31 @@ Where on the line
 the _Host_ attribute must be equal to the hostname where the container will run, in this case the hostname is _alma_.
 
 == Client host ==
+
+The client host must have the java binary and the bulk data binary files installed. To do this, you must enter the root directory of the source and execute:
+
+ * *make client_host*
+
+= Testing the system =
+
+You can test the system without a CCD camera using the _GCCD_SIM_ component, which simulates one on a very basic level. This component is mostly useful to test the connection between the client, component and ACS hosts, and the bulk data transfer system.
+
+If you have configured the system to use daemons, you just need to start the client on the client host:
+
+ * *acsStartJava alma.ucn.oca.ccd.Main*
+
+Once the GUI appears, you must select the _GCCD_SIM_ camera model from the list of available cameras and press connect:
+
+-->insert image<--
+
+You must then set the exposure time on the CCD Settings tab to a value greater or equal than zero:
+
+-->insert image<--
+
+Finally on the CCD Control tab you must start the simulator by pressing Start CCD button and then acquire images pressing the Start Exposure button:
+
+-->insert image<--
+
+If everything worked correctly you should be able to see images on the GUI as they arrive:
+
+-->insert image<--
