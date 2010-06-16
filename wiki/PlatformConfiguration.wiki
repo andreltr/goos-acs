@@ -94,4 +94,4 @@ Select you camera type from the list and wait for the script to finish.
 
 = SBIG Linux Development Tools =
 
-Todo
+To install the shared libraries you must download the Linux Development Kit for Kernel 2.6 from the SBIG website. Then follow the instructions on the _README.txt_ file.
