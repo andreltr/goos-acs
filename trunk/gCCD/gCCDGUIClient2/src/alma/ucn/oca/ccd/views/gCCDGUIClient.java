@@ -25,7 +25,7 @@ import alma.ucn.oca.ccd.utils.gCCDImagePanel;
 /**
  * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
  * Builder, which is free for non-commercial use. If Jigloo is being used
- * commercially (i.e., by a corporation, company or business for any purpose
+ * commercially (ie, by a corporation, company or business for any purpose
  * whatever) then you should purchase a license for each developer using Jigloo.
  * Please visit www.cloudgarden.com for details. Use of Jigloo implies
  * acceptance of these licensing terms. A COMMERCIAL LICENSE HAS NOT BEEN
@@ -49,12 +49,6 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JSplitPane jSplitPaneHorizontal;
 	private JTabbedPane jTabbedPaneOptions;
 	private JSplitPane jSplitPaneVertical;
-	private JMenuItem deleteMenuItem;
-	private JSeparator jSeparator1;
-	private JMenuItem pasteMenuItem;
-	private JMenuItem copyMenuItem;
-	private JMenuItem cutMenuItem;
-	private JMenu jMenuEdit;
 	private JRadioButton jRadioButtonCCDScanTypeAcc;
 	private JRadioButton jRadioButtonCCDScanTypeSingle;
 	private ButtonGroup buttonGroupCCDSettingsMenuScanType;
@@ -148,14 +142,6 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JLabel jLabelCCDSetup;
 	private JPanel jPanelCCDControl;
 	private JPanel jPanelCCDSettings;
-	private JMenuItem exitMenuItem;
-	private JSeparator jSeparator2;
-	private JMenuItem closeFileMenuItem;
-	private JMenuItem saveAsMenuItem;
-	private JMenuItem saveMenuItem;
-	private JMenuItem openFileMenuItem;
-	private JMenuItem newFileMenuItem;
-	private JMenu jMenuFile;
 	private JMenuBar jMenuBar;
 	private LinkedList<String> listFiles;
 	private gCCDImagePanel imagePanel;
@@ -623,74 +609,6 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 				jMenuBar = new JMenuBar();
 				setJMenuBar(jMenuBar);
 				{
-					jMenuFile = new JMenu();
-					jMenuBar.add(jMenuFile);
-					jMenuFile.setText("File");
-					{
-						newFileMenuItem = new JMenuItem();
-						jMenuFile.add(newFileMenuItem);
-						newFileMenuItem.setText("New");
-					}
-					{
-						openFileMenuItem = new JMenuItem();
-						jMenuFile.add(openFileMenuItem);
-						openFileMenuItem.setText("Open");
-					}
-					{
-						saveMenuItem = new JMenuItem();
-						jMenuFile.add(saveMenuItem);
-						saveMenuItem.setText("Save");
-					}
-					{
-						saveAsMenuItem = new JMenuItem();
-						jMenuFile.add(saveAsMenuItem);
-						saveAsMenuItem.setText("Save As ...");
-					}
-					{
-						closeFileMenuItem = new JMenuItem();
-						jMenuFile.add(closeFileMenuItem);
-						closeFileMenuItem.setText("Close");
-					}
-					{
-						jSeparator2 = new JSeparator();
-						jMenuFile.add(jSeparator2);
-					}
-					{
-						exitMenuItem = new JMenuItem();
-						jMenuFile.add(exitMenuItem);
-						exitMenuItem.setText("Exit");
-					}
-				}
-				{
-					jMenuEdit = new JMenu();
-					jMenuBar.add(jMenuEdit);
-					jMenuEdit.setText("Edit");
-					{
-						cutMenuItem = new JMenuItem();
-						jMenuEdit.add(cutMenuItem);
-						cutMenuItem.setText("Cut");
-					}
-					{
-						copyMenuItem = new JMenuItem();
-						jMenuEdit.add(copyMenuItem);
-						copyMenuItem.setText("Copy");
-					}
-					{
-						pasteMenuItem = new JMenuItem();
-						jMenuEdit.add(pasteMenuItem);
-						pasteMenuItem.setText("Paste");
-					}
-					{
-						jSeparator1 = new JSeparator();
-						jMenuEdit.add(jSeparator1);
-					}
-					{
-						deleteMenuItem = new JMenuItem();
-						jMenuEdit.add(deleteMenuItem);
-						deleteMenuItem.setText("Delete");
-					}
-				}
-				{
 					jMenuCCDSetup = new JMenu();
 					jMenuBar.add(jMenuCCDSetup);
 					jMenuCCDSetup.setText("CCD Setup");
@@ -989,7 +907,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JLabel getJLabelImageInfoWidth() {
 		if (jLabelImageInfoWidth == null) {
 			jLabelImageInfoWidth = new JLabel();
-			jLabelImageInfoWidth.setText("Width (px):");
+			jLabelImageInfoWidth.setText("Width:");
 		}
 		return jLabelImageInfoWidth;
 	}
@@ -1005,7 +923,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JLabel getJLabelImageInfoHeight() {
 		if (jLabelImageInfoHeight == null) {
 			jLabelImageInfoHeight = new JLabel();
-			jLabelImageInfoHeight.setText("Height (px):");
+			jLabelImageInfoHeight.setText("Height:");
 		}
 		return jLabelImageInfoHeight;
 	}
@@ -1021,7 +939,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JLabel getJLabelImageInfoFileSize() {
 		if (jLabelImageInfoFileSize == null) {
 			jLabelImageInfoFileSize = new JLabel();
-			jLabelImageInfoFileSize.setText("File Size (kB):");
+			jLabelImageInfoFileSize.setText("File Size:");
 		}
 		return jLabelImageInfoFileSize;
 	}
@@ -1061,7 +979,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JLabel getJLabelCCDInfoCurrTemp() {
 		if (jLabelCCDInfoCurrTemp == null) {
 			jLabelCCDInfoCurrTemp = new JLabel();
-			jLabelCCDInfoCurrTemp.setText("Current Temperature (ºC):");
+			jLabelCCDInfoCurrTemp.setText("Temperature:");
 		}
 		return jLabelCCDInfoCurrTemp;
 	}
@@ -1770,7 +1688,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		else if (evt.getPropertyName().equals(
 				DefaultController.COMP_ACTUAL_CCD_TEMP)) {
 			Double newDoubleValue = (Double) evt.getNewValue();
-			jLabelCCDInfoCurrT.setText(newDoubleValue.toString());
+			jLabelCCDInfoCurrT.setText(newDoubleValue.toString() + " ºC");
 		}
 
 		repaint();

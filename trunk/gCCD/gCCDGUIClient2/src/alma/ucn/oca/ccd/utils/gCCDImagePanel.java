@@ -23,6 +23,10 @@ public class gCCDImagePanel extends JPanel {
 	private MagickImage magickImage;
 	private MagickImage magickImage2;
 
+	public gCCDImagePanel() {
+
+	}
+
 	public gCCDImagePanel(String filename) {
 		setImage(filename);
 		initComponents();
@@ -76,7 +80,6 @@ public class gCCDImagePanel extends JPanel {
 
 	private void initComponents() {
 		this.setPreferredSize(new Dimension(width, height));
-
 	}
 
 	@Override
