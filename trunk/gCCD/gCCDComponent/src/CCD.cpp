@@ -337,14 +337,23 @@ CCDContext* CCDComponent::getContext() {
 
 void CCDComponent::startBulkData() {
 	ACS_TRACE("CCDComponent::startBulkData()");
+
 	if (sender == 0) {
+		char senderName[256];
+		ACE_OS::strcpy(senderName, name());
+		ACE_OS::strcat(senderName, "_Sender");
+
 		sender
 				= getContainerServices()->getComponent<bulkdata::BulkDataSender> (
-						"BulkDataSenderEx1");
+						senderName);
 	}
 	if (receiver == 0) {
+		char receiverName[256];
+		ACE_OS::strcpy(receiverName, name());
+		ACE_OS::strcat(receiverName, "_Receiver");
+
 		receiver = getContainerServices()->getComponent<
-				bulkdata::BulkDataReceiver> ("BulkDataReceiver");
+				bulkdata::BulkDataReceiver> (receiverName);
 	}
 	if (ncSupplier == 0) {
 		ncSupplier = getContainerServices()->getComponent<
