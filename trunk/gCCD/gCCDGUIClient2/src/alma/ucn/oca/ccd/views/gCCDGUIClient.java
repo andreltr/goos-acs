@@ -40,7 +40,6 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private Timer updateGUIValues;
-
 	private JMenuItem helpMenuItem;
 	private JMenu jMenuHelp;
 	private JPanel jPanelCCDSetup;
