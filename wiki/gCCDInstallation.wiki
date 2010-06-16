@@ -63,7 +63,7 @@ The CDB container configuration files found in config/MACI/Containers/ for each 
   <Autoload>
     <cdb:_ string="baci" />
   </Autoload>
-  <DeployInfo Host="alma" Flags="" KeepAliveTime="0"/>
+  <DeployInfo Host="alma" Flags="" KeepAliveTime="-1"/>
   <LoggingConfig 
              centralizedLogger="Log" 
              minLogLevel="2" 
@@ -77,7 +77,7 @@ The CDB container configuration files found in config/MACI/Containers/ for each 
 Where on the line
 
 {{{
-  <DeployInfo Host="alma" Flags="" KeepAliveTime="0"/>
+  <DeployInfo Host="alma" Flags="" KeepAliveTime="-1"/>
 }}}
 
 the _Host_ attribute must be equal to the hostname where the container will run, in this case the hostname is _alma_.
