@@ -412,6 +412,7 @@ public class CodeGenerator extends javax.swing.JFrame {
 			outputStream.write(propertyNames.get(i).getText() + ";");
 			// System.out.println(idl_property);
 		}
+		outputStream.newLine();
 		outputStream.flush();
 		outputStream.close();
 	}
@@ -458,8 +459,10 @@ public class CodeGenerator extends javax.swing.JFrame {
 			// System.out.println(include_property);
 			// System.out.println(prototype_method);
 		}
+		include_property.newLine();
 		include_property.flush();
 		include_property.close();
+		prototype_method.newLine();
 		prototype_method.flush();
 		prototype_method.close();
 	}
@@ -528,8 +531,10 @@ public class CodeGenerator extends javax.swing.JFrame {
 		component_constructor.write("{");
 		component_constructor.write(constructor_properties);
 		component_constructor.write("}");
+		component_constructor.newLine();
 		component_constructor.flush();
 		component_constructor.close();
+		component_methods.newLine();
 		component_methods.flush();
 		component_methods.close();
 		// System.out.println(constructor_parameters);
