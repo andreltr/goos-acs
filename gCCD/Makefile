@@ -1,9 +1,5 @@
 all:	bdt component client
 
-client_host:	bdt client
-
-component_host:	bdt component
-
 client:
 	@echo "*********************************************"
 	@echo "* Making gCCD Client...                     *"

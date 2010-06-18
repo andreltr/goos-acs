@@ -9,64 +9,66 @@
 
 module CCDmodule
 {
-  //Notification channels definition
-  const string CHANNELNAME_CCDCLIENT = "ccdchannelclient";
-  
-  //Type of event FILENAME, END_SUBSCRIPTION
-  enum NCMsgType{ FILENAME, END_SUBSCRIPTION };
+	//Notification channels definition
+	const string CHANNELNAME_CCDCLIENT = "ccdchannelclient";
 
-  //Struct that contains information about the images being sent
-  //type: The message type
-  //fileName: The name of the file
-  //id: The id of this image in the sequence
-  //total: The total number of images in the sequence
-  struct ncCCDFilename
-  {
-    NCMsgType type;
-    string fileName;
-    long id;
-    long total;
-  };
+	//Type of event FILENAME, END_SUBSCRIPTION
+	enum NCMsgType {FILENAME, END_SUBSCRIPTION};
 
-  //CCD interface
-  interface CCDinterface : ACS::CharacteristicComponent
-  {
-    void on();
-    void off();
-    void resetCamera();
-    //void getImage(in long width, in long height, in long acquisitionMode, in long numberOfAcquisitions, in float exposureTime);
-    void startExposure();
-    void stopExposure();
-    void startCooler();
-    void stopCooler();
-    long getState();
+	//Struct that contains information about the images being sent
+	//type: The message type
+	//fileName: The name of the file
+	//id: The id of this image in the sequence
+	//total: The total number of images in the sequence
+	struct ncCCDFilename
+	{
+		NCMsgType type;
+		string fileName;
+		long id;
+		long total;
+	};
 
-    readonly attribute ACS::ROdouble actualAirTemperature;
-    readonly attribute ACS::ROdouble actualCCDTemperature;
-    readonly attribute ACS::RWdouble commandedCCDTemperature;
-    readonly attribute ACS::ROstring cameraName;
-    readonly attribute ACS::ROlong cameraModel;
-	readonly attribute ACS::RWstring filterName;
-	readonly attribute ACS::RWstring objectName;
-	readonly attribute ACS::RWstring observerName;
-	readonly attribute ACS::RWdouble exposureTime;
-	readonly attribute ACS::RWlong acquisitionMode;
-	readonly attribute ACS::RWlong numberOfAcquisitions;
-	readonly attribute ACS::RWdouble focalLength;
-	readonly attribute ACS::ROdouble gain;
-	readonly attribute ACS::ROdouble xPixelSize;
-    readonly attribute ACS::ROdouble yPixelSize;
-    readonly attribute ACS::RWlong xStart;
-	readonly attribute ACS::RWlong xEnd;
-    readonly attribute ACS::RWlong yStart;
-    readonly attribute ACS::RWlong yEnd;
-  };
+	//CCD interface
+	interface CCDinterface : ACS::CharacteristicComponent
+	{
+		void on();
+		void off();
+		void resetCamera();
+		//void getImage(in long width, in long height, in long acquisitionMode, in long numberOfAcquisitions, in float exposureTime);
+		void startExposure();
+		void stopExposure();
+		void startCooler();
+		void stopCooler();
+		long getState();
+		
+		//Insert the contents from the generated file "idl_properties.inc" below
+		readonly attribute ACS::ROdouble actualAirTemperature;
+		readonly attribute ACS::ROdouble actualCCDTemperature;
+		readonly attribute ACS::RWdouble commandedCCDTemperature;
+		readonly attribute ACS::ROstring cameraName;
+		readonly attribute ACS::ROlong cameraModel;
+		readonly attribute ACS::RWstring filterName;
+		readonly attribute ACS::RWstring objectName;
+		readonly attribute ACS::RWstring observerName;
+		readonly attribute ACS::RWdouble exposureTime;
+		readonly attribute ACS::RWlong acquisitionMode;
+		readonly attribute ACS::RWlong numberOfAcquisitions;
+		readonly attribute ACS::RWdouble focalLength;
+		readonly attribute ACS::ROdouble gain;
+		readonly attribute ACS::ROdouble xPixelSize;
+		readonly attribute ACS::ROdouble yPixelSize;
+		readonly attribute ACS::RWlong xStart;
+		readonly attribute ACS::RWlong xEnd;
+		readonly attribute ACS::RWlong yStart;
+		readonly attribute ACS::RWlong yEnd;
 
-  //Notification channel supplier interface
-  interface NotificationSupplier : ACS::ACSComponent
-  {
-    void sendNotification(in ncCCDFilename fileEvent) raises (ACSErrTypeCommon::CouldntPerformActionEx);
-  };
+	};
+
+	//Notification channel supplier interface
+	interface NotificationSupplier : ACS::ACSComponent
+	{
+		void sendNotification(in ncCCDFilename fileEvent) raises (ACSErrTypeCommon::CouldntPerformActionEx);
+	};
 };
 
 #endif

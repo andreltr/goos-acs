@@ -14,6 +14,7 @@
 class STRBase {
 protected:
 	std::string* filesQueue;
+	float currentTemp;
 public:
 	STRBase() {
 		filesQueue = 0;
@@ -36,6 +37,11 @@ public:
 
 	virtual void startCooler(float commandedCCDTemp) = 0;
 	virtual void stopCooler() = 0;
+
+	//
+	float getCurrentCCDTemperatue(){
+		return currentTemp;
+	}
 
 };
 #endif
