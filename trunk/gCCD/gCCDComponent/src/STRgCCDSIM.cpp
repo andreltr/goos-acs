@@ -44,7 +44,7 @@ std::string* STRgCCDSIM::getImage(int width, int height, int acquisitionMode,
 			std::stringstream out;
 			out << i;
 			s = out.str();
-			filenames[i] = "capture" + s;
+			filenames[i] = "gCCDSIMimage" + s;
 		}
 		filenames[(int) exposureTime] = "null";
 	} catch (FitsException&) {
@@ -83,7 +83,7 @@ int STRgCCDSIM::writeImage(int frames, int fileCorrelation) {
 		out << fileCorrelation;
 		s = out.str();
 
-		const std::string fileName("gCCDSIM_image_" + s + ".fits");
+		const std::string fileName("!gCCDSIMimage" + s + ".fits");
 		pFits.reset(new FITS(fileName, BYTE_IMG, naxis, naxes));
 	} catch (FITS::CantCreate) {
 		// ... or not, as the case may be.
