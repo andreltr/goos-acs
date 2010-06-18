@@ -6,6 +6,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.LinkedList;
 
 import javax.swing.*;
@@ -368,99 +371,125 @@ public class CodeGenerator extends javax.swing.JFrame {
 	}
 
 	public void generateCodeAction(ActionEvent e) {
-		generateIDL();
-		generateComponentIncludeFile();
-		generateComponenCppFile();
+		try {
+			generateIDL();
+			generateComponentIncludeFile();
+			generateComponenCppFile();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
-	public void generateIDL() {
+	public void generateIDL() throws IOException {
+		BufferedWriter outputStream = new BufferedWriter(new FileWriter(
+				"idl_properties.inc"));
+
 		for (int i = 0; i < propertyNames.size(); i++) {
-			String idl_property = "readonly attribute ACS::";
+			outputStream.write("readonly attribute ACS::");
 
 			switch (propertyRORW.get(i).getSelectedIndex()) {
 			case 0:
-				idl_property += "RO";
+				outputStream.write("RO");
 				break;
 			case 1:
-				idl_property += "RW";
+				outputStream.write("RW");
 				break;
 			}
 
 			switch (propertyTypes.get(i).getSelectedIndex()) {
 			case 0:
-				idl_property += "double ";
+				outputStream.write("double ");
 				break;
 			case 1:
-				idl_property += "long ";
+				outputStream.write("long ");
 				break;
 			case 2:
-				idl_property += "string ";
+				outputStream.write("string ");
 				break;
 			}
 
-			idl_property += propertyNames.get(i).getText() + ";";
-			System.out.println(idl_property);
+			outputStream.write(propertyNames.get(i).getText() + ";");
+			// System.out.println(idl_property);
 		}
+		outputStream.flush();
+		outputStream.close();
 	}
 
-	public void generateComponentIncludeFile() {
+	public void generateComponentIncludeFile() throws IOException {
+		BufferedWriter include_property = new BufferedWriter(new FileWriter(
+				"component_properties.inc"));
+		BufferedWriter prototype_method = new BufferedWriter(new FileWriter(
+				"component_prototypes.inc"));
 		for (int i = 0; i < propertyNames.size(); i++) {
-			String include_property = "SmartPropertyPointer<";
-			String prototype_method = "virtual ACS::";
+			include_property.write("SmartPropertyPointer<");
+			prototype_method.write("virtual ACS::");
 
 			switch (propertyRORW.get(i).getSelectedIndex()) {
 			case 0:
-				include_property += "RO";
-				prototype_method += "RO";
+				include_property.write("RO");
+				prototype_method.write("RO");
 				break;
 			case 1:
-				include_property += "RW";
-				prototype_method += "RW";
+				include_property.write("RW");
+				prototype_method.write("RW");
 				break;
 			}
 
 			switch (propertyTypes.get(i).getSelectedIndex()) {
 			case 0:
-				include_property += "double> ";
-				prototype_method += "double_ptr ";
+				include_property.write("double> ");
+				prototype_method.write("double_ptr ");
 				break;
 			case 1:
-				include_property += "long> ";
-				prototype_method += "long_ptr ";
+				include_property.write("long> ");
+				prototype_method.write("long_ptr ");
 				break;
 			case 2:
-				include_property += "string> ";
-				prototype_method += "string_ptr ";
+				include_property.write("string> ");
+				prototype_method.write("string_ptr ");
 				break;
 			}
 
-			include_property += "m_" + propertyNames.get(i).getText() + "_sp;";
-			prototype_method += propertyNames.get(i).getText() + "() ";
-			prototype_method += "throw (CORBA::SystemException);";
-			System.out.println(include_property);
-			System.out.println(prototype_method);
+			include_property.write("m_" + propertyNames.get(i).getText()
+					+ "_sp;");
+			prototype_method.write(propertyNames.get(i).getText() + "() ");
+			prototype_method.write("throw (CORBA::SystemException);");
+			// System.out.println(include_property);
+			// System.out.println(prototype_method);
 		}
+		include_property.flush();
+		include_property.close();
+		prototype_method.flush();
+		prototype_method.close();
 	}
 
-	public void generateComponenCppFile() {
-		String constructor_parameters = "CCDComponent::CCDComponent(const ACE_CString& name, maci::ContainerServices * containerServices) :CharacteristicComponentImpl(name, containerServices)";
+	public void generateComponenCppFile() throws IOException {
+		BufferedWriter component_constructor = new BufferedWriter(
+				new FileWriter("component_constructor.inc"));
+		BufferedWriter component_methods = new BufferedWriter(new FileWriter(
+				"component_methods.inc"));
+		component_constructor
+				.write("CCDComponent::CCDComponent(const ACE_CString& name, maci::ContainerServices * containerServices) :CharacteristicComponentImpl(name, containerServices)");
+
+		String constructor_properties = "";
 		String ctor_m_r = "";
 		String ctor_m_t = "";
 		for (int i = 0; i < propertyNames.size(); i++) {
-			String constructor_properties = "m_"
-					+ propertyNames.get(i).getText() + "_sp = new ";
-			String constructor_method = "ACS::";
+			constructor_properties += "m_" + propertyNames.get(i).getText()
+					+ "_sp = new ";
+			component_methods.write("ACS::");
 
 			switch (propertyRORW.get(i).getSelectedIndex()) {
 			case 0:
 				constructor_properties += "RO";
 				ctor_m_r = "RO";
-				constructor_method += ctor_m_r;
+				component_methods.write(ctor_m_r);
 				break;
 			case 1:
 				constructor_properties += "RW";
 				ctor_m_r = "RW";
-				constructor_method += ctor_m_r;
+				component_methods.write(ctor_m_r);
 				break;
 			}
 
@@ -468,35 +497,41 @@ public class CodeGenerator extends javax.swing.JFrame {
 			case 0:
 				constructor_properties += "double(name + \":";
 				ctor_m_t = "double";
-				constructor_method += "double_ptr CCDComponent::";
+				component_methods.write("double_ptr CCDComponent::");
 				break;
 			case 1:
 				constructor_properties += "long(name + \":";
 				ctor_m_t = "long";
-				constructor_method += "long_ptr CCDComponent::";
+				component_methods.write("long_ptr CCDComponent::");
 				break;
 			case 2:
 				constructor_properties += "string(name + \":";
 				ctor_m_t = "string";
-				constructor_method += "string_ptr CCDComponent::";
+				component_methods.write("string_ptr CCDComponent::");
 				break;
 			}
 
-			constructor_parameters += ", m_" + propertyNames.get(i).getText()
-					+ "_sp(this)";
+			component_constructor.write(", m_" + propertyNames.get(i).getText()
+					+ "_sp(this)");
 			constructor_properties += propertyNames.get(i).getText()
 					+ "\", getComponent());";
-			constructor_method += propertyNames.get(i).getText()
+			component_methods.write(propertyNames.get(i).getText()
 					+ "() throw (CORBA::SystemException) { if (!m_"
 					+ propertyNames.get(i).getText() + "_sp) { return ACS::"
 					+ ctor_m_r + ctor_m_t + "::_nil(); }ACS::" + ctor_m_r
 					+ ctor_m_t + "_var prop = ACS::" + ctor_m_r + ctor_m_t
 					+ "::_narrow(m_" + propertyNames.get(i).getText()
-					+ "_sp->getCORBAReference()); return prop._retn();	}";
-			System.out.println(constructor_properties);
-			System.out.println(constructor_method);
+					+ "_sp->getCORBAReference()); return prop._retn();	}");
+			// System.out.println(constructor_properties);
+			// System.out.println(constructor_method);
 		}
-		constructor_parameters += "{";
-		System.out.println(constructor_parameters);
+		component_constructor.write("{");
+		component_constructor.write(constructor_properties);
+		component_constructor.write("}");
+		component_constructor.flush();
+		component_constructor.close();
+		component_methods.flush();
+		component_methods.close();
+		// System.out.println(constructor_parameters);
 	}
 }
