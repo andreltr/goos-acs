@@ -14,6 +14,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <pthread.h>
 
 using namespace CCfits;
 
@@ -35,11 +36,13 @@ public:
 	void startCooler(float commandedCCDTemp);
 	void stopCooler();
 
+	//internal functions
 	int writeImage(int frames, int fileCorrelation);
+	//void *simulateTemperature(void *commandedCCDTemp);
 
 private:
-	int iMAGES_WIDTH;
-	int iMAGES_HEIGHT;
+	int IMAGE_WIDTH;
+	int IMAGE_HEIGHT;
 };
 
 #endif

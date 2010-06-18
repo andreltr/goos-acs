@@ -6,7 +6,7 @@
  */
 
 STRgCCDSIM::STRgCCDSIM() {
-
+	currentTemp = 0;
 }
 
 STRgCCDSIM::~STRgCCDSIM() {
@@ -29,8 +29,8 @@ void STRgCCDSIM::resetCamera() {
 std::string* STRgCCDSIM::getImage(int width, int height, int acquisitionMode,
 		int numberOfAcquisitions, float exposureTime) {
 
-	iMAGES_WIDTH = width;
-	iMAGES_HEIGHT = height;
+	IMAGE_WIDTH = width;
+	IMAGE_HEIGHT = height;
 
 	FITS::setVerboseMode(true);
 
@@ -58,6 +58,14 @@ void STRgCCDSIM::stopExposure() {
 
 }
 
+void STRgCCDSIM::startCooler(float commandedCCDTemp) {
+	return;
+}
+
+void STRgCCDSIM::stopCooler() {
+	return;
+}
+
 int STRgCCDSIM::writeImage(int frames, int fileCorrelation) {
 
 	frames--;
@@ -65,7 +73,7 @@ int STRgCCDSIM::writeImage(int frames, int fileCorrelation) {
 		frames = 0;
 
 	long naxis = 2;
-	long naxes[2] = { iMAGES_WIDTH, iMAGES_HEIGHT };
+	long naxes[2] = { IMAGE_WIDTH, IMAGE_HEIGHT };
 
 	std::auto_ptr<FITS> pFits(0);
 
@@ -75,7 +83,7 @@ int STRgCCDSIM::writeImage(int frames, int fileCorrelation) {
 		out << fileCorrelation;
 		s = out.str();
 
-		const std::string fileName("!capture" + s + ".fits");
+		const std::string fileName("gCCDSIM_image_" + s + ".fits");
 		pFits.reset(new FITS(fileName, BYTE_IMG, naxis, naxes));
 	} catch (FITS::CantCreate) {
 		// ... or not, as the case may be.
@@ -99,8 +107,8 @@ int STRgCCDSIM::writeImage(int frames, int fileCorrelation) {
 		s = out.str();
 
 		std::vector<long> extAx(2, 0);
-		extAx.front() = iMAGES_WIDTH;
-		extAx.back() = iMAGES_HEIGHT;
+		extAx.front() = IMAGE_WIDTH;
+		extAx.back() = IMAGE_HEIGHT;
 
 		string newName("NEW-EXTENSION-" + s);
 
@@ -144,11 +152,25 @@ int STRgCCDSIM::writeImage(int frames, int fileCorrelation) {
 	return 0;
 }
 
-void STRgCCDSIM::startCooler(float commandedCCDTemp) {
-	return;
-}
+/*void *STRgCCDSIM::simulateTemperature(void *commandedCCDTemp) {
+ float modifier = 0;
 
-void STRgCCDSIM::stopCooler() {
-	return;
-}
+ float *commandedTemp = static_cast<float*> (commandedCCDTemp);
+
+ if (currentTemp > *commandedTemp) {
+ modifier = -1.3;
+ } else {
+ modifier = 1.3;
+ }
+
+ clock_t endwait;
+ endwait = clock() + 20 * CLOCKS_PER_SEC;
+ while (clock() < endwait) {
+ currentTemp += modifier;
+ }
+
+ currentTemp = *commandedTemp;
+
+ pthread_exit(0);
+ }*/
 
