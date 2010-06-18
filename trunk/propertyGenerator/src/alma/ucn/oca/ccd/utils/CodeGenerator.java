@@ -1,9 +1,11 @@
 package alma.ucn.oca.ccd.utils;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
@@ -312,6 +314,23 @@ public class CodeGenerator extends javax.swing.JFrame {
 		propertyRORWLabels.add(new JLabel("RO/RW:"));
 		propertyRORW.add(new JComboBox(new DefaultComboBoxModel(new String[] {
 				"Read only", "Read write" })));
+		
+		int w = 150;
+		int h = 15;
+
+		propertyNameLabels.getLast().setPreferredSize(new Dimension(w, h));
+		propertyNames.getLast().setPreferredSize(new Dimension(w, h));
+		propertyTypeLabels.getLast().setPreferredSize(new Dimension(w, h));
+		propertyTypes.getLast().setPreferredSize(new Dimension(w, h));
+		propertyRORWLabels.getLast().setPreferredSize(new Dimension(w, h));
+		propertyRORW.getLast().setPreferredSize(new Dimension(w, h));
+
+		propertyNameLabels.getLast().setSize(new Dimension(w, h));
+		propertyNames.getLast().setSize(new Dimension(w, h));
+		propertyTypeLabels.getLast().setSize(new Dimension(w, h));
+		propertyTypes.getLast().setSize(new Dimension(w, h));
+		propertyRORWLabels.getLast().setSize(new Dimension(w, h));
+		propertyRORW.getLast().setSize(new Dimension(w, h));
 	}
 
 	public void removeProperty() {
@@ -351,7 +370,7 @@ public class CodeGenerator extends javax.swing.JFrame {
 		jPanelPropertyRORWLabels.add(propertyRORWLabels.getLast());
 		jPanelPropertyRORW.add(propertyRORW.getLast());
 
-		jPanel1.validate();
+		pack();
 	}
 
 	public void removePropertyAction(ActionEvent e) {
@@ -366,6 +385,8 @@ public class CodeGenerator extends javax.swing.JFrame {
 				removeProperty();
 
 				jPanel1.validate();
+
+				pack();
 			}
 		}
 	}
