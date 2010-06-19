@@ -9,7 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -35,13 +37,11 @@ public class CodeGenerator extends javax.swing.JFrame {
 
 	private JMenuItem helpMenuItem;
 	private JMenu jMenu5;
-	private JSeparator jSeparator1;
 	private JMenuItem removePropertyMenuItem;
 	private JMenuItem addPropertyMenuItem;
 	private JMenu jMenu4;
 	private JMenuItem exitMenuItem;
 	private JSeparator jSeparator2;
-	private JMenuItem saveAsMenuItem;
 	private JMenuItem generateMenuItem;
 	private JMenuItem saveMenuItem;
 	private JMenuItem openFileMenuItem;
@@ -99,21 +99,35 @@ public class CodeGenerator extends javax.swing.JFrame {
 						newFileMenuItem = new JMenuItem();
 						jMenu3.add(newFileMenuItem);
 						newFileMenuItem.setText("New");
+						newFileMenuItem.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								newCodeAction(e);
+							}
+						});
 					}
 					{
 						openFileMenuItem = new JMenuItem();
 						jMenu3.add(openFileMenuItem);
 						openFileMenuItem.setText("Open");
+						openFileMenuItem
+								.addActionListener(new ActionListener() {
+									@Override
+									public void actionPerformed(ActionEvent e) {
+										openCodeAction(e);
+									}
+								});
 					}
 					{
 						saveMenuItem = new JMenuItem();
 						jMenu3.add(saveMenuItem);
 						saveMenuItem.setText("Save");
-					}
-					{
-						saveAsMenuItem = new JMenuItem();
-						jMenu3.add(saveAsMenuItem);
-						saveAsMenuItem.setText("Save As ...");
+						saveMenuItem.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								saveCodeAction(e);
+							}
+						});
 					}
 					{
 						generateMenuItem = new JMenuItem();
@@ -135,6 +149,12 @@ public class CodeGenerator extends javax.swing.JFrame {
 						exitMenuItem = new JMenuItem();
 						jMenu3.add(exitMenuItem);
 						exitMenuItem.setText("Exit");
+						exitMenuItem.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								System.exit(0);
+							}
+						});
 					}
 				}
 				{
@@ -164,10 +184,6 @@ public class CodeGenerator extends javax.swing.JFrame {
 										removePropertyAction(e);
 									}
 								});
-					}
-					{
-						jSeparator1 = new JSeparator();
-						jMenu4.add(jSeparator1);
 					}
 				}
 				{
@@ -317,7 +333,7 @@ public class CodeGenerator extends javax.swing.JFrame {
 		propertyRORWLabels.add(new JLabel("RO/RW:"));
 		propertyRORW.add(new JComboBox(new DefaultComboBoxModel(new String[] {
 				"Read only", "Read write" })));
-		
+
 		int w = 150;
 		int h = 15;
 
@@ -394,6 +410,165 @@ public class CodeGenerator extends javax.swing.JFrame {
 		}
 	}
 
+	public void newCodeAction(ActionEvent e) {
+		if (propertyNameLabels != null) {
+			propertyNameLabels = null;
+		}
+		if (propertyNames != null) {
+			propertyNames = null;
+		}
+		if (propertyTypeLabels != null) {
+			propertyTypeLabels = null;
+		}
+		if (propertyTypes != null) {
+			propertyTypes = null;
+		}
+		if (propertyRORWLabels != null) {
+			propertyRORWLabels = null;
+		}
+		if (propertyRORW != null) {
+			propertyRORW = null;
+		}
+
+		jPanelPropertyNameLabels.removeAll();
+		jPanelPropertyNames.removeAll();
+		jPanelPropertyTypeLabels.removeAll();
+		jPanelPropertyTypes.removeAll();
+		jPanelPropertyRORWLabels.removeAll();
+		jPanelPropertyRORW.removeAll();
+
+		pack();
+	}
+
+	public void openCodeAction(ActionEvent e) {
+		newCodeAction(e);
+
+		try {
+			BufferedReader properties = new BufferedReader(new FileReader(
+					"properties.prop"));
+
+			if (propertyNameLabels == null) {
+				propertyNameLabels = new LinkedList<JLabel>();
+			}
+			if (propertyNames == null) {
+				propertyNames = new LinkedList<JTextField>();
+			}
+			if (propertyTypeLabels == null) {
+				propertyTypeLabels = new LinkedList<JLabel>();
+			}
+			if (propertyTypes == null) {
+				propertyTypes = new LinkedList<JComboBox>();
+			}
+			if (propertyRORWLabels == null) {
+				propertyRORWLabels = new LinkedList<JLabel>();
+			}
+			if (propertyRORW == null) {
+				propertyRORW = new LinkedList<JComboBox>();
+			}
+
+			String s = properties.readLine();
+
+			int w = 150;
+			int h = 15;
+
+			while (!s.equals("---")) {
+				propertyNameLabels.add(new JLabel("Property name:"));
+				propertyNames.add(new JTextField(s));
+
+				propertyNameLabels.getLast().setPreferredSize(
+						new Dimension(w, h));
+				propertyNames.getLast().setPreferredSize(new Dimension(w, h));
+
+				propertyNameLabels.getLast().setSize(new Dimension(w, h));
+				propertyNames.getLast().setSize(new Dimension(w, h));
+
+				s = properties.readLine();
+			}
+			s = properties.readLine();
+			while (!s.equals("---")) {
+				propertyTypeLabels.add(new JLabel("Type:"));
+				propertyTypes.add(new JComboBox(new String[] { "Double",
+						"Long", "String" }));
+				propertyTypes.getLast().setSelectedIndex(new Integer(s));
+
+				propertyTypeLabels.getLast().setPreferredSize(
+						new Dimension(w, h));
+				propertyTypes.getLast().setPreferredSize(new Dimension(w, h));
+
+				propertyTypeLabels.getLast().setSize(new Dimension(w, h));
+				propertyTypes.getLast().setSize(new Dimension(w, h));
+
+				s = properties.readLine();
+			}
+			s = properties.readLine();
+			while (!s.equals("---")) {
+				propertyRORWLabels.add(new JLabel("RO/RW:"));
+				propertyRORW.add(new JComboBox(new DefaultComboBoxModel(
+						new String[] { "Read only", "Read write" })));
+				propertyRORW.getLast().setSelectedIndex(new Integer(s));
+
+				propertyRORWLabels.getLast().setPreferredSize(
+						new Dimension(w, h));
+				propertyRORW.getLast().setPreferredSize(new Dimension(w, h));
+
+				propertyRORWLabels.getLast().setSize(new Dimension(w, h));
+				propertyRORW.getLast().setSize(new Dimension(w, h));
+
+				s = properties.readLine();
+			}
+
+			properties.close();
+
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		for (int i = 0; i < propertyNames.size(); i++) {
+			jPanelPropertyNameLabels.add(propertyNameLabels.get(i));
+			jPanelPropertyNames.add(propertyNames.get(i));
+			jPanelPropertyTypeLabels.add(propertyTypeLabels.get(i));
+			jPanelPropertyTypes.add(propertyTypes.get(i));
+			jPanelPropertyRORWLabels.add(propertyRORWLabels.get(i));
+			jPanelPropertyRORW.add(propertyRORW.get(i));
+		}
+		pack();
+	}
+
+	public void saveCodeAction(ActionEvent e) {
+
+		if (propertyNames != null) {
+			try {
+				BufferedWriter properties = new BufferedWriter(new FileWriter(
+						"properties.prop"));
+				for (JTextField j : propertyNames) {
+					properties.write(j.getText());
+					properties.newLine();
+				}
+				properties.write("---");
+				properties.newLine();
+				for (JComboBox j : propertyTypes) {
+					properties.write("" + j.getSelectedIndex());
+					properties.newLine();
+				}
+				properties.write("---");
+				properties.newLine();
+				for (JComboBox j : propertyRORW) {
+					properties.write("" + j.getSelectedIndex());
+					properties.newLine();
+				}
+				properties.write("---");
+				properties.newLine();
+
+				properties.close();
+
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
+
 	public void generateCodeAction(ActionEvent e) {
 		try {
 			generateIDL();
@@ -406,89 +581,87 @@ public class CodeGenerator extends javax.swing.JFrame {
 	}
 
 	public void generateIDL() throws IOException {
-		BufferedWriter outputStream = new BufferedWriter(new FileWriter(
+		BufferedWriter idl_properties = new BufferedWriter(new FileWriter(
 				"idl_properties.inc"));
 
 		for (int i = 0; i < propertyNames.size(); i++) {
-			outputStream.write("readonly attribute ACS::");
+			idl_properties.write("readonly attribute ACS::");
 
 			switch (propertyRORW.get(i).getSelectedIndex()) {
 			case 0:
-				outputStream.write("RO");
+				idl_properties.write("RO");
 				break;
 			case 1:
-				outputStream.write("RW");
+				idl_properties.write("RW");
 				break;
 			}
 
 			switch (propertyTypes.get(i).getSelectedIndex()) {
 			case 0:
-				outputStream.write("double ");
+				idl_properties.write("double ");
 				break;
 			case 1:
-				outputStream.write("long ");
+				idl_properties.write("long ");
 				break;
 			case 2:
-				outputStream.write("string ");
+				idl_properties.write("string ");
 				break;
 			}
 
-			outputStream.write(propertyNames.get(i).getText() + ";");
-			// System.out.println(idl_property);
+			idl_properties.write(propertyNames.get(i).getText() + ";");
+			idl_properties.newLine();
 		}
-		outputStream.newLine();
-		outputStream.flush();
-		outputStream.close();
+		idl_properties.flush();
+		idl_properties.close();
 	}
 
 	public void generateComponentIncludeFile() throws IOException {
-		BufferedWriter include_property = new BufferedWriter(new FileWriter(
-				"component_properties.inc"));
-		BufferedWriter prototype_method = new BufferedWriter(new FileWriter(
-				"component_prototypes.inc"));
+		BufferedWriter component_properties = new BufferedWriter(
+				new FileWriter("component_properties.inc"));
+		BufferedWriter component_prototypes = new BufferedWriter(
+				new FileWriter("component_prototypes.inc"));
 		for (int i = 0; i < propertyNames.size(); i++) {
-			include_property.write("SmartPropertyPointer<");
-			prototype_method.write("virtual ACS::");
+			component_properties.write("SmartPropertyPointer<");
+			component_prototypes.write("virtual ACS::");
 
 			switch (propertyRORW.get(i).getSelectedIndex()) {
 			case 0:
-				include_property.write("RO");
-				prototype_method.write("RO");
+				component_properties.write("RO");
+				component_prototypes.write("RO");
 				break;
 			case 1:
-				include_property.write("RW");
-				prototype_method.write("RW");
+				component_properties.write("RW");
+				component_prototypes.write("RW");
 				break;
 			}
 
 			switch (propertyTypes.get(i).getSelectedIndex()) {
 			case 0:
-				include_property.write("double> ");
-				prototype_method.write("double_ptr ");
+				component_properties.write("double> ");
+				component_prototypes.write("double_ptr ");
 				break;
 			case 1:
-				include_property.write("long> ");
-				prototype_method.write("long_ptr ");
+				component_properties.write("long> ");
+				component_prototypes.write("long_ptr ");
 				break;
 			case 2:
-				include_property.write("string> ");
-				prototype_method.write("string_ptr ");
+				component_properties.write("string> ");
+				component_prototypes.write("string_ptr ");
 				break;
 			}
 
-			include_property.write("m_" + propertyNames.get(i).getText()
+			component_properties.write("m_" + propertyNames.get(i).getText()
 					+ "_sp;");
-			prototype_method.write(propertyNames.get(i).getText() + "() ");
-			prototype_method.write("throw (CORBA::SystemException);");
-			// System.out.println(include_property);
-			// System.out.println(prototype_method);
+			component_properties.newLine();
+
+			component_prototypes.write(propertyNames.get(i).getText() + "() ");
+			component_prototypes.write("throw (CORBA::SystemException);");
+			component_prototypes.newLine();
 		}
-		include_property.newLine();
-		include_property.flush();
-		include_property.close();
-		prototype_method.newLine();
-		prototype_method.flush();
-		prototype_method.close();
+		component_properties.flush();
+		component_properties.close();
+		component_prototypes.flush();
+		component_prototypes.close();
 	}
 
 	public void generateComponenCppFile() throws IOException {
@@ -497,13 +670,15 @@ public class CodeGenerator extends javax.swing.JFrame {
 		BufferedWriter component_methods = new BufferedWriter(new FileWriter(
 				"component_methods.inc"));
 		component_constructor
-				.write("CCDComponent::CCDComponent(const ACE_CString& name, maci::ContainerServices * containerServices) :CharacteristicComponentImpl(name, containerServices)");
+				.write("CCDComponent::CCDComponent(const ACE_CString& name,\n"
+						+ "\t\tmaci::ContainerServices * containerServices) :\n"
+						+ "\tCharacteristicComponentImpl(name, containerServices)\n");
 
 		String constructor_properties = "";
 		String ctor_m_r = "";
 		String ctor_m_t = "";
 		for (int i = 0; i < propertyNames.size(); i++) {
-			constructor_properties += "m_" + propertyNames.get(i).getText()
+			constructor_properties += "\tm_" + propertyNames.get(i).getText()
 					+ "_sp = new ";
 			component_methods.write("ACS::");
 
@@ -538,32 +713,32 @@ public class CodeGenerator extends javax.swing.JFrame {
 				break;
 			}
 
-			component_constructor.write(", m_" + propertyNames.get(i).getText()
-					+ "_sp(this)");
+			component_constructor.write("\t\t\t, m_"
+					+ propertyNames.get(i).getText() + "_sp(this)\n");
 			constructor_properties += propertyNames.get(i).getText()
-					+ "\", getComponent());";
-			component_methods.write(propertyNames.get(i).getText()
-					+ "() throw (CORBA::SystemException) { if (!m_"
-					+ propertyNames.get(i).getText() + "_sp) { return ACS::"
-					+ ctor_m_r + ctor_m_t + "::_nil(); }ACS::" + ctor_m_r
-					+ ctor_m_t + "_var prop = ACS::" + ctor_m_r + ctor_m_t
-					+ "::_narrow(m_" + propertyNames.get(i).getText()
-					+ "_sp->getCORBAReference()); return prop._retn();	}");
-			// System.out.println(constructor_properties);
-			// System.out.println(constructor_method);
+					+ "\", getComponent());\n";
+
+			component_methods.write(propertyNames.get(i).getText() + "()\n"
+					+ "\t\tthrow (CORBA::SystemException) {\n" + "\tif (!m_"
+					+ propertyNames.get(i).getText() + "_sp) {\n"
+					+ "\t\treturn ACS::" + ctor_m_r + ctor_m_t + "::_nil();\n"
+					+ "\t}\n" + "\tACS::" + ctor_m_r + ctor_m_t
+					+ "_var prop = ACS::" + ctor_m_r + ctor_m_t
+					+ "::_narrow(\n" + "\t\t\tm_"
+					+ propertyNames.get(i).getText()
+					+ "_sp->getCORBAReference());\n"
+					+ "\treturn prop._retn();\n" + "}\n\n");
 		}
-		component_constructor.write("{");
+		component_constructor.write("{\n");
 		component_constructor.write(constructor_properties);
 		component_constructor.write("}");
 		component_constructor.newLine();
 		component_constructor.flush();
 		component_constructor.close();
-		component_methods.newLine();
 		component_methods.flush();
 		component_methods.close();
-		// System.out.println(constructor_parameters);
 	}
-	
+
 	private static class WindowCloseManager extends WindowAdapter {
 		public void windowClosing(WindowEvent evt) {
 			System.exit(0);
