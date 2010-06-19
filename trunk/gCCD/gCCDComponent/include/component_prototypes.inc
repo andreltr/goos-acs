@@ -1,7 +1,6 @@
 virtual ACS::ROdouble_ptr actualAirTemperature() throw (CORBA::SystemException);
 virtual ACS::ROdouble_ptr actualCCDTemperature() throw (CORBA::SystemException);
-virtual ACS::RWdouble_ptr commandedCCDTemperature()
-		throw (CORBA::SystemException);
+virtual ACS::RWdouble_ptr commandedCCDTemperature() throw (CORBA::SystemException);
 virtual ACS::ROstring_ptr cameraName() throw (CORBA::SystemException);
 virtual ACS::ROlong_ptr cameraModel() throw (CORBA::SystemException);
 virtual ACS::RWstring_ptr filterName() throw (CORBA::SystemException);

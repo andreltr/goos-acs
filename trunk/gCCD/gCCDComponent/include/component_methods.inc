@@ -7,6 +7,7 @@ ACS::ROdouble_ptr CCDComponent::actualAirTemperature()
 			m_actualAirTemperature_sp->getCORBAReference());
 	return prop._retn();
 }
+
 ACS::ROdouble_ptr CCDComponent::actualCCDTemperature()
 		throw (CORBA::SystemException) {
 	if (!m_actualCCDTemperature_sp) {
@@ -16,6 +17,7 @@ ACS::ROdouble_ptr CCDComponent::actualCCDTemperature()
 			m_actualCCDTemperature_sp->getCORBAReference());
 	return prop._retn();
 }
+
 ACS::RWdouble_ptr CCDComponent::commandedCCDTemperature()
 		throw (CORBA::SystemException) {
 	if (!m_commandedCCDTemperature_sp) {
@@ -25,7 +27,9 @@ ACS::RWdouble_ptr CCDComponent::commandedCCDTemperature()
 			m_commandedCCDTemperature_sp->getCORBAReference());
 	return prop._retn();
 }
-ACS::ROstring_ptr CCDComponent::cameraName() throw (CORBA::SystemException) {
+
+ACS::ROstring_ptr CCDComponent::cameraName()
+		throw (CORBA::SystemException) {
 	if (!m_cameraName_sp) {
 		return ACS::ROstring::_nil();
 	}
@@ -33,7 +37,9 @@ ACS::ROstring_ptr CCDComponent::cameraName() throw (CORBA::SystemException) {
 			m_cameraName_sp->getCORBAReference());
 	return prop._retn();
 }
-ACS::ROlong_ptr CCDComponent::cameraModel() throw (CORBA::SystemException) {
+
+ACS::ROlong_ptr CCDComponent::cameraModel()
+		throw (CORBA::SystemException) {
 	if (!m_cameraModel_sp) {
 		return ACS::ROlong::_nil();
 	}
@@ -41,7 +47,9 @@ ACS::ROlong_ptr CCDComponent::cameraModel() throw (CORBA::SystemException) {
 			m_cameraModel_sp->getCORBAReference());
 	return prop._retn();
 }
-ACS::RWstring_ptr CCDComponent::filterName() throw (CORBA::SystemException) {
+
+ACS::RWstring_ptr CCDComponent::filterName()
+		throw (CORBA::SystemException) {
 	if (!m_filterName_sp) {
 		return ACS::RWstring::_nil();
 	}
@@ -49,7 +57,9 @@ ACS::RWstring_ptr CCDComponent::filterName() throw (CORBA::SystemException) {
 			m_filterName_sp->getCORBAReference());
 	return prop._retn();
 }
-ACS::RWstring_ptr CCDComponent::objectName() throw (CORBA::SystemException) {
+
+ACS::RWstring_ptr CCDComponent::objectName()
+		throw (CORBA::SystemException) {
 	if (!m_objectName_sp) {
 		return ACS::RWstring::_nil();
 	}
@@ -57,7 +67,9 @@ ACS::RWstring_ptr CCDComponent::objectName() throw (CORBA::SystemException) {
 			m_objectName_sp->getCORBAReference());
 	return prop._retn();
 }
-ACS::RWstring_ptr CCDComponent::observerName() throw (CORBA::SystemException) {
+
+ACS::RWstring_ptr CCDComponent::observerName()
+		throw (CORBA::SystemException) {
 	if (!m_observerName_sp) {
 		return ACS::RWstring::_nil();
 	}
@@ -65,7 +77,9 @@ ACS::RWstring_ptr CCDComponent::observerName() throw (CORBA::SystemException) {
 			m_observerName_sp->getCORBAReference());
 	return prop._retn();
 }
-ACS::RWdouble_ptr CCDComponent::exposureTime() throw (CORBA::SystemException) {
+
+ACS::RWdouble_ptr CCDComponent::exposureTime()
+		throw (CORBA::SystemException) {
 	if (!m_exposureTime_sp) {
 		return ACS::RWdouble::_nil();
 	}
@@ -73,7 +87,9 @@ ACS::RWdouble_ptr CCDComponent::exposureTime() throw (CORBA::SystemException) {
 			m_exposureTime_sp->getCORBAReference());
 	return prop._retn();
 }
-ACS::RWlong_ptr CCDComponent::acquisitionMode() throw (CORBA::SystemException) {
+
+ACS::RWlong_ptr CCDComponent::acquisitionMode()
+		throw (CORBA::SystemException) {
 	if (!m_acquisitionMode_sp) {
 		return ACS::RWlong::_nil();
 	}
@@ -81,6 +97,7 @@ ACS::RWlong_ptr CCDComponent::acquisitionMode() throw (CORBA::SystemException) {
 			m_acquisitionMode_sp->getCORBAReference());
 	return prop._retn();
 }
+
 ACS::RWlong_ptr CCDComponent::numberOfAcquisitions()
 		throw (CORBA::SystemException) {
 	if (!m_numberOfAcquisitions_sp) {
@@ -90,7 +107,9 @@ ACS::RWlong_ptr CCDComponent::numberOfAcquisitions()
 			m_numberOfAcquisitions_sp->getCORBAReference());
 	return prop._retn();
 }
-ACS::RWdouble_ptr CCDComponent::focalLength() throw (CORBA::SystemException) {
+
+ACS::RWdouble_ptr CCDComponent::focalLength()
+		throw (CORBA::SystemException) {
 	if (!m_focalLength_sp) {
 		return ACS::RWdouble::_nil();
 	}
@@ -98,7 +117,9 @@ ACS::RWdouble_ptr CCDComponent::focalLength() throw (CORBA::SystemException) {
 			m_focalLength_sp->getCORBAReference());
 	return prop._retn();
 }
-ACS::ROdouble_ptr CCDComponent::gain() throw (CORBA::SystemException) {
+
+ACS::ROdouble_ptr CCDComponent::gain()
+		throw (CORBA::SystemException) {
 	if (!m_gain_sp) {
 		return ACS::ROdouble::_nil();
 	}
@@ -106,7 +127,9 @@ ACS::ROdouble_ptr CCDComponent::gain() throw (CORBA::SystemException) {
 			m_gain_sp->getCORBAReference());
 	return prop._retn();
 }
-ACS::ROdouble_ptr CCDComponent::xPixelSize() throw (CORBA::SystemException) {
+
+ACS::ROdouble_ptr CCDComponent::xPixelSize()
+		throw (CORBA::SystemException) {
 	if (!m_xPixelSize_sp) {
 		return ACS::ROdouble::_nil();
 	}
@@ -114,7 +137,9 @@ ACS::ROdouble_ptr CCDComponent::xPixelSize() throw (CORBA::SystemException) {
 			m_xPixelSize_sp->getCORBAReference());
 	return prop._retn();
 }
-ACS::ROdouble_ptr CCDComponent::yPixelSize() throw (CORBA::SystemException) {
+
+ACS::ROdouble_ptr CCDComponent::yPixelSize()
+		throw (CORBA::SystemException) {
 	if (!m_yPixelSize_sp) {
 		return ACS::ROdouble::_nil();
 	}
@@ -122,7 +147,9 @@ ACS::ROdouble_ptr CCDComponent::yPixelSize() throw (CORBA::SystemException) {
 			m_yPixelSize_sp->getCORBAReference());
 	return prop._retn();
 }
-ACS::RWlong_ptr CCDComponent::xStart() throw (CORBA::SystemException) {
+
+ACS::RWlong_ptr CCDComponent::xStart()
+		throw (CORBA::SystemException) {
 	if (!m_xStart_sp) {
 		return ACS::RWlong::_nil();
 	}
@@ -130,14 +157,19 @@ ACS::RWlong_ptr CCDComponent::xStart() throw (CORBA::SystemException) {
 			m_xStart_sp->getCORBAReference());
 	return prop._retn();
 }
-ACS::RWlong_ptr CCDComponent::xEnd() throw (CORBA::SystemException) {
+
+ACS::RWlong_ptr CCDComponent::xEnd()
+		throw (CORBA::SystemException) {
 	if (!m_xEnd_sp) {
 		return ACS::RWlong::_nil();
 	}
-	ACS::RWlong_var prop = ACS::RWlong::_narrow(m_xEnd_sp->getCORBAReference());
+	ACS::RWlong_var prop = ACS::RWlong::_narrow(
+			m_xEnd_sp->getCORBAReference());
 	return prop._retn();
 }
-ACS::RWlong_ptr CCDComponent::yStart() throw (CORBA::SystemException) {
+
+ACS::RWlong_ptr CCDComponent::yStart()
+		throw (CORBA::SystemException) {
 	if (!m_yStart_sp) {
 		return ACS::RWlong::_nil();
 	}
@@ -145,10 +177,14 @@ ACS::RWlong_ptr CCDComponent::yStart() throw (CORBA::SystemException) {
 			m_yStart_sp->getCORBAReference());
 	return prop._retn();
 }
-ACS::RWlong_ptr CCDComponent::yEnd() throw (CORBA::SystemException) {
+
+ACS::RWlong_ptr CCDComponent::yEnd()
+		throw (CORBA::SystemException) {
 	if (!m_yEnd_sp) {
 		return ACS::RWlong::_nil();
 	}
-	ACS::RWlong_var prop = ACS::RWlong::_narrow(m_yEnd_sp->getCORBAReference());
+	ACS::RWlong_var prop = ACS::RWlong::_narrow(
+			m_yEnd_sp->getCORBAReference());
 	return prop._retn();
 }
+
