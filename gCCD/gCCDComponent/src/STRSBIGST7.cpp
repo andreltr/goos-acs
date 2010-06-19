@@ -1,5 +1,5 @@
 #include "STRSBIGST7.h"
-#define IP_ADDRESS	0xC0A8010C
+#define IP_ADRESS	0xC0A8010C
 
 /*
  *
@@ -8,18 +8,12 @@
  */
 
 STRSBIGST7::STRSBIGST7() {
-	p_Cam = 0;
-	p_Img = 0;
 
 }
 
 STRSBIGST7::~STRSBIGST7() {
-	if (p_Cam != 0) {
-		delete p_Cam;
-	}
-	if (p_Img != 0) {
-		delete p_Img;
-	}
+	delete p_Cam;
+	delete p_Img;
 
 }
 
@@ -41,6 +35,21 @@ std::string* STRSBIGST7::getImage(int width, int height, int acquisitionMode,
 
 	initialize();
 	p_Img = new CSBIGImg;
+
+	/*
+	 * set exposure time before acquire image
+	 */
+	p_Cam->SetExposureTime((double) exposureTime);
+
+	/*
+	 * Acquires an entire image. Allocates the image buffer and acquires the
+	 * image from the active CCD using the set readout mode, exposure, etc.
+	 * It is a high-level exposure command.
+	 *
+	 * TODO: test high level asynchronous acquiring
+	 * p_Cam->GrabSetup(p_Img, SBDF_LIGHT_ONLY);
+	 * p_Cam->GrabMain(p_Img, SBDF_LIGHT_ONLY);
+	 */
 	p_Cam->GrabImage(p_Img, SBDF_LIGHT_ONLY);
 	p_Img->AutoBackgroundAndRange();
 	p_Img->SaveImage("img1.fits", SBIF_FITS);
@@ -55,20 +64,13 @@ std::string* STRSBIGST7::getImage(int width, int height, int acquisitionMode,
 }
 
 void STRSBIGST7::stopExposure() {
+	p_Cam->EndExposure();
 
-}
-
-void STRSBIGST7::startCooler(float commandedCCDTemp) {
-	return;
-}
-
-void STRSBIGST7::stopCooler() {
-	return;
 }
 
 void STRSBIGST7::initialize() {
 	this->odp.deviceType = DEV_ETH;
-	this->odp.ipAddress = IP_ADDRESS;
+	this->odp.ipAddress = IP_ADRESS;
 	p_Cam = new CSBIGCam(odp);
 	p_Cam->EstablishLink();
 }
