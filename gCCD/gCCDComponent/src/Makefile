@@ -105,16 +105,16 @@ LIBRARIES_L     =
 # <brief description of lllll library>
 CCDComponent_OBJECTS   = CCD \
 			BDTThread \
-			CCDStatesImpl/CCDContext \
-			CCDStatesImpl/CCDState \
-			CCDStatesImpl/CCDStateConnectedOff \
-			CCDStatesImpl/CCDStateConnectedOn \
-			CCDStatesImpl/CCDStateDisconnected \
-			CCDStatesImpl/CCDStateAcquiring \
-			STRModelsImpl/STRContext \
-			STRModelsImpl/STRLucaEMCCD \
-			STRModelsImpl/STRgCCDSIM \
-			STRModelsImpl/STRSBIGST7 \
+			CCDContext \
+			CCDState \
+			CCDStateConnectedOff \
+			CCDStateConnectedOn \
+			CCDStateDisconnected \
+			CCDStateAcquiring \
+			STRContext \
+			STRLucaEMCCD \
+			STRgCCDSIM \
+			STRSBIGST7 \
 			csbigcam \
 			csbigimg \
 			Observer \
@@ -152,7 +152,7 @@ pppppp_MODULES	   =
 # <brief description of tttttt tcl-script>
 tttttt_OBJECTS  =
 tttttt_TCLSH    = 
-#CCDComponent_LIBS     = CCDComponentStubs
+tttttt_LIBS     = 
 
 #
 # TCL libraries (public and local)
