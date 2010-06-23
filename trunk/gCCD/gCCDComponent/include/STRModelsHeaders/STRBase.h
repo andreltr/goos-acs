@@ -6,18 +6,22 @@
 #endif
 
 #include <iostream>
+#include "ComponentProperties.h"
+#include "Observer.h"
 
 /**
  * Abstract base class for the Strategy Pattern
  */
 
-class STRBase {
+class STRBase: public Observer {
 protected:
 	std::string* filesQueue;
 	float currentTemp;
+	ComponentProperties *componentProperties;
 public:
 	STRBase() {
 		filesQueue = 0;
+		componentProperties = 0;
 	};
 
 	virtual ~STRBase() {
@@ -30,18 +34,22 @@ public:
 	virtual void off() = 0;
 	virtual void resetCamera() = 0;
 
-	virtual std::string* getImage(int width, int height, int acquisitionMode,
-			int numberOfAcquisitions, float exposureTime) = 0;
-
+	virtual std::string* startExposure() = 0;
 	virtual void stopExposure() = 0;
 
-	virtual void startCooler(float commandedCCDTemp) = 0;
+	virtual void startCooler() = 0;
 	virtual void stopCooler() = 0;
 
 	//
-	float getCurrentCCDTemperatue(){
+	float getCurrentCCDTemperatue() {
 		return currentTemp;
 	}
 
+	virtual void update()=0;
+
+	void setComponentProperties(Observable *observable) {
+		componentProperties = (ComponentProperties*) observable;
+		setObservable(componentProperties);
+	}
 };
 #endif

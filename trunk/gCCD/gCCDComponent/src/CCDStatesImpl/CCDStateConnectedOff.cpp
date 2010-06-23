@@ -1,4 +1,4 @@
-#include "CCDStateConnectedOff.h"
+#include "CCDStatesHeaders/CCDStateConnectedOff.h"
 #include <iostream>
 #include "CCD.h"
 
@@ -14,6 +14,10 @@ CCDStateConnectedOff::CCDStateConnectedOff(CCDComponent * ccd) :
 
 CCDStateConnectedOff::~CCDStateConnectedOff() {
 
+}
+
+int CCDStateConnectedOff::getState() {
+	return STATE_CONNECTED_COOLER_OFF;
 }
 
 void CCDStateConnectedOff::on() {
@@ -33,28 +37,27 @@ void CCDStateConnectedOff::resetCamera() {
 	return;
 }
 
-std::string* CCDStateConnectedOff::getImage(int width, int height,
-		int acquisitionMode, int numberOfAcquisitions, float exposureTime) {
-	std::cout << "CCDStateConnectedOff::getImage()" << std::endl;
+std::string* CCDStateConnectedOff::startExposure() {
+	std::cout << "CCDStateConnectedOff::startExposure()" << std::endl;
 	ccd_p->getContext()->setLastState(ccd_p->getContext()->getState());
 	ccd_p->getContext()->setState(STATE_ACQUIRING);
-	return strContext_p->getImage(width, height, acquisitionMode,
-			numberOfAcquisitions, exposureTime);
+	return strContext_p->startExposure();
 }
 
 void CCDStateConnectedOff::stopExposure() {
-	std::cout << "CCDStateConnectedOff::stopExposure() nothing to do" << std::endl;
+	std::cout << "CCDStateConnectedOff::stopExposure() nothing to do"
+			<< std::endl;
 	return;
 }
 
-void CCDStateConnectedOff::startCooler(float commandedCCDTemp) {
-	std::cout << "CCDStateAcquiring::startCooler(...)" << std::endl;
+void CCDStateConnectedOff::startCooler() {
+	std::cout << "CCDStateAcquiring::startCooler()" << std::endl;
 	ccd_p->getContext()->setState(STATE_CONNECTED_COOLER_ON);
-	strContext_p->startCooler(commandedCCDTemp);
+	strContext_p->startCooler();
 	return;
 }
 
-void CCDStateConnectedOff::stopCooler(){
+void CCDStateConnectedOff::stopCooler() {
 	std::cout << "CCDStateAcquiring::stopCooler() nothing to do" << std::endl;
 	return;
 }

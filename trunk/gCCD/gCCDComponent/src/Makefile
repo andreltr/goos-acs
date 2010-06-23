@@ -105,18 +105,21 @@ LIBRARIES_L     =
 # <brief description of lllll library>
 CCDComponent_OBJECTS   = CCD \
 			BDTThread \
-			CCDContext \
-			CCDState \
-			CCDStateConnectedOff \
-			CCDStateConnectedOn \
-			CCDStateDisconnected \
-			CCDStateAcquiring \
-			STRContext \
-			STRLucaEMCCD \
-			STRgCCDSIM \
-			STRSBIGST7 \
+			CCDStatesImpl/CCDContext \
+			CCDStatesImpl/CCDState \
+			CCDStatesImpl/CCDStateConnectedOff \
+			CCDStatesImpl/CCDStateConnectedOn \
+			CCDStatesImpl/CCDStateDisconnected \
+			CCDStatesImpl/CCDStateAcquiring \
+			STRModelsImpl/STRContext \
+			STRModelsImpl/STRLucaEMCCD \
+			STRModelsImpl/STRgCCDSIM \
+			STRModelsImpl/STRSBIGST7 \
 			csbigcam \
-			csbigimg
+			csbigimg \
+			Observer \
+			Observable \
+			ComponentProperties
 
 NCSupplier_OBJECTS   = NCSupplier
 

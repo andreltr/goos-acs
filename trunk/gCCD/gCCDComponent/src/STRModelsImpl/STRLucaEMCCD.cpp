@@ -1,4 +1,4 @@
-#include "STRLucaEMCCD.h"
+#include "STRModelsHeaders/STRLucaEMCCD.h"
 
 /*
  *
@@ -26,18 +26,17 @@ void STRLucaEMCCD::resetCamera() {
 
 }
 
-std::string* STRLucaEMCCD::getImage(int width, int height,
-		int acquisitionMode, int numberOfAcquisitions, float exposureTime) {
+std::string* STRLucaEMCCD::startExposure() {
 	std::cout << "STRLucaEMCCD::getImage()" << std::endl;
 
-	//int width = 640;
-	//int height = 480;
+	int width = 640;
+	int height = 480;
 
 	initialize();
 	/*Accumulate mode by default*/
-	SetAcquisitionMode(acquisitionMode);
-	SetNumberAccumulations(numberOfAcquisitions);
-	SetExposureTime(exposureTime);
+	SetAcquisitionMode(componentProperties->getAcquisitionMode());
+	SetNumberAccumulations(componentProperties->getNumberOfAcquisitions());
+	SetExposureTime(componentProperties->getExposureTime());
 	StartAcquisition();
 
 	int status;
@@ -68,12 +67,16 @@ void STRLucaEMCCD::stopExposure() {
 }
 
 
-void STRLucaEMCCD::startCooler(float commandedCCDTemp) {
+void STRLucaEMCCD::startCooler() {
 	return;
 }
 
 void STRLucaEMCCD::stopCooler() {
 	return;
+}
+
+void STRLucaEMCCD::update() {
+	std::cout << "STRLucaEMCCD::update()" << std::endl;
 }
 
 void STRLucaEMCCD::initialize() {

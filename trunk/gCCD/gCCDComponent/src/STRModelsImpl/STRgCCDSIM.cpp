@@ -1,4 +1,4 @@
-#include "STRgCCDSIM.h"
+#include "STRModelsHeaders/STRgCCDSIM.h"
 
 /*
  * Implementation of gCCDSIM strategy for the Strategy Pattern
@@ -26,19 +26,20 @@ void STRgCCDSIM::resetCamera() {
 }
 
 /*Code simulation for FITS creation goes here...*/
-std::string* STRgCCDSIM::getImage(int width, int height, int acquisitionMode,
-		int numberOfAcquisitions, float exposureTime) {
+std::string* STRgCCDSIM::startExposure() {
 
-	IMAGE_WIDTH = width;
-	IMAGE_HEIGHT = height;
+	IMAGE_WIDTH = 640;
+	IMAGE_HEIGHT = 480;
+
+	double exposureTime = componentProperties->getExposureTime();
 
 	FITS::setVerboseMode(true);
 
-	string *filenames = new string[((int) exposureTime) + 1];
+	string *filenames = new string[(int) exposureTime + 1];
 
 	try {
 		for (int i = 0; i < (int) exposureTime; i++) {
-			if (!writeImage(numberOfAcquisitions, i))
+			if (!writeImage(componentProperties->getNumberOfAcquisitions(), i))
 				std::cerr << "";
 			std::string s;
 			std::stringstream out;
@@ -58,12 +59,26 @@ void STRgCCDSIM::stopExposure() {
 
 }
 
-void STRgCCDSIM::startCooler(float commandedCCDTemp) {
+void STRgCCDSIM::startCooler() {
+	//trace for testing only, should be removed
+	std::cout << "Current ComponentProperties temp: "
+			<< componentProperties->getActualCCDTemperature() << std::endl;
+
+	std::cout << "Current ComponentProperties temp: "
+				<< componentProperties->getCommandedCCDTemperature() << std::endl;
+
+	componentProperties->setActualCCDTemperature(
+			componentProperties->getCommandedCCDTemperature());
+	componentProperties->notifyObservers();
 	return;
 }
 
 void STRgCCDSIM::stopCooler() {
 	return;
+}
+
+void STRgCCDSIM::update() {
+	std::cout << "STRgCCDSIM::update()" << std::endl;
 }
 
 int STRgCCDSIM::writeImage(int frames, int fileCorrelation) {

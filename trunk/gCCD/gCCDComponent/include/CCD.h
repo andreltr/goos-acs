@@ -24,12 +24,10 @@
 #include "ace/Get_Opt.h"
 #include "orbsvcs/AV/AVStreams_i.h"
 
-#include "bulkDataSenderS.h"
-#include "bulkDataReceiverS.h"
-#include "ACSBulkDataError.h"
-
-#include "CCDContext.h"
+#include "CCDStatesHeaders/CCDContext.h"
 #include "BDTThread.h"
+#include "Observer.h"
+#include "ComponentProperties.h"
 
 using namespace ACSBulkDataError;
 using namespace baci;
@@ -41,7 +39,7 @@ class CCDStateConnected;
 /**
  * ACS component class
  */
-class CCDComponent: public virtual CharacteristicComponentImpl,
+class CCDComponent: public Observer, public virtual CharacteristicComponentImpl,
 		public virtual POA_CCDmodule::CCDinterface {
 private:
 
@@ -50,10 +48,11 @@ private:
 	BDTThread * m_bdtThread_p;
 	std::string * filesQueue;
 	int queueSize;
+	ComponentProperties * componentProperties;
 
 	/* --------------------- [ Properties START ] ----------------------*/
 	//Include file for the generated properties smart pointers
-#include "component_properties.inc"
+#include "GeneratedCode/component_properties.inc"
 	/* --------------------- [ Properties END ] ------------------------*/
 
 protected:
@@ -148,7 +147,7 @@ public:
 	 */
 
 	//Include file for the generated properties methods prototypes
-#include "component_prototypes.inc"
+#include "GeneratedCode/component_prototypes.inc"
 
 	/* --------------------- [ CORBA interface END ] --------------------- */
 
@@ -168,6 +167,12 @@ public:
 	 * Sends the files to the client
 	 */
 	void sendBulkData(int lastState);
+
+	void update();
+
+	void setComponentProperties();
+
+	Observable* getComponentProperties();
 
 };
 

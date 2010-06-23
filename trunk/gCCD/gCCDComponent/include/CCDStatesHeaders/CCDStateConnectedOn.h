@@ -5,7 +5,7 @@
 #error This is a C++ include file and cannot be used from plain C
 #endif
 
-#include "CCDState.h"
+#include "CCDStatesHeaders/CCDState.h"
 
 /**
  * State: Connected with cooler on
@@ -28,9 +28,7 @@ public:
 	/**
 	 * Gets the state CONNECTED
 	 */
-	int getState() {
-		return STATE_CONNECTED_COOLER_ON;
-	}
+	int getState();
 	/**
 	 * Implementation of "on" function for this state.
 	 * The camera is already on, it should do nothing
@@ -52,15 +50,8 @@ public:
 	/**
 	 * Implementation of "getImage" function for this state.
 	 * The camera is on, it should obtain an image.
-	 * @param width Image width
-	 * @param height Image height
-	 * @param acquisitionMode Camera acquisition mode
-	 * @param numberOfAcquisitions Number of acquisitions
-	 * @param exposureTime Camera exposure time
-	 * @return a list of the images file names
 	 */
-	std::string* getImage(int width, int height, int acquisitionMode,
-			int numberOfAcquisitions, float exposureTime);
+	std::string* startExposure();
 
 	/**
 	 * Implementation of "stopExposure" function for this state
@@ -68,7 +59,7 @@ public:
 	 */
 	void stopExposure();
 
-	void startCooler(float commandedCCDTemp);
+	void startCooler();
 	void stopCooler();
 };
 

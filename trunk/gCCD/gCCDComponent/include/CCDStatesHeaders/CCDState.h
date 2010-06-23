@@ -6,9 +6,9 @@
 #endif
 
 #include <iostream>
-#include "CCDModels.h"
-#include "CCDStates.h"
-#include "STRContext.h"
+#include "STRModelsHeaders/CCDModels.h"
+#include "CCDStatesHeaders/CCDStates.h"
+#include "STRModelsHeaders/STRContext.h"
 #include "atmcdLXd.h"
 
 class STRContext;
@@ -23,19 +23,14 @@ protected:
 	STRContext * strContext_p;
 public:
 	CCDState(CCDComponent * ccd);
-	virtual ~CCDState() {
-		if (strContext_p != 0) {
-			delete strContext_p;
-		}
-	}
+	virtual ~CCDState();
 
 	virtual void on() = 0;
 	virtual void off() = 0;
 	virtual void resetCamera() = 0;
-	virtual std::string* getImage(int width, int height, int acquisitionMode,
-			int numberOfAcquisitions, float exposureTime) = 0;
+	virtual std::string* startExposure() = 0;
 	virtual void stopExposure() = 0;
-	virtual void startCooler(float commandedCCDTemp) = 0;
+	virtual void startCooler() = 0;
 	virtual void stopCooler() = 0;
 	virtual int getState() = 0;
 

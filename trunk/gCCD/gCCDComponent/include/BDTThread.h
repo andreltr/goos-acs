@@ -6,9 +6,17 @@
 #endif
 
 #include "acsThread.h"
+#include "bulkDataSenderC.h"
+#include "bulkDataReceiverC.h"
+#include "ACSBulkDataError.h"
 #include "CCD.h"
 
 class BDTThread: public ACS::Thread {
+private:
+	std::string * filesQueue;
+	int queueSize;
+	CCDComponent * ccd_p;
+	int lastState;
 public:
 	BDTThread(const ACE_CString &name, CCDComponent * ccd_ptr,
 			const ACS::TimeInterval& responseTime =
@@ -28,14 +36,6 @@ public:
 
 	void setQueue(std::string * filesQ, const int qSize);
 	void setLastState(int lastState);
-
-	/****************** [ variables ] *****************/
-private:
-
-	std::string * filesQueue;
-	int queueSize;
-	CCDComponent * ccd_p;
-	int lastState;
 };
 
 #endif
