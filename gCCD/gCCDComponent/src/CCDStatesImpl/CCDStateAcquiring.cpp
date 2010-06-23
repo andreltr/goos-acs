@@ -1,4 +1,4 @@
-#include "CCDStateAcquiring.h"
+#include "CCDStatesHeaders/CCDStateAcquiring.h"
 #include <iostream>
 #include "CCD.h"
 
@@ -16,6 +16,10 @@ CCDStateAcquiring::~CCDStateAcquiring() {
 
 }
 
+int CCDStateAcquiring::getState() {
+	return STATE_ACQUIRING;
+}
+
 void CCDStateAcquiring::on() {
 	std::cout << "CCDStateAcquiring::on() nothing to do" << std::endl;
 	return;
@@ -31,9 +35,9 @@ void CCDStateAcquiring::resetCamera() {
 	return;
 }
 
-std::string* CCDStateAcquiring::getImage(int width, int height,
-		int acquisitionMode, int numberOfAcquisitions, float exposureTime) {
-	std::cout << "CCDStateAcquiring::getImage() nothing to do" << std::endl;
+std::string* CCDStateAcquiring::startExposure() {
+	std::cout << "CCDStateAcquiring::startExposure() nothing to do"
+			<< std::endl;
 	return 0;
 }
 
@@ -44,12 +48,12 @@ void CCDStateAcquiring::stopExposure() {
 	return;
 }
 
-void CCDStateAcquiring::startCooler(float commandedCCDTemp) {
-	std::cout << "CCDStateAcquiring::startCooler(...) nothing to do" << std::endl;
+void CCDStateAcquiring::startCooler() {
+	std::cout << "CCDStateAcquiring::startCooler() nothing to do" << std::endl;
 	return;
 }
 
-void CCDStateAcquiring::stopCooler(){
+void CCDStateAcquiring::stopCooler() {
 	std::cout << "CCDStateAcquiring::stopCooler() nothing to do" << std::endl;
 	return;
 }

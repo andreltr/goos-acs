@@ -1,6 +1,6 @@
 #include <baciDB.h>
 #include "CCD.h"
-#include "CCDStates.h"
+#include "CCDStatesHeaders/CCDStates.h"
 
 using namespace baci;
 
@@ -12,7 +12,7 @@ using namespace baci;
  */
 
 //Include for the generated constructor
-#include "component_constructor.inc"
+#include "GeneratedCode/component_constructor.inc"
 
 CCDComponent::~CCDComponent() {
 	ACS_TRACE("CCDComponent::~CCDComponent(): destroyed");
@@ -29,6 +29,9 @@ void CCDComponent::initialize()
 	sender = 0;
 	m_bdtThread_p = 0;
 	bdStatus = false;
+	componentProperties = new ComponentProperties();
+	setObservable( componentProperties);
+	setComponentProperties();
 	context = new CCDContext(this, STATE_DISCONNECTED);
 }
 
@@ -42,12 +45,20 @@ void CCDComponent::cleanUp() {
 	ACS_TRACE("CCDComponent::cleanUp()");
 
 	if (m_bdtThread_p != 0) {
+		ACS_TRACE("CCDComponent::cleanUp(): cleaning BDT components...");
 		getContainerServices()->getThreadManager()->destroy(m_bdtThread_p);
 	}
 
+	if (componentProperties != 0) {
+		ACS_TRACE("CCDComponent::cleanUp(): cleaning observer properties...");
+		delete componentProperties;
+	}
+
 	if (context != 0) {
+		ACS_TRACE("CCDComponent::cleanUp(): cleaning states...");
 		delete context;
 	}
+	ACS_TRACE("CCDComponent::cleanUp(): done");
 }
 
 void CCDComponent::aboutToAbort() {
@@ -80,13 +91,11 @@ void CCDComponent::resetCamera() {
 
 void CCDComponent::startExposure() {
 	ACS_TRACE("CCDComponent::startExposure()");
-	ACSErr::Completion_var completion;
-	int lastState = getState();
 
-	filesQueue = context->getImage(640, 480, (int) acquisitionMode()->get_sync(
-			completion.out()), (int) numberOfAcquisitions()->get_sync(
-			completion.out()), (float) exposureTime()->get_sync(
-			completion.out()));
+	int lastState = getState();
+	setComponentProperties();
+
+	filesQueue = context->startExposure();
 	if (filesQueue != 0) {
 		startBulkData();
 		sendBulkData(lastState);
@@ -100,8 +109,8 @@ void CCDComponent::stopExposure() {
 
 void CCDComponent::startCooler() {
 	ACS_TRACE("CCDComponent::startCooler()");
-	ACSErr::Completion_var completion;
-	context->startCooler(commandedCCDTemperature()->get_sync(completion.out()));
+	setComponentProperties();
+	context->startCooler();
 }
 void CCDComponent::stopCooler() {
 	ACS_TRACE("CCDComponent::stopCooler()");
@@ -120,7 +129,7 @@ long CCDComponent::getCCDModel() {
 }
 
 //Include file for the generated properties methods
-#include "component_methods.inc"
+#include "GeneratedCode/component_methods.inc"
 
 /*********************** [ internal ] ***********************/
 
@@ -193,6 +202,78 @@ void CCDComponent::sendBulkData(int lastState) {
 		m_bdtThread_p->restart();
 		ACS_SHORT_LOG((LM_INFO, "BDT thread restarted."));
 	}
+}
+
+void CCDComponent::update() {
+	ACS_TRACE("CCDComponent::update()");
+
+	ACS::Time timestamp;
+
+	m_actualAirTemperature_sp->getDevIO()->write(
+			componentProperties->getActualAirTemperature(), timestamp);
+	m_actualCCDTemperature_sp->getDevIO()->write(
+			componentProperties->getActualCCDTemperature(), timestamp);
+	commandedCCDTemperature()->set_sync(
+			componentProperties->getCommandedCCDTemperature());
+	m_cameraName_sp->getDevIO()->write(
+			componentProperties->getCameraName().c_str(), timestamp);
+	m_cameraModel_sp->getDevIO()->write(componentProperties->getCameraModel(),
+			timestamp);
+	filterName()->set_sync(componentProperties->getFilterName().c_str());
+	objectName()->set_sync(componentProperties->getObjectName().c_str());
+	observerName()->set_sync(componentProperties->getObserverName().c_str());
+	exposureTime()->set_sync(componentProperties->getExposureTime());
+	acquisitionMode()->set_sync(componentProperties->getAcquisitionMode());
+	numberOfAcquisitions()->set_sync(
+			componentProperties->getNumberOfAcquisitions());
+	focalLength()->set_sync(componentProperties->getFocalLength());
+	m_gain_sp->getDevIO()->write(componentProperties->getGain(), timestamp);
+	m_xPixelSize_sp->getDevIO()->write(componentProperties->getxPixelSize(),
+			timestamp);
+	m_yPixelSize_sp->getDevIO()->write(componentProperties->getyPixelSize(),
+			timestamp);
+	xStart()->set_sync(componentProperties->getxStart());
+	xEnd()->set_sync(componentProperties->getxEnd());
+	yStart()->set_sync(componentProperties->getyStart());
+	yEnd()->set_sync(componentProperties->getyEnd());
+}
+
+void CCDComponent::setComponentProperties() {
+	ACS_TRACE("CCDComponent::setComponentProperties()");
+	ACSErr::Completion_var completion;
+
+	componentProperties->setActualAirTemperature(
+			actualAirTemperature()->get_sync(completion.out()));
+	componentProperties->setActualCCDTemperature(
+			actualCCDTemperature()->get_sync(completion.out()));
+	componentProperties->setCommandedCCDTemperature(
+			commandedCCDTemperature()->get_sync(completion.out()));
+	componentProperties->setCameraName(cameraName()->get_sync(completion.out()));
+	componentProperties->setCameraModel(cameraModel()->get_sync(
+			completion.out()));
+	componentProperties->setFilterName(filterName()->get_sync(completion.out()));
+	componentProperties->setObjectName(objectName()->get_sync(completion.out()));
+	componentProperties->setObserverName(observerName()->get_sync(
+			completion.out()));
+	componentProperties->setExposureTime(exposureTime()->get_sync(
+			completion.out()));
+	componentProperties->setAcquisitionMode(acquisitionMode()->get_sync(
+			completion.out()));
+	componentProperties->setNumberOfAcquisitions(
+			numberOfAcquisitions()->get_sync(completion.out()));
+	componentProperties->setFocalLength(focalLength()->get_sync(
+			completion.out()));
+	componentProperties->setGain(gain()->get_sync(completion.out()));
+	componentProperties->setxPixelSize(xPixelSize()->get_sync(completion.out()));
+	componentProperties->setyPixelSize(yPixelSize()->get_sync(completion.out()));
+	componentProperties->setxStart(xStart()->get_sync(completion.out()));
+	componentProperties->setxEnd(xEnd()->get_sync(completion.out()));
+	componentProperties->setyStart(yStart()->get_sync(completion.out()));
+	componentProperties->setyEnd(yEnd()->get_sync(completion.out()));
+}
+
+Observable* CCDComponent::getComponentProperties() {
+	return componentProperties;
 }
 
 #include <maciACSComponentDefines.h>

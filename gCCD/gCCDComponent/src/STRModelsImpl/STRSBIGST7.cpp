@@ -1,4 +1,4 @@
-#include "STRSBIGST7.h"
+#include "STRModelsHeaders/STRSBIGST7.h"
 #define IP_ADRESS	0xC0A8010C
 
 /*
@@ -29,8 +29,7 @@ void STRSBIGST7::resetCamera() {
 
 }
 
-std::string* STRSBIGST7::getImage(int width, int height, int acquisitionMode,
-		int numberOfAcquisitions, float exposureTime) {
+std::string* STRSBIGST7::startExposure() {
 	std::cout << "STRSBIGST7::getImage()" << std::endl;
 
 	initialize();
@@ -39,7 +38,7 @@ std::string* STRSBIGST7::getImage(int width, int height, int acquisitionMode,
 	/*
 	 * set exposure time before acquire image
 	 */
-	p_Cam->SetExposureTime((double) exposureTime);
+	p_Cam->SetExposureTime(componentProperties->getExposureTime());
 
 	/*
 	 * Acquires an entire image. Allocates the image buffer and acquires the
@@ -68,12 +67,16 @@ void STRSBIGST7::stopExposure() {
 
 }
 
-void STRSBIGST7::startCooler(float commandedCCDTemp) {
+void STRSBIGST7::startCooler() {
 	return;
 }
 
 void STRSBIGST7::stopCooler() {
 	return;
+}
+
+void STRSBIGST7::update() {
+	std::cout << "STRSBIGST7::update()" << std::endl;
 }
 
 void STRSBIGST7::initialize() {

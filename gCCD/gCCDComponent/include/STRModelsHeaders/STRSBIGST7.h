@@ -5,7 +5,7 @@
 #error This is a C++ include file and cannot be used from plain C
 #endif
 
-#include "STRBase.h"
+#include "STRModelsHeaders/STRBase.h"
 #include "csbigcam.h"
 #include "csbigimg.h"
 
@@ -18,12 +18,13 @@ public:
 	void on();
 	void off();
 	void resetCamera();
-	std::string* getImage(int width, int height, int acquisitionMode,
-			int numberOfAcquisitions, float exposureTime);
+	std::string* startExposure();
 	void stopExposure();
 
-	void startCooler(float commandedCCDTemp);
+	void startCooler();
 	void stopCooler();
+
+	void update();
 
 	void initialize();
 	void shutDown();
