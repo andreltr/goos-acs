@@ -19,10 +19,10 @@ class CCDComponent;
  */
 class CCDState {
 protected:
-	CCDComponent * ccd_p;
-	STRContext * strContext_p;
+	CCDComponent* ccd_p;
+	STRContext* strContext_p;
 public:
-	CCDState(CCDComponent * ccd);
+	CCDState(CCDComponent * ccd, STRContext* strContext);
 	virtual ~CCDState();
 
 	virtual void on() = 0;

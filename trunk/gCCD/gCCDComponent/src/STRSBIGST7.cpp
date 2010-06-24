@@ -83,11 +83,6 @@ void STRSBIGST7::update() {
 	std::cout << "STRSBIGST7::update()" << std::endl;
 }
 
-void STRSBIGST7::setComponentProperties(Observable *observable) {
-	componentProperties = (ComponentProperties*) observable;
-	setObservable( componentProperties);
-}
-
 void STRSBIGST7::initialize() {
 	this->odp.deviceType = DEV_ETH;
 	this->odp.ipAddress = IP_ADRESS;

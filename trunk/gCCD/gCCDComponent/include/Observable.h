@@ -14,6 +14,7 @@
 class Observable {
 private:
 	std::vector < class Observer * > observers;
+	int counter;
 protected:
 public:
 	Observable();

@@ -31,7 +31,7 @@ void CCDComponent::initialize()
 	bdStatus = false;
 	componentProperties = new ComponentProperties();
 	setObservable( componentProperties);
-	setComponentProperties();
+	setComponentPropertiesValues();
 	context = new CCDContext(this, STATE_DISCONNECTED);
 }
 
@@ -99,7 +99,7 @@ void CCDComponent::startExposure() {
 	ACS_TRACE("CCDComponent::startExposure()");
 
 	int lastState = getState();
-	setComponentProperties();
+	setComponentPropertiesValues();
 
 	filesQueue = context->startExposure();
 	if (filesQueue != 0) {
@@ -115,7 +115,7 @@ void CCDComponent::stopExposure() {
 
 void CCDComponent::startCooler() {
 	ACS_TRACE("CCDComponent::startCooler()");
-	setComponentProperties();
+	setComponentPropertiesValues();
 	context->startCooler();
 }
 void CCDComponent::stopCooler() {
@@ -245,38 +245,43 @@ void CCDComponent::update() {
 	yEnd()->set_sync(componentProperties->getyEnd());
 }
 
-void CCDComponent::setComponentProperties() {
-	ACS_TRACE("CCDComponent::setComponentProperties()");
+void CCDComponent::setComponentPropertiesValues() {
+	ACS_TRACE("CCDComponent::setComponentPropertiesValues()");
 	ACSErr::Completion_var completion;
 
 	componentProperties->setActualAirTemperature(
-			actualAirTemperature()->get_sync(completion.out()));
+			(double) actualAirTemperature()->get_sync(completion.out()));
 	componentProperties->setActualCCDTemperature(
-			actualCCDTemperature()->get_sync(completion.out()));
+			(double) actualCCDTemperature()->get_sync(completion.out()));
 	componentProperties->setCommandedCCDTemperature(
-			commandedCCDTemperature()->get_sync(completion.out()));
-	componentProperties->setCameraName(cameraName()->get_sync(completion.out()));
-	componentProperties->setCameraModel(cameraModel()->get_sync(
+			(double) commandedCCDTemperature()->get_sync(completion.out()));
+	componentProperties->setCameraName((std::string) cameraName()->get_sync(
 			completion.out()));
-	componentProperties->setFilterName(filterName()->get_sync(completion.out()));
-	componentProperties->setObjectName(objectName()->get_sync(completion.out()));
-	componentProperties->setObserverName(observerName()->get_sync(
+	componentProperties->setCameraModel((long) cameraModel()->get_sync(
 			completion.out()));
-	componentProperties->setExposureTime(exposureTime()->get_sync(
+	componentProperties->setFilterName((std::string) filterName()->get_sync(
 			completion.out()));
-	componentProperties->setAcquisitionMode(acquisitionMode()->get_sync(
+	componentProperties->setObjectName((std::string) objectName()->get_sync(
+			completion.out()));
+	componentProperties->setObserverName(
+			(std::string) observerName()->get_sync(completion.out()));
+	componentProperties->setExposureTime((double) exposureTime()->get_sync(
+			completion.out()));
+	componentProperties->setAcquisitionMode((long) acquisitionMode()->get_sync(
 			completion.out()));
 	componentProperties->setNumberOfAcquisitions(
-			numberOfAcquisitions()->get_sync(completion.out()));
-	componentProperties->setFocalLength(focalLength()->get_sync(
+			(long) numberOfAcquisitions()->get_sync(completion.out()));
+	componentProperties->setFocalLength((double) focalLength()->get_sync(
 			completion.out()));
-	componentProperties->setGain(gain()->get_sync(completion.out()));
-	componentProperties->setxPixelSize(xPixelSize()->get_sync(completion.out()));
-	componentProperties->setyPixelSize(yPixelSize()->get_sync(completion.out()));
-	componentProperties->setxStart(xStart()->get_sync(completion.out()));
-	componentProperties->setxEnd(xEnd()->get_sync(completion.out()));
-	componentProperties->setyStart(yStart()->get_sync(completion.out()));
-	componentProperties->setyEnd(yEnd()->get_sync(completion.out()));
+	componentProperties->setGain((double) gain()->get_sync(completion.out()));
+	componentProperties->setxPixelSize((double) xPixelSize()->get_sync(
+			completion.out()));
+	componentProperties->setyPixelSize((double) yPixelSize()->get_sync(
+			completion.out()));
+	componentProperties->setxStart((long) xStart()->get_sync(completion.out()));
+	componentProperties->setxEnd((long) xEnd()->get_sync(completion.out()));
+	componentProperties->setyStart((long) yStart()->get_sync(completion.out()));
+	componentProperties->setyEnd((long) yEnd()->get_sync(completion.out()));
 }
 
 Observable* CCDComponent::getComponentProperties() {

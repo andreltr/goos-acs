@@ -2,7 +2,7 @@
 #include "Observer.h"
 
 Observable::Observable() {
-
+	counter = 0;
 }
 
 Observable::~Observable() {
@@ -10,8 +10,11 @@ Observable::~Observable() {
 }
 
 void Observable::addObserver(Observer *obs) {
-	std::cout << "Observable::addObserver(...)" << std::endl;
+	std::cout << "Observable::addObserver(...) " << std::endl;
 	observers.push_back(obs);
+	std::cout << "Observable::addObserver(...) observer number " << counter
+			<< std::endl;
+	counter++;
 }
 
 void Observable::removeObserver(int position) {

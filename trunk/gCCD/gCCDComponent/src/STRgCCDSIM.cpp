@@ -81,11 +81,6 @@ void STRgCCDSIM::update() {
 	std::cout << "STRgCCDSIM::update()" << std::endl;
 }
 
-void STRgCCDSIM::setComponentProperties(Observable *observable) {
-	componentProperties = (ComponentProperties*) observable;
-	setObservable(componentProperties);
-}
-
 int STRgCCDSIM::writeImage(int frames, int fileCorrelation) {
 
 	frames--;

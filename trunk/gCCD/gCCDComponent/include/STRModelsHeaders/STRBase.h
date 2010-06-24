@@ -17,7 +17,7 @@ class STRBase: public Observer {
 protected:
 	std::string* filesQueue;
 	float currentTemp;
-	ComponentProperties *componentProperties;
+	ComponentProperties* componentProperties;
 public:
 	STRBase() {
 		filesQueue = 0;
@@ -47,6 +47,9 @@ public:
 
 	virtual void update()=0;
 
-	virtual void setComponentProperties(Observable *observable)=0;
+	void setComponentProperties(Observable* observable) {
+		componentProperties = (ComponentProperties*) observable;
+		setObservable(componentProperties);
+	}
 };
 #endif

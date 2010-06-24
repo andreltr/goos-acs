@@ -18,7 +18,7 @@ public:
 	 * Constructor
 	 * @param ccd CCDComponent reference
 	 */
-	CCDStateAcquiring(CCDComponent * ccd);
+	CCDStateAcquiring(CCDComponent* ccd, STRContext* strContext);
 
 	/**
 	 * Destructor

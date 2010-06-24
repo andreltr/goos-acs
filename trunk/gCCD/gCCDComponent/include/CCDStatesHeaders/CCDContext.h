@@ -24,11 +24,12 @@ class CCDContext {
 private:
 	int currState;
 	int lastState;
-	CCDState * currentState;
-	CCDStateDisconnected * disconnected;
-	CCDStateConnectedOff * connected_off;
-	CCDStateConnectedOn * connected_on;
-	CCDStateAcquiring * acquiring;
+	CCDState* currentState;
+	STRContext* strContext_p;
+	CCDStateDisconnected* disconnected;
+	CCDStateConnectedOff* connected_off;
+	CCDStateConnectedOn* connected_on;
+	CCDStateAcquiring* acquiring;
 public:
 	/**
 	 * @param ccd CCDComponent reference

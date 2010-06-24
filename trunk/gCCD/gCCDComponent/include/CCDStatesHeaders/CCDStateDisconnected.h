@@ -18,7 +18,7 @@ public:
 	/**
 	 * @param ccd CCDComponent reference
 	 */
-	CCDStateDisconnected(CCDComponent * ccd);
+	CCDStateDisconnected(CCDComponent* ccd, STRContext* strContext);
 
 	~CCDStateDisconnected();
 

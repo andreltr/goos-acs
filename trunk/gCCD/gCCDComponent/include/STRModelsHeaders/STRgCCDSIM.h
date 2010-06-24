@@ -36,7 +36,6 @@ public:
 	void stopCooler();
 
 	void update();
-	void setComponentProperties(Observable *observable);
 
 	//internal functions
 	int writeImage(int frames, int fileCorrelation);

@@ -40,15 +40,16 @@ class CCDStateConnected;
  * ACS component class
  */
 class CCDComponent: public virtual CharacteristicComponentImpl,
-		public virtual POA_CCDmodule::CCDinterface, public Observer {
+		public virtual POA_CCDmodule::CCDinterface,
+		public Observer {
 private:
 
 	/* ------------------------- [ Variables START ] ----------------------- */
 	bool bdStatus;
-	BDTThread * m_bdtThread_p;
-	std::string * filesQueue;
+	BDTThread* m_bdtThread_p;
+	std::string* filesQueue;
 	int queueSize;
-	ComponentProperties * componentProperties;
+	ComponentProperties* componentProperties;
 
 	/* --------------------- [ Properties START ] ----------------------*/
 	//Include file for the generated properties smart pointers
@@ -74,7 +75,7 @@ public:
 	 * ACS component constructor
 	 */
 	CCDComponent(const ACE_CString& name,
-			maci::ContainerServices * containerServices);
+			maci::ContainerServices* containerServices);
 
 	/**
 	 * ACS component destructor
@@ -170,7 +171,7 @@ public:
 
 	void update();
 
-	void setComponentProperties();
+	void setComponentPropertiesValues();
 
 	Observable* getComponentProperties();
 

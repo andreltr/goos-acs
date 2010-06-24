@@ -5,7 +5,7 @@ STRContext::STRContext(long cameraModel, Observable *observable) {
 			<< std::endl;
 	currentCCDModel = 0;
 	setCCDModel(cameraModel);
-	setComponentProperties(observable);
+	setObservable(observable);
 }
 
 STRContext::~STRContext() {
@@ -67,6 +67,7 @@ void STRContext::setCCDModel(long cameraModel) {
 	}
 }
 
-void STRContext::setComponentProperties(Observable *observable) {
+void STRContext::setObservable(Observable *observable) {
+	std::cout << "STRContext::setObservable(...)" << std::endl;
 	currentCCDModel->setComponentProperties(observable);
 }
