@@ -215,73 +215,14 @@ void CCDComponent::update() {
 	ACS_TRACE("CCDComponent::update()");
 
 	ACS::Time timestamp;
-
-	m_actualAirTemperature_sp->getDevIO()->write(
-			componentProperties->getActualAirTemperature(), timestamp);
-	m_actualCCDTemperature_sp->getDevIO()->write(
-			componentProperties->getActualCCDTemperature(), timestamp);
-	commandedCCDTemperature()->set_sync(
-			componentProperties->getCommandedCCDTemperature());
-	m_cameraName_sp->getDevIO()->write(
-			componentProperties->getCameraName().c_str(), timestamp);
-	m_cameraModel_sp->getDevIO()->write(componentProperties->getCameraModel(),
-			timestamp);
-	filterName()->set_sync(componentProperties->getFilterName().c_str());
-	objectName()->set_sync(componentProperties->getObjectName().c_str());
-	observerName()->set_sync(componentProperties->getObserverName().c_str());
-	exposureTime()->set_sync(componentProperties->getExposureTime());
-	acquisitionMode()->set_sync(componentProperties->getAcquisitionMode());
-	numberOfAcquisitions()->set_sync(
-			componentProperties->getNumberOfAcquisitions());
-	focalLength()->set_sync(componentProperties->getFocalLength());
-	m_gain_sp->getDevIO()->write(componentProperties->getGain(), timestamp);
-	m_xPixelSize_sp->getDevIO()->write(componentProperties->getxPixelSize(),
-			timestamp);
-	m_yPixelSize_sp->getDevIO()->write(componentProperties->getyPixelSize(),
-			timestamp);
-	xStart()->set_sync(componentProperties->getxStart());
-	xEnd()->set_sync(componentProperties->getxEnd());
-	yStart()->set_sync(componentProperties->getyStart());
-	yEnd()->set_sync(componentProperties->getyEnd());
+#include "GeneratedCode/component_update.inc"
 }
 
 void CCDComponent::setComponentPropertiesValues() {
 	ACS_TRACE("CCDComponent::setComponentPropertiesValues()");
 	ACSErr::Completion_var completion;
 
-	componentProperties->setActualAirTemperature(
-			(double) actualAirTemperature()->get_sync(completion.out()));
-	componentProperties->setActualCCDTemperature(
-			(double) actualCCDTemperature()->get_sync(completion.out()));
-	componentProperties->setCommandedCCDTemperature(
-			(double) commandedCCDTemperature()->get_sync(completion.out()));
-	componentProperties->setCameraName((std::string) cameraName()->get_sync(
-			completion.out()));
-	componentProperties->setCameraModel((long) cameraModel()->get_sync(
-			completion.out()));
-	componentProperties->setFilterName((std::string) filterName()->get_sync(
-			completion.out()));
-	componentProperties->setObjectName((std::string) objectName()->get_sync(
-			completion.out()));
-	componentProperties->setObserverName(
-			(std::string) observerName()->get_sync(completion.out()));
-	componentProperties->setExposureTime((double) exposureTime()->get_sync(
-			completion.out()));
-	componentProperties->setAcquisitionMode((long) acquisitionMode()->get_sync(
-			completion.out()));
-	componentProperties->setNumberOfAcquisitions(
-			(long) numberOfAcquisitions()->get_sync(completion.out()));
-	componentProperties->setFocalLength((double) focalLength()->get_sync(
-			completion.out()));
-	componentProperties->setGain((double) gain()->get_sync(completion.out()));
-	componentProperties->setxPixelSize((double) xPixelSize()->get_sync(
-			completion.out()));
-	componentProperties->setyPixelSize((double) yPixelSize()->get_sync(
-			completion.out()));
-	componentProperties->setxStart((long) xStart()->get_sync(completion.out()));
-	componentProperties->setxEnd((long) xEnd()->get_sync(completion.out()));
-	componentProperties->setyStart((long) yStart()->get_sync(completion.out()));
-	componentProperties->setyEnd((long) yEnd()->get_sync(completion.out()));
+#include "GeneratedCode/component_setter.inc"
 }
 
 Observable* CCDComponent::getComponentProperties() {

@@ -34,9 +34,9 @@ std::string* STRLucaEMCCD::startExposure() {
 
 	initialize();
 	/*Accumulate mode by default*/
-	SetAcquisitionMode(componentProperties->getAcquisitionMode());
-	SetNumberAccumulations(componentProperties->getNumberOfAcquisitions());
-	SetExposureTime(componentProperties->getExposureTime());
+	SetAcquisitionMode(componentProperties->getacquisitionMode());
+	SetNumberAccumulations(componentProperties->getnumberOfAcquisitions());
+	SetExposureTime(componentProperties->getexposureTime());
 	StartAcquisition();
 
 	int status;
