@@ -836,19 +836,25 @@ public class CodeGenerator extends javax.swing.JFrame {
 		String set_sync = "";
 
 		for (int i = 0; i < propertyNames.size(); i++) {
+			String c_str = "";
+			if (propertyTypes.get(i).getSelectedIndex() == 2) {
+				c_str = ".c_str()";
+			}
 			switch (propertyRORW.get(i).getSelectedIndex()) {
 			case 0:
 				// constructor_properties += "RO";
 				dev_io += "\tm_"
 						+ propertyNames.get(i).getText()
 						+ "_sp->getDevIO()->write(\n\t\tcomponentProperties->get"
-						+ propertyNames.get(i).getText() + "(), timestamp);\n";
+						+ propertyNames.get(i).getText() + "()" + c_str
+						+ ", timestamp);\n";
 				break;
 			case 1:
 				// constructor_properties += "RW";
 				set_sync += "\t" + propertyNames.get(i).getText()
 						+ "()->set_sync(\n\t\tcomponentProperties->" + "get"
-						+ propertyNames.get(i).getText() + "());\n";
+						+ propertyNames.get(i).getText() + "()" + c_str
+						+ ");\n";
 				break;
 			}
 		}
