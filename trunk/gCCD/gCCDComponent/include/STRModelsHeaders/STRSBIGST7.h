@@ -25,6 +25,7 @@ public:
 	void stopCooler();
 
 	void update();
+	void setComponentProperties(Observable *observable);
 
 	void initialize();
 	void shutDown();

@@ -8,13 +8,17 @@
  */
 
 STRSBIGST7::STRSBIGST7() {
-
+	p_Cam = 0;
+	p_Img = 0;
 }
 
 STRSBIGST7::~STRSBIGST7() {
-	delete p_Cam;
-	delete p_Img;
-
+	if (p_Cam != 0) {
+		delete p_Cam;
+	}
+	if (p_Img != 0) {
+		delete p_Img;
+	}
 }
 
 void STRSBIGST7::on() {
@@ -77,6 +81,11 @@ void STRSBIGST7::stopCooler() {
 
 void STRSBIGST7::update() {
 	std::cout << "STRSBIGST7::update()" << std::endl;
+}
+
+void STRSBIGST7::setComponentProperties(Observable *observable) {
+	componentProperties = (ComponentProperties*) observable;
+	setObservable(componentProperties);
 }
 
 void STRSBIGST7::initialize() {

@@ -39,8 +39,8 @@ class CCDStateConnected;
 /**
  * ACS component class
  */
-class CCDComponent: public Observer, public virtual CharacteristicComponentImpl,
-		public virtual POA_CCDmodule::CCDinterface {
+class CCDComponent: public virtual CharacteristicComponentImpl,
+		public virtual POA_CCDmodule::CCDinterface, public Observer {
 private:
 
 	/* ------------------------- [ Variables START ] ----------------------- */

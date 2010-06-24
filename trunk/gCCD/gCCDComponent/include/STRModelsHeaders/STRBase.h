@@ -22,13 +22,13 @@ public:
 	STRBase() {
 		filesQueue = 0;
 		componentProperties = 0;
-	};
+	}
 
 	virtual ~STRBase() {
 		if (filesQueue != 0) {
 			delete[] filesQueue;
 		}
-	};
+	}
 
 	virtual void on() = 0;
 	virtual void off() = 0;
@@ -47,9 +47,6 @@ public:
 
 	virtual void update()=0;
 
-	void setComponentProperties(Observable *observable) {
-		componentProperties = (ComponentProperties*) observable;
-		setObservable(componentProperties);
-	}
+	virtual void setComponentProperties(Observable *observable)=0;
 };
 #endif

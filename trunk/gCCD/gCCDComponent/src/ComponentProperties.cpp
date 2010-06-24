@@ -1,6 +1,25 @@
 #include "ComponentProperties.h"
 
 ComponentProperties::ComponentProperties() {
+	actualAirTemperature = 0;
+	actualCCDTemperature = 0;
+	commandedCCDTemperature = 0;
+	cameraName = "";
+	cameraModel = 0;
+	filterName = "";
+	objectName = "";
+	observerName = "";
+	exposureTime = 0;
+	acquisitionMode = 0;
+	numberOfAcquisitions = 0;
+	focalLength = 0;
+	gain = 0;
+	xPixelSize = 0;
+	yPixelSize = 0;
+	xStart = 0;
+	xEnd = 0;
+	yStart = 0;
+	yEnd = 0;
 }
 
 ComponentProperties::~ComponentProperties() {

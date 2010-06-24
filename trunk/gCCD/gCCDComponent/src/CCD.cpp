@@ -49,14 +49,14 @@ void CCDComponent::cleanUp() {
 		getContainerServices()->getThreadManager()->destroy(m_bdtThread_p);
 	}
 
-	if (componentProperties != 0) {
-		ACS_TRACE("CCDComponent::cleanUp(): cleaning observer properties...");
-		delete componentProperties;
-	}
-
 	if (context != 0) {
 		ACS_TRACE("CCDComponent::cleanUp(): cleaning states...");
 		delete context;
+	}
+
+	if (componentProperties != 0) {
+		ACS_TRACE("CCDComponent::cleanUp(): cleaning observer properties...");
+		delete componentProperties;
 	}
 	ACS_TRACE("CCDComponent::cleanUp(): done");
 }
@@ -68,7 +68,13 @@ void CCDComponent::aboutToAbort() {
 	}
 
 	if (context != 0) {
+		ACS_TRACE("CCDComponent::cleanUp(): cleaning states...");
 		delete context;
+	}
+
+	if (componentProperties != 0) {
+		ACS_TRACE("CCDComponent::cleanUp(): cleaning observer properties...");
+		delete componentProperties;
 	}
 }
 
@@ -125,7 +131,8 @@ CORBA::Long CCDComponent::getState() {
 long CCDComponent::getCCDModel() {
 	ACS_TRACE("CCDComponent::getCCDModel()");
 	ACSErr::Completion_var completion;
-	return cameraModel()->get_sync(completion.out());
+	long ccdModel = (long) cameraModel()->get_sync(completion.out());
+	return ccdModel;
 }
 
 //Include file for the generated properties methods
