@@ -6,8 +6,8 @@
 #endif
 
 #include "acsThread.h"
-#include "bulkDataSenderC.h"
-#include "bulkDataReceiverC.h"
+#include "bulkDataSenderS.h"
+#include "bulkDataReceiverS.h"
 #include "ACSBulkDataError.h"
 #include "CCD.h"
 
