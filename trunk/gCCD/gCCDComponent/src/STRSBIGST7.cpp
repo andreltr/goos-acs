@@ -42,7 +42,7 @@ std::string* STRSBIGST7::startExposure() {
 	/*
 	 * set exposure time before acquire image
 	 */
-	p_Cam->SetExposureTime(componentProperties->getExposureTime());
+	p_Cam->SetExposureTime(componentProperties->getexposureTime());
 
 	/*
 	 * Acquires an entire image. Allocates the image buffer and acquires the
@@ -98,19 +98,19 @@ void STRSBIGST7::shutDown() {
 }
 
 void STRSBIGST7::setObserverName(std::string observerName) {
-	p_Img->SetObserverName(observerName);
-	componentProperties->setObserverName(observerName);
+	p_Img->SetObserver(observerName);
+	componentProperties->setobserverName(observerName);
 }
 
 std::string STRSBIGST7::getObserverName() {
-	componentProperties->getObserverName();
+	return componentProperties->getobserverName();
 }
 
 void STRSBIGST7::setFocalLength(double focalLength) {
 	p_Img->SetFocalLength(focalLength);
-	componentProperties->setFocalLength(focalLength);
+	componentProperties->setfocalLength(focalLength);
 }
 
 double STRSBIGST7::getFocalLength() {
-	componentProperties->getFocalLength();
+	return componentProperties->getfocalLength();
 }

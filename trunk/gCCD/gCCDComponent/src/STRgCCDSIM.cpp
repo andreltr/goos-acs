@@ -31,7 +31,7 @@ std::string* STRgCCDSIM::startExposure() {
 	IMAGE_WIDTH = 640;
 	IMAGE_HEIGHT = 480;
 
-	double exposureTime = componentProperties->getExposureTime();
+	double exposureTime = componentProperties->getexposureTime();
 
 	FITS::setVerboseMode(true);
 
@@ -39,7 +39,7 @@ std::string* STRgCCDSIM::startExposure() {
 
 	try {
 		for (int i = 0; i < (int) exposureTime; i++) {
-			if (!writeImage(componentProperties->getNumberOfAcquisitions(), i))
+			if (!writeImage(componentProperties->getnumberOfAcquisitions(), i))
 				std::cerr << "";
 			std::string s;
 			std::stringstream out;
@@ -62,13 +62,13 @@ void STRgCCDSIM::stopExposure() {
 void STRgCCDSIM::startCooler() {
 	//trace for testing only, should be removed
 	std::cout << "Current ComponentProperties temp: "
-			<< componentProperties->getActualCCDTemperature() << std::endl;
+			<< componentProperties->getactualCCDTemperature() << std::endl;
 
 	std::cout << "Current ComponentProperties temp: "
-				<< componentProperties->getCommandedCCDTemperature() << std::endl;
+				<< componentProperties->getcommandedCCDTemperature() << std::endl;
 
-	componentProperties->setActualCCDTemperature(
-			componentProperties->getCommandedCCDTemperature());
+	componentProperties->setactualCCDTemperature(
+			componentProperties->getcommandedCCDTemperature());
 	componentProperties->notifyObservers();
 	return;
 }
