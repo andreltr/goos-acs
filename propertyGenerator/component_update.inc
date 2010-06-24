@@ -3,7 +3,7 @@
 	m_actualCCDTemperature_sp->getDevIO()->write(
 		componentProperties->getactualCCDTemperature(), timestamp);
 	m_cameraName_sp->getDevIO()->write(
-		componentProperties->getcameraName(), timestamp);
+		componentProperties->getcameraName().c_str(), timestamp);
 	m_cameraModel_sp->getDevIO()->write(
 		componentProperties->getcameraModel(), timestamp);
 	m_gain_sp->getDevIO()->write(
@@ -15,11 +15,11 @@
 	commandedCCDTemperature()->set_sync(
 		componentProperties->getcommandedCCDTemperature());
 	filterName()->set_sync(
-		componentProperties->getfilterName());
+		componentProperties->getfilterName().c_str());
 	objectName()->set_sync(
-		componentProperties->getobjectName());
+		componentProperties->getobjectName().c_str());
 	observerName()->set_sync(
-		componentProperties->getobserverName());
+		componentProperties->getobserverName().c_str());
 	exposureTime()->set_sync(
 		componentProperties->getexposureTime());
 	acquisitionMode()->set_sync(
