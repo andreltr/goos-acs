@@ -1,10 +1,13 @@
 #include "CCDStatesHeaders/CCDContext.h"
+#include "CCD.h"
 
 CCDContext::CCDContext(CCDComponent * ccd, int state) {
-	disconnected = new CCDStateDisconnected(ccd);
-	connected_off = new CCDStateConnectedOff(ccd);
-	connected_on = new CCDStateConnectedOn(ccd);
-	acquiring = new CCDStateAcquiring(ccd);
+	strContext_p = new STRContext(ccd->getCCDModel(),
+			ccd->getComponentProperties());
+	disconnected = new CCDStateDisconnected(ccd, strContext_p);
+	connected_off = new CCDStateConnectedOff(ccd, strContext_p);
+	connected_on = new CCDStateConnectedOn(ccd, strContext_p);
+	acquiring = new CCDStateAcquiring(ccd, strContext_p);
 	setState(state);
 }
 
@@ -20,6 +23,9 @@ CCDContext::~CCDContext() {
 	}
 	if (acquiring != 0) {
 		delete acquiring;
+	}
+	if (strContext_p != 0) {
+		delete strContext_p;
 	}
 }
 

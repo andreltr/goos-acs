@@ -43,7 +43,7 @@ public:
 
 	void setCCDModel(long cameraModel);
 
-	void setComponentProperties(Observable *observable);
+	void setObservable(Observable *observable);
 
 };
 

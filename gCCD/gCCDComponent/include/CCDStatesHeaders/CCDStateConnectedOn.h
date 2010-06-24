@@ -18,7 +18,7 @@ public:
 	 * Constructor
 	 * @param ccd CCDComponent reference
 	 */
-	CCDStateConnectedOn(CCDComponent * ccd);
+	CCDStateConnectedOn(CCDComponent* ccd, STRContext* strContext);
 
 	/**
 	 * Destructor

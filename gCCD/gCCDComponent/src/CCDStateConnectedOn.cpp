@@ -8,8 +8,9 @@
  *
  */
 
-CCDStateConnectedOn::CCDStateConnectedOn(CCDComponent * ccd) :
-	CCDState(ccd) {
+CCDStateConnectedOn::CCDStateConnectedOn(CCDComponent * ccd,
+		STRContext* strContext) :
+	CCDState(ccd, strContext) {
 }
 
 CCDStateConnectedOn::~CCDStateConnectedOn() {

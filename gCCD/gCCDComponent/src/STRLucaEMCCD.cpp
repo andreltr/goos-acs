@@ -79,11 +79,6 @@ void STRLucaEMCCD::update() {
 	std::cout << "STRLucaEMCCD::update()" << std::endl;
 }
 
-void STRLucaEMCCD::setComponentProperties(Observable *observable) {
-	componentProperties = (ComponentProperties*) observable;
-	setObservable(componentProperties);
-}
-
 void STRLucaEMCCD::initialize() {
 	unsigned long error = Initialize("/usr/local/etc/andor");
 	if (error != DRV_SUCCESS) {

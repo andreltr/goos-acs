@@ -8,8 +8,8 @@
  *
  */
 
-CCDStateAcquiring::CCDStateAcquiring(CCDComponent * ccd) :
-	CCDState(ccd) {
+CCDStateAcquiring::CCDStateAcquiring(CCDComponent * ccd, STRContext* strContext) :
+	CCDState(ccd, strContext) {
 }
 
 CCDStateAcquiring::~CCDStateAcquiring() {
