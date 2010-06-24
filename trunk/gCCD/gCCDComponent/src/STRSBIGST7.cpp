@@ -85,7 +85,7 @@ void STRSBIGST7::update() {
 
 void STRSBIGST7::setComponentProperties(Observable *observable) {
 	componentProperties = (ComponentProperties*) observable;
-	setObservable(componentProperties);
+	setObservable( componentProperties);
 }
 
 void STRSBIGST7::initialize() {
@@ -100,4 +100,22 @@ void STRSBIGST7::shutDown() {
 	p_Cam->CloseDevice();
 	cout << "Closing 1st Driver..." << endl;
 	p_Cam->CloseDriver();
+}
+
+void STRSBIGST7::setObserverName(std::string observerName) {
+	p_Img->SetObserverName(observerName);
+	componentProperties->setObserverName(observerName);
+}
+
+std::string STRSBIGST7::getObserverName() {
+	componentProperties->getObserverName();
+}
+
+void STRSBIGST7::setFocalLength(double focalLength) {
+	p_Img->SetFocalLength(focalLength);
+	componentProperties->setFocalLength(focalLength);
+}
+
+double STRSBIGST7::getFocalLength() {
+	componentProperties->getFocalLength();
 }

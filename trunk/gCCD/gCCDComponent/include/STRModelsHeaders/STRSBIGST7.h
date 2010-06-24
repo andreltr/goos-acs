@@ -29,6 +29,10 @@ public:
 
 	void initialize();
 	void shutDown();
+	void setObserverName(std::string observerName);
+	std::string getObserverName();
+	void setFocalLength(double focalLength);
+	double getFocalLength();
 private:
 	OpenDeviceParams odp;
 	CSBIGCam* p_Cam;
