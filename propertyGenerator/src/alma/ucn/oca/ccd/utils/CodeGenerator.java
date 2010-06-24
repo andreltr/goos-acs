@@ -574,6 +574,10 @@ public class CodeGenerator extends javax.swing.JFrame {
 			generateIDL();
 			generateComponentIncludeFile();
 			generateComponenCppFile();
+			generatedObservableHeader();
+			generatedObservableImpl();
+			generatedComponentObserverSetter();
+			generatedComponentObserverUpdate();
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -737,6 +741,139 @@ public class CodeGenerator extends javax.swing.JFrame {
 		component_constructor.close();
 		component_methods.flush();
 		component_methods.close();
+	}
+
+	public void generatedObservableHeader() throws IOException {
+		BufferedWriter observable_header = new BufferedWriter(new FileWriter(
+				"observable_header.inc"));
+		String vars = "";
+		String getters = "";
+		String setters = "";
+		String type = "";
+
+		for (int i = 0; i < propertyNames.size(); i++) {
+
+			switch (propertyTypes.get(i).getSelectedIndex()) {
+			case 0:
+				type = "double ";
+				break;
+			case 1:
+				type = "long ";
+				break;
+			case 2:
+				type = "std::string ";
+				break;
+			}
+
+			vars += "\t" + type + propertyNames.get(i).getText() + ";\n";
+			getters += "\t" + type + "get" + propertyNames.get(i).getText()
+					+ "();\n";
+			setters += "\tvoid set" + propertyNames.get(i).getText() + "("
+					+ type + propertyNames.get(i).getText() + ");\n";
+		}
+		observable_header.write("public:\n");
+		observable_header.write("\tComponentProperties();\n");
+		observable_header.write("\t~ComponentProperties();\n");
+		observable_header.write(getters);
+		observable_header.write(setters);
+		observable_header.write("protected:\n");
+		observable_header.write("private:\n");
+		observable_header.write(vars);
+		observable_header.flush();
+		observable_header.close();
+	}
+
+	public void generatedObservableImpl() throws IOException {
+		BufferedWriter observable_header = new BufferedWriter(new FileWriter(
+				"observable_impl.inc"));
+		String vars = "ComponentProperties::ComponentProperties() {\n}\n"
+				+ "ComponentProperties::~ComponentProperties() {\n}\n";
+		String getters = "";
+		String setters = "";
+		String type = "";
+
+		for (int i = 0; i < propertyNames.size(); i++) {
+
+			switch (propertyTypes.get(i).getSelectedIndex()) {
+			case 0:
+				type = "double ";
+				break;
+			case 1:
+				type = "long ";
+				break;
+			case 2:
+				type = "std::string ";
+				break;
+			}
+
+			// vars += "\t" + type + propertyNames.get(i).getText() + ";\n";
+			getters += type + "ComponentProperties::get"
+					+ propertyNames.get(i).getText() + "() {\n";
+			getters += "\treturn " + propertyNames.get(i).getText() + ";\n";
+			getters += "}\n";
+
+			setters += "void ComponentProperties::set"
+					+ propertyNames.get(i).getText() + "(" + type
+					+ propertyNames.get(i).getText() + ") {\n";
+			setters += "\tif (this->" + propertyNames.get(i).getText() + " != "
+					+ propertyNames.get(i).getText() + ") {\n" + "\t\tthis->"
+					+ propertyNames.get(i).getText() + " = "
+					+ propertyNames.get(i).getText() + ";\n" + "\t}\n";
+			setters += "}\n";
+		}
+		observable_header.write(vars);
+		observable_header.write(getters);
+		observable_header.write(setters);
+		observable_header.flush();
+		observable_header.close();
+	}
+
+	public void generatedComponentObserverUpdate() throws IOException {
+		BufferedWriter component_update = new BufferedWriter(new FileWriter(
+				"component_update.inc"));
+
+		String dev_io = "";
+		String set_sync = "";
+
+		for (int i = 0; i < propertyNames.size(); i++) {
+			switch (propertyRORW.get(i).getSelectedIndex()) {
+			case 0:
+				// constructor_properties += "RO";
+				dev_io += "\tm_"
+						+ propertyNames.get(i).getText()
+						+ "_sp->getDevIO()->write(\n\t\tcomponentProperties->get"
+						+ propertyNames.get(i).getText() + "(), timestamp);\n";
+				break;
+			case 1:
+				// constructor_properties += "RW";
+				set_sync += "\t" + propertyNames.get(i).getText()
+						+ "()->set_sync(\n\t\tcomponentProperties->" + "get"
+						+ propertyNames.get(i).getText() + "());\n";
+				break;
+			}
+		}
+		component_update.write(dev_io);
+		component_update.write(set_sync);
+		component_update.flush();
+		component_update.close();
+	}
+
+	public void generatedComponentObserverSetter() throws IOException {
+		BufferedWriter component_setter = new BufferedWriter(new FileWriter(
+				"component_setter.inc"));
+
+		String setter = "";
+
+		for (int i = 0; i < propertyNames.size(); i++) {
+			setter += "\tcomponentProperties->set"
+					+ propertyNames.get(i).getText() + "("
+					+ propertyNames.get(i).getText()
+					+ "()->get_sync(completion.out()));\n";
+		}
+		component_setter.write(setter);
+		component_setter.flush();
+		component_setter.close();
+
 	}
 
 	private static class WindowCloseManager extends WindowAdapter {
