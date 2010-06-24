@@ -1806,7 +1806,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			controller.startCamera();
 
 			if (updateGUIValues == null) {
-				updateGUIValues = new Timer(5000, new ActionListener() {
+				updateGUIValues = new Timer(1500, new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						try {

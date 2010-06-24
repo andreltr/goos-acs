@@ -161,37 +161,39 @@ public class gCCDComponentDAO extends ComponentClient {
 
 	//
 	public void setInitialModelValuesFromCDB() {
-		model.setActualAirTemperature(ccdCompReference.actualAirTemperature()
-				.get_sync(new alma.ACSErr.CompletionHolder()));
-		model.setActualCCDTemperature(ccdCompReference.actualCCDTemperature()
-				.get_sync(new alma.ACSErr.CompletionHolder()));
-		model.setCommandedCCDTemperature(ccdCompReference
+		model.setActualAirTemperature((double) ccdCompReference
+				.actualAirTemperature().get_sync(
+						new alma.ACSErr.CompletionHolder()));
+		model.setActualCCDTemperature((double) ccdCompReference
+				.actualCCDTemperature().get_sync(
+						new alma.ACSErr.CompletionHolder()));
+		model.setCommandedCCDTemperature((double) ccdCompReference
 				.commandedCCDTemperature().get_sync(
 						new alma.ACSErr.CompletionHolder()));
-		model.setCameraName(ccdCompReference.cameraName().get_sync(
+		model.setCameraName((String) ccdCompReference.cameraName().get_sync(
 				new alma.ACSErr.CompletionHolder()));
 		model.setCameraModel((long) ccdCompReference.cameraModel().get_sync(
 				new alma.ACSErr.CompletionHolder()));
-		model.setFilterName(ccdCompReference.filterName().get_sync(
+		model.setFilterName((String) ccdCompReference.filterName().get_sync(
 				new alma.ACSErr.CompletionHolder()));
-		model.setObjectName(ccdCompReference.objectName().get_sync(
+		model.setObjectName((String) ccdCompReference.objectName().get_sync(
 				new alma.ACSErr.CompletionHolder()));
-		model.setObserverName(ccdCompReference.observerName().get_sync(
-				new alma.ACSErr.CompletionHolder()));
-		model.setExposureTime(ccdCompReference.exposureTime().get_sync(
-				new alma.ACSErr.CompletionHolder()));
+		model.setObserverName((String) ccdCompReference.observerName()
+				.get_sync(new alma.ACSErr.CompletionHolder()));
+		model.setExposureTime((double) ccdCompReference.exposureTime()
+				.get_sync(new alma.ACSErr.CompletionHolder()));
 		model.setAcquisitionMode((long) ccdCompReference.acquisitionMode()
 				.get_sync(new alma.ACSErr.CompletionHolder()));
 		model.setNumberOfAcquisitions((long) ccdCompReference
 				.numberOfAcquisitions().get_sync(
 						new alma.ACSErr.CompletionHolder()));
-		model.setFocalLength(ccdCompReference.focalLength().get_sync(
+		model.setFocalLength((double) ccdCompReference.focalLength().get_sync(
 				new alma.ACSErr.CompletionHolder()));
-		model.setGain(ccdCompReference.gain().get_sync(
+		model.setGain((double) ccdCompReference.gain().get_sync(
 				new alma.ACSErr.CompletionHolder()));
-		model.setxPixelSize(ccdCompReference.xPixelSize().get_sync(
+		model.setxPixelSize((double) ccdCompReference.xPixelSize().get_sync(
 				new alma.ACSErr.CompletionHolder()));
-		model.setyPixelSize(ccdCompReference.yPixelSize().get_sync(
+		model.setyPixelSize((double) ccdCompReference.yPixelSize().get_sync(
 				new alma.ACSErr.CompletionHolder()));
 		model.setxStart((long) ccdCompReference.xStart().get_sync(
 				new alma.ACSErr.CompletionHolder()));
