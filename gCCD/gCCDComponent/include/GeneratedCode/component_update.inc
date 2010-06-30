@@ -36,3 +36,5 @@
 		componentProperties->getyStart());
 	yEnd()->set_sync(
 		componentProperties->getyEnd());
+	telescopeName()->set_sync(
+		componentProperties->gettelescopeName().c_str());

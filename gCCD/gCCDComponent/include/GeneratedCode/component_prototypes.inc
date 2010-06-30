@@ -17,3 +17,4 @@ virtual ACS::RWlong_ptr xStart() throw (CORBA::SystemException);
 virtual ACS::RWlong_ptr xEnd() throw (CORBA::SystemException);
 virtual ACS::RWlong_ptr yStart() throw (CORBA::SystemException);
 virtual ACS::RWlong_ptr yEnd() throw (CORBA::SystemException);
+virtual ACS::RWstring_ptr telescopeName() throw (CORBA::SystemException);

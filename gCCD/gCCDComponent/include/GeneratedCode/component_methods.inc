@@ -188,3 +188,13 @@ ACS::RWlong_ptr CCDComponent::yEnd()
 	return prop._retn();
 }
 
+ACS::RWstring_ptr CCDComponent::telescopeName()
+		throw (CORBA::SystemException) {
+	if (!m_telescopeName_sp) {
+		return ACS::RWstring::_nil();
+	}
+	ACS::RWstring_var prop = ACS::RWstring::_narrow(
+			m_telescopeName_sp->getCORBAReference());
+	return prop._retn();
+}
+

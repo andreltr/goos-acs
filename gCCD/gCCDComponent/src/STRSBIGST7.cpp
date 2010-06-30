@@ -55,6 +55,10 @@ std::string* STRSBIGST7::startExposure() {
 	 */
 	p_Cam->GrabImage(p_Img, SBDF_LIGHT_ONLY);
 	p_Img->AutoBackgroundAndRange();
+	p_Img->SetFocalLength(componentProperties->getfocalLength());
+	p_Img->SetObserver(componentProperties->getobserverName());
+	p_Img->SetFilter(componentProperties->getfilterName());
+	p_Img->SetExposureTime(componentProperties->getexposureTime());
 	p_Img->SaveImage("img1.fits", SBIF_FITS);
 
 	std::string *filenames = new string[2];
@@ -97,20 +101,3 @@ void STRSBIGST7::shutDown() {
 	p_Cam->CloseDriver();
 }
 
-void STRSBIGST7::setObserverName(std::string observerName) {
-	p_Img->SetObserver(observerName);
-	componentProperties->setobserverName(observerName);
-}
-
-std::string STRSBIGST7::getObserverName() {
-	return componentProperties->getobserverName();
-}
-
-void STRSBIGST7::setFocalLength(double focalLength) {
-	p_Img->SetFocalLength(focalLength);
-	componentProperties->setfocalLength(focalLength);
-}
-
-double STRSBIGST7::getFocalLength() {
-	return componentProperties->getfocalLength();
-}

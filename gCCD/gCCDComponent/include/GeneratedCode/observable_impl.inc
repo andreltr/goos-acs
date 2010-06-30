@@ -59,6 +59,9 @@ long ComponentProperties::getyStart() {
 long ComponentProperties::getyEnd() {
 	return yEnd;
 }
+std::string ComponentProperties::gettelescopeName() {
+	return telescopeName;
+}
 void ComponentProperties::setactualAirTemperature(double actualAirTemperature) {
 	if (this->actualAirTemperature != actualAirTemperature) {
 		this->actualAirTemperature = actualAirTemperature;
@@ -152,5 +155,10 @@ void ComponentProperties::setyStart(long yStart) {
 void ComponentProperties::setyEnd(long yEnd) {
 	if (this->yEnd != yEnd) {
 		this->yEnd = yEnd;
+	}
+}
+void ComponentProperties::settelescopeName(std::string telescopeName) {
+	if (this->telescopeName != telescopeName) {
+		this->telescopeName = telescopeName;
 	}
 }

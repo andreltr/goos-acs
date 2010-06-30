@@ -17,3 +17,4 @@
 	componentProperties->setxEnd(xEnd()->get_sync(completion.out()));
 	componentProperties->setyStart(yStart()->get_sync(completion.out()));
 	componentProperties->setyEnd(yEnd()->get_sync(completion.out()));
+	componentProperties->settelescopeName(telescopeName()->get_sync(completion.out()));
