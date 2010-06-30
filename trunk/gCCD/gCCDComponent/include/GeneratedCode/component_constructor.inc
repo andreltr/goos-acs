@@ -20,6 +20,7 @@ CCDComponent::CCDComponent(const ACE_CString& name,
 			, m_xEnd_sp(this)
 			, m_yStart_sp(this)
 			, m_yEnd_sp(this)
+			, m_telescopeName_sp(this)
 {
 	m_actualAirTemperature_sp = new ROdouble(name + ":actualAirTemperature", getComponent());
 	m_actualCCDTemperature_sp = new ROdouble(name + ":actualCCDTemperature", getComponent());
@@ -40,4 +41,5 @@ CCDComponent::CCDComponent(const ACE_CString& name,
 	m_xEnd_sp = new RWlong(name + ":xEnd", getComponent());
 	m_yStart_sp = new RWlong(name + ":yStart", getComponent());
 	m_yEnd_sp = new RWlong(name + ":yEnd", getComponent());
+	m_telescopeName_sp = new RWstring(name + ":telescopeName", getComponent());
 }

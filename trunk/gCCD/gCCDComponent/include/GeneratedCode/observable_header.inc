@@ -20,6 +20,7 @@ public:
 	long getxEnd();
 	long getyStart();
 	long getyEnd();
+	std::string gettelescopeName();
 	void setactualAirTemperature(double actualAirTemperature);
 	void setactualCCDTemperature(double actualCCDTemperature);
 	void setcommandedCCDTemperature(double commandedCCDTemperature);
@@ -39,6 +40,7 @@ public:
 	void setxEnd(long xEnd);
 	void setyStart(long yStart);
 	void setyEnd(long yEnd);
+	void settelescopeName(std::string telescopeName);
 protected:
 private:
 	double actualAirTemperature;
@@ -60,3 +62,4 @@ private:
 	long xEnd;
 	long yStart;
 	long yEnd;
+	std::string telescopeName;

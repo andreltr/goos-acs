@@ -61,6 +61,7 @@ module CCDmodule
 		readonly attribute ACS::RWlong xEnd;
 		readonly attribute ACS::RWlong yStart;
 		readonly attribute ACS::RWlong yEnd;
+		readonly attribute ACS::RWstring telescopeName;
 
 	};
 
