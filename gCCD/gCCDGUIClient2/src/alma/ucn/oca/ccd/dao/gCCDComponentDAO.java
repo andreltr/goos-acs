@@ -88,8 +88,7 @@ public class gCCDComponentDAO extends ComponentClient {
 
 	// This method calls the CCD component and asks for an image.
 	// It also prepares the NC consumer to start receiving notifications.
-	public void startExposure(int width, int height, int acquisitionMode,
-			int numberOfAcc, float exposureTime) {
+	public void startExposure() {
 		m_logger.info("INFO: Starting exposure...");
 		try {
 			l_filenames = null;
@@ -105,14 +104,27 @@ public class gCCDComponentDAO extends ComponentClient {
 			m_logger.info("EXCEPTION: Consumer has been disconnected");
 			this.disconnectConsumer();
 		}
-		m_logger.info("INFO: Consumer is ready");
-		m_logger.info("INFO: acq Mode: " + acquisitionMode);
-		m_logger.info("INFO: fpf number of acc: " + numberOfAcc);
-		m_logger.info("INFO: exposure time: " + exposureTime);
-		ccdCompReference.acquisitionMode().set_sync(acquisitionMode);
-		ccdCompReference.numberOfAcquisitions().set_sync(numberOfAcc);
-		ccdCompReference.exposureTime().set_sync(exposureTime);
+
+		ccdCompReference.observerName().set_sync(
+				(String) model.getObserverName());
+		ccdCompReference.objectName().set_sync((String) model.getObjectName());
+		ccdCompReference.telescopeName().set_sync(
+				(String) model.getTelescopeName());
+		ccdCompReference.acquisitionMode().set_sync(
+				(int) model.getAcquisitionMode());
+		ccdCompReference.numberOfAcquisitions().set_sync(
+				(int) model.getNumberOfAcquisitions());
+		ccdCompReference.exposureTime().set_sync(
+				(double) model.getExposureTime());
 		ccdCompReference.startExposure();
+
+		System.out.println((String) ccdCompReference.objectName().get_sync(
+				new alma.ACSErr.CompletionHolder()));
+		System.out.println((String) ccdCompReference.observerName().get_sync(
+				new alma.ACSErr.CompletionHolder()));
+		System.out.println((String) ccdCompReference.telescopeName().get_sync(
+				new alma.ACSErr.CompletionHolder()));
+
 		getCurrentState();
 	}
 
@@ -203,6 +215,8 @@ public class gCCDComponentDAO extends ComponentClient {
 				new alma.ACSErr.CompletionHolder()));
 		model.setyEnd((long) ccdCompReference.yEnd().get_sync(
 				new alma.ACSErr.CompletionHolder()));
+		model.setTelescopeName((String) ccdCompReference.telescopeName().get_sync(
+				new alma.ACSErr.CompletionHolder()));
 	}
 
 	// Returns a reference to the ACS component
@@ -230,6 +244,7 @@ public class gCCDComponentDAO extends ComponentClient {
 			l_filenames.add(newImageEvent.fileName);
 			// To actually update the list
 			model.setListFiles((LinkedList<String>) l_filenames.clone());
+			model.fileReceived(lastNotification);
 			m_logger.info("INFO: Last added: " + l_filenames.getLast());
 		} else if ((newImageEvent.type.toString()).equals("END_SUBSCRIPTION")) {
 			m_logger.info("INFO: 'END_SUBSCRIPTION' Notification received");
