@@ -44,6 +44,7 @@ public class DefaultController extends AbstractController {
 	public static final String COMP_X_END = "xEnd";
 	public static final String COMP_Y_START = "yStart";
 	public static final String COMP_Y_END = "yEnd";
+	public static final String COMP_TELESCOPE_NAME = "TelescopeName";
 	public static final String COMP_ORIGINAL_SIZE = "OriginalSize";
 	public static final String COMP_CURRENT_IMAGE = "CurrentImage";
 
@@ -51,6 +52,7 @@ public class DefaultController extends AbstractController {
 	public static final String COMP_CAMERA_MODELS = "CCDModels";
 	public static final String COMP_SELECTED_MODEL = "SelectedCamera";
 	public static final String COMP_LIST_FILES = "ListFiles";
+	public static final String COMP_FILE_RECEIVED = "fileReceived";
 	public static final String COMP_END_SUBSCRIPTION = "endSubscription";
 
 	public static final String COMP_CONNECT_METHOD = "connectToCamera";
@@ -140,6 +142,10 @@ public class DefaultController extends AbstractController {
 	public void changeCompyEnd(long newyEnd) {
 		setModelProperty(COMP_Y_END, newyEnd);
 	}
+	
+	public void changeCompTelescopeName(String newTelescopeName) {
+		setModelProperty(COMP_TELESCOPE_NAME, newTelescopeName);
+	}
 
 	public void changeCompOriginalSize(boolean newOriginalSize) {
 		setModelProperty(COMP_ORIGINAL_SIZE, newOriginalSize);
@@ -163,6 +169,10 @@ public class DefaultController extends AbstractController {
 
 	public void changeCompListFiles(int newListFiles) {
 		setModelProperty(COMP_LIST_FILES, newListFiles);
+	}
+	
+	public void changeCompFileReceived() throws Exception {
+		useMethod(COMP_FILE_RECEIVED);
 	}
 
 	public void changeCompEndSubscription() throws Exception {

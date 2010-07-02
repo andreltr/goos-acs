@@ -2,6 +2,7 @@ package alma.ucn.oca.ccd.model;
 
 import alma.ucn.oca.ccd.controller.DefaultController;
 import alma.ucn.oca.ccd.dao.gCCDComponentDAO;
+import alma.ucn.oca.ccd.utils.gCCDNCEvent;
 
 //import java.beans.PropertyChangeEvent;
 import java.util.LinkedList;
@@ -34,6 +35,8 @@ public class gCCDComponentModel extends AbstractModel {
 	private long xEnd;
 	private long yStart;
 	private long yEnd;
+	private String telescopeName;
+	private gCCDNCEvent lastNotification;
 
 	//
 	private int currentState;
@@ -68,6 +71,7 @@ public class gCCDComponentModel extends AbstractModel {
 		xEnd = -1;
 		yStart = -1;
 		yEnd = -1;
+		telescopeName = "none";
 
 		managerLoc = System.getProperty("ACS.manager");
 		if (managerLoc == null) {
@@ -160,8 +164,7 @@ public class gCCDComponentModel extends AbstractModel {
 
 	public void startExposure() {
 		if (ccd_dao != null) {
-			ccd_dao.startExposure(640, 480, (int) acquisitionMode,
-					(int) numberOfAcquisitions, (float) exposureTime);
+			ccd_dao.startExposure();
 		}
 	}
 
@@ -195,6 +198,13 @@ public class gCCDComponentModel extends AbstractModel {
 		if (ccd_dao != null) {
 			ccd_dao.setCurrentModelValuesFromComponent();
 		}
+	}
+	
+	public void fileReceived(gCCDNCEvent lastNotification) {
+		gCCDNCEvent oldLastNotification = this.lastNotification;
+		this.lastNotification = lastNotification;
+		
+		firePropertyChange(DefaultController.COMP_FILE_RECEIVED, oldLastNotification, lastNotification);
 	}
 
 	public void endSubscription() {
@@ -617,6 +627,26 @@ public class gCCDComponentModel extends AbstractModel {
 	 */
 	public long getyEnd() {
 		return yEnd;
+	}
+	
+	/**
+	 * @param telescopeName
+	 *            the telescopeName to set
+	 */
+
+	public void setTelescopeName(String telescopeName) {
+		String oldTelescopeName = this.telescopeName;
+		this.telescopeName = telescopeName;
+
+		firePropertyChange(DefaultController.COMP_TELESCOPE_NAME, oldTelescopeName,
+				telescopeName);
+	}
+	
+	/**
+	 * @return the telescopeName
+	 */
+	public String getTelescopeName() {
+		return telescopeName;
 	}
 
 	/**

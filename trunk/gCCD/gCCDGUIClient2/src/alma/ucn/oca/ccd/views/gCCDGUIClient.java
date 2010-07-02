@@ -21,6 +21,7 @@ import magick.*;
 import alma.ucn.oca.ccd.controller.DefaultController;
 import alma.ucn.oca.ccd.utils.gCCDFileSelectorDialog;
 import alma.ucn.oca.ccd.utils.gCCDImagePanel;
+import alma.ucn.oca.ccd.utils.gCCDNCEvent;
 
 /**
  * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
@@ -64,11 +65,19 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JLabel jLabelCCDTemp;
 	private JLabel jLabelCCDModels;
 	private JButton jButtonCCDOn;
+	private JTextField jTextFieldImageInfoTabObserverName;
+	private JTextField jTextFieldImageInfoTabTelescopeName;
+	private JTextField jTextFieldImageInfoTabObjectName;
+	private JLabel jLabelImageInfoTabTelescopeName;
+	private JLabel jLabelImageInfoTabObserverName;
+	private JLabel jLabelImageInfoTabObjectName;
+	private JPanel jPanelTabImageInfo;
 	private JFrame jFrameAboutDialog;
 	private JFrame jFrameErrorDialog;
 	private JFrame jFrameCoolerTempDialog;
 	private JFrame jFrameExpTimeDialog;
 	private JFrame jFrameAccDialog;
+	private JFrame jFrameAcquiring;
 	private JPanel jPanel2;
 	private JPanel jPanel1;
 	private JMenuItem jMenuItemHelpAbout;
@@ -84,7 +93,6 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JMenuItem jMenuItemCCDControlStopCooler;
 	private JMenuItem jMenuItemCCDControlStartCooler;
 	private JSeparator jSeparator5;
-	private JMenuItem jMenuItemCCDControlStopExp;
 	private JMenuItem jMenuItemCCDControlStartExp;
 	private JSeparator jSeparator4;
 	private JMenuItem jMenuItemCCDControlReset;
@@ -151,6 +159,17 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private boolean coolerOn;
 	private boolean ccdOn;
 	private boolean acquiring;
+
+	private JLabel jLabelcurrentReceivedFile;
+	private JLabel jLabeltotalFiles;
+
+	private int currentReceivedFile;
+	private int totalFiles;
+
+	private JProgressBar progressBar;
+	private Object[] acquiringDialogMessage;
+	private JOptionPane jOptionPaneAcquiring;
+	private JDialog dialog;
 
 	/**
 	 * Auto-generated main method to display this JFrame
@@ -485,11 +504,6 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 												0.0, GridBagConstraints.CENTER,
 												GridBagConstraints.NONE,
 												new Insets(0, 0, 0, 0), 0, 0));
-								jPanelCCDControl.add(getJButtonCCDStopExp(),
-										new GridBagConstraints(2, 2, 1, 1, 0.0,
-												0.0, GridBagConstraints.CENTER,
-												GridBagConstraints.NONE,
-												new Insets(0, 0, 0, 0), 0, 0));
 								jPanelCCDControl.add(
 										getJButtonCCDStartCooler(),
 										new GridBagConstraints(3, 1, 1, 1, 0.0,
@@ -509,6 +523,8 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 							GridBagLayout jPanelImageOptionsLayout = new GridBagLayout();
 							jTabbedPaneOptions.addTab("Image Options", null,
 									jPanelImageOptions, null);
+							jTabbedPaneOptions.addTab("Image Information",
+									null, getJPanelImageInfoTab(), null);
 
 							jPanelImageOptionsLayout.rowWeights = new double[] {
 									0.1, 0.1, 0.1, 0.1 };
@@ -635,7 +651,6 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 					jMenuCCDControl.add(getJMenuItemCCDControlReset());
 					jMenuCCDControl.add(getJSeparator4());
 					jMenuCCDControl.add(getJMenuItemCCDControlStartExp());
-					jMenuCCDControl.add(getJMenuItemCCDControlStopExp());
 					jMenuCCDControl.add(getJSeparator5());
 					jMenuCCDControl.add(getJMenuItemCCDControlStartCooler());
 					jMenuCCDControl.add(getJMenuItemCCDControlStopCooler());
@@ -678,10 +693,13 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		jTabbedPaneOptions.setEnabledAt(1, false);
 		jTabbedPaneOptions.setEnabledAt(2, false);
 		jTabbedPaneOptions.setEnabledAt(3, false);
+		jTabbedPaneOptions.setEnabledAt(4, false);
 
 		jMenuCCDSettings.setEnabled(false);
 		jMenuCCDControl.setEnabled(false);
 		jMenuImageOptions.setEnabled(false);
+
+		getJButtonCCDStopExp();
 	}
 
 	private ButtonGroup getButtonGroupCCDSettingsMenuScanType() {
@@ -1026,6 +1044,22 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		return jLabelCCDInfoCameaSt;
 	}
 
+	private JLabel getJLabelCurrentReceivedFile() {
+		if (jLabelcurrentReceivedFile == null) {
+			jLabelcurrentReceivedFile = new JLabel();
+			jLabelcurrentReceivedFile.setText("" + currentReceivedFile);
+		}
+		return jLabelcurrentReceivedFile;
+	}
+
+	private JLabel getJLabelTotalFiles() {
+		if (jLabeltotalFiles == null) {
+			jLabeltotalFiles = new JLabel();
+			jLabeltotalFiles.setText("" + totalFiles);
+		}
+		return jLabeltotalFiles;
+	}
+
 	private JMenuItem getJMenuCCDSetupModels() {
 		if (jMenuItemCCDSetupModels == null) {
 			jMenuItemCCDSetupModels = new JMenuItem();
@@ -1232,21 +1266,6 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			});
 		}
 		return jMenuItemCCDControlStartExp;
-	}
-
-	private JMenuItem getJMenuItemCCDControlStopExp() {
-		if (jMenuItemCCDControlStopExp == null) {
-			jMenuItemCCDControlStopExp = new JMenuItem();
-			jMenuItemCCDControlStopExp.setText("Stop Exposure");
-			jMenuItemCCDControlStopExp.setEnabled(false);
-			jMenuItemCCDControlStopExp.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					stopExposureAction(e);
-				}
-			});
-		}
-		return jMenuItemCCDControlStopExp;
 	}
 
 	private JSeparator getJSeparator5() {
@@ -1548,8 +1567,39 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		}
 		Object[] message = { "Set number of accumulations: ",
 				jSpinnerCCDNAccDialog };
-		JOptionPane.showMessageDialog(jFrameExpTimeDialog, message,
+		JOptionPane.showMessageDialog(jFrameAccDialog, message,
 				"Set number of accumulations...", JOptionPane.OK_CANCEL_OPTION);
+	}
+
+	private void getJDialogAcquiring() {
+		if (jFrameAcquiring == null) {
+			jFrameAcquiring = new JFrame();
+			progressBar = new JProgressBar(0, Integer
+					.parseInt(getJLabelTotalFiles().getText()));
+			acquiringDialogMessage = new Object[2];
+		}
+
+		progressBar.setValue(0);
+		progressBar.setStringPainted(true);
+
+		acquiringDialogMessage[0] = "Receiving image "
+				+ getJLabelCurrentReceivedFile().getText() + " of "
+				+ getJLabelTotalFiles().getText();
+		acquiringDialogMessage[1] = progressBar;
+
+		Object[] options = { getJButtonCCDStopExp() };
+
+		jOptionPaneAcquiring = new JOptionPane("Acquiring...",
+				JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
+				options, null);
+		dialog = new JDialog(jFrameAcquiring, "Click a button", true);
+		dialog.setContentPane(jOptionPaneAcquiring);
+		dialog.setVisible(true);
+		/*
+		 * JOptionPane.showOptionDialog(jFrameAcquiring, acquiringDialogMessage,
+		 * "Acquiring...", JOptionPane.DEFAULT_OPTION,
+		 * JOptionPane.PLAIN_MESSAGE, null, options, null);
+		 */
 	}
 
 	private JFileChooser getJDialogFilechooser() {
@@ -1627,6 +1677,24 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			listFiles = newStringValue;
 			imgMax = listFiles.size();
 			showImageAction(null, 0);
+
+		} else if (evt.getPropertyName().equals(
+				DefaultController.COMP_FILE_RECEIVED)) {
+			System.out.println("Notificacion");
+			gCCDNCEvent newNotification = (gCCDNCEvent) evt.getNewValue();
+			jLabelcurrentReceivedFile.setText("" + newNotification.getID());
+			jLabeltotalFiles.setText("" + newNotification.getTotal());
+
+			progressBar.setValue((int) newNotification.getID());
+			progressBar.setStringPainted(true);
+
+			acquiringDialogMessage[0] = "Receiving image "
+					+ getJLabelCurrentReceivedFile().getText() + " of "
+					+ getJLabelTotalFiles().getText();
+			acquiringDialogMessage[1] = progressBar;
+
+			dialog.validate();
+
 		} else if (evt.getPropertyName().equals(
 				DefaultController.COMP_END_SUBSCRIPTION)) {
 			jButtonCCDStopExp.setEnabled(false);
@@ -1637,13 +1705,15 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jButtonCCDStartCooler.setEnabled(!coolerOn);
 			jButtonCCDStopCooler.setEnabled(coolerOn);
 
-			jMenuItemCCDControlStopExp.setEnabled(false);
 			jMenuItemCCDControlStartExp.setEnabled(true);
 			jMenuItemCCDControlReset.setEnabled(true);
 			jMenuItemCCDControlOff.setEnabled(true);
 			//
 			jMenuItemCCDControlStartCooler.setEnabled(!coolerOn);
 			jMenuItemCCDControlStopCooler.setEnabled(coolerOn);
+
+			dialog.setVisible(false);
+			dialog.setAlwaysOnTop(false);
 		}
 
 		else if (evt.getPropertyName().equals(
@@ -1695,6 +1765,27 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	}
 
 	// Methods that change the model
+
+	private void changeObserverNameActionPerformed(ActionEvent evt) {
+
+		controller.changeCompObserverName(jTextFieldImageInfoTabObserverName
+				.getText());
+
+	}
+
+	private void changeObjectNameActionPerformed(ActionEvent evt) {
+
+		controller.changeCompObjectName(jTextFieldImageInfoTabObjectName
+				.getText());
+
+	}
+
+	private void changeTelescopeNameActionPerformed(ActionEvent evt) {
+
+		controller.changeCompTelescopeName(jTextFieldImageInfoTabTelescopeName
+				.getText());
+
+	}
 
 	private void exposureTimeSpinnerStateChanged(
 			javax.swing.event.ChangeEvent evt) {
@@ -1756,6 +1847,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jTabbedPaneOptions.setEnabledAt(1, true);
 			jTabbedPaneOptions.setEnabledAt(2, true);
 			jTabbedPaneOptions.setEnabledAt(3, true);
+			jTabbedPaneOptions.setEnabledAt(4, true);
 
 			jMenuItemCCDSetupConnect.setEnabled(false);
 			jMenuItemCCDSetupDisconnect.setEnabled(true);
@@ -1789,6 +1881,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jTabbedPaneOptions.setEnabledAt(1, false);
 			jTabbedPaneOptions.setEnabledAt(2, false);
 			jTabbedPaneOptions.setEnabledAt(3, false);
+			jTabbedPaneOptions.setEnabledAt(4, false);
 
 			jMenuItemCCDSetupConnect.setEnabled(true);
 			jMenuItemCCDSetupDisconnect.setEnabled(false);
@@ -1882,12 +1975,14 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jButtonCCDStartCooler.setEnabled(false);
 			jButtonCCDStopCooler.setEnabled(false);
 
-			jMenuItemCCDControlStopExp.setEnabled(true);
 			jMenuItemCCDControlStartExp.setEnabled(false);
 			jMenuItemCCDControlReset.setEnabled(false);
 			jMenuItemCCDControlOff.setEnabled(false);
 			jMenuItemCCDControlStartCooler.setEnabled(false);
 			jMenuItemCCDControlStopCooler.setEnabled(false);
+
+			getJDialogAcquiring();
+
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -1897,6 +1992,9 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		try {
 			controller.stopExposure();
 
+			jFrameAcquiring.setVisible(false);
+			jFrameAcquiring.setAlwaysOnTop(false);
+
 			jButtonCCDStopExp.setEnabled(false);
 			jButtonCCDStartExp.setEnabled(true);
 			jButtonCCDReset.setEnabled(true);
@@ -1905,7 +2003,6 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jButtonCCDStartCooler.setEnabled(!coolerOn);
 			jButtonCCDStopCooler.setEnabled(coolerOn);
 
-			jMenuItemCCDControlStopExp.setEnabled(false);
 			jMenuItemCCDControlStartExp.setEnabled(true);
 			jMenuItemCCDControlReset.setEnabled(true);
 			jMenuItemCCDControlOff.setEnabled(true);
@@ -2050,5 +2147,110 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 
 		image2.setFileName(imagePath);
 		image2.writeImage(info2);
+	}
+
+	private JPanel getJPanelImageInfoTab() {
+		if (jPanelTabImageInfo == null) {
+			jPanelTabImageInfo = new JPanel();
+			GridBagLayout jPanelTabImageInfoLayout = new GridBagLayout();
+			jPanelTabImageInfoLayout.rowWeights = new double[] { 0.1, 0.1, 0.1,
+					0.1, 0.1 };
+			jPanelTabImageInfoLayout.rowHeights = new int[] { 7, 7, 7, 7, 7 };
+			jPanelTabImageInfoLayout.columnWeights = new double[] { 0.1, 0.1,
+					0.1 };
+			jPanelTabImageInfoLayout.columnWidths = new int[] { 7, 7, 7 };
+			jPanelTabImageInfo.setLayout(jPanelTabImageInfoLayout);
+			jPanelTabImageInfo.add(getJLabelImageInfoTabObjectName(),
+					new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
+							GridBagConstraints.CENTER, GridBagConstraints.NONE,
+							new Insets(0, 0, 0, 0), 0, 0));
+			jPanelTabImageInfo.add(getJLabelImageInfoTabObserverName(),
+					new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0,
+							GridBagConstraints.CENTER, GridBagConstraints.NONE,
+							new Insets(0, 0, 0, 0), 0, 0));
+			jPanelTabImageInfo.add(getJLabelImageInfoTabTelescopeName(),
+					new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
+							GridBagConstraints.CENTER, GridBagConstraints.NONE,
+							new Insets(0, 0, 0, 0), 0, 0));
+			jPanelTabImageInfo.add(getJTextFieldImageInfoTabObjectName(),
+					new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
+							GridBagConstraints.CENTER,
+							GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0,
+									0), 0, 0));
+			jPanelTabImageInfo.add(getJTextFieldImageInfoTabTelescopeName(),
+					new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
+							GridBagConstraints.CENTER,
+							GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0,
+									0), 0, 0));
+			jPanelTabImageInfo.add(getJTextFieldImageInfoTabObserverName(),
+					new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0,
+							GridBagConstraints.CENTER,
+							GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0,
+									0), 0, 0));
+		}
+		return jPanelTabImageInfo;
+	}
+
+	private JLabel getJLabelImageInfoTabObjectName() {
+		if (jLabelImageInfoTabObjectName == null) {
+			jLabelImageInfoTabObjectName = new JLabel();
+			jLabelImageInfoTabObjectName.setText("Object Name:");
+		}
+		return jLabelImageInfoTabObjectName;
+	}
+
+	private JLabel getJLabelImageInfoTabObserverName() {
+		if (jLabelImageInfoTabObserverName == null) {
+			jLabelImageInfoTabObserverName = new JLabel();
+			jLabelImageInfoTabObserverName.setText("Observer Name:");
+		}
+		return jLabelImageInfoTabObserverName;
+	}
+
+	private JLabel getJLabelImageInfoTabTelescopeName() {
+		if (jLabelImageInfoTabTelescopeName == null) {
+			jLabelImageInfoTabTelescopeName = new JLabel();
+			jLabelImageInfoTabTelescopeName.setText("Telescope Name:");
+		}
+		return jLabelImageInfoTabTelescopeName;
+	}
+
+	private JTextField getJTextFieldImageInfoTabObjectName() {
+		if (jTextFieldImageInfoTabObjectName == null) {
+			jTextFieldImageInfoTabObjectName = new JTextField();
+			jTextFieldImageInfoTabObjectName
+					.addActionListener(new java.awt.event.ActionListener() {
+						public void actionPerformed(ActionEvent evt) {
+							changeObjectNameActionPerformed(evt);
+						}
+					});
+		}
+		return jTextFieldImageInfoTabObjectName;
+	}
+
+	private JTextField getJTextFieldImageInfoTabTelescopeName() {
+		if (jTextFieldImageInfoTabTelescopeName == null) {
+			jTextFieldImageInfoTabTelescopeName = new JTextField();
+			jTextFieldImageInfoTabTelescopeName
+					.addActionListener(new java.awt.event.ActionListener() {
+						public void actionPerformed(ActionEvent evt) {
+							changeTelescopeNameActionPerformed(evt);
+						}
+					});
+		}
+		return jTextFieldImageInfoTabTelescopeName;
+	}
+
+	private JTextField getJTextFieldImageInfoTabObserverName() {
+		if (jTextFieldImageInfoTabObserverName == null) {
+			jTextFieldImageInfoTabObserverName = new JTextField();
+			jTextFieldImageInfoTabObserverName
+					.addActionListener(new java.awt.event.ActionListener() {
+						public void actionPerformed(ActionEvent evt) {
+							changeObserverNameActionPerformed(evt);
+						}
+					});
+		}
+		return jTextFieldImageInfoTabObserverName;
 	}
 }
