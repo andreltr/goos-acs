@@ -75,6 +75,8 @@ Then you can execute *./configure* again and follow the rest of the installation
 
 To install CCfits, you must download the rpm files available in the Downloads section of this site and install them:
 
+ * *cfitsio-3.030-1.sl5.i386.rpm*
+ * *cfitsio-devel-3.030-1.sl5.i386.rpm*
  * *CCfits-1.7-1.fc6.i386.rpm*
  * *CCfits-devel-1.7-1.fc6.i386.rpm*
 
