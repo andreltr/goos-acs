@@ -68,7 +68,7 @@ public class DAO extends ComponentClient {
 		//getCurrentState();
 	}
 
-	public void getCurrentState() {
+	public void getCurrentState() { //Opción a borrar
 		//model.setCurrentState(gDomeCompReference.getState(new alma.ACSErr.CompletionHolder()));
 		gDomeCompReference.displayMessage();
 	}
@@ -126,6 +126,26 @@ public class DAO extends ComponentClient {
 	}
 	
 	public void rotateLeft(double radians){
+		m_logger.info("INFO: Rotating Dome!");
 		gDomeCompReference.domeCurrentPosition().set_sync((double) radians);
+		m_logger.info("INFO: Current Position: "+gDomeCompReference.domeCurrentPosition().get_sync(new alma.ACSErr.CompletionHolder()));
+	}
+	
+	public void rotateRight(double radians){
+		m_logger.info("INFO: Rotating Dome!");
+		gDomeCompReference.domeCurrentPosition().set_sync((double) radians);
+		m_logger.info("INFO: Current Position: "+gDomeCompReference.domeCurrentPosition().get_sync(new alma.ACSErr.CompletionHolder()));
+	}
+	
+	public void openSlit() {
+		m_logger.info("INFO: Opening the slit");
+		gDomeCompReference.slitCurrentState().set_sync(1);
+		m_logger.info("INFO: Current Slite State:"+gDomeCompReference.slitCurrentState().get_sync(new alma.ACSErr.CompletionHolder()));
+	}
+	
+	public void closeSlit() {
+		m_logger.info("INFO: Closing the slit");
+		gDomeCompReference.slitCurrentState().set_sync(0);
+		m_logger.info("INFO: Current Slite State:"+gDomeCompReference.slitCurrentState().get_sync(new alma.ACSErr.CompletionHolder()));
 	}
 }

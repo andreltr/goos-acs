@@ -56,12 +56,12 @@ public class gDomeGUIview extends javax.swing.JFrame {
 	private JMenuItem newFileMenuItem;
 	private JMenu jMenu3;
 	private JMenuBar jMenuBar1;
-	private Object controller;
 	private Model d_model;
+	
 
-	public gDomeGUIview(Object controller) {
+	public gDomeGUIview(Model controller) {
 		super();
-		this.controller = controller;
+		this.d_model = controller;
 		initGUI();
 		this.addWindowListener(new WindowCloseManager());
 	}
@@ -286,7 +286,7 @@ public class gDomeGUIview extends javax.swing.JFrame {
 	}
 	
 	private void actionPressRotateLeft(){
-		//d_model.rotateLeft((double)3);
+		d_model.rotateLeft((Double)jSpinnerDegrees.getValue());
 	
 	}
 		
