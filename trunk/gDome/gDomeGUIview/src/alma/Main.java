@@ -13,9 +13,22 @@ public class Main {
 
 	/** Creates a new instance of Main */
 	public Main() {
-		//Controller controller = new Controller();
+		Model d_model = null;
+		try {
+			d_model = new Model();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 
-		gDomeGUIview userInterface = new gDomeGUIview(new Object()); //Enviar controller 
+		gDomeGUIview userInterface = new gDomeGUIview(d_model); //Enviar controller
+		
+		try {
+			d_model.connectToComponent();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		/*Model componentModel = null;
 

@@ -95,4 +95,23 @@ public class Model extends AbstractModel {
 			dome_dao.rotateLeft(radians);
 		}
 	}
+	
+	public void rotateRight(double radians) {
+		if (dome_dao != null) {
+			dome_dao.rotateRight(radians);
+		}
+	}
+	
+	public void openSlit() {
+		if (dome_dao != null) {
+			dome_dao.openSlit();
+		}
+	}
+	
+	public void closeSlit() {
+		if (dome_dao != null) {
+			dome_dao.closeSlit();
+		}
+	}
+	
 }
