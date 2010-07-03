@@ -1,0 +1,764 @@
+Application time: 1.9213110 seconds
+Total time for which application threads were stopped: 0.0002220 seconds
+Application time: 0.6887920 seconds
+12.772: [Full GC (System) 12.773: [CMS: 0K->770K(49152K), 0.7066090 secs] 9057K->770K(63936K), [CMS Perm : 5176K->5171K(16384K)], 0.7067470 secs] [Times: user=0.04 sys=0.09, real=0.11 secs] 
+Total time for which application threads were stopped: 0.7071550 seconds
+Application time: 0.0003190 seconds
+13.480: [GC [1 CMS-initial-mark: 770K(49152K)] 770K(63936K), 0.0003140 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0006300 seconds
+13.480: [CMS-concurrent-mark-start]
+Application time: 0.1284790 seconds
+13.609: [Full GC (System) 13.609: [CMS13.628: [CMS-concurrent-mark: 0.019/0.148 secs] [Times: user=0.02 sys=0.02, real=0.08 secs] 
+ (concurrent mode interrupted): 770K->769K(49152K), 0.0533820 secs] 1284K->769K(63936K), [CMS Perm : 5265K->5265K(16384K)], 0.0535930 secs] [Times: user=0.05 sys=0.00, real=0.04 secs] 
+Total time for which application threads were stopped: 0.0542380 seconds
+Application time: 1.5636410 seconds
+Total time for which application threads were stopped: 0.0003180 seconds
+Application time: 0.9518960 seconds
+16.179: [Full GC (System) 16.179: [CMS: 769K->1287K(49152K), 0.1052880 secs] 3099K->1287K(63936K), [CMS Perm : 7163K->7158K(16384K)], 0.1054040 secs] [Times: user=0.05 sys=0.01, real=0.06 secs] 
+Total time for which application threads were stopped: 0.1057170 seconds
+Application time: 0.0001610 seconds
+16.285: [GC [1 CMS-initial-mark: 1287K(49152K)] 1287K(63936K), 0.0004360 secs] [Times: user=0.01 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0007960 seconds
+16.286: [CMS-concurrent-mark-start]
+Application time: 0.0002260 seconds
+Total time for which application threads were stopped: 0.0000610 seconds
+Application time: 0.0000810 seconds
+Total time for which application threads were stopped: 0.0000580 seconds
+Application time: 0.0000610 seconds
+Total time for which application threads were stopped: 0.0000500 seconds
+Application time: 0.0000600 seconds
+Total time for which application threads were stopped: 0.0000500 seconds
+Application time: 0.0041760 seconds
+16.291: [Full GC (System) 16.291: [CMS16.318: [CMS-concurrent-mark: 0.027/0.032 secs] [Times: user=0.02 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1287K->1272K(49152K), 0.0728000 secs] 1683K->1272K(63936K), [CMS Perm : 7158K->7158K(16384K)], 0.0729300 secs] [Times: user=0.06 sys=0.01, real=0.06 secs] 
+Total time for which application threads were stopped: 0.0737170 seconds
+Application time: 0.1679930 seconds
+16.532: [Full GC (System) 16.532: [CMS: 1272K->1328K(49152K), 0.0487010 secs] 1668K->1328K(63936K), [CMS Perm : 7182K->7182K(16384K)], 0.0488430 secs] [Times: user=0.05 sys=0.00, real=0.04 secs] 
+Total time for which application threads were stopped: 0.0491310 seconds
+Application time: 0.0002070 seconds
+16.585: [GC [1 CMS-initial-mark: 1328K(49152K)] 1328K(63936K), 0.0005830 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0039970 seconds
+16.585: [CMS-concurrent-mark-start]
+Application time: 0.0002210 seconds
+Total time for which application threads were stopped: 0.0000860 seconds
+Application time: 0.0000840 seconds
+Total time for which application threads were stopped: 0.0000520 seconds
+Application time: 0.0000910 seconds
+Total time for which application threads were stopped: 0.0000610 seconds
+Application time: 0.0000630 seconds
+Total time for which application threads were stopped: 0.0000530 seconds
+Application time: 0.0009040 seconds
+16.587: [Full GC (System) 16.587: [CMS16.612: [CMS-concurrent-mark: 0.025/0.027 secs] [Times: user=0.02 sys=0.01, real=0.02 secs] 
+ (concurrent mode interrupted): 1328K->1328K(49152K), 0.0699000 secs] 1460K->1328K(63936K), [CMS Perm : 7182K->7182K(16384K)], 0.0700180 secs] [Times: user=0.07 sys=0.00, real=0.06 secs] 
+Total time for which application threads were stopped: 0.0703470 seconds
+Application time: 0.1253850 seconds
+16.783: [Full GC (System) 16.783: [CMS: 1328K->1314K(49152K), 0.0453250 secs] 1724K->1314K(63936K), [CMS Perm : 7187K->7187K(16384K)], 0.0455860 secs] [Times: user=0.04 sys=0.00, real=0.04 secs] 
+Total time for which application threads were stopped: 0.0459630 seconds
+Application time: 0.0001510 seconds
+16.829: [GC [1 CMS-initial-mark: 1314K(49152K)] 1314K(63936K), 0.0004660 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0008390 seconds
+16.830: [CMS-concurrent-mark-start]
+Application time: 0.0001800 seconds
+Total time for which application threads were stopped: 0.0000580 seconds
+Application time: 0.0000790 seconds
+Total time for which application threads were stopped: 0.0000740 seconds
+Application time: 0.0000610 seconds
+Total time for which application threads were stopped: 0.0000500 seconds
+Application time: 0.0000600 seconds
+Total time for which application threads were stopped: 0.0000500 seconds
+Application time: 0.0505650 seconds
+16.881: [Full GC (System) 16.901: [CMS16.936: [CMS-concurrent-mark: 0.034/0.106 secs] [Times: user=0.04 sys=0.00, real=0.03 secs] 
+ (concurrent mode interrupted): 1314K->1314K(49152K), 0.0833780 secs] 1446K->1314K(63936K), [CMS Perm : 7187K->7187K(16384K)], 0.0839090 secs] [Times: user=0.08 sys=0.01, real=0.07 secs] 
+Total time for which application threads were stopped: 0.1045630 seconds
+Application time: 18.0545790 seconds
+35.040: [Full GC (System) 35.040: [CMS: 1314K->1313K(49152K), 0.0433240 secs] 1446K->1313K(63936K), [CMS Perm : 7187K->7187K(16384K)], 0.0434600 secs] [Times: user=0.04 sys=0.00, real=0.03 secs] 
+Total time for which application threads were stopped: 0.0438060 seconds
+Application time: 0.0001370 seconds
+35.084: [GC [1 CMS-initial-mark: 1313K(49152K)] 1313K(63936K), 0.0004100 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0005720 seconds
+35.084: [CMS-concurrent-mark-start]
+Application time: 0.0004870 seconds
+35.085: [Full GC (System) 35.085: [CMS35.110: [CMS-concurrent-mark: 0.025/0.025 secs] [Times: user=0.03 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1313K->1313K(49152K), 0.0687790 secs] 1576K->1313K(63936K), [CMS Perm : 7187K->7187K(16384K)], 0.0688920 secs] [Times: user=0.07 sys=0.00, real=0.06 secs] 
+Total time for which application threads were stopped: 0.0691750 seconds
+Application time: 20.4865570 seconds
+Total time for which application threads were stopped: 0.0018180 seconds
+Application time: 0.0002310 seconds
+Total time for which application threads were stopped: 0.0001570 seconds
+Application time: 0.0000960 seconds
+Total time for which application threads were stopped: 0.0003080 seconds
+Application time: 0.0002410 seconds
+Total time for which application threads were stopped: 0.0000950 seconds
+Application time: 0.0001000 seconds
+Total time for which application threads were stopped: 0.0001780 seconds
+Application time: 1.3184730 seconds
+56.963: [Full GC (System) 56.963: [CMS: 1313K->1331K(49152K), 0.0637710 secs] 2244K->1331K(63936K), [CMS Perm : 7271K->7269K(16384K)], 0.0650190 secs] [Times: user=0.06 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0656790 seconds
+Application time: 0.0005250 seconds
+57.029: [GC [1 CMS-initial-mark: 1331K(49152K)] 1331K(63936K), 0.0004470 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0007900 seconds
+57.029: [CMS-concurrent-mark-start]
+Application time: 0.0002150 seconds
+Total time for which application threads were stopped: 0.0000770 seconds
+Application time: 0.0000870 seconds
+Total time for which application threads were stopped: 0.0000610 seconds
+Application time: 0.0000670 seconds
+Total time for which application threads were stopped: 0.0000530 seconds
+Application time: 0.0001210 seconds
+Total time for which application threads were stopped: 0.0000540 seconds
+Application time: 0.0000610 seconds
+Total time for which application threads were stopped: 0.0000510 seconds
+Application time: 0.0004980 seconds
+57.031: [Full GC (System) 57.031: [CMS57.056: [CMS-concurrent-mark: 0.025/0.026 secs] [Times: user=0.02 sys=0.00, real=0.03 secs] 
+ (concurrent mode interrupted): 1331K->1330K(49152K), 0.0683960 secs] 1595K->1330K(63936K), [CMS Perm : 7269K->7269K(16384K)], 0.0685130 secs] [Times: user=0.07 sys=0.01, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0689000 seconds
+Application time: 7.9965550 seconds
+Total time for which application threads were stopped: 0.0001560 seconds
+Application time: 0.0027850 seconds
+Total time for which application threads were stopped: 0.0001560 seconds
+Application time: 0.0001240 seconds
+Total time for which application threads were stopped: 0.0002420 seconds
+Application time: 3.1284930 seconds
+Total time for which application threads were stopped: 0.0006440 seconds
+Application time: 0.8376700 seconds
+69.067: [Full GC (System) 69.067: [CMS: 1330K->1385K(49152K), 0.0769360 secs] 2920K->1385K(63936K), [CMS Perm : 7349K->7347K(16384K)], 0.0771210 secs] [Times: user=0.04 sys=0.03, real=0.07 secs] 
+Total time for which application threads were stopped: 0.0777090 seconds
+Application time: 0.0006730 seconds
+69.145: [Full GC (System) 69.145: [CMS: 1385K->1385K(49152K), 0.0439210 secs] 1649K->1385K(63936K), [CMS Perm : 7347K->7347K(16384K)], 0.0441450 secs] [Times: user=0.04 sys=0.00, real=0.03 secs] 
+Total time for which application threads were stopped: 0.0443580 seconds
+Application time: 0.0100190 seconds
+Total time for which application threads were stopped: 0.0001340 seconds
+Application time: 0.0001320 seconds
+Total time for which application threads were stopped: 0.0001480 seconds
+Application time: 0.0001030 seconds
+Total time for which application threads were stopped: 0.0001400 seconds
+Application time: 0.0041620 seconds
+69.204: [GC [1 CMS-initial-mark: 1385K(49152K)] 1916K(63936K), 0.0007120 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0009160 seconds
+69.205: [CMS-concurrent-mark-start]
+69.247: [CMS-concurrent-mark: 0.042/0.042 secs] [Times: user=0.02 sys=0.00, real=0.04 secs] 
+69.247: [CMS-concurrent-preclean-start]
+69.248: [CMS-concurrent-preclean: 0.000/0.000 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Application time: 0.0431160 seconds
+69.248: [GC[YG occupancy: 531 K (14784 K)]69.248: [Rescan (non-parallel) 69.248: [grey object rescan, 0.0001700 secs]69.248: [root rescan, 0.0004000 secs], 0.0006330 secs]69.249: [weak refs processing, 0.0000090 secs] [1 CMS-remark: 1385K(49152K)] 1916K(63936K), 0.0007140 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0009240 seconds
+Application time: 0.0001600 seconds
+Total time for which application threads were stopped: 0.0001100 seconds
+Application time: 0.0003860 seconds
+Total time for which application threads were stopped: 0.0001060 seconds
+69.250: [CMS-concurrent-sweep-start]
+69.251: [CMS-concurrent-sweep: 0.002/0.002 secs] [Times: user=0.01 sys=0.00, real=0.00 secs] 
+69.252: [CMS-concurrent-reset-start]
+69.254: [CMS-concurrent-reset: 0.002/0.002 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Application time: 9.7854200 seconds
+79.035: [Full GC (System) 79.036: [CMS: 1379K->1379K(49152K), 0.0535510 secs] 1910K->1379K(63936K), [CMS Perm : 7347K->7347K(16384K)], 0.0541960 secs] [Times: user=0.05 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0547220 seconds
+Application time: 0.0006720 seconds
+79.091: [Full GC (System) 79.091: [CMS: 1379K->1379K(49152K), 0.0611310 secs] 1643K->1379K(63936K), [CMS Perm : 7347K->7347K(16384K)], 0.0613270 secs] [Times: user=0.05 sys=0.00, real=0.04 secs] 
+Total time for which application threads were stopped: 0.0617000 seconds
+Application time: 0.0002360 seconds
+79.153: [GC [1 CMS-initial-mark: 1379K(49152K)] 1643K(63936K), 0.0004150 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0006230 seconds
+79.153: [CMS-concurrent-mark-start]
+79.178: [CMS-concurrent-mark: 0.025/0.025 secs] [Times: user=0.03 sys=0.00, real=0.02 secs] 
+79.178: [CMS-concurrent-preclean-start]
+79.179: [CMS-concurrent-preclean: 0.000/0.000 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Application time: 0.0255450 seconds
+79.179: [GC[YG occupancy: 263 K (14784 K)]79.179: [Rescan (non-parallel) 79.179: [grey object rescan, 0.0001960 secs]79.179: [root rescan, 0.0004230 secs], 0.0007170 secs]79.180: [weak refs processing, 0.0000070 secs] [1 CMS-remark: 1379K(49152K)] 1643K(63936K), 0.0008490 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0011290 seconds
+79.180: [CMS-concurrent-sweep-start]
+79.181: [CMS-concurrent-sweep: 0.001/0.001 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+79.181: [CMS-concurrent-reset-start]
+79.184: [CMS-concurrent-reset: 0.002/0.002 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Application time: 0.0041250 seconds
+Total time for which application threads were stopped: 0.0002140 seconds
+Application time: 0.0001570 seconds
+Total time for which application threads were stopped: 0.0001100 seconds
+Application time: 0.0001090 seconds
+Total time for which application threads were stopped: 0.0001350 seconds
+Application time: 17.7505150 seconds
+96.936: [Full GC (System) 96.936: [CMS: 1379K->1379K(49152K), 0.0573120 secs] 1643K->1379K(63936K), [CMS Perm : 7347K->7347K(16384K)], 0.0575920 secs] [Times: user=0.06 sys=0.00, real=0.04 secs] 
+Total time for which application threads were stopped: 0.0583130 seconds
+Application time: 0.0006110 seconds
+96.995: [GC [1 CMS-initial-mark: 1379K(49152K)] 1642K(63936K), 0.0004520 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0006540 seconds
+96.995: [CMS-concurrent-mark-start]
+Application time: 0.0001120 seconds
+96.995: [Full GC (System) 96.995: [CMS97.020: [CMS-concurrent-mark: 0.024/0.024 secs] [Times: user=0.03 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1379K->1379K(49152K), 0.0666100 secs] 1642K->1379K(63936K), [CMS Perm : 7347K->7347K(16384K)], 0.0667760 secs] [Times: user=0.07 sys=0.00, real=0.06 secs] 
+Total time for which application threads were stopped: 0.0670100 seconds
+Application time: 17.8383750 seconds
+114.901: [Full GC (System) 114.901: [CMS: 1379K->1379K(49152K), 0.0596320 secs] 1642K->1379K(63936K), [CMS Perm : 7347K->7347K(16384K)], 0.0598100 secs] [Times: user=0.06 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0603560 seconds
+Application time: 0.0002750 seconds
+114.962: [GC [1 CMS-initial-mark: 1379K(49152K)] 1642K(63936K), 0.0004170 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0005740 seconds
+114.962: [CMS-concurrent-mark-start]
+Application time: 0.0001300 seconds
+114.962: [Full GC (System) 114.962: [CMS114.987: [CMS-concurrent-mark: 0.025/0.025 secs] [Times: user=0.02 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1379K->1291K(49152K), 0.0772330 secs] 1642K->1291K(63936K), [CMS Perm : 7347K->7340K(16384K)], 0.0775790 secs] [Times: user=0.06 sys=0.01, real=0.06 secs] 
+Total time for which application threads were stopped: 0.0778400 seconds
+Application time: 17.8372780 seconds
+132.878: [Full GC (System) 132.878: [CMS: 1291K->1291K(49152K), 0.0563770 secs] 1555K->1291K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0566260 secs] [Times: user=0.06 sys=0.00, real=0.04 secs] 
+Total time for which application threads were stopped: 0.0573690 seconds
+Application time: 0.0005550 seconds
+132.935: [GC [1 CMS-initial-mark: 1291K(49152K)] 1555K(63936K), 0.0004310 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0005910 seconds
+132.936: [CMS-concurrent-mark-start]
+Application time: 0.0001230 seconds
+132.936: [Full GC (System) 132.936: [CMS132.960: [CMS-concurrent-mark: 0.024/0.024 secs] [Times: user=0.02 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1291K->1290K(49152K), 0.0677400 secs] 1555K->1290K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0679450 secs] [Times: user=0.07 sys=0.00, real=0.06 secs] 
+Total time for which application threads were stopped: 0.0682650 seconds
+Application time: 18.1423500 seconds
+151.147: [Full GC (System) 151.147: [CMS: 1290K->1290K(49152K), 0.0586450 secs] 1553K->1290K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0590250 secs] [Times: user=0.05 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0596440 seconds
+Application time: 0.0007600 seconds
+151.207: [GC [1 CMS-initial-mark: 1290K(49152K)] 1553K(63936K), 0.0005120 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0007050 seconds
+151.208: [CMS-concurrent-mark-start]
+Application time: 0.0001420 seconds
+151.208: [Full GC (System) 151.208: [CMS151.233: [CMS-concurrent-mark: 0.024/0.025 secs] [Times: user=0.03 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1290K->1285K(49152K), 0.0746250 secs] 1553K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0747930 secs] [Times: user=0.08 sys=0.01, real=0.06 secs] 
+Total time for which application threads were stopped: 0.0750660 seconds
+Application time: 17.8009080 seconds
+169.084: [Full GC (System) 169.084: [CMS: 1285K->1285K(49152K), 0.0608030 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0610690 secs] [Times: user=0.06 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0615850 seconds
+Application time: 0.0005940 seconds
+169.146: [GC [1 CMS-initial-mark: 1285K(49152K)] 1549K(63936K), 0.0004040 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0006300 seconds
+169.147: [CMS-concurrent-mark-start]
+Application time: 0.0001070 seconds
+169.147: [Full GC (System) 169.147: [CMS169.172: [CMS-concurrent-mark: 0.025/0.025 secs] [Times: user=0.03 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1285K->1285K(49152K), 0.0676350 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0678590 secs] [Times: user=0.07 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0680900 seconds
+Application time: 17.8704270 seconds
+187.086: [Full GC (System) 187.086: [CMS: 1285K->1285K(49152K), 0.0618850 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0621310 secs] [Times: user=0.06 sys=0.00, real=0.06 secs] 
+Total time for which application threads were stopped: 0.0626780 seconds
+Application time: 0.0006400 seconds
+187.149: [GC [1 CMS-initial-mark: 1285K(49152K)] 1549K(63936K), 0.0004600 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0007350 seconds
+187.149: [CMS-concurrent-mark-start]
+Application time: 0.0001380 seconds
+187.150: [Full GC (System) 187.150: [CMS187.174: [CMS-concurrent-mark: 0.025/0.025 secs] [Times: user=0.02 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1285K->1285K(49152K), 0.0680350 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0682170 secs] [Times: user=0.07 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0684930 seconds
+Application time: 17.8556770 seconds
+205.074: [Full GC (System) 205.074: [CMS: 1285K->1285K(49152K), 0.0536020 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0538100 secs] [Times: user=0.05 sys=0.01, real=0.04 secs] 
+Total time for which application threads were stopped: 0.0544890 seconds
+Application time: 0.0007330 seconds
+205.129: [GC [1 CMS-initial-mark: 1285K(49152K)] 1549K(63936K), 0.0004490 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0006370 seconds
+205.130: [CMS-concurrent-mark-start]
+Application time: 0.0001090 seconds
+205.130: [Full GC (System) 205.130: [CMS205.154: [CMS-concurrent-mark: 0.024/0.025 secs] [Times: user=0.03 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1285K->1285K(49152K), 0.0677140 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0681310 secs] [Times: user=0.07 sys=0.00, real=0.06 secs] 
+Total time for which application threads were stopped: 0.0683890 seconds
+Application time: 18.3669010 seconds
+223.565: [Full GC (System) 223.566: [CMS: 1285K->1285K(49152K), 0.0648810 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0651460 secs] [Times: user=0.06 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0661540 seconds
+Application time: 0.0008130 seconds
+223.632: [GC [1 CMS-initial-mark: 1285K(49152K)] 1549K(63936K), 0.0004750 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0006730 seconds
+223.633: [CMS-concurrent-mark-start]
+Application time: 0.0001090 seconds
+223.633: [Full GC (System) 223.633: [CMS223.657: [CMS-concurrent-mark: 0.024/0.025 secs] [Times: user=0.02 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1285K->1285K(49152K), 0.0706590 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0709210 secs] [Times: user=0.07 sys=0.01, real=0.06 secs] 
+Total time for which application threads were stopped: 0.0711600 seconds
+Application time: 17.9698700 seconds
+241.674: [Full GC (System) 241.674: [CMS: 1285K->1285K(49152K), 0.0564910 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0570890 secs] [Times: user=0.05 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0577360 seconds
+Application time: 0.0005260 seconds
+241.732: [GC [1 CMS-initial-mark: 1285K(49152K)] 1549K(63936K), 0.0004440 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0006040 seconds
+241.733: [CMS-concurrent-mark-start]
+Application time: 0.0001080 seconds
+241.733: [Full GC (System) 241.733: [CMS241.757: [CMS-concurrent-mark: 0.024/0.024 secs] [Times: user=0.03 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1285K->1285K(49152K), 0.0666350 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0668000 secs] [Times: user=0.07 sys=0.00, real=0.06 secs] 
+Total time for which application threads were stopped: 0.0670320 seconds
+Application time: 17.9268090 seconds
+259.727: [Full GC (System) 259.727: [CMS: 1285K->1285K(49152K), 0.0577650 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0580270 secs] [Times: user=0.05 sys=0.01, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0586820 seconds
+Application time: 0.0006240 seconds
+259.786: [GC [1 CMS-initial-mark: 1285K(49152K)] 1549K(63936K), 0.0004230 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0006800 seconds
+259.786: [CMS-concurrent-mark-start]
+Application time: 0.0001070 seconds
+259.787: [Full GC (System) 259.787: [CMS259.810: [CMS-concurrent-mark: 0.024/0.024 secs] [Times: user=0.03 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1285K->1285K(49152K), 0.0672610 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0674780 secs] [Times: user=0.07 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0677630 seconds
+Application time: 17.7844740 seconds
+277.639: [Full GC (System) 277.639: [CMS: 1285K->1285K(49152K), 0.0592000 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0594680 secs] [Times: user=0.06 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0601720 seconds
+Application time: 0.0005690 seconds
+277.700: [GC [1 CMS-initial-mark: 1285K(49152K)] 1549K(63936K), 0.0004800 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0006430 seconds
+277.700: [CMS-concurrent-mark-start]
+Application time: 0.0001070 seconds
+277.700: [Full GC (System) 277.700: [CMS277.724: [CMS-concurrent-mark: 0.024/0.024 secs] [Times: user=0.02 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1285K->1285K(49152K), 0.0662460 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0664220 secs] [Times: user=0.06 sys=0.00, real=0.06 secs] 
+Total time for which application threads were stopped: 0.0667070 seconds
+Application time: 17.8486400 seconds
+295.616: [Full GC (System) 295.616: [CMS: 1285K->1285K(49152K), 0.0571490 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0574700 secs] [Times: user=0.06 sys=0.00, real=0.04 secs] 
+Total time for which application threads were stopped: 0.0581430 seconds
+Application time: 0.0005630 seconds
+295.674: [GC [1 CMS-initial-mark: 1285K(49152K)] 1549K(63936K), 0.0004470 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0006090 seconds
+295.675: [CMS-concurrent-mark-start]
+Application time: 0.0001070 seconds
+295.675: [Full GC (System) 295.675: [CMS295.701: [CMS-concurrent-mark: 0.026/0.026 secs] [Times: user=0.03 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1285K->1285K(49152K), 0.0693520 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0695620 secs] [Times: user=0.07 sys=0.00, real=0.06 secs] 
+Total time for which application threads were stopped: 0.0698270 seconds
+Application time: 17.8129730 seconds
+313.558: [Full GC (System) 313.558: [CMS: 1285K->1285K(49152K), 0.0731220 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0733380 secs] [Times: user=0.07 sys=0.00, real=0.06 secs] 
+Total time for which application threads were stopped: 0.0739600 seconds
+Application time: 0.0003320 seconds
+313.632: [GC [1 CMS-initial-mark: 1285K(49152K)] 1549K(63936K), 0.0007120 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0009360 seconds
+313.633: [CMS-concurrent-mark-start]
+Application time: 0.0002430 seconds
+313.633: [Full GC (System) 313.634: [CMS313.658: [CMS-concurrent-mark: 0.024/0.025 secs] [Times: user=0.02 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1285K->1285K(49152K), 0.0694220 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0696030 secs] [Times: user=0.07 sys=0.01, real=0.06 secs] 
+Total time for which application threads were stopped: 0.0698540 seconds
+Application time: 18.0723120 seconds
+331.776: [Full GC (System) 331.776: [CMS: 1285K->1285K(49152K), 0.0542000 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0544960 secs] [Times: user=0.05 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0553570 seconds
+Application time: 0.0002590 seconds
+331.832: [GC [1 CMS-initial-mark: 1285K(49152K)] 1549K(63936K), 0.0005640 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0007680 seconds
+331.832: [CMS-concurrent-mark-start]
+Application time: 0.0001110 seconds
+331.832: [Full GC (System) 331.832: [CMS331.857: [CMS-concurrent-mark: 0.025/0.025 secs] [Times: user=0.02 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1285K->1285K(49152K), 0.0682600 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0684500 secs] [Times: user=0.07 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0686920 seconds
+Application time: 17.8133170 seconds
+349.715: [Full GC (System) 349.715: [CMS: 1285K->1285K(49152K), 0.0548850 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0551240 secs] [Times: user=0.05 sys=0.01, real=0.04 secs] 
+Total time for which application threads were stopped: 0.0557970 seconds
+Application time: 0.0002990 seconds
+349.771: [GC [1 CMS-initial-mark: 1285K(49152K)] 1549K(63936K), 0.0004310 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0006060 seconds
+349.771: [CMS-concurrent-mark-start]
+Application time: 0.0001240 seconds
+349.772: [Full GC (System) 349.772: [CMS349.796: [CMS-concurrent-mark: 0.024/0.025 secs] [Times: user=0.02 sys=0.00, real=0.03 secs] 
+ (concurrent mode interrupted): 1285K->1285K(49152K), 0.0667520 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0669650 secs] [Times: user=0.06 sys=0.00, real=0.06 secs] 
+Total time for which application threads were stopped: 0.0671980 seconds
+Application time: 17.8685630 seconds
+367.708: [Full GC (System) 367.708: [CMS: 1285K->1285K(49152K), 0.0596470 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0598990 secs] [Times: user=0.06 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0606260 seconds
+Application time: 0.0002670 seconds
+367.769: [GC [1 CMS-initial-mark: 1285K(49152K)] 1549K(63936K), 0.0004720 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0006440 seconds
+367.769: [CMS-concurrent-mark-start]
+Application time: 0.0001380 seconds
+367.769: [Full GC (System) 367.769: [CMS367.794: [CMS-concurrent-mark: 0.025/0.025 secs] [Times: user=0.03 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1285K->1285K(49152K), 0.0689480 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0691200 secs] [Times: user=0.07 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0693770 seconds
+Application time: 17.8697520 seconds
+385.709: [Full GC (System) 385.709: [CMS: 1285K->1285K(49152K), 0.0594630 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0596740 secs] [Times: user=0.06 sys=0.01, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0605160 seconds
+Application time: 0.0003720 seconds
+385.770: [GC [1 CMS-initial-mark: 1285K(49152K)] 1549K(63936K), 0.0004890 secs] [Times: user=0.01 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0006570 seconds
+385.770: [CMS-concurrent-mark-start]
+Application time: 0.0001110 seconds
+385.770: [Full GC (System) 385.770: [CMS385.795: [CMS-concurrent-mark: 0.024/0.024 secs] [Times: user=0.02 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1285K->1285K(49152K), 0.0690550 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0692560 secs] [Times: user=0.06 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0694950 seconds
+Application time: 17.8553880 seconds
+403.695: [Full GC (System) 403.696: [CMS: 1285K->1285K(49152K), 0.0669130 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0674590 secs] [Times: user=0.06 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0679580 seconds
+Application time: 0.0002880 seconds
+403.764: [GC [1 CMS-initial-mark: 1285K(49152K)] 1549K(63936K), 0.0004030 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0006130 seconds
+403.764: [CMS-concurrent-mark-start]
+Application time: 0.0001080 seconds
+403.765: [Full GC (System) 403.765: [CMS403.789: [CMS-concurrent-mark: 0.024/0.024 secs] [Times: user=0.02 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1285K->1285K(49152K), 0.0668020 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0670510 secs] [Times: user=0.07 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0673250 seconds
+Application time: 17.7102360 seconds
+421.542: [Full GC (System) 421.543: [CMS: 1285K->1285K(49152K), 0.0571570 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0574140 secs] [Times: user=0.05 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0580140 seconds
+Application time: 0.0007660 seconds
+421.601: [GC [1 CMS-initial-mark: 1285K(49152K)] 1549K(63936K), 0.0004950 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0007270 seconds
+421.602: [CMS-concurrent-mark-start]
+Application time: 0.0001150 seconds
+421.602: [Full GC (System) 421.602: [CMS421.627: [CMS-concurrent-mark: 0.025/0.025 secs] [Times: user=0.03 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1285K->1285K(49152K), 0.0692750 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0694910 secs] [Times: user=0.07 sys=0.00, real=0.06 secs] 
+Total time for which application threads were stopped: 0.0697570 seconds
+Application time: 17.8245530 seconds
+439.497: [Full GC (System) 439.497: [CMS: 1285K->1285K(49152K), 0.0634290 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0636580 secs] [Times: user=0.06 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0646060 seconds
+Application time: 0.0002760 seconds
+439.562: [GC [1 CMS-initial-mark: 1285K(49152K)] 1549K(63936K), 0.0004420 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0006180 seconds
+439.562: [CMS-concurrent-mark-start]
+Application time: 0.0001140 seconds
+439.562: [Full GC (System) 439.562: [CMS439.588: [CMS-concurrent-mark: 0.026/0.026 secs] [Times: user=0.03 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1285K->1285K(49152K), 0.0714860 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0716770 secs] [Times: user=0.08 sys=0.00, real=0.06 secs] 
+Total time for which application threads were stopped: 0.0719260 seconds
+Application time: 18.0082650 seconds
+457.643: [Full GC (System) 457.643: [CMS: 1285K->1285K(49152K), 0.0458820 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0461080 secs] [Times: user=0.04 sys=0.00, real=0.04 secs] 
+Total time for which application threads were stopped: 0.0464550 seconds
+Application time: 0.0028140 seconds
+457.692: [GC [1 CMS-initial-mark: 1285K(49152K)] 1549K(63936K), 0.0004490 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0006850 seconds
+457.692: [CMS-concurrent-mark-start]
+Application time: 0.0001080 seconds
+457.693: [Full GC (System) 457.693: [CMS457.718: [CMS-concurrent-mark: 0.026/0.026 secs] [Times: user=0.02 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1285K->1285K(49152K), 0.0815150 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0816960 secs] [Times: user=0.07 sys=0.01, real=0.07 secs] 
+Total time for which application threads were stopped: 0.0819400 seconds
+Application time: 17.3771830 seconds
+475.152: [Full GC (System) 475.152: [CMS: 1285K->1285K(49152K), 0.0577390 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0579460 secs] [Times: user=0.05 sys=0.00, real=0.04 secs] 
+Total time for which application threads were stopped: 0.0586560 seconds
+Application time: 0.0003160 seconds
+475.211: [GC [1 CMS-initial-mark: 1285K(49152K)] 1549K(63936K), 0.0004360 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+Total time for which application threads were stopped: 0.0006460 seconds
+475.212: [CMS-concurrent-mark-start]
+Application time: 0.0001100 seconds
+475.212: [Full GC (System) 475.212: [CMS475.236: [CMS-concurrent-mark: 0.024/0.025 secs] [Times: user=0.03 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1285K->1285K(49152K), 0.0718790 secs] 1549K->1285K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0720750 secs] [Times: user=0.07 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0723550 seconds
+Application time: 1.8387420 seconds
+Total time for which application threads were stopped: 0.0001820 seconds
+Application time: 0.0011910 seconds
+Total time for which application threads were stopped: 0.0001380 seconds
+Application time: 0.0000950 seconds
+Total time for which application threads were stopped: 0.0000920 seconds
+Application time: 0.1358920 seconds
+Total time for which application threads were stopped: 0.0001530 seconds
+Application time: 0.0008910 seconds
+Total time for which application threads were stopped: 0.0001360 seconds
+Application time: 0.0000940 seconds
+Total time for which application threads were stopped: 0.0001120 seconds
+Application time: 4.1266010 seconds
+Total time for which application threads were stopped: 0.0002740 seconds
+Application time: 0.0001530 seconds
+Total time for which application threads were stopped: 0.0002450 seconds
+Application time: 0.0003480 seconds
+Total time for which application threads were stopped: 0.0001280 seconds
+Application time: 13.9713700 seconds
+495.361: [Full GC (System) 495.362: [CMS: 1285K->1309K(49152K), 0.0649230 secs] 2744K->1309K(63936K), [CMS Perm : 7343K->7340K(16384K)], 0.0652020 secs] [Times: user=0.07 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0661820 seconds
+Application time: 0.0010660 seconds
+495.428: [GC [1 CMS-initial-mark: 1309K(49152K)] 1573K(63936K), 0.0005130 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0007060 seconds
+495.429: [CMS-concurrent-mark-start]
+Application time: 0.0001690 seconds
+495.429: [Full GC (System) 495.429: [CMS495.454: [CMS-concurrent-mark: 0.024/0.024 secs] [Times: user=0.02 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1309K->1309K(49152K), 0.0659530 secs] 1573K->1309K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0661160 secs] [Times: user=0.06 sys=0.00, real=0.06 secs] 
+Total time for which application threads were stopped: 0.0663840 seconds
+Application time: 0.0004860 seconds
+Total time for which application threads were stopped: 0.0002110 seconds
+Application time: 0.0002150 seconds
+Total time for which application threads were stopped: 0.0001940 seconds
+Application time: 0.0002010 seconds
+Total time for which application threads were stopped: 0.0001040 seconds
+Application time: 0.0002380 seconds
+Total time for which application threads were stopped: 0.0001040 seconds
+Application time: 0.0001910 seconds
+Total time for which application threads were stopped: 0.0001310 seconds
+Application time: 0.0001900 seconds
+Total time for which application threads were stopped: 0.0001030 seconds
+Application time: 0.0002050 seconds
+Total time for which application threads were stopped: 0.0001170 seconds
+Application time: 0.0001880 seconds
+Total time for which application threads were stopped: 0.0001080 seconds
+Application time: 0.0002130 seconds
+Total time for which application threads were stopped: 0.0001030 seconds
+Application time: 0.0002090 seconds
+Total time for which application threads were stopped: 0.0001120 seconds
+Application time: 0.0001920 seconds
+Total time for which application threads were stopped: 0.0001020 seconds
+Application time: 0.0002110 seconds
+Total time for which application threads were stopped: 0.0001030 seconds
+Application time: 0.0001900 seconds
+Total time for which application threads were stopped: 0.0001250 seconds
+Application time: 0.0001880 seconds
+Total time for which application threads were stopped: 0.0001130 seconds
+Application time: 0.0002230 seconds
+Total time for which application threads were stopped: 0.0001030 seconds
+Application time: 0.0001890 seconds
+Total time for which application threads were stopped: 0.0001020 seconds
+Application time: 0.0002300 seconds
+Total time for which application threads were stopped: 0.0001120 seconds
+Application time: 0.0002500 seconds
+Total time for which application threads were stopped: 0.0001040 seconds
+Application time: 0.0001880 seconds
+Total time for which application threads were stopped: 0.0001020 seconds
+Application time: 0.0002240 seconds
+Total time for which application threads were stopped: 0.0001540 seconds
+Application time: 0.0002230 seconds
+Total time for which application threads were stopped: 0.0001040 seconds
+Application time: 0.0001880 seconds
+Total time for which application threads were stopped: 0.0001020 seconds
+Application time: 0.0002110 seconds
+Total time for which application threads were stopped: 0.0001040 seconds
+Application time: 0.0001890 seconds
+Total time for which application threads were stopped: 0.0001040 seconds
+Application time: 0.0001890 seconds
+Total time for which application threads were stopped: 0.0001020 seconds
+Application time: 0.0002110 seconds
+Total time for which application threads were stopped: 0.0001030 seconds
+Application time: 0.0001880 seconds
+Total time for which application threads were stopped: 0.0001320 seconds
+Application time: 0.0001910 seconds
+Total time for which application threads were stopped: 0.0001020 seconds
+Application time: 0.0002040 seconds
+Total time for which application threads were stopped: 0.0001020 seconds
+Application time: 0.0001940 seconds
+Total time for which application threads were stopped: 0.0001020 seconds
+Application time: 0.0002210 seconds
+Total time for which application threads were stopped: 0.0001030 seconds
+Application time: 0.0001890 seconds
+Total time for which application threads were stopped: 0.0001320 seconds
+Application time: 0.0003380 seconds
+Total time for which application threads were stopped: 0.0001850 seconds
+Application time: 0.0001950 seconds
+Total time for which application threads were stopped: 0.0001030 seconds
+Application time: 0.0002240 seconds
+Total time for which application threads were stopped: 0.0001040 seconds
+Application time: 0.0001910 seconds
+Total time for which application threads were stopped: 0.0001480 seconds
+Application time: 17.4119540 seconds
+512.920: [Full GC (System) 512.920: [CMS: 1309K->1299K(49152K), 0.0618760 secs] 1837K->1299K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0621340 secs] [Times: user=0.06 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0628080 seconds
+Application time: 0.0007130 seconds
+512.983: [GC [1 CMS-initial-mark: 1299K(49152K)] 1562K(63936K), 0.0004260 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0006230 seconds
+512.984: [CMS-concurrent-mark-start]
+Application time: 0.0002710 seconds
+512.984: [Full GC (System) 512.984: [CMS513.008: [CMS-concurrent-mark: 0.024/0.024 secs] [Times: user=0.03 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1299K->1299K(49152K), 0.0678850 secs] 1562K->1299K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0679990 secs] [Times: user=0.07 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0682430 seconds
+Application time: 17.5144130 seconds
+530.567: [Full GC (System) 530.567: [CMS: 1299K->1299K(49152K), 0.0550250 secs] 1562K->1299K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0552600 secs] [Times: user=0.05 sys=0.00, real=0.04 secs] 
+Total time for which application threads were stopped: 0.0555590 seconds
+Application time: 0.0151490 seconds
+530.642: [GC [1 CMS-initial-mark: 1299K(49152K)] 1562K(63936K), 0.0006500 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0057360 seconds
+530.643: [CMS-concurrent-mark-start]
+Application time: 0.0001750 seconds
+530.644: [Full GC (System) 530.644: [CMS530.678: [CMS-concurrent-mark: 0.034/0.035 secs] [Times: user=0.02 sys=0.00, real=0.03 secs] 
+ (concurrent mode interrupted): 1299K->1299K(49152K), 0.0952050 secs] 1562K->1299K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0953300 secs] [Times: user=0.06 sys=0.00, real=0.09 secs] 
+Total time for which application threads were stopped: 0.0956660 seconds
+Application time: 21.1900470 seconds
+551.929: [Full GC (System) 551.930: [CMS: 1299K->1299K(49152K), 0.0560330 secs] 1562K->1299K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0562530 secs] [Times: user=0.06 sys=0.00, real=0.04 secs] 
+Total time for which application threads were stopped: 0.0568580 seconds
+Application time: 0.0003690 seconds
+551.987: [GC [1 CMS-initial-mark: 1299K(49152K)] 1562K(63936K), 0.0005220 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0012870 seconds
+551.988: [CMS-concurrent-mark-start]
+552.011: [CMS-concurrent-mark: 0.024/0.024 secs] [Times: user=0.02 sys=0.00, real=0.02 secs] 
+552.012: [CMS-concurrent-preclean-start]
+552.012: [CMS-concurrent-preclean: 0.000/0.000 secs] [Times: user=0.01 sys=0.00, real=0.00 secs] 
+Application time: 0.0242430 seconds
+552.012: [GC[YG occupancy: 263 K (14784 K)]552.012: [Rescan (non-parallel) 552.012: [grey object rescan, 0.0001930 secs]552.012: [root rescan, 0.0004420 secs], 0.0006860 secs]552.013: [weak refs processing, 0.0000070 secs] [1 CMS-remark: 1299K(49152K)] 1562K(63936K), 0.0007590 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+Total time for which application threads were stopped: 0.0009210 seconds
+552.013: [CMS-concurrent-sweep-start]
+552.015: [CMS-concurrent-sweep: 0.002/0.002 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+552.015: [CMS-concurrent-reset-start]
+552.017: [CMS-concurrent-reset: 0.002/0.002 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Application time: 0.0046300 seconds
+552.018: [Full GC (System) 552.018: [CMS: 1299K->1299K(49152K), 0.0412420 secs] 1562K->1299K(63936K), [CMS Perm : 7340K->7340K(16384K)], 0.0414510 secs] [Times: user=0.04 sys=0.00, real=0.03 secs] 
+Total time for which application threads were stopped: 0.0420360 seconds
+Application time: 0.0002420 seconds
+552.060: [GC [1 CMS-initial-mark: 1299K(49152K)] 1299K(63936K), 0.0004450 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0006660 seconds
+552.060: [CMS-concurrent-mark-start]
+552.084: [CMS-concurrent-mark: 0.024/0.024 secs] [Times: user=0.03 sys=0.00, real=0.02 secs] 
+552.084: [CMS-concurrent-preclean-start]
+552.085: [CMS-concurrent-preclean: 0.000/0.000 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Application time: 0.0242540 seconds
+552.085: [GC[YG occupancy: 0 K (14784 K)]552.085: [Rescan (non-parallel) 552.085: [grey object rescan, 0.0001700 secs]552.085: [root rescan, 0.0003800 secs], 0.0006490 secs]552.086: [weak refs processing, 0.0000070 secs] [1 CMS-remark: 1299K(49152K)] 1299K(63936K), 0.0007980 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0010050 seconds
+552.086: [CMS-concurrent-sweep-start]
+552.087: [CMS-concurrent-sweep: 0.001/0.001 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+552.087: [CMS-concurrent-reset-start]
+552.089: [CMS-concurrent-reset: 0.002/0.002 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Application time: 20.6756130 seconds
+572.762: [Full GC (System) 572.762: [CMS: 1299K->1717K(49152K), 0.0451670 secs] 3414K->1717K(63936K), [CMS Perm : 7393K->7393K(16384K)], 0.0453910 secs] [Times: user=0.05 sys=0.00, real=0.04 secs] 
+Total time for which application threads were stopped: 0.0458500 seconds
+Application time: 0.0005230 seconds
+572.808: [Full GC (System) 572.808: [CMS: 1717K->1717K(49152K), 0.0437390 secs] 1980K->1717K(63936K), [CMS Perm : 7393K->7393K(16384K)], 0.0439070 secs] [Times: user=0.04 sys=0.01, real=0.04 secs] 
+Total time for which application threads were stopped: 0.0442160 seconds
+Application time: 0.0012110 seconds
+572.853: [GC [1 CMS-initial-mark: 1717K(49152K)] 1980K(63936K), 0.0004070 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0006370 seconds
+572.854: [CMS-concurrent-mark-start]
+572.880: [CMS-concurrent-mark: 0.026/0.026 secs] [Times: user=0.03 sys=0.00, real=0.02 secs] 
+572.880: [CMS-concurrent-preclean-start]
+572.880: [CMS-concurrent-preclean: 0.000/0.000 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Application time: 0.0299980 seconds
+Total time for which application threads were stopped: 0.0001540 seconds
+Application time: 0.0001210 seconds
+Total time for which application threads were stopped: 0.0000910 seconds
+Application time: 0.0001300 seconds
+Total time for which application threads were stopped: 0.0000910 seconds
+Application time: 0.0001000 seconds
+Total time for which application threads were stopped: 0.0000900 seconds
+Application time: 0.0001000 seconds
+Total time for which application threads were stopped: 0.0001120 seconds
+Application time: 0.0001140 seconds
+Total time for which application threads were stopped: 0.0001010 seconds
+Application time: 0.0001050 seconds
+Total time for which application threads were stopped: 0.0000900 seconds
+Application time: 0.0001600 seconds
+Total time for which application threads were stopped: 0.0000910 seconds
+Application time: 0.0001010 seconds
+Total time for which application threads were stopped: 0.0000970 seconds
+Application time: 0.0001240 seconds
+Total time for which application threads were stopped: 0.0000910 seconds
+Application time: 0.0001020 seconds
+Total time for which application threads were stopped: 0.0001010 seconds
+Application time: 0.0001000 seconds
+Total time for which application threads were stopped: 0.0001090 seconds
+Application time: 0.0001020 seconds
+Total time for which application threads were stopped: 0.0000900 seconds
+Application time: 0.0000990 seconds
+Total time for which application threads were stopped: 0.0000970 seconds
+Application time: 0.0001650 seconds
+572.887: [GC[YG occupancy: 263 K (14784 K)]572.887: [Rescan (non-parallel) 572.887: [grey object rescan, 0.0002700 secs]572.887: [root rescan, 0.0003910 secs], 0.0007340 secs]572.888: [weak refs processing, 0.0000100 secs] [1 CMS-remark: 1717K(49152K)] 1980K(63936K), 0.0008190 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0010790 seconds
+Application time: 0.0001760 seconds
+Total time for which application threads were stopped: 0.0001760 seconds
+572.888: [CMS-concurrent-sweep-start]
+572.890: [CMS-concurrent-sweep: 0.002/0.002 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+572.890: [CMS-concurrent-reset-start]
+572.893: [CMS-concurrent-reset: 0.002/0.002 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Application time: 0.0046040 seconds
+Total time for which application threads were stopped: 0.0001690 seconds
+Application time: 4.6711140 seconds
+577.565: [Full GC (System) 577.565: [CMS: 1716K->1713K(49152K), 0.0545870 secs] 1980K->1713K(63936K), [CMS Perm : 7393K->7393K(16384K)], 0.0548200 secs] [Times: user=0.06 sys=0.00, real=0.04 secs] 
+Total time for which application threads were stopped: 0.0554110 seconds
+Application time: 0.0002860 seconds
+577.620: [GC [1 CMS-initial-mark: 1713K(49152K)] 1713K(63936K), 0.0004710 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0006750 seconds
+577.621: [CMS-concurrent-mark-start]
+Application time: 0.0005140 seconds
+577.621: [Full GC (System) 577.621: [CMS577.647: [CMS-concurrent-mark: 0.025/0.026 secs] [Times: user=0.02 sys=0.00, real=0.03 secs] 
+ (concurrent mode interrupted): 1713K->1713K(49152K), 0.0707290 secs] 1977K->1713K(63936K), [CMS Perm : 7393K->7393K(16384K)], 0.0708520 secs] [Times: user=0.07 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0711700 seconds
+Application time: 18.5045680 seconds
+596.198: [Full GC (System) 596.198: [CMS: 1713K->1713K(49152K), 0.0750600 secs] 1977K->1713K(63936K), [CMS Perm : 7393K->7393K(16384K)], 0.0752390 secs] [Times: user=0.07 sys=0.01, real=0.06 secs] 
+Total time for which application threads were stopped: 0.0763810 seconds
+Application time: 0.0010440 seconds
+596.275: [GC [1 CMS-initial-mark: 1713K(49152K)] 1713K(63936K), 0.0005230 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0007220 seconds
+596.275: [CMS-concurrent-mark-start]
+Application time: 0.0005920 seconds
+596.276: [Full GC (System) 596.276: [CMS596.301: [CMS-concurrent-mark: 0.025/0.026 secs] [Times: user=0.02 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1713K->1713K(49152K), 0.0696300 secs] 1977K->1713K(63936K), [CMS Perm : 7393K->7393K(16384K)], 0.0697720 secs] [Times: user=0.07 sys=0.00, real=0.06 secs] 
+Total time for which application threads were stopped: 0.0701020 seconds
+Application time: 18.8298840 seconds
+615.177: [Full GC (System) 615.177: [CMS: 1713K->1713K(49152K), 0.0651440 secs] 1977K->1713K(63936K), [CMS Perm : 7393K->7393K(16384K)], 0.0654200 secs] [Times: user=0.06 sys=0.01, real=0.06 secs] 
+Total time for which application threads were stopped: 0.0663620 seconds
+Application time: 0.0002230 seconds
+615.242: [GC [1 CMS-initial-mark: 1713K(49152K)] 1713K(63936K), 0.0004640 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0006550 seconds
+615.243: [CMS-concurrent-mark-start]
+Application time: 0.0005520 seconds
+615.244: [Full GC (System) 615.244: [CMS615.269: [CMS-concurrent-mark: 0.025/0.026 secs] [Times: user=0.03 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1713K->1713K(49152K), 0.0702090 secs] 1977K->1713K(63936K), [CMS Perm : 7393K->7393K(16384K)], 0.0703240 secs] [Times: user=0.07 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0706770 seconds
+Application time: 17.4079730 seconds
+632.722: [Full GC (System) 632.723: [CMS: 1713K->1713K(49152K), 0.0621460 secs] 1977K->1713K(63936K), [CMS Perm : 7393K->7393K(16384K)], 0.0623410 secs] [Times: user=0.06 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0629230 seconds
+Application time: 0.0001480 seconds
+632.785: [GC [1 CMS-initial-mark: 1713K(49152K)] 1713K(63936K), 0.0004360 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0007170 seconds
+632.786: [CMS-concurrent-mark-start]
+Application time: 0.0004770 seconds
+632.787: [Full GC (System) 632.787: [CMS632.812: [CMS-concurrent-mark: 0.025/0.026 secs] [Times: user=0.03 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1713K->1713K(49152K), 0.0700340 secs] 1977K->1713K(63936K), [CMS Perm : 7393K->7393K(16384K)], 0.0701510 secs] [Times: user=0.07 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0704530 seconds
+Application time: 17.7720000 seconds
+650.629: [Full GC (System) 650.629: [CMS: 1713K->1713K(49152K), 0.0632130 secs] 1977K->1713K(63936K), [CMS Perm : 7393K->7393K(16384K)], 0.0633520 secs] [Times: user=0.06 sys=0.01, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0638210 seconds
+Application time: 0.0002880 seconds
+650.693: [GC [1 CMS-initial-mark: 1713K(49152K)] 1977K(63936K), 0.0004920 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0006460 seconds
+650.694: [CMS-concurrent-mark-start]
+Application time: 0.0001100 seconds
+650.694: [Full GC (System) 650.694: [CMS650.719: [CMS-concurrent-mark: 0.025/0.025 secs] [Times: user=0.03 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1713K->1712K(49152K), 0.0701930 secs] 1977K->1712K(63936K), [CMS Perm : 7393K->7393K(16384K)], 0.0703070 secs] [Times: user=0.07 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0707250 seconds
+Application time: 17.1949660 seconds
+667.960: [Full GC (System) 667.960: [CMS: 1712K->1712K(49152K), 0.0550590 secs] 1975K->1712K(63936K), [CMS Perm : 7393K->7393K(16384K)], 0.0552510 secs] [Times: user=0.06 sys=0.00, real=0.04 secs] 
+Total time for which application threads were stopped: 0.0558630 seconds
+Application time: 0.0003150 seconds
+668.016: [GC [1 CMS-initial-mark: 1712K(49152K)] 1975K(63936K), 0.0004480 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0005830 seconds
+668.017: [CMS-concurrent-mark-start]
+Application time: 0.0001320 seconds
+668.017: [Full GC (System) 668.017: [CMS668.046: [CMS-concurrent-mark: 0.029/0.029 secs] [Times: user=0.02 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1712K->1712K(49152K), 0.0724400 secs] 1975K->1712K(63936K), [CMS Perm : 7393K->7393K(16384K)], 0.0725530 secs] [Times: user=0.07 sys=0.00, real=0.06 secs] 
+Total time for which application threads were stopped: 0.0727760 seconds
+Application time: 17.5617620 seconds
+685.652: [Full GC (System) 685.652: [CMS: 1712K->1712K(49152K), 0.0506650 secs] 1975K->1712K(63936K), [CMS Perm : 7393K->7393K(16384K)], 0.0507880 secs] [Times: user=0.04 sys=0.00, real=0.04 secs] 
+Total time for which application threads were stopped: 0.0511340 seconds
+Application time: 0.0005490 seconds
+685.704: [GC [1 CMS-initial-mark: 1712K(49152K)] 1975K(63936K), 0.0004850 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+Total time for which application threads were stopped: 0.0010040 seconds
+685.704: [CMS-concurrent-mark-start]
+Application time: 0.0002310 seconds
+685.705: [Full GC (System) 685.705: [CMS685.733: [CMS-concurrent-mark: 0.028/0.028 secs] [Times: user=0.02 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1712K->1712K(49152K), 0.0813360 secs] 1975K->1712K(63936K), [CMS Perm : 7393K->7393K(16384K)], 0.0815300 secs] [Times: user=0.07 sys=0.00, real=0.06 secs] 
+Total time for which application threads were stopped: 0.0818410 seconds
+Application time: 15.4649170 seconds
+Total time for which application threads were stopped: 0.0002760 seconds
+Application time: 1.0710210 seconds
+Total time for which application threads were stopped: 0.0001280 seconds
+Application time: 0.8743830 seconds
+703.197: [Full GC (System) 703.197: [CMS: 1712K->1696K(49152K), 0.0463850 secs] 2771K->1696K(63936K), [CMS Perm : 7394K->7393K(16384K)], 0.0465840 secs] [Times: user=0.05 sys=0.00, real=0.03 secs] 
+Total time for which application threads were stopped: 0.0470290 seconds
+Application time: 0.0003420 seconds
+703.245: [GC [1 CMS-initial-mark: 1696K(49152K)] 1959K(63936K), 0.0005260 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+Total time for which application threads were stopped: 0.0007400 seconds
+703.245: [CMS-concurrent-mark-start]
+Application time: 0.0001480 seconds
+Total time for which application threads were stopped: 0.0000600 seconds
+Application time: 0.0000600 seconds
+Total time for which application threads were stopped: 0.0001250 seconds
+Application time: 0.0000880 seconds
+Total time for which application threads were stopped: 0.0000960 seconds
+Application time: 0.0001990 seconds
+703.246: [Full GC (System) 703.246: [CMS703.271: [CMS-concurrent-mark: 0.025/0.026 secs] [Times: user=0.02 sys=0.00, real=0.02 secs] 
+ (concurrent mode interrupted): 1696K->1690K(49152K), 0.0692620 secs] 1959K->1690K(63936K), [CMS Perm : 7393K->7393K(16384K)], 0.0694970 secs] [Times: user=0.07 sys=0.00, real=0.05 secs] 
+Total time for which application threads were stopped: 0.0697210 seconds
+Application time: 7.2979520 seconds
+Total time for which application threads were stopped: 0.0001430 seconds
+Application time: 0.0038910 seconds
+Total time for which application threads were stopped: 0.0001670 seconds
+Application time: 0.0000950 seconds
+Total time for which application threads were stopped: 0.0001330 seconds
+Application time: 0.0086180 seconds
+Total time for which application threads were stopped: 0.0011970 seconds
+Application time: 0.0002580 seconds
+Total time for which application threads were stopped: 0.0000960 seconds
+Application time: 0.0000900 seconds
+Total time for which application threads were stopped: 0.0000880 seconds
+Application time: 0.0054970 seconds
+Total time for which application threads were stopped: 0.0001520 seconds
+Application time: 0.0013240 seconds
+Total time for which application threads were stopped: 0.0001300 seconds
+Application time: 0.0543340 seconds
+710.690: [GC [1 CMS-initial-mark: 1690K(49152K)] 3531K(63936K), 0.0005840 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0009790 seconds
+710.691: [CMS-concurrent-mark-start]
+710.716: [CMS-concurrent-mark: 0.025/0.025 secs] [Times: user=0.02 sys=0.00, real=0.02 secs] 
+710.716: [CMS-concurrent-preclean-start]
+710.718: [CMS-concurrent-preclean: 0.001/0.001 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+Application time: 0.0456410 seconds
+710.737: [GC[YG occupancy: 1841 K (14784 K)]710.737: [Rescan (non-parallel) 710.737: [grey object rescan, 0.0001770 secs]710.737: [root rescan, 0.0005390 secs], 0.0008220 secs]710.738: [weak refs processing, 0.0000210 secs] [1 CMS-remark: 1690K(49152K)] 3531K(63936K), 0.0009640 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0012020 seconds
+710.739: [CMS-concurrent-sweep-start]
+710.740: [CMS-concurrent-sweep: 0.002/0.002 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+710.740: [CMS-concurrent-reset-start]
+710.743: [CMS-concurrent-reset: 0.002/0.002 secs] [Times: user=0.01 sys=0.00, real=0.00 secs] 
+Heap
+ def new generation   total 14784K, used 2104K [0xaa220000, 0xab220000, 0xab220000)
+  eden space 13184K,  15% used [0xaa220000, 0xaa42e338, 0xaaf00000)
+  from space 1600K,   0% used [0xaaf00000, 0xaaf00000, 0xab090000)
+  to   space 1600K,   0% used [0xab090000, 0xab090000, 0xab220000)
+ concurrent mark-sweep generation total 49152K, used 1663K [0xab220000, 0xae220000, 0xb0220000)
+ concurrent-mark-sweep perm gen total 16384K, used 7413K [0xb0220000, 0xb1220000, 0xb4220000)
