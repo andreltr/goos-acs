@@ -1,6 +1,8 @@
 package alma.ucn.oca.ccd.views;
 
 import javax.swing.JOptionPane;
+
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -9,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.beans.PropertyChangeEvent;
 import java.io.File;
 import java.util.LinkedList;
@@ -77,7 +80,6 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JFrame jFrameCoolerTempDialog;
 	private JFrame jFrameExpTimeDialog;
 	private JFrame jFrameAccDialog;
-	private JFrame jFrameAcquiring;
 	private JPanel jPanel2;
 	private JPanel jPanel1;
 	private JMenuItem jMenuItemHelpAbout;
@@ -160,16 +162,21 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private boolean ccdOn;
 	private boolean acquiring;
 
-	private JLabel jLabelcurrentReceivedFile;
-	private JLabel jLabeltotalFiles;
+	private JLabel jLabelReceptionMessage;
+	private JLabel jLabelAcquiringMessage;
 
 	private int currentReceivedFile;
 	private int totalFiles;
 
-	private JProgressBar progressBar;
-	private Object[] acquiringDialogMessage;
-	private JOptionPane jOptionPaneAcquiring;
-	private JDialog dialog;
+	private JProgressBar jProgressBarReception;
+	private String receptionDialogMessage;
+	private JDialog jDialogReceptionProgress;
+	private volatile Thread tReceptionDialog;
+
+	private JProgressBar jProgressBarAcquiring;
+	private String acquiringDialogMessage;
+	private JDialog jDialogAcquiringProgress;
+	private boolean receiving = false;
 
 	/**
 	 * Auto-generated main method to display this JFrame
@@ -1044,22 +1051,6 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		return jLabelCCDInfoCameaSt;
 	}
 
-	private JLabel getJLabelCurrentReceivedFile() {
-		if (jLabelcurrentReceivedFile == null) {
-			jLabelcurrentReceivedFile = new JLabel();
-			jLabelcurrentReceivedFile.setText("" + currentReceivedFile);
-		}
-		return jLabelcurrentReceivedFile;
-	}
-
-	private JLabel getJLabelTotalFiles() {
-		if (jLabeltotalFiles == null) {
-			jLabeltotalFiles = new JLabel();
-			jLabeltotalFiles.setText("" + totalFiles);
-		}
-		return jLabeltotalFiles;
-	}
-
 	private JMenuItem getJMenuCCDSetupModels() {
 		if (jMenuItemCCDSetupModels == null) {
 			jMenuItemCCDSetupModels = new JMenuItem();
@@ -1572,34 +1563,85 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	}
 
 	private void getJDialogAcquiring() {
-		if (jFrameAcquiring == null) {
-			jFrameAcquiring = new JFrame();
-			progressBar = new JProgressBar(0, Integer
-					.parseInt(getJLabelTotalFiles().getText()));
-			acquiringDialogMessage = new Object[2];
+		if (jLabelAcquiringMessage == null) {
+			jProgressBarAcquiring = new JProgressBar();
+			jProgressBarAcquiring.setIndeterminate(true);
+			jLabelAcquiringMessage = new JLabel();
 		}
 
-		progressBar.setValue(0);
-		progressBar.setStringPainted(true);
+		acquiringDialogMessage = "Taking image...";
+		jLabelAcquiringMessage.setText(acquiringDialogMessage);
 
-		acquiringDialogMessage[0] = "Receiving image "
-				+ getJLabelCurrentReceivedFile().getText() + " of "
-				+ getJLabelTotalFiles().getText();
-		acquiringDialogMessage[1] = progressBar;
+		jDialogAcquiringProgress = new JDialog(this, "Acquiring...", true);
+		jDialogAcquiringProgress
+				.add(BorderLayout.SOUTH, getJButtonCCDStopExp());
+		jDialogAcquiringProgress
+				.add(BorderLayout.CENTER, jProgressBarAcquiring);
+		jDialogAcquiringProgress
+				.add(BorderLayout.NORTH, jLabelAcquiringMessage);
+		jDialogAcquiringProgress.setSize(300, 100);
+		jDialogAcquiringProgress.setLocationRelativeTo(this);
+		jDialogAcquiringProgress.addWindowListener(new WindowListener() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				// TODO Auto-generated method stub
 
-		Object[] options = { getJButtonCCDStopExp() };
+			}
 
-		jOptionPaneAcquiring = new JOptionPane("Acquiring...",
-				JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
-				options, null);
-		dialog = new JDialog(jFrameAcquiring, "Click a button", true);
-		dialog.setContentPane(jOptionPaneAcquiring);
-		dialog.setVisible(true);
-		/*
-		 * JOptionPane.showOptionDialog(jFrameAcquiring, acquiringDialogMessage,
-		 * "Acquiring...", JOptionPane.DEFAULT_OPTION,
-		 * JOptionPane.PLAIN_MESSAGE, null, options, null);
-		 */
+			@Override
+			public void windowClosed(WindowEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				stopExposureAction(null);
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void windowIconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void windowOpened(WindowEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+	}
+
+	private void getJDialogReception() {
+		if (jLabelReceptionMessage == null) {
+			jProgressBarReception = new JProgressBar(0, 999);
+			jLabelReceptionMessage = new JLabel();
+		}
+
+		receptionDialogMessage = "Receiving...";
+		jLabelReceptionMessage.setText(receptionDialogMessage);
+
+		jDialogReceptionProgress = new JDialog(this, "Receiving...", true);
+		jDialogReceptionProgress
+				.add(BorderLayout.CENTER, jProgressBarReception);
+		jDialogReceptionProgress
+				.add(BorderLayout.NORTH, jLabelReceptionMessage);
+		jDialogReceptionProgress.setSize(300, 100);
+		jDialogReceptionProgress.setLocationRelativeTo(this);
 	}
 
 	private JFileChooser getJDialogFilechooser() {
@@ -1682,18 +1724,19 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 				DefaultController.COMP_FILE_RECEIVED)) {
 			System.out.println("Notificacion");
 			gCCDNCEvent newNotification = (gCCDNCEvent) evt.getNewValue();
-			jLabelcurrentReceivedFile.setText("" + newNotification.getID());
-			jLabeltotalFiles.setText("" + newNotification.getTotal());
 
-			progressBar.setValue((int) newNotification.getID());
-			progressBar.setStringPainted(true);
+			jDialogAcquiringProgress.setVisible(false);
+			receiving = true;
 
-			acquiringDialogMessage[0] = "Receiving image "
-					+ getJLabelCurrentReceivedFile().getText() + " of "
-					+ getJLabelTotalFiles().getText();
-			acquiringDialogMessage[1] = progressBar;
+			currentReceivedFile = (int) newNotification.getID();
+			totalFiles = (int) newNotification.getTotal();
 
-			dialog.validate();
+			receptionDialogMessage = "Receiving image " + currentReceivedFile
+					+ " of " + totalFiles;
+			jLabelReceptionMessage.setText(receptionDialogMessage);
+
+			jProgressBarReception.setValue(currentReceivedFile);
+			jProgressBarReception.setMaximum(totalFiles);
 
 		} else if (evt.getPropertyName().equals(
 				DefaultController.COMP_END_SUBSCRIPTION)) {
@@ -1712,8 +1755,11 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jMenuItemCCDControlStartCooler.setEnabled(!coolerOn);
 			jMenuItemCCDControlStopCooler.setEnabled(coolerOn);
 
-			dialog.setVisible(false);
-			dialog.setAlwaysOnTop(false);
+			tReceptionDialog = null;
+			jDialogReceptionProgress.setVisible(false);
+			jDialogReceptionProgress.setAlwaysOnTop(false);
+			jDialogAcquiringProgress.setVisible(false);
+			receiving = false;
 		}
 
 		else if (evt.getPropertyName().equals(
@@ -1966,6 +2012,28 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 
 	protected void startExposureAction(ActionEvent e) {
 		try {
+			getJDialogAcquiring();
+			getJDialogReception();
+
+			tReceptionDialog = new Thread(new Runnable() {
+
+				public void run() {
+					Thread thisThread = Thread.currentThread();
+					while (tReceptionDialog == thisThread) {
+						System.out.println("234234254366b34jibjib4j34");
+						if (!receiving) {
+							System.out.println("2142352334234");
+							jDialogAcquiringProgress.setVisible(true);
+						} else {
+							System.out.println("SJKNJKSADNASJD");
+							jDialogReceptionProgress.setVisible(true);
+						}
+					}
+				}
+			});
+
+			tReceptionDialog.start();
+
 			controller.startExposure();
 
 			jButtonCCDStopExp.setEnabled(true);
@@ -1981,8 +2049,6 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jMenuItemCCDControlStartCooler.setEnabled(false);
 			jMenuItemCCDControlStopCooler.setEnabled(false);
 
-			getJDialogAcquiring();
-
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -1990,10 +2056,12 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 
 	protected void stopExposureAction(ActionEvent e) {
 		try {
-			controller.stopExposure();
+			tReceptionDialog = null;
+			jDialogAcquiringProgress.setVisible(false);
+			jDialogReceptionProgress.setVisible(false);
+			receiving = false;
 
-			jFrameAcquiring.setVisible(false);
-			jFrameAcquiring.setAlwaysOnTop(false);
+			controller.stopExposure();
 
 			jButtonCCDStopExp.setEnabled(false);
 			jButtonCCDStartExp.setEnabled(true);
