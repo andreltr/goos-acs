@@ -53,7 +53,7 @@ std::string* STRSBIGST7::startExposure() {
 	 * p_Cam->GrabSetup(p_Img, SBDF_LIGHT_ONLY);
 	 * p_Cam->GrabMain(p_Img, SBDF_LIGHT_ONLY);
 	 */
-	p_Cam->GrabImage(p_Img, SBDF_LIGHT_ONLY);
+	p_Cam->GrabImage(p_Img, SBDF_DARK_ALSO);
 	p_Img->AutoBackgroundAndRange();
 	p_Img->SetFocalLength(componentProperties->getfocalLength());
 	p_Img->SetObserver(componentProperties->getobserverName());
