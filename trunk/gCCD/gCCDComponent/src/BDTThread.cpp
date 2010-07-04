@@ -98,6 +98,12 @@ void BDTThread::onStop() {
 	fileEvent->id = 0;
 	fileEvent->total = 0;
 
+	ACS_SHORT_LOG((LM_INFO, "BDTThread::onStop(): disconnect()"));
+	ccd_p->sender->disconnect();
+
+	ACS_SHORT_LOG((LM_INFO, "BDTThread::onStop(): closeReceiver()"));
+	ccd_p->receiver->closeReceiver();
+
 	ccd_p->context->setState(lastState);
 	/**Send the notification to the client*/
 	ACS_SHORT_LOG(
@@ -105,12 +111,6 @@ void BDTThread::onStop() {
 	ccd_p->ncSupplier->sendNotification(*fileEvent);
 
 	ACS_SHORT_LOG((LM_INFO, "BDTThread::onStop(): notification sent!"));
-
-	ACS_SHORT_LOG((LM_INFO, "BDTThread::onStop(): disconnect()"));
-	ccd_p->sender->disconnect();
-
-	ACS_SHORT_LOG((LM_INFO, "BDTThread::onStop(): closeReceiver()"));
-	ccd_p->receiver->closeReceiver();
 
 	ACS_SHORT_LOG((LM_INFO, "BDT thread stopped."));
 }
