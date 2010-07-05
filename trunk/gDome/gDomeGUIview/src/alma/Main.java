@@ -30,27 +30,6 @@ public class Main {
 			e.printStackTrace();
 		}
 
-		/*Model componentModel = null;
-
-		try {
-			componentModel = new Model();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		controller.addModel(componentModel);
-
-		controller.addView(userInterface);
-
-		try {
-			componentModel.init();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
-
 		userInterface.pack();
 		userInterface.setLocationRelativeTo(null);
 		userInterface.setMinimumSize(userInterface.getSize());
