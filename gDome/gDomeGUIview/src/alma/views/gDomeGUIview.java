@@ -36,25 +36,12 @@ public class gDomeGUIview extends javax.swing.JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JMenuItem helpMenuItem;
-	private JMenu jMenu5;
 	private JButton jButtonRotateRight;
 	private JButton jButtonRotateLeft;
 	private JSpinner jSpinnerDegrees;
 	private JPanel jPanelImage;
 	private JPanel jPanelOptions;
 	private JPanel jPanelMain;
-	private JMenuItem deleteMenuItem;
-	private JSeparator jSeparator1;
-	private JMenuItem pasteMenuItem;
-	private JMenuItem copyMenuItem;
-	private JMenuItem cutMenuItem;
-	private JMenu jMenu4;
-	private JMenuItem exitMenuItem;
-	private JSeparator jSeparator2;
-	private JMenuItem closeFileMenuItem;
-	private JMenuItem saveAsMenuItem;
-	private JMenuItem saveMenuItem;
 	private AbstractAction abstractActionDisconnectComponent;
 	private JLabel systemMessage;
 	private JLabel jLabel1;
@@ -71,10 +58,6 @@ public class gDomeGUIview extends javax.swing.JFrame {
 	private JPanel jPanelDomeImage;
 	private JButton jButtonCloseSlit;
 	private JButton jButtonOpenSlit;
-	private JMenuItem openFileMenuItem;
-	private JMenuItem newFileMenuItem;
-	private JMenu jMenu3;
-	private JMenuBar jMenuBar1;
 	private Model d_model;
 	private JLabel jLabelImgDome;
 	private JLabel indicadorComponente;
@@ -97,6 +80,7 @@ public class gDomeGUIview extends javax.swing.JFrame {
 			thisLayout.columnWeights = new double[] { 0.1 };
 			thisLayout.columnWidths = new int[] { 7 };
 			getContentPane().setLayout(thisLayout);
+			this.setTitle("ACS gDome Client");
 			{
 				jPanelMain = new JPanel();
 				GridBagLayout jPanelMainLayout = new GridBagLayout();
@@ -130,7 +114,7 @@ public class gDomeGUIview extends javax.swing.JFrame {
 					jPanelOptions.setPreferredSize(new Dimension(320, 426));
 					{
 						SpinnerNumberModel jSpinnerDegreesModel = new SpinnerNumberModel(
-								5D, 0D, 360D, 0.1D);
+								0.2D, 0D, 360D, 0.1D);
 						jSpinnerDegrees = new JSpinner();
 						jPanelOptions.add(jSpinnerDegrees,
 								new GridBagConstraints(1, 1, 3, 1, 0.0, 0.0,
@@ -220,88 +204,6 @@ public class gDomeGUIview extends javax.swing.JFrame {
 					}
 				}
 			}
-			{
-				jMenuBar1 = new JMenuBar();
-				setJMenuBar(jMenuBar1);
-				{
-					jMenu3 = new JMenu();
-					jMenuBar1.add(jMenu3);
-					jMenu3.setText("File");
-					{
-						newFileMenuItem = new JMenuItem();
-						jMenu3.add(newFileMenuItem);
-						newFileMenuItem.setText("New");
-					}
-					{
-						openFileMenuItem = new JMenuItem();
-						jMenu3.add(openFileMenuItem);
-						openFileMenuItem.setText("Open");
-					}
-					{
-						saveMenuItem = new JMenuItem();
-						jMenu3.add(saveMenuItem);
-						saveMenuItem.setText("Save");
-					}
-					{
-						saveAsMenuItem = new JMenuItem();
-						jMenu3.add(saveAsMenuItem);
-						saveAsMenuItem.setText("Save As ...");
-					}
-					{
-						closeFileMenuItem = new JMenuItem();
-						jMenu3.add(closeFileMenuItem);
-						closeFileMenuItem.setText("Close");
-					}
-					{
-						jSeparator2 = new JSeparator();
-						jMenu3.add(jSeparator2);
-					}
-					{
-						exitMenuItem = new JMenuItem();
-						jMenu3.add(exitMenuItem);
-						exitMenuItem.setText("Exit");
-					}
-				}
-				{
-					jMenu4 = new JMenu();
-					jMenuBar1.add(jMenu4);
-					jMenu4.setText("Edit");
-					{
-						cutMenuItem = new JMenuItem();
-						jMenu4.add(cutMenuItem);
-						cutMenuItem.setText("Cut");
-					}
-					{
-						copyMenuItem = new JMenuItem();
-						jMenu4.add(copyMenuItem);
-						copyMenuItem.setText("Copy");
-					}
-					{
-						pasteMenuItem = new JMenuItem();
-						jMenu4.add(pasteMenuItem);
-						pasteMenuItem.setText("Paste");
-					}
-					{
-						jSeparator1 = new JSeparator();
-						jMenu4.add(jSeparator1);
-					}
-					{
-						deleteMenuItem = new JMenuItem();
-						jMenu4.add(deleteMenuItem);
-						deleteMenuItem.setText("Delete");
-					}
-				}
-				{
-					jMenu5 = new JMenu();
-					jMenuBar1.add(jMenu5);
-					jMenu5.setText("Help");
-					{
-						helpMenuItem = new JMenuItem();
-						jMenu5.add(helpMenuItem);
-						helpMenuItem.setText("Help");
-					}
-				}
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -350,17 +252,6 @@ public class gDomeGUIview extends javax.swing.JFrame {
 			};
 		}
 		return abstractActionCloseSlit;
-	}
-	
-	private AbstractAction getAbstractActionDisconnectComponent() {
-		if(abstractActionDisconnectComponent == null) {
-			abstractActionDisconnectComponent = new AbstractAction("abstractActionDisconnectComponent", null) {
-				public void actionPerformed(ActionEvent evt) {
-					actionPressDisconnectComponent();
-				}
-			};
-		}
-		return abstractActionDisconnectComponent;
 	}
 	
 	//Methods form Model Class
@@ -452,6 +343,15 @@ public class gDomeGUIview extends javax.swing.JFrame {
 	private void actionPressDisconnectComponent(){
 		try {
 			d_model.disconnectFromComponent();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void actionPressConnectComponent(){
+		try {
+			d_model.connectToComponent();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
