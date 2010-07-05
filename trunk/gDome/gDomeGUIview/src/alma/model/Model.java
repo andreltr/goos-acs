@@ -83,28 +83,23 @@ public class Model extends AbstractModel {
 		}
 	}
 
-	// Component interface
-	/*public void startCooler() {
-		if (dome_dao != null) {
-			dome_dao.startCooler();
-		}
-	}*/
-	
+		
 	public void rotateLeft(double radians) {
-		if (dome_dao != null) {
+		
+		if (dome_dao != null) {			
 			dome_dao.rotateLeft(radians);
 		}
 	}
 	
 	public void rotateRight(double radians) {
-		if (dome_dao != null) {
+		if (dome_dao != null) {			
 			dome_dao.rotateRight(radians);
 		}
 	}
 	
 	public void openSlit() {
 		if (dome_dao != null) {
-			dome_dao.openSlit();
+			dome_dao.openSlit();			
 		}
 	}
 	
