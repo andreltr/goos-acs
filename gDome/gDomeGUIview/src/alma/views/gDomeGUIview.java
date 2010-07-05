@@ -56,6 +56,7 @@ public class gDomeGUIview extends javax.swing.JFrame {
 	private JMenuItem saveAsMenuItem;
 	private JMenuItem saveMenuItem;
 	private AbstractAction abstractActionDisconnectComponent;
+	private JLabel jLabel1;
 	private JLabel jLabelComponentConnected;
 	private JLabel jLabelRadians;
 	private JLabel jLabelWest;
@@ -75,6 +76,8 @@ public class gDomeGUIview extends javax.swing.JFrame {
 	private JMenuBar jMenuBar1;
 	private Model d_model;
 	private JLabel jLabelImgDome;
+	private JLabel indicadorComponente;
+	private JLabel indicadorSlit;
 	
 	public gDomeGUIview(Model controller) {
 		super();
@@ -158,23 +161,26 @@ public class gDomeGUIview extends javax.swing.JFrame {
 					}
 					{
 						jButtonOpenSlit = new JButton();
-						jPanelOptions.add(jButtonOpenSlit,
-								new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0,
-										GridBagConstraints.CENTER,
-										GridBagConstraints.HORIZONTAL,
-										new Insets(0, 0, 0, 0), 0, 0));
+						jPanelOptions.add(jButtonOpenSlit, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 						jButtonOpenSlit.setText("Open Slit");
 						jButtonOpenSlit.setAction(getAbstractActionOpenSlit());
 					}
 					{
 						jButtonCloseSlit = new JButton();
-						jPanelOptions.add(jButtonCloseSlit,
-								new GridBagConstraints(3, 3, 1, 1, 0.0, 0.0,
-										GridBagConstraints.CENTER,
-										GridBagConstraints.HORIZONTAL,
-										new Insets(0, 0, 0, 0), 0, 0));
+						jPanelOptions.add(jButtonCloseSlit, new GridBagConstraints(3, 4, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 						jPanelOptions.add(getJLabelRadians(), new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 						jPanelOptions.add(getJLabelComponentConnected(), new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+						
+						indicadorComponente = new javax.swing.JLabel();
+						indicadorComponente.setIcon(new javax.swing.ImageIcon("alma/views/images/green_light.gif"));
+						jPanelOptions.add(indicadorComponente);
+						
+						
+						indicadorSlit = new javax.swing.JLabel();
+						indicadorSlit.setIcon(new javax.swing.ImageIcon("alma/views/images/green_light.gif"));
+						jPanelOptions.add(indicadorSlit, new GridBagConstraints(2, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+						jPanelOptions.add(getJLabel1(), new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+
 						jButtonCloseSlit.setText("Close Slit");
 						jButtonCloseSlit.setAction(getAbstractActionCloseSlit());
 						jButtonCloseSlit.disable();
@@ -432,14 +438,15 @@ public class gDomeGUIview extends javax.swing.JFrame {
 		jButtonOpenSlit.disable();
 		d_model.openSlit();
 		jButtonCloseSlit.enable();
-	
+		indicadorSlit.setIcon(new javax.swing.ImageIcon("alma/views/images/green_light.gif"));
 	}
 	
 	@SuppressWarnings("deprecation")
 	private void actionPressCloseSlit(){
 		jButtonCloseSlit.disable();
 		d_model.closeSlit();
-		jButtonOpenSlit.enable();	
+		jButtonOpenSlit.enable();
+		indicadorSlit.setIcon(new javax.swing.ImageIcon("alma/views/images/red_light.gif"));
 	}
 	
 	private void actionPressDisconnectComponent(){
@@ -497,6 +504,14 @@ public class gDomeGUIview extends javax.swing.JFrame {
 			jLabelComponentConnected.setText("Component Status:");
 		}
 		return jLabelComponentConnected;
+	}
+	
+	private JLabel getJLabel1() {
+		if(jLabel1 == null) {
+			jLabel1 = new JLabel();
+			jLabel1.setText("Slit Status:");
+		}
+		return jLabel1;
 	}
 
 	private static class WindowCloseManager extends WindowAdapter {
