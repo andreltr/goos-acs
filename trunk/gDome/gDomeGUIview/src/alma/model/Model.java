@@ -42,6 +42,10 @@ public class Model extends AbstractModel {
 		dome_dao.init();
 	}
 
+	public String getSystemMessage() {
+		return dome_dao.getSystemMessage();
+	}
+	
 	// DAO interface
 
 	public void connectToComponent() throws Exception {

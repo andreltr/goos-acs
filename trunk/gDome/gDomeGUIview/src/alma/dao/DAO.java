@@ -16,6 +16,8 @@ public class DAO extends ComponentClient {
 	private LinkedList<String> modelsList;
 	private double move_to;
 
+	private String systemMessage = "";
+	
 	/**
 	 * Default constructor
 	 * 
@@ -27,7 +29,8 @@ public class DAO extends ComponentClient {
 
 		gDomeCompReference = null;
 		// Get the Container Services
-		m_logger.info("INFO: Container services...");
+		systemMessage = "INFO: Container services...";
+		m_logger.info(systemMessage);
 		m_containerServices = getContainerServices();
 
 		setModel(model);
@@ -46,7 +49,8 @@ public class DAO extends ComponentClient {
 				.narrow(m_containerServices.getComponent(selectedDome));
 
 		//setInitialModelValuesFromCDB();
-		m_logger.info("INFO: Connected!!!");
+		systemMessage = "INFO: Connected!!!";
+		m_logger.info(systemMessage);
 		getCurrentState();
 	}
 
@@ -57,7 +61,8 @@ public class DAO extends ComponentClient {
 	}	
 	
 	public void getCurrentPosition() {
-		m_logger.info("INFO: Receiving current position...");
+		systemMessage = "INFO: Receiving current position...";
+		m_logger.info(systemMessage);
 		gDomeCompReference.domeCurrentPosition().get_sync(new alma.ACSErr.CompletionHolder());
 		//getCurrentState();
 	}
@@ -118,20 +123,30 @@ public class DAO extends ComponentClient {
 	public void openSlit() {
 		m_logger.info("INFO: Opening the slit");
 		if(gDomeCompReference.slitCurrentState().get_sync(new alma.ACSErr.CompletionHolder()) == 1){
-			m_logger.info("INFO: The slit is already opened");		
+			systemMessage = "already opened";
+			m_logger.info(systemMessage);		
 		}else		{
 			gDomeCompReference.slitCurrentState().set_sync(1);
-			m_logger.info("INFO: Current Slite State:"+gDomeCompReference.slitCurrentState().get_sync(new alma.ACSErr.CompletionHolder()));
+			systemMessage = "INFO: Current Slite State:"+gDomeCompReference.slitCurrentState().get_sync(new alma.ACSErr.CompletionHolder());
+			m_logger.info(systemMessage);
+			systemMessage = "OK";
 		}
 	}
 	
 	public void closeSlit() {
 		m_logger.info("INFO: Closing the slit");
 		if(gDomeCompReference.slitCurrentState().get_sync(new alma.ACSErr.CompletionHolder()) == 0){
-			m_logger.info("INFO: The slit is already closed");
+			systemMessage = "already closed";
+			m_logger.info(systemMessage);
 		}else{
+			systemMessage = "INFO: Current Slite State:"+gDomeCompReference.slitCurrentState().get_sync(new alma.ACSErr.CompletionHolder());
 			gDomeCompReference.slitCurrentState().set_sync(0);
-			m_logger.info("INFO: Current Slite State:"+gDomeCompReference.slitCurrentState().get_sync(new alma.ACSErr.CompletionHolder()));
+			m_logger.info(systemMessage);
+			systemMessage = "OK";
 		}
+	}
+	
+	public String getSystemMessage() {
+		return systemMessage;
 	}
 }
