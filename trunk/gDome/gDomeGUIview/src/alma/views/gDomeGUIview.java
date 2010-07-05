@@ -68,6 +68,7 @@ public class gDomeGUIview extends javax.swing.JFrame {
 	private JMenu jMenu3;
 	private JMenuBar jMenuBar1;
 	private Model d_model;
+	private JLabel jLabelImgDome;
 	
 
 	public gDomeGUIview(Model controller) {
@@ -193,13 +194,17 @@ public class gDomeGUIview extends javax.swing.JFrame {
 					jPanelImage.setLayout(jPanelImageLayout);
 					{
 						jPanelDomeImage = new JPanel();
-						jPanelImage.add(jPanelDomeImage, new GridBagConstraints(1, 1, 2, 2, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(60, 2, 60, 2), 0, 0));
+						jPanelImage.add(jPanelDomeImage, new GridBagConstraints(1, 1, 2, 2, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(60, 2, 60, 2), 0, 0));
 						jPanelImage.add(getJLabelNorth(), new GridBagConstraints(1, 0, 2, 1, 0.0, 0.0, GridBagConstraints.SOUTH, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 						jPanelImage.add(getJLabelEast(), new GridBagConstraints(3, 1, 1, 2, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 						jPanelImage.add(getJLabelWest(), new GridBagConstraints(0, 1, 1, 2, 0.0, 0.0, GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 						jPanelImage.add(getJLabelSouth(), new GridBagConstraints(1, 3, 2, 1, 0.0, 0.0, GridBagConstraints.NORTH, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 						jPanelDomeImage.setBorder(BorderFactory
 								.createBevelBorder(BevelBorder.LOWERED));
+						
+						jLabelImgDome = new javax.swing.JLabel();
+						jLabelImgDome.setIcon(new javax.swing.ImageIcon("alma/views/images/domo/domo0001.jpg"));
+						jPanelDomeImage.add(jLabelImgDome, new GridBagConstraints(1, 1, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 					}
 				}
 			}
