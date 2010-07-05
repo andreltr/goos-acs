@@ -49,6 +49,7 @@ public class gDomeGUIview extends javax.swing.JFrame {
 	private JMenuItem closeFileMenuItem;
 	private JMenuItem saveAsMenuItem;
 	private JMenuItem saveMenuItem;
+	private AbstractAction abstractActionDisconnectComponent;
 	private JLabel jLabelComponentConnected;
 	private JLabel jLabelRadians;
 	private JLabel jLabelWest;
@@ -334,11 +335,21 @@ public class gDomeGUIview extends javax.swing.JFrame {
 		return abstractActionCloseSlit;
 	}
 	
+	private AbstractAction getAbstractActionDisconnectComponent() {
+		if(abstractActionDisconnectComponent == null) {
+			abstractActionDisconnectComponent = new AbstractAction("abstractActionDisconnectComponent", null) {
+				public void actionPerformed(ActionEvent evt) {
+					actionPressDisconnectComponent();
+				}
+			};
+		}
+		return abstractActionDisconnectComponent;
+	}
+	
 	//Methods form Model Class
 	
 	private void actionPressRotateLeft(){
-		d_model.rotateLeft((Double)jSpinnerDegrees.getValue());
-	
+		d_model.rotateLeft((Double)jSpinnerDegrees.getValue());		
 	}
 	
 	private void actionPressRotateRight(){
@@ -359,6 +370,15 @@ public class gDomeGUIview extends javax.swing.JFrame {
 		jButtonCloseSlit.disable();
 		d_model.closeSlit();
 		jButtonOpenSlit.enable();	
+	}
+	
+	private void actionPressDisconnectComponent(){
+		try {
+			d_model.disconnectFromComponent();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private JLabel getJLabelNorth() {
