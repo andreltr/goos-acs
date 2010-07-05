@@ -56,6 +56,7 @@ public class gDomeGUIview extends javax.swing.JFrame {
 	private JMenuItem saveAsMenuItem;
 	private JMenuItem saveMenuItem;
 	private AbstractAction abstractActionDisconnectComponent;
+	private JLabel systemMessage;
 	private JLabel jLabel1;
 	private JLabel jLabelComponentConnected;
 	private JLabel jLabelRadians;
@@ -117,9 +118,8 @@ public class gDomeGUIview extends javax.swing.JFrame {
 							1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
 							GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0,
 							0));
-					jPanelOptionsLayout.rowWeights = new double[] { 0.1, 0.1,
-							0.1, 0.1, 0.1 };
-					jPanelOptionsLayout.rowHeights = new int[] { 7, 7, 7, 7, 7 };
+					jPanelOptionsLayout.rowWeights = new double[] {0.1, 0.1, 0.1, 0.1, 0.1, 0.1};
+					jPanelOptionsLayout.rowHeights = new int[] {7, 7, 7, 7, 7, 20};
 					jPanelOptionsLayout.columnWeights = new double[] { 0.1,
 							0.1, 0.1, 0.1, 0.1 };
 					jPanelOptionsLayout.columnWidths = new int[] { 7, 7, 7, 7,
@@ -173,14 +173,14 @@ public class gDomeGUIview extends javax.swing.JFrame {
 						
 						indicadorComponente = new javax.swing.JLabel();
 						indicadorComponente.setIcon(new javax.swing.ImageIcon("alma/views/images/green_light.gif"));
-						jPanelOptions.add(indicadorComponente);
+						jPanelOptions.add(indicadorComponente, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 						
 						
 						indicadorSlit = new javax.swing.JLabel();
 						indicadorSlit.setIcon(new javax.swing.ImageIcon("alma/views/images/green_light.gif"));
 						jPanelOptions.add(indicadorSlit, new GridBagConstraints(2, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 						jPanelOptions.add(getJLabel1(), new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-
+						
 						jButtonCloseSlit.setText("Close Slit");
 						jButtonCloseSlit.setAction(getAbstractActionCloseSlit());
 						jButtonCloseSlit.disable();
@@ -512,6 +512,14 @@ public class gDomeGUIview extends javax.swing.JFrame {
 			jLabel1.setText("Slit Status:");
 		}
 		return jLabel1;
+	}
+	
+	private JLabel getJLabel2() {
+		if(systemMessage == null) {
+			systemMessage = new JLabel();
+			systemMessage.setText("System Message:");
+		}
+		return systemMessage;
 	}
 
 	private static class WindowCloseManager extends WindowAdapter {
