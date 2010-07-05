@@ -354,7 +354,8 @@ public class gDomeGUIview extends javax.swing.JFrame {
 	//Methods form Model Class
 	
 	private void actionPressRotateLeft(){
-		d_model.rotateLeft((Double)jSpinnerDegrees.getValue());		
+		d_model.rotateLeft((Double)jSpinnerDegrees.getValue());
+		
 	}
 	
 	private void actionPressRotateRight(){

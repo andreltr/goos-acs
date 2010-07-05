@@ -82,6 +82,14 @@ public class Model extends AbstractModel {
 			}
 		}
 	}
+	
+	public double getCurrentPositionDome() {
+		double currentPosition = 0;
+		if (dome_dao != null) {			
+			currentPosition = dome_dao.getCurrentPositionDome();			
+		}
+		return currentPosition;
+	}
 
 		
 	public void rotateLeft(double radians) {
