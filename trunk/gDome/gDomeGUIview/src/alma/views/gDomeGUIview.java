@@ -1,14 +1,20 @@
 package alma.views;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 
+import java.io.*;
+import java.awt.*;
 import javax.swing.*;
+import javax.imageio.*;
+
 import javax.swing.border.BevelBorder;
 
 import alma.model.Model;
@@ -70,7 +76,6 @@ public class gDomeGUIview extends javax.swing.JFrame {
 	private Model d_model;
 	private JLabel jLabelImgDome;
 	
-
 	public gDomeGUIview(Model controller) {
 		super();
 		this.d_model = controller;
@@ -193,18 +198,19 @@ public class gDomeGUIview extends javax.swing.JFrame {
 					jPanelImageLayout.columnWidths = new int[] { 7, 7, 7, 7 };
 					jPanelImage.setLayout(jPanelImageLayout);
 					{
-						jPanelDomeImage = new JPanel();
-						jPanelImage.add(jPanelDomeImage, new GridBagConstraints(1, 1, 2, 2, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(60, 2, 60, 2), 0, 0));
 						jPanelImage.add(getJLabelNorth(), new GridBagConstraints(1, 0, 2, 1, 0.0, 0.0, GridBagConstraints.SOUTH, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 						jPanelImage.add(getJLabelEast(), new GridBagConstraints(3, 1, 1, 2, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 						jPanelImage.add(getJLabelWest(), new GridBagConstraints(0, 1, 1, 2, 0.0, 0.0, GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 						jPanelImage.add(getJLabelSouth(), new GridBagConstraints(1, 3, 2, 1, 0.0, 0.0, GridBagConstraints.NORTH, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+						
+						jPanelDomeImage = new JPanel();
 						jPanelDomeImage.setBorder(BorderFactory
 								.createBevelBorder(BevelBorder.LOWERED));
+						jPanelImage.add(jPanelDomeImage, new GridBagConstraints(1, 1, 2, 2, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(60, 2, 60, 2), 0, 0));
 						
 						jLabelImgDome = new javax.swing.JLabel();
 						jLabelImgDome.setIcon(new javax.swing.ImageIcon("alma/views/images/domo/domo0001.jpg"));
-						jPanelDomeImage.add(jLabelImgDome, new GridBagConstraints(1, 1, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+						jPanelDomeImage.add(jLabelImgDome);
 					}
 				}
 			}
@@ -354,23 +360,69 @@ public class gDomeGUIview extends javax.swing.JFrame {
 	//Methods form Model Class
 	
 	private void actionPressRotateLeft(){
-		double speed = 0.1;
-		int initialposition = (int)(d_model.getCurrentPositionDome()*90/1.5708);
-		int finalposition = (int)((d_model.getCurrentPositionDome()+(Double)jSpinnerDegrees.getValue())*90/1.5708);
-		for (int i=initialposition; i<= finalposition; i++) {
-			d_model.rotateLeft(d_model.getCurrentPositionDome()-speed);
-			jLabelImgDome.setIcon(new javax.swing.ImageIcon("alma/views/images/domo/domo0" +i +".jpg"));
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		double initialposition = d_model.getCurrentPositionDome();
+		double finalposition = d_model.getCurrentPositionDome()+(Double)jSpinnerDegrees.getValue();
+		int in = (int)(initialposition*90/1.5708);
+		int fn = (int)(finalposition*90/1.5708);
+		
+		try {
+			Thread.sleep(10*Math.abs(fn-in));
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
+		while (fn < 0) {
+			fn += 360;
+		};
+		while (fn >= 360) {
+			fn -= 360;
+		};
+		
+		String paddingString = "";
+		if (fn >= 0 && fn < 10) {
+			paddingString = "00";
+		} else if (fn >= 10 && fn < 100) {
+			paddingString = "0";
+		};
+		jLabelImgDome.setIcon(new javax.swing.ImageIcon("alma/views/images/domo/domo0" + paddingString + fn +".jpg"));
+		jLabelImgDome.repaint();
+		jPanelDomeImage.add(jLabelImgDome);
+		
+		d_model.rotateLeft((Double)jSpinnerDegrees.getValue());
 	}
 	
-	
-	private void actionPressRotateRight(){
+	private void actionPressRotateRight(){		
+		double initialposition = d_model.getCurrentPositionDome();
+		double finalposition = d_model.getCurrentPositionDome()-(Double)jSpinnerDegrees.getValue();
+		int in = (int)(initialposition*90/1.5708);
+		int fn = (int)(finalposition*90/1.5708);
+		
+		try {
+			Thread.sleep(10*Math.abs(in-fn));
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		while (fn < 0) {
+			fn += 360;
+		};
+		while (fn >= 360) {
+			fn -= 360;
+		};
+		//if (fn >= 359) fn = 359;
+		
+		String paddingString = "";
+		if (fn >= 0 && fn < 10) {
+			paddingString = "00";
+		} else if (fn >= 10 && fn < 100) {
+			paddingString = "0";
+		};
+		jLabelImgDome.setIcon(new javax.swing.ImageIcon("alma/views/images/domo/domo0" + paddingString + fn +".jpg"));
+		jLabelImgDome.repaint();
+		jPanelDomeImage.add(jLabelImgDome);
+		
 		d_model.rotateRight((Double)jSpinnerDegrees.getValue());
 	
 	}
