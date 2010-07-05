@@ -35,7 +35,8 @@ public class gCCDImagePanel extends JPanel {
 	public void setImage(String filename) {
 		try {
 			// We read using ImageMagick
-			magickImageInfo = new ImageInfo("/home/almadev/" + filename);
+			magickImageInfo = new ImageInfo(System.getProperty("user.dir")
+					+ "/" + filename);
 			magickImage = new MagickImage(magickImageInfo);
 
 			byte[] imageArray = magickImage.imageToBlob(magickImageInfo);
@@ -85,8 +86,8 @@ public class gCCDImagePanel extends JPanel {
 	@Override
 	public void paint(Graphics g) {
 		if (bufferedImage != null) {
-			g.drawImage(bufferedImage, 0, 0, this.getSize().width, this
-					.getSize().height, this);
+			g.drawImage(bufferedImage, 0, 0, this.getSize().width,
+					this.getSize().height, this);
 
 			setOpaque(false);
 		} else {
@@ -120,7 +121,6 @@ public class gCCDImagePanel extends JPanel {
 		try {
 			return magickImage.getNumFrames();
 		} catch (MagickException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return -1;

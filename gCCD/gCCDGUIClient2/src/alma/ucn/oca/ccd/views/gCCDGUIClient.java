@@ -9,6 +9,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -707,6 +709,128 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		jMenuImageOptions.setEnabled(false);
 
 		getJButtonCCDStopExp();
+	}
+
+	// GUI components
+
+	private JPanel getJPanelImageInfoTab() {
+		if (jPanelTabImageInfo == null) {
+			jPanelTabImageInfo = new JPanel();
+			GridBagLayout jPanelTabImageInfoLayout = new GridBagLayout();
+			jPanelTabImageInfoLayout.rowWeights = new double[] { 0.1, 0.1, 0.1,
+					0.1, 0.1 };
+			jPanelTabImageInfoLayout.rowHeights = new int[] { 7, 7, 7, 7, 7 };
+			jPanelTabImageInfoLayout.columnWeights = new double[] { 0.1, 0.1,
+					0.1 };
+			jPanelTabImageInfoLayout.columnWidths = new int[] { 7, 7, 7 };
+			jPanelTabImageInfo.setLayout(jPanelTabImageInfoLayout);
+			jPanelTabImageInfo.add(getJLabelImageInfoTabObjectName(),
+					new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
+							GridBagConstraints.CENTER, GridBagConstraints.NONE,
+							new Insets(0, 0, 0, 0), 0, 0));
+			jPanelTabImageInfo.add(getJLabelImageInfoTabObserverName(),
+					new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0,
+							GridBagConstraints.CENTER, GridBagConstraints.NONE,
+							new Insets(0, 0, 0, 0), 0, 0));
+			jPanelTabImageInfo.add(getJLabelImageInfoTabTelescopeName(),
+					new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
+							GridBagConstraints.CENTER, GridBagConstraints.NONE,
+							new Insets(0, 0, 0, 0), 0, 0));
+			jPanelTabImageInfo.add(getJTextFieldImageInfoTabObjectName(),
+					new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
+							GridBagConstraints.CENTER,
+							GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0,
+									0), 0, 0));
+			jPanelTabImageInfo.add(getJTextFieldImageInfoTabTelescopeName(),
+					new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
+							GridBagConstraints.CENTER,
+							GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0,
+									0), 0, 0));
+			jPanelTabImageInfo.add(getJTextFieldImageInfoTabObserverName(),
+					new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0,
+							GridBagConstraints.CENTER,
+							GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0,
+									0), 0, 0));
+		}
+		return jPanelTabImageInfo;
+	}
+
+	private JLabel getJLabelImageInfoTabObjectName() {
+		if (jLabelImageInfoTabObjectName == null) {
+			jLabelImageInfoTabObjectName = new JLabel();
+			jLabelImageInfoTabObjectName.setText("Object Name:");
+		}
+		return jLabelImageInfoTabObjectName;
+	}
+
+	private JLabel getJLabelImageInfoTabObserverName() {
+		if (jLabelImageInfoTabObserverName == null) {
+			jLabelImageInfoTabObserverName = new JLabel();
+			jLabelImageInfoTabObserverName.setText("Observer Name:");
+		}
+		return jLabelImageInfoTabObserverName;
+	}
+
+	private JLabel getJLabelImageInfoTabTelescopeName() {
+		if (jLabelImageInfoTabTelescopeName == null) {
+			jLabelImageInfoTabTelescopeName = new JLabel();
+			jLabelImageInfoTabTelescopeName.setText("Telescope Name:");
+		}
+		return jLabelImageInfoTabTelescopeName;
+	}
+
+	private JTextField getJTextFieldImageInfoTabObjectName() {
+		if (jTextFieldImageInfoTabObjectName == null) {
+			jTextFieldImageInfoTabObjectName = new JTextField();
+			jTextFieldImageInfoTabObjectName
+					.addFocusListener(new FocusListener() {
+						@Override
+						public void focusLost(FocusEvent e) {
+							changeObjectNameActionPerformed();
+						}
+
+						@Override
+						public void focusGained(FocusEvent e) {
+						}
+					});
+		}
+		return jTextFieldImageInfoTabObjectName;
+	}
+
+	private JTextField getJTextFieldImageInfoTabTelescopeName() {
+		if (jTextFieldImageInfoTabTelescopeName == null) {
+			jTextFieldImageInfoTabTelescopeName = new JTextField();
+			jTextFieldImageInfoTabTelescopeName
+					.addFocusListener(new FocusListener() {
+						@Override
+						public void focusLost(FocusEvent e) {
+							changeTelescopeNameActionPerformed();
+						}
+
+						@Override
+						public void focusGained(FocusEvent e) {
+						}
+					});
+		}
+		return jTextFieldImageInfoTabTelescopeName;
+	}
+
+	private JTextField getJTextFieldImageInfoTabObserverName() {
+		if (jTextFieldImageInfoTabObserverName == null) {
+			jTextFieldImageInfoTabObserverName = new JTextField();
+			jTextFieldImageInfoTabObserverName
+					.addFocusListener(new FocusListener() {
+						@Override
+						public void focusLost(FocusEvent e) {
+							changeObserverNameActionPerformed();
+						}
+
+						@Override
+						public void focusGained(FocusEvent e) {
+						}
+					});
+		}
+		return jTextFieldImageInfoTabObserverName;
 	}
 
 	private ButtonGroup getButtonGroupCCDSettingsMenuScanType() {
@@ -1497,6 +1621,8 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		return jPanel2;
 	}
 
+	// Dialogs
+
 	private void getJDialogAbout() {
 		if (jFrameAboutDialog == null) {
 			jFrameAboutDialog = new JFrame();
@@ -1584,44 +1710,31 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		jDialogAcquiringProgress.addWindowListener(new WindowListener() {
 			@Override
 			public void windowActivated(WindowEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
 			public void windowClosed(WindowEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
 			public void windowClosing(WindowEvent e) {
-				// TODO Auto-generated method stub
 				stopExposureAction(null);
 			}
 
 			@Override
 			public void windowDeactivated(WindowEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
 			public void windowDeiconified(WindowEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
 			public void windowIconified(WindowEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
 			public void windowOpened(WindowEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 		});
 	}
@@ -1647,7 +1760,8 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JFileChooser getJDialogFilechooser() {
 		if (jFileChooserDialog == null) {
 			// File selector dialog
-			jFileChooserDialog = new JFileChooser();
+			jFileChooserDialog = new JFileChooser(
+					System.getProperty("user.dir"));
 			jFileChooserDialog
 					.addChoosableFileFilter(new gCCDFileSelectorDialog());
 		}
@@ -1812,21 +1926,21 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 
 	// Methods that change the model
 
-	private void changeObserverNameActionPerformed(ActionEvent evt) {
+	private void changeObserverNameActionPerformed() {
 
 		controller.changeCompObserverName(jTextFieldImageInfoTabObserverName
 				.getText());
 
 	}
 
-	private void changeObjectNameActionPerformed(ActionEvent evt) {
+	private void changeObjectNameActionPerformed() {
 
 		controller.changeCompObjectName(jTextFieldImageInfoTabObjectName
 				.getText());
 
 	}
 
-	private void changeTelescopeNameActionPerformed(ActionEvent evt) {
+	private void changeTelescopeNameActionPerformed() {
 
 		controller.changeCompTelescopeName(jTextFieldImageInfoTabTelescopeName
 				.getText());
@@ -2067,14 +2181,14 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jButtonCCDStartExp.setEnabled(true);
 			jButtonCCDReset.setEnabled(true);
 			jButtonCCDOff.setEnabled(true);
-			//
+
 			jButtonCCDStartCooler.setEnabled(!coolerOn);
 			jButtonCCDStopCooler.setEnabled(coolerOn);
 
 			jMenuItemCCDControlStartExp.setEnabled(true);
 			jMenuItemCCDControlReset.setEnabled(true);
 			jMenuItemCCDControlOff.setEnabled(true);
-			//
+
 			jMenuItemCCDControlStartCooler.setEnabled(!coolerOn);
 			jMenuItemCCDControlStopCooler.setEnabled(coolerOn);
 		} catch (Exception e1) {
@@ -2184,17 +2298,17 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 
 	protected void saveAsImageAction(ActionEvent e) {
 		int result = getJDialogFilechooser().showSaveDialog(this);
-		File fileObj = jFileChooserDialog.getSelectedFile();// We get the
-		// path to save the image
+		File fileObj = jFileChooserDialog.getSelectedFile();
+		// We get the path to save the image
 		if (result == JFileChooser.APPROVE_OPTION) {
 			try {
 				// We append the .fits extension if it's not found
 				if (jFileChooserDialog.getFileFilter().accept(fileObj) == true) {
-					saveImage(fileObj.getAbsolutePath(), listFiles
-							.get(imgIndex));
+					saveImage(fileObj.getAbsolutePath(),
+							listFiles.get(imgIndex));
 				} else {
-					saveImage(fileObj.getAbsolutePath() + ".fits", listFiles
-							.get(imgIndex));
+					saveImage(fileObj.getAbsolutePath() + ".fits",
+							listFiles.get(imgIndex));
 				}
 
 			} catch (Exception ex) {
@@ -2207,118 +2321,14 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		}
 	}
 
-	public void saveImage(String imagePath, String currentImage)
+	public void saveImage(String savedImagePath, String currentImage)
 			throws MagickException {
-		// The received image is saved as a BMP file, and then converted to FITS
-		ImageInfo info2 = new ImageInfo("/home/almadev/" + currentImage);
+		ImageInfo info2 = new ImageInfo(System.getProperty("user.dir") + "/"
+				+ currentImage);
 		MagickImage image2 = new MagickImage(info2);
 
-		image2.setFileName(imagePath);
+		image2.setFileName(savedImagePath);
 		image2.writeImage(info2);
 	}
 
-	private JPanel getJPanelImageInfoTab() {
-		if (jPanelTabImageInfo == null) {
-			jPanelTabImageInfo = new JPanel();
-			GridBagLayout jPanelTabImageInfoLayout = new GridBagLayout();
-			jPanelTabImageInfoLayout.rowWeights = new double[] { 0.1, 0.1, 0.1,
-					0.1, 0.1 };
-			jPanelTabImageInfoLayout.rowHeights = new int[] { 7, 7, 7, 7, 7 };
-			jPanelTabImageInfoLayout.columnWeights = new double[] { 0.1, 0.1,
-					0.1 };
-			jPanelTabImageInfoLayout.columnWidths = new int[] { 7, 7, 7 };
-			jPanelTabImageInfo.setLayout(jPanelTabImageInfoLayout);
-			jPanelTabImageInfo.add(getJLabelImageInfoTabObjectName(),
-					new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
-							GridBagConstraints.CENTER, GridBagConstraints.NONE,
-							new Insets(0, 0, 0, 0), 0, 0));
-			jPanelTabImageInfo.add(getJLabelImageInfoTabObserverName(),
-					new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0,
-							GridBagConstraints.CENTER, GridBagConstraints.NONE,
-							new Insets(0, 0, 0, 0), 0, 0));
-			jPanelTabImageInfo.add(getJLabelImageInfoTabTelescopeName(),
-					new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
-							GridBagConstraints.CENTER, GridBagConstraints.NONE,
-							new Insets(0, 0, 0, 0), 0, 0));
-			jPanelTabImageInfo.add(getJTextFieldImageInfoTabObjectName(),
-					new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
-							GridBagConstraints.CENTER,
-							GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0,
-									0), 0, 0));
-			jPanelTabImageInfo.add(getJTextFieldImageInfoTabTelescopeName(),
-					new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
-							GridBagConstraints.CENTER,
-							GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0,
-									0), 0, 0));
-			jPanelTabImageInfo.add(getJTextFieldImageInfoTabObserverName(),
-					new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0,
-							GridBagConstraints.CENTER,
-							GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0,
-									0), 0, 0));
-		}
-		return jPanelTabImageInfo;
-	}
-
-	private JLabel getJLabelImageInfoTabObjectName() {
-		if (jLabelImageInfoTabObjectName == null) {
-			jLabelImageInfoTabObjectName = new JLabel();
-			jLabelImageInfoTabObjectName.setText("Object Name:");
-		}
-		return jLabelImageInfoTabObjectName;
-	}
-
-	private JLabel getJLabelImageInfoTabObserverName() {
-		if (jLabelImageInfoTabObserverName == null) {
-			jLabelImageInfoTabObserverName = new JLabel();
-			jLabelImageInfoTabObserverName.setText("Observer Name:");
-		}
-		return jLabelImageInfoTabObserverName;
-	}
-
-	private JLabel getJLabelImageInfoTabTelescopeName() {
-		if (jLabelImageInfoTabTelescopeName == null) {
-			jLabelImageInfoTabTelescopeName = new JLabel();
-			jLabelImageInfoTabTelescopeName.setText("Telescope Name:");
-		}
-		return jLabelImageInfoTabTelescopeName;
-	}
-
-	private JTextField getJTextFieldImageInfoTabObjectName() {
-		if (jTextFieldImageInfoTabObjectName == null) {
-			jTextFieldImageInfoTabObjectName = new JTextField();
-			jTextFieldImageInfoTabObjectName
-					.addActionListener(new java.awt.event.ActionListener() {
-						public void actionPerformed(ActionEvent evt) {
-							changeObjectNameActionPerformed(evt);
-						}
-					});
-		}
-		return jTextFieldImageInfoTabObjectName;
-	}
-
-	private JTextField getJTextFieldImageInfoTabTelescopeName() {
-		if (jTextFieldImageInfoTabTelescopeName == null) {
-			jTextFieldImageInfoTabTelescopeName = new JTextField();
-			jTextFieldImageInfoTabTelescopeName
-					.addActionListener(new java.awt.event.ActionListener() {
-						public void actionPerformed(ActionEvent evt) {
-							changeTelescopeNameActionPerformed(evt);
-						}
-					});
-		}
-		return jTextFieldImageInfoTabTelescopeName;
-	}
-
-	private JTextField getJTextFieldImageInfoTabObserverName() {
-		if (jTextFieldImageInfoTabObserverName == null) {
-			jTextFieldImageInfoTabObserverName = new JTextField();
-			jTextFieldImageInfoTabObserverName
-					.addActionListener(new java.awt.event.ActionListener() {
-						public void actionPerformed(ActionEvent evt) {
-							changeObserverNameActionPerformed(evt);
-						}
-					});
-		}
-		return jTextFieldImageInfoTabObserverName;
-	}
 }
