@@ -354,9 +354,21 @@ public class gDomeGUIview extends javax.swing.JFrame {
 	//Methods form Model Class
 	
 	private void actionPressRotateLeft(){
-		d_model.rotateLeft((Double)jSpinnerDegrees.getValue());
-		
+		double speed = 0.1;
+		int initialposition = (int)(d_model.getCurrentPositionDome()*90/1.5708);
+		int finalposition = (int)((d_model.getCurrentPositionDome()+(Double)jSpinnerDegrees.getValue())*90/1.5708);
+		for (int i=initialposition; i<= finalposition; i++) {
+			d_model.rotateLeft(d_model.getCurrentPositionDome()-speed);
+			jLabelImgDome.setIcon(new javax.swing.ImageIcon("alma/views/images/domo/domo0" +i +".jpg"));
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
+	
 	
 	private void actionPressRotateRight(){
 		d_model.rotateRight((Double)jSpinnerDegrees.getValue());
