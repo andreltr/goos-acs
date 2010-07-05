@@ -45,7 +45,7 @@ public class DAO extends ComponentClient {
 		gDomeCompReference = alma.acsdomeServer.DomeServerHelper
 				.narrow(m_containerServices.getComponent(selectedDome));
 
-		setInitialModelValuesFromCDB();
+		//setInitialModelValuesFromCDB();
 		m_logger.info("INFO: Connected!!!");
 		getCurrentState();
 	}
@@ -54,14 +54,7 @@ public class DAO extends ComponentClient {
 		m_logger.info("INFO: Disconnecting from component...");
 		m_logger.info("INFO: Disconnected!!!");
 		getCurrentState();
-	}
-
-	/*public void startCooler() {
-		m_logger.info("INFO: Starting cooler...");
-		gDomeCompReference.domeCurrentPosition().get_sync(c);
-		gDomeCompReference.startCooler();
-		getCurrentState();
-	}*/
+	}	
 	
 	public void getCurrentPosition() {
 		m_logger.info("INFO: Receiving current position...");
@@ -73,29 +66,7 @@ public class DAO extends ComponentClient {
 		//model.setCurrentState(gDomeCompReference.getState(new alma.ACSErr.CompletionHolder()));
 		gDomeCompReference.displayMessage();
 	}
-
-	public void setCurrentModelValuesFromComponent() {
-		/*
-		model.setActualAirTemperature(gDomeCompReference.actualAirTemperature()
-				.get_sync(new alma.ACSErr.CompletionHolder()));
-		model.setCameraName(gDomeCompReference.cameraName().get_sync(
-				new alma.ACSErr.CompletionHolder()));
-		model.setCameraModel((long) gDomeCompReference.cameraModel().get_sync(
-				new alma.ACSErr.CompletionHolder()));
-				*/
-	}
-
-	//
-	public void setInitialModelValuesFromCDB() {
-		/*model.setActualAirTemperature((double) gDomeCompReference
-				.actualAirTemperature().get_sync(
-						new alma.ACSErr.CompletionHolder()));
-		model.setCameraName((String) gDomeCompReference.cameraName().get_sync(
-				new alma.ACSErr.CompletionHolder()));
-		model.setCameraModel((long) gDomeCompReference.cameraModel().get_sync(
-				new alma.ACSErr.CompletionHolder()));*/
-	}
-
+	
 	// Returns a reference to the ACS component
 	public alma.acsdomeServer.DomeServer getComponent() {
 		return gDomeCompReference;
@@ -124,6 +95,10 @@ public class DAO extends ComponentClient {
 
 	public Model getModel() {
 		return this.model;
+	}
+	
+	public double getCurrentPositionDome(){
+		return gDomeCompReference.domeCurrentPosition().get_sync(new alma.ACSErr.CompletionHolder());
 	}
 	
 	public void rotateLeft(double radians){
