@@ -161,13 +161,12 @@ public class gDomeGUIview extends javax.swing.JFrame {
 						
 						
 						indicadorSlit = new javax.swing.JLabel();
-						indicadorSlit.setIcon(new javax.swing.ImageIcon("alma/views/images/green_light.gif"));
+						indicadorSlit.setIcon(new javax.swing.ImageIcon("alma/views/images/red_light.gif"));
 						jPanelOptions.add(indicadorSlit, new GridBagConstraints(2, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 						jPanelOptions.add(getJLabel1(), new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 						
 						jButtonCloseSlit.setText("Close Slit");
 						jButtonCloseSlit.setAction(getAbstractActionCloseSlit());
-						jButtonCloseSlit.disable();
 					}
 				}
 				{
