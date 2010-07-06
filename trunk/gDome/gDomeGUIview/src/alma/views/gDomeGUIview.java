@@ -208,6 +208,71 @@ public class gDomeGUIview extends javax.swing.JFrame {
 		}
 	}
 	
+	private JLabel getJLabelNorth() {
+		if(jLabelNorth == null) {
+			jLabelNorth = new JLabel();
+			jLabelNorth.setText("North");
+		}
+		return jLabelNorth;
+	}
+	
+	private JLabel getJLabelSouth() {
+		if(jLabelSouth == null) {
+			jLabelSouth = new JLabel();
+			jLabelSouth.setText("South");
+		}
+		return jLabelSouth;
+	}
+	
+	private JLabel getJLabelEast() {
+		if(jLabelEast == null) {
+			jLabelEast = new JLabel();
+			jLabelEast.setText("East");
+		}
+		return jLabelEast;
+	}
+	
+	private JLabel getJLabelWest() {
+		if(jLabelWest == null) {
+			jLabelWest = new JLabel();
+			jLabelWest.setText("West");
+		}
+		return jLabelWest;
+	}
+	
+	private JLabel getJLabelRadians() {
+		if(jLabelRadians == null) {
+			jLabelRadians = new JLabel();
+			jLabelRadians.setText("Radians:");
+		}
+		return jLabelRadians;
+	}
+	
+	private JLabel getJLabelComponentConnected() {
+		if(jLabelComponentConnected == null) {
+			jLabelComponentConnected = new JLabel();
+			jLabelComponentConnected.setText("Component Status:");
+		}
+		return jLabelComponentConnected;
+	}
+	
+	private JLabel getJLabel1() {
+		if(jLabel1 == null) {
+			jLabel1 = new JLabel();
+			jLabel1.setText("Slit Status:");
+		}
+		return jLabel1;
+	}
+	
+	private JLabel getJLabel2() {
+		if(systemMessage == null) {
+			systemMessage = new JLabel();
+			systemMessage.setText("System Message:");
+		}
+		return systemMessage;
+	}
+	
+	//Abstract methods
 	
 	private AbstractAction getAbstractActionRotateLeft() {
 		if(abstractActionRotateLeft == null) {
@@ -357,69 +422,7 @@ public class gDomeGUIview extends javax.swing.JFrame {
 		}
 	}
 	
-	private JLabel getJLabelNorth() {
-		if(jLabelNorth == null) {
-			jLabelNorth = new JLabel();
-			jLabelNorth.setText("North");
-		}
-		return jLabelNorth;
-	}
 	
-	private JLabel getJLabelSouth() {
-		if(jLabelSouth == null) {
-			jLabelSouth = new JLabel();
-			jLabelSouth.setText("South");
-		}
-		return jLabelSouth;
-	}
-	
-	private JLabel getJLabelEast() {
-		if(jLabelEast == null) {
-			jLabelEast = new JLabel();
-			jLabelEast.setText("East");
-		}
-		return jLabelEast;
-	}
-	
-	private JLabel getJLabelWest() {
-		if(jLabelWest == null) {
-			jLabelWest = new JLabel();
-			jLabelWest.setText("West");
-		}
-		return jLabelWest;
-	}
-	
-	private JLabel getJLabelRadians() {
-		if(jLabelRadians == null) {
-			jLabelRadians = new JLabel();
-			jLabelRadians.setText("Radians:");
-		}
-		return jLabelRadians;
-	}
-	
-	private JLabel getJLabelComponentConnected() {
-		if(jLabelComponentConnected == null) {
-			jLabelComponentConnected = new JLabel();
-			jLabelComponentConnected.setText("Component Status:");
-		}
-		return jLabelComponentConnected;
-	}
-	
-	private JLabel getJLabel1() {
-		if(jLabel1 == null) {
-			jLabel1 = new JLabel();
-			jLabel1.setText("Slit Status:");
-		}
-		return jLabel1;
-	}
-	
-	private JLabel getJLabel2() {
-		if(systemMessage == null) {
-			systemMessage = new JLabel();
-			systemMessage.setText("System Message:");
-		}
-		return systemMessage;
-	}
 
 	private static class WindowCloseManager extends WindowAdapter {
 		public void windowClosing(WindowEvent evt) {

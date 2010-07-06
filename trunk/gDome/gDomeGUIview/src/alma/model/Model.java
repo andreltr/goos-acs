@@ -38,10 +38,7 @@ public class Model extends AbstractModel {
 	 * 
 	 * @throws Exception
 	 */
-	public void init() throws Exception {
-		dome_dao.init();
-	}
-
+	
 	public String getSystemMessage() {
 		return dome_dao.getSystemMessage();
 	}
