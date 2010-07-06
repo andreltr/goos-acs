@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+
 import java.io.InputStream;
 import java.io.ByteArrayInputStream;
 
@@ -33,6 +34,7 @@ public class gCCDImagePanel extends JPanel {
 	}
 
 	public void setImage(String filename) {
+
 		try {
 			// We read using ImageMagick
 			magickImageInfo = new ImageInfo(System.getProperty("user.dir")

@@ -16,6 +16,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.beans.PropertyChangeEvent;
 import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 import javax.swing.JFileChooser;
 
@@ -24,9 +25,7 @@ import javax.swing.border.BevelBorder;
 
 import magick.*;
 import alma.ucn.oca.ccd.controller.DefaultController;
-import alma.ucn.oca.ccd.utils.gCCDFileSelectorDialog;
-import alma.ucn.oca.ccd.utils.gCCDImagePanel;
-import alma.ucn.oca.ccd.utils.gCCDNCEvent;
+import alma.ucn.oca.ccd.utils.*;
 
 /**
  * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
@@ -156,7 +155,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JPanel jPanelCCDSettings;
 	private JMenuBar jMenuBar;
 	private LinkedList<String> listFiles;
-	private gCCDImagePanel imagePanel;
+	// private gCCDImagePanel imagePanel;
 	private int imgIndex = 0;
 	private int imgMax;
 	private JFileChooser jFileChooserDialog;
@@ -179,6 +178,9 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private String acquiringDialogMessage;
 	private JDialog jDialogAcquiringProgress;
 	private boolean receiving = false;
+
+	private FITSFileDisplay imagePanel;
+	private String currentDir = System.getProperty("user.dir") + "/";
 
 	/**
 	 * Auto-generated main method to display this JFrame
@@ -1869,9 +1871,9 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jMenuItemCCDControlStartCooler.setEnabled(!coolerOn);
 			jMenuItemCCDControlStopCooler.setEnabled(coolerOn);
 
+			tReceptionDialog.interrupt();
 			tReceptionDialog = null;
 			jDialogReceptionProgress.setVisible(false);
-			jDialogReceptionProgress.setAlwaysOnTop(false);
 			jDialogAcquiringProgress.setVisible(false);
 			receiving = false;
 		}
@@ -2134,12 +2136,9 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 				public void run() {
 					Thread thisThread = Thread.currentThread();
 					while (tReceptionDialog == thisThread) {
-						System.out.println("234234254366b34jibjib4j34");
 						if (!receiving) {
-							System.out.println("2142352334234");
 							jDialogAcquiringProgress.setVisible(true);
 						} else {
-							System.out.println("SJKNJKSADNASJD");
 							jDialogReceptionProgress.setVisible(true);
 						}
 					}
@@ -2243,7 +2242,8 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 
 	protected void originalSizeImageAction(ActionEvent e) {
 		if (imagePanel != null) {
-			Dimension originalSize = imagePanel.getWidthHeight();
+			// Dimension originalSize = imagePanel.getWidthHeight();
+			Dimension originalSize = imagePanel.getSize();
 
 			imagePanel.setPreferredSize(originalSize);
 			imagePanel.setSize(originalSize);
@@ -2275,25 +2275,39 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	}
 
 	protected void showImageAction(ActionEvent e, int imgIndex) {
+		/*
+		 * if (imagePanel == null) { imageContainer = new JPanel(new
+		 * GridBagLayout());
+		 * 
+		 * imagePanel = new gCCDImagePanel(listFiles.get(imgIndex));
+		 * 
+		 * originalSizeImageAction(null);
+		 * 
+		 * imageContainer.add(imagePanel);
+		 * 
+		 * jScrollPaneImage.setViewportView(imageContainer); } if (listFiles !=
+		 * null) { imagePanel.setImage(listFiles.get(imgIndex)); }
+		 * 
+		 * jLabelImageInfoFileSz.setText("" + imagePanel.getImageSize());
+		 * jLabelImageInfoFr.setText("" + imagePanel.getImageFrames());
+		 * jLabelImageInfoH.setText("" + imagePanel.getImageHeight());
+		 * jLabelImageInfoW.setText("" + imagePanel.getImageWidth());
+		 */
+
 		if (imagePanel == null) {
+			imagePanel = new FITSFileDisplay();
 			imageContainer = new JPanel(new GridBagLayout());
-
-			imagePanel = new gCCDImagePanel(listFiles.get(imgIndex));
-
-			originalSizeImageAction(null);
-
 			imageContainer.add(imagePanel);
-
 			jScrollPaneImage.setViewportView(imageContainer);
 		}
-		if (listFiles != null) {
-			imagePanel.setImage(listFiles.get(imgIndex));
+		try {
+			if (listFiles != null) {
+				imagePanel.load(currentDir + listFiles.get(imgIndex));
+			}
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
-
-		jLabelImageInfoFileSz.setText("" + imagePanel.getImageSize());
-		jLabelImageInfoFr.setText("" + imagePanel.getImageFrames());
-		jLabelImageInfoH.setText("" + imagePanel.getImageHeight());
-		jLabelImageInfoW.setText("" + imagePanel.getImageWidth());
 	}
 
 	protected void saveAsImageAction(ActionEvent e) {
@@ -2321,14 +2335,18 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		}
 	}
 
-	public void saveImage(String savedImagePath, String currentImage)
-			throws MagickException {
-		ImageInfo info2 = new ImageInfo(System.getProperty("user.dir") + "/"
-				+ currentImage);
-		MagickImage image2 = new MagickImage(info2);
-
-		image2.setFileName(savedImagePath);
-		image2.writeImage(info2);
+	public void saveImage(String savedImagePath, String currentImage) {
+		try {
+			imagePanel.save(new File(savedImagePath));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		/*
+		 * ImageInfo info2 = new ImageInfo(currentDir + currentImage);
+		 * MagickImage image2 = new MagickImage(info2);
+		 * 
+		 * image2.setFileName(savedImagePath); image2.writeImage(info2);
+		 */
 	}
 
 }
