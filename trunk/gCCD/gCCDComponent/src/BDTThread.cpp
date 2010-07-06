@@ -50,6 +50,11 @@ void BDTThread::run() {
 			ACS_SHORT_LOG((LM_INFO, "BDTThread::run(): notification sent!"));
 			i++;
 		}
+		ACS_SHORT_LOG((LM_INFO, "BDTThread::run(): disconnect()"));
+		ccd_p->sender->disconnect();
+
+		ACS_SHORT_LOG((LM_INFO, "BDTThread::run(): closeReceiver()"));
+		ccd_p->receiver->closeReceiver();
 	}
 
 	catch (AVConnectErrorEx & ex) {
@@ -88,6 +93,10 @@ void BDTThread::onStart() {
 void BDTThread::onStop() {
 	ACS_TRACE("BDTThread::onStop()");
 
+	ACS_SHORT_LOG(
+			(LM_INFO, "Sleeping 3 sec to allow everything to cleanup and stabilize"));
+	ACE_OS::sleep(3);
+
 	CCDmodule::ncCCDFilename * fileEvent;
 	/**create an event with the filename, type, id, and total*/
 	fileEvent = new CCDmodule::ncCCDFilename;
@@ -97,12 +106,6 @@ void BDTThread::onStop() {
 	fileEvent->fileName = fName;
 	fileEvent->id = 0;
 	fileEvent->total = 0;
-
-	ACS_SHORT_LOG((LM_INFO, "BDTThread::onStop(): disconnect()"));
-	ccd_p->sender->disconnect();
-
-	ACS_SHORT_LOG((LM_INFO, "BDTThread::onStop(): closeReceiver()"));
-	ccd_p->receiver->closeReceiver();
 
 	ccd_p->context->setState(lastState);
 	/**Send the notification to the client*/
