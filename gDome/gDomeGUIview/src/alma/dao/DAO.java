@@ -2,7 +2,6 @@ package alma.dao;
 
 import alma.model.Model;
 import java.util.logging.Logger;
-import java.util.LinkedList;
 import alma.JavaContainerError.wrappers.AcsJContainerServicesEx;
 import alma.acs.component.client.ComponentClient;
 import alma.acs.container.ContainerServices;
@@ -13,7 +12,6 @@ public class DAO extends ComponentClient {
 	private alma.acsdomeServer.DomeServer gDomeCompReference;
 	// Reference to the Container Services of ACS
 	private ContainerServices m_containerServices;
-	private LinkedList<String> modelsList;
 	private double move_to;
 
 	private String systemMessage = "";
@@ -36,10 +34,7 @@ public class DAO extends ComponentClient {
 		setModel(model);
 	}
 
-	public void init() throws AcsJContainerServicesEx {
-		//model.setCCDModels(getCameraModelsFromCDB());
-	}
-
+	
 	// Obtains a connection to the ACS Component
 	public void connectToComponent(String selectedDome)
 			throws AcsJContainerServicesEx {
@@ -48,50 +43,25 @@ public class DAO extends ComponentClient {
 		gDomeCompReference = alma.acsdomeServer.DomeServerHelper
 				.narrow(m_containerServices.getComponent(selectedDome));
 
-		//setInitialModelValuesFromCDB();
 		systemMessage = "INFO: Connected!!!";
 		m_logger.info(systemMessage);
-		getCurrentState();
 	}
 
 	public void disconnectFromComponent() {
 		m_logger.info("INFO: Disconnecting from component...");
 		m_logger.info("INFO: Disconnected!!!");
-		getCurrentState();
 	}	
 	
 	public void getCurrentPosition() {
 		systemMessage = "INFO: Receiving current position...";
 		m_logger.info(systemMessage);
 		gDomeCompReference.domeCurrentPosition().get_sync(new alma.ACSErr.CompletionHolder());
-		//getCurrentState();
 	}
 
-	public void getCurrentState() { //Opción a borrar
-		//model.setCurrentState(gDomeCompReference.getState(new alma.ACSErr.CompletionHolder()));
-		gDomeCompReference.displayMessage();
-	}
-	
+		
 	// Returns a reference to the ACS component
 	public alma.acsdomeServer.DomeServer getComponent() {
 		return gDomeCompReference;
-	}
-
-	public String[] getCameraModelsFromCDB() throws AcsJContainerServicesEx {
-		m_logger.info("INFO: Finding components...");
-		if (modelsList == null) {
-			modelsList = new LinkedList<String>();
-			modelsList.add("<SELECT A CAMERA MODEL>");
-		}
-
-		for (String s : m_containerServices.findComponents(null, null)) {
-			if (m_containerServices.getComponentDescriptor(s).getType().equals(
-					"IDL:alma/CCDmodule/CCDinterface:1.0")) {
-				modelsList.add(m_containerServices.getComponentDescriptor(s)
-						.getName());
-			}
-		}
-		return modelsList.toArray(new String[0]);
 	}
 
 	public void setModel(Model model) {
