@@ -291,6 +291,10 @@
 	<classpathentry kind="var" path="ACSROOT/lib/xmlrpc-1.2.jar"/>
 	<classpathentry kind="var" path="ACSROOT/lib/xsddoc.jar"/>
 	<classpathentry kind="var" path="USER_LIBS/jmagick-6.4.0.jar"/>
-	<classpathentry kind="lib" path="/home/almadev/INTROOT/lib/fits1.3.jar" sourcepath="/home/almadev/Desktop/fits1.3_source.jar"/>
+	<classpathentry kind="var" path="USER_LIBS/fits1.3.jar" sourcepath="/USER_LIBS/fits1.3_source.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/usr/lib/fits1.3_source.jar!/doc"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
