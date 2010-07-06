@@ -14,6 +14,12 @@
 
 #include <baciSmartPropertyPointer.h>
 
+/*
+ * El componente se debe crear a partir del CharacteristicComponentImpl,
+ * a traves de la herencia de dicho componente.
+ * Esto permite que podamos implementar las distintas caracteristicas que
+ * este componente tiene implementados.
+ */
 class DomeServer: public baci::CharacteristicComponentImpl,
 			  public virtual POA_acsdomeServer::DomeServer
 {
@@ -36,6 +42,10 @@ class DomeServer: public baci::CharacteristicComponentImpl,
     slitCurrentState ();
 
     private:
+    	/*
+    	 * Se utilizan SmartPropertyPointer para el manejo de los distintos
+    	 * atributos, su obtencion y seteo.
+    	 */
         baci::SmartPropertyPointer<baci::RWdouble> m_domeCurrentPosition_sp;
         baci::SmartPropertyPointer<baci::RWlong> m_slitCurrentState_sp;
 };
