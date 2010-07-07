@@ -54,8 +54,6 @@ Dimension dimen = scroll.getPreferredSize();
 dimen = new Dimension(dimen.width, dimen.width/3 );
 scroll.setPreferredSize(dimen);
 
-add("Header", scroll);
-
 /************************************************
 * make a border labled wth the name of this HDU *
 ************************************************/
@@ -72,19 +70,6 @@ FitsData data = hdu.getData();
 
 try {
     /***************
-    * image viewer *
-    ***************/
-    if(data.blockCount() >0) {
-        FitsImageViewer viewer = new FitsImageViewer((FitsImageData)data);
-        viewer.showProgress();
-        viewer.allowGammaCorrection();
-
-        add(header.getType(),viewer);
-    }
-} catch(ClassCastException e) {}
-
-try {
-    /***************
     * table viewer *
     ***************/
     JTable table = new JTable( (FitsTableData)data );
@@ -96,6 +81,20 @@ try {
     add(header.getType(), new JScrollPane(table));
 } catch(ClassCastException e) {}
 
+try {
+    /***************
+    * image viewer *
+    ***************/
+    if(data.blockCount() >0) {
+        FitsImageViewer viewer = new FitsImageViewer((FitsImageData)data);
+        viewer.showProgress();
+        viewer.allowGammaCorrection();
+
+        add(header.getType(),viewer);
+    }
+} catch(ClassCastException e) {}
+
+add("Header", scroll);
 
 } // end of constructor
 
