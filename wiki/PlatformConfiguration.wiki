@@ -4,74 +4,17 @@
 
 In order to compile the software you must install some libraries. This guide will show you  the needed libraries and explain how to install them.
 
-= Image Magick =
+= Swift Quick-Look FITS 1.3 =
 
-To install Image Magick you must download the source code of version 6.4.0 from http://downloads.jmagick.org/ and decompress it:
+In order to use it, download the _fits1.3.jar_ file and put it in your CLASSPATH environment variable. You can see your current CLASSPATH folders with:
 
- * *tar -xvzf ImageMagick-6.4.0-0.tar.gz
+ * *echo $CLASSPATH*
 
-Enter the directory and execute configure:
+To add another folder to your CLASSPATH you must edit your _.bashrc_ file in your HOME folder, here's an example:
 
- * *./configure*
+ * *export CLASSPATH=/my_dir/lib/:$CLASSPATH*  
 
-Then just execute make as *root*:
-
- * *make install*
-
-After it's done, you can verify that it's working by opening the image viewer:
-
- * *display*
-
-Also you must add libMagick.so to the LD_LIBRARY_PATH enviroment variable:
-
- * *LD_LIBRARY_PATH=/usr/lib:$LD_LIBRARY_PATH
-
-= Jmagick =
-
-Download the source code of version 6.4.0 from http://downloads.jmagick.org and decompress it:
-
- * *tar -xvzf jmagick-6.4.0-src.tar.gz
-
-Enter the new directory and execute autoconf:
-
- * *autoconf*
-
-Then configure:
-
- * *./configure*
-
-To compile it, you must execute make:
-
- * *make all*
-
-After it's done, install it with (as root):
-
- * *make install*
-
-You must add jmagick-ver-.jar to the CLASSPATH enviroment variable:
-
- * *export CLASSPATH=/usr/lib/jmagick-6.4.0.jar:$CLASSPATH*
-
-== Known problems ==
-
-=== JAVA_HOME not found ===
-
-If you get a "JAVA_HOME dirrectories not found" error when executing *./configure* then there is a problem with your Java JDK installation. You must download and install the Java JDK. After that you must make sure that the JAVA_HOME environment variable points to the directory where the JDK is installed:
-
- * *echo $JAVA_HOME*
-
-If it's not, then add to your *.bashrc* the lines:
-
- * *export JAVA_HOME=_java_installation_path_*
- * *export PATH=$JAVA_HOME/bin:$PATH*
-
-Where you must replace *_java_installation_path_* with your path to the JDK e.g.: */usr/java/jdk1.6.0_19*. Then you must logout and login again or source your *.bashrc*:
-
- * *source .bashrc*
-
-Then you can execute *./configure* again and follow the rest of the installation.
-
-= CCFITS =
+= CCFITS and cfitsio =
 
 To install CCfits, you must download the rpm files available in the Downloads section of this site and install them:
 
