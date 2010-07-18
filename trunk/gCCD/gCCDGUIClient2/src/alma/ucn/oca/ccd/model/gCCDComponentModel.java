@@ -162,7 +162,7 @@ public class gCCDComponentModel extends AbstractModel {
 		}
 	}
 
-	public void startExposure() {
+	public void startExposure() throws Exception{
 		if (ccd_dao != null) {
 			ccd_dao.startExposure();
 		}

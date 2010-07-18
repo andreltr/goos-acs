@@ -1714,11 +1714,11 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 				"About...", JOptionPane.INFORMATION_MESSAGE);
 	}
 
-	private void getJDialogError() {
+	private void getJDialogError(String err) {
 		if (jFrameErrorDialog == null) {
 			jFrameErrorDialog = new JFrame();
 		}
-		JOptionPane.showMessageDialog(jFrameErrorDialog, "Error code: ",
+		JOptionPane.showMessageDialog(jFrameErrorDialog, "Error: " + err,
 				"An error has occured...", JOptionPane.ERROR_MESSAGE);
 	}
 
@@ -1843,8 +1843,8 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JFileChooser getJDialogFilechooser() {
 		if (jFileChooserDialogSave == null) {
 			// File selector dialog
-			jFileChooserDialogSave = new JFileChooser(
-					System.getProperty("user.dir"));
+			jFileChooserDialogSave = new JFileChooser(System
+					.getProperty("user.dir"));
 			jFileChooserDialogSave
 					.addChoosableFileFilter(new gCCDFileSelectorDialog());
 		}
@@ -2098,7 +2098,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jMenuCCDControl.setEnabled(true);
 			jMenuImageOptions.setEnabled(true);
 		} catch (Throwable e1) {
-			getJDialogError();
+			getJDialogError(e1.getCause().toString());
 			e1.printStackTrace();
 		}
 	}
@@ -2125,6 +2125,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jTabbedPaneOptions.setEnabledAt(2, false);
 			jTabbedPaneOptions.setEnabledAt(3, false);
 			jTabbedPaneOptions.setEnabledAt(4, false);
+			jTabbedPaneOptions.setSelectedIndex(0);
 
 			jMenuItemCCDSetupConnect.setEnabled(true);
 			jMenuItemCCDSetupDisconnect.setEnabled(false);
@@ -2132,7 +2133,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jMenuCCDControl.setEnabled(false);
 			jMenuImageOptions.setEnabled(false);
 		} catch (Exception e1) {
-			getJDialogError();
+			getJDialogError(e1.getCause().toString());
 			e1.printStackTrace();
 		}
 	}
@@ -2223,6 +2224,8 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 							jDialogReceptionProgress.setVisible(true);
 						}
 					}
+					jDialogAcquiringProgress.setVisible(false);
+					jDialogReceptionProgress.setVisible(false);
 				}
 			});
 
@@ -2244,17 +2247,20 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jMenuItemCCDControlStopCooler.setEnabled(false);
 
 		} catch (Exception e1) {
+			disconnectAction(null);
+			getJDialogError(e1.getCause().toString());
 			e1.printStackTrace();
 		}
 	}
 
 	protected void stopExposureAction(ActionEvent e) {
 		try {
+			tReceptionDialog.interrupt();
 			tReceptionDialog = null;
-			jDialogAcquiringProgress.setVisible(false);
 			jDialogReceptionProgress.setVisible(false);
+			jDialogAcquiringProgress.setVisible(false);
 			receiving = false;
-
+			
 			controller.stopExposure();
 
 			jButtonCCDStopExp.setEnabled(false);
