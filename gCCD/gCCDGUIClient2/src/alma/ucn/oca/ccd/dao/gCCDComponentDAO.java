@@ -88,7 +88,7 @@ public class gCCDComponentDAO extends ComponentClient {
 
 	// This method calls the CCD component and asks for an image.
 	// It also prepares the NC consumer to start receiving notifications.
-	public void startExposure() {
+	public void startExposure() throws Exception {
 		m_logger.info("INFO: Starting exposure...");
 		try {
 			l_filenames = null;
