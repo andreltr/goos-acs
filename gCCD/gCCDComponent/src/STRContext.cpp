@@ -28,7 +28,11 @@ void STRContext::resetCamera() {
 
 std::string* STRContext::startExposure() {
 	std::cout << "STRContext::startExposure()" << std::endl;
-	return currentCCDModel->startExposure();
+	try {
+		return currentCCDModel->startExposure();
+	} catch (...) {
+		throw 1;
+	}
 }
 
 void STRContext::stopExposure() {

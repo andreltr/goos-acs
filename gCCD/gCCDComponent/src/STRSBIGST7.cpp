@@ -53,13 +53,19 @@ std::string* STRSBIGST7::startExposure() {
 	 * p_Cam->GrabSetup(p_Img, SBDF_LIGHT_ONLY);
 	 * p_Cam->GrabMain(p_Img, SBDF_LIGHT_ONLY);
 	 */
-	p_Cam->GrabImage(p_Img, SBDF_DARK_ALSO);
+	error = p_Cam->GrabImage(p_Img, SBDF_DARK_ALSO);
+	if (error != CE_NO_ERROR) {
+		throw 1;
+	}
 	p_Img->AutoBackgroundAndRange();
 	p_Img->SetFocalLength(componentProperties->getfocalLength());
 	p_Img->SetObserver(componentProperties->getobserverName());
 	p_Img->SetFilter(componentProperties->getfilterName());
 	p_Img->SetExposureTime(componentProperties->getexposureTime());
-	p_Img->SaveImage("img1.fits", SBIF_FITS);
+	imageError = p_Img->SaveImage("img1.fits", SBIF_FITS);
+	if (imageError != SBFE_NO_ERROR) {
+		throw 1;
+	}
 
 	std::string *filenames = new string[2];
 	filenames[0] = "img1";
@@ -91,7 +97,11 @@ void STRSBIGST7::initialize() {
 	this->odp.deviceType = DEV_ETH;
 	this->odp.ipAddress = IP_ADRESS;
 	p_Cam = new CSBIGCam(odp);
-	p_Cam->EstablishLink();
+	error = p_Cam->EstablishLink();
+	if (error != CE_NO_ERROR) {
+		throw 1;
+	}
+
 }
 
 void STRSBIGST7::shutDown() {

@@ -35,7 +35,7 @@ module CCDmodule
 		void off();
 		void resetCamera();
 		//void getImage(in long width, in long height, in long acquisitionMode, in long numberOfAcquisitions, in float exposureTime);
-		void startExposure();
+		void startExposure() raises(ACSErrTypeCommon::GenericErrorEx,ACSErrTypeCommon::UnexpectedExceptionEx);
 		void stopExposure();
 		void startCooler();
 		void stopCooler();

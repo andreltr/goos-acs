@@ -30,7 +30,7 @@ void CCDComponent::initialize()
 	m_bdtThread_p = 0;
 	bdStatus = false;
 	componentProperties = new ComponentProperties();
-	setObservable( componentProperties);
+	setObservable(componentProperties);
 	setComponentPropertiesValues();
 	context = new CCDContext(this, STATE_DISCONNECTED);
 }
@@ -100,8 +100,13 @@ void CCDComponent::startExposure() {
 
 	int lastState = getState();
 	setComponentPropertiesValues();
-
-	filesQueue = context->startExposure();
+	try {
+		filesQueue = context->startExposure();
+	} catch (...) {
+		ACSErrTypeCommon::UnexpectedExceptionExImpl ex2(__FILE__, __LINE__,
+				"ErrorComponent::badMethod");
+		throw ex2.getUnexpectedExceptionEx();
+	}
 	if (filesQueue != 0) {
 		startBulkData();
 		sendBulkData(lastState);

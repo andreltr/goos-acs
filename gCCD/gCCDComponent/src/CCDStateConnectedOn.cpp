@@ -42,7 +42,11 @@ std::string* CCDStateConnectedOn::startExposure() {
 	std::cout << "CCDStateConnectedOn::startExposure()" << std::endl;
 	ccd_p->getContext()->setLastState(ccd_p->getContext()->getState());
 	ccd_p->getContext()->setState(STATE_ACQUIRING);
-	return strContext_p->startExposure();
+	try {
+		return strContext_p->startExposure();
+	} catch (...) {
+		throw 1;
+	}
 }
 
 void CCDStateConnectedOn::stopExposure() {
