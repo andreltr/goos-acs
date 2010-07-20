@@ -2,7 +2,7 @@
 
 = Introduction =
 
-In order to compile the software you must install some libraries. This guide will show you  the needed libraries and explain how to install them.
+In order to compile the software you must install some libraries. This guide will show you the needed libraries and explain how to install them.
 
 = Swift Quick-Look FITS 1.3 =
 
@@ -35,7 +35,7 @@ Go to the new directory from a terminal and execute (as sudo):
 
  * *sudo ./install_andor*
 
-Select you camera type from the list and wait for the script to finish.
+Select your camera type from the list and wait for the script to finish.
 
 = SBIG Linux Development Tools =
 
