@@ -10,7 +10,7 @@
 #include <baciCharacteristicComponentImpl.h>
 
 #include <ACSErrTypeCommon.h>
-
+#include <ACSErrTypeOK.h>
 #include <CCDS.h>
 
 #include <baciROlong.h>

@@ -33,6 +33,8 @@ private:
 	OpenDeviceParams odp;
 	CSBIGCam* p_Cam;
 	CSBIGImg* p_Img;
+	PAR_ERROR error;
+	SBIG_FILE_ERROR imageError;
 };
 
 #endif

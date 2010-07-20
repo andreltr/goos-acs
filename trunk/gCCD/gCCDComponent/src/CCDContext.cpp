@@ -69,7 +69,11 @@ void CCDContext::resetCamera() {
  * depending of the current state, it gets an image
  */
 std::string* CCDContext::startExposure() {
-	return currentState->startExposure();
+	try {
+		return currentState->startExposure();
+	} catch (...) {
+		throw 1;
+	}
 }
 
 /**
