@@ -35,6 +35,7 @@ private:
 	CSBIGImg* p_Img;
 	PAR_ERROR error;
 	SBIG_FILE_ERROR imageError;
+	MY_LOGICAL coolerEnabled;
 };
 
 #endif
