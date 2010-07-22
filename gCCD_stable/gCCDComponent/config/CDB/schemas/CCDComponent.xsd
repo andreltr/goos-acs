@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns="urn:schemas-cosylab-com:CCDComponent:1.0" xmlns:baci="urn:schemas-cosylab-com:BACI:1.0" xmlns:cdb="urn:schemas-cosylab-com:CDB:1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:schemas-cosylab-com:CCDComponent:1.0">
+	<xs:import namespace="urn:schemas-cosylab-com:CDB:1.0" schemaLocation="CDB.xsd"/>
+	<xs:import namespace="urn:schemas-cosylab-com:BACI:1.0" schemaLocation="BACI.xsd"/>
+	<xs:complexType name="CCDComponent">
+		<xs:sequence>
+			<xs:element name="actualAirTemperature">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="baci:ROdouble">
+							<xs:attribute default="actualAirTemperature" name="description" type="xs:string" use="optional"/>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="actualCCDTemperature">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="baci:ROdouble">
+							<xs:attribute default="actualCCDTemperature" name="description" type="xs:string" use="optional"/>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="commandedCCDTemperature">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="baci:RWdouble">
+							<xs:attribute default="commandedCCDTemperature" name="description" type="xs:string" use="optional"/>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="cameraName">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="baci:ROstring">
+							<xs:attribute default="cameraName" name="description" type="xs:string" use="optional"/>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="cameraModel">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="baci:ROlong">
+							<xs:attribute default="cameraModel" name="description" type="xs:string" use="optional"/>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="filterName">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="baci:RWstring">
+							<xs:attribute default="filterName" name="description" type="xs:string" use="optional"/>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="objectName">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="baci:RWstring">
+							<xs:attribute default="objectName" name="description" type="xs:string" use="optional"/>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="observerName">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="baci:RWstring">
+							<xs:attribute default="observerName" name="description" type="xs:string" use="optional"/>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="exposureTime">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="baci:RWdouble">
+							<xs:attribute default="exposureTime" name="description" type="xs:string" use="optional"/>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="acquisitionMode">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="baci:RWlong">
+							<xs:attribute default="acquisitionMode" name="description" type="xs:string" use="optional"/>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="numberOfAcquisitions">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="baci:RWlong">
+							<xs:attribute default="numberOfAcquisitions" name="description" type="xs:string" use="optional"/>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="focalLength">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="baci:RWdouble">
+							<xs:attribute default="focalLength" name="description" type="xs:string" use="optional"/>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="gain">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="baci:ROdouble">
+							<xs:attribute default="gain" name="description" type="xs:string" use="optional"/>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="xPixelSize">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="baci:ROdouble">
+							<xs:attribute default="xPixelSize" name="description" type="xs:string" use="optional"/>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="yPixelSize">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="baci:ROdouble">
+							<xs:attribute default="yPixelSize" name="description" type="xs:string" use="optional"/>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="xStart">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="baci:RWlong">
+							<xs:attribute default="xStart" name="description" type="xs:string" use="optional"/>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="xEnd">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="baci:RWlong">
+							<xs:attribute default="xEnd" name="description" type="xs:string" use="optional"/>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="yStart">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="baci:RWlong">
+							<xs:attribute default="yStart" name="description" type="xs:string" use="optional"/>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="yEnd">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="baci:RWlong">
+							<xs:attribute default="yEnd" name="description" type="xs:string" use="optional"/>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="telescopeName">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="baci:RWstring">
+							<xs:attribute default="telescopeName" name="description" type="xs:string" use="optional"/>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute default="0" name="id" type="xs:int" use="optional"/>
+	</xs:complexType>
+	<xs:element name="CCDComponent" type="CCDComponent"/>
+</xs:schema>
