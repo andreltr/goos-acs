@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="lib" path="lib/ACSBulkDataError.jar"/>
+	<classpathentry kind="lib" path="lib/ACSBulkDataStatus.jar"/>
+	<classpathentry kind="lib" path="lib/bulkData.jar"/>
+	<classpathentry kind="lib" path="lib/bulkDataReceiver.jar"/>
+	<classpathentry kind="lib" path="lib/bulkDataSender.jar"/>
+	<classpathentry kind="lib" path="lib/bulkDataSenderEx1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
