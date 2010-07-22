@@ -22,11 +22,20 @@ STRSBIGST7::~STRSBIGST7() {
 }
 
 void STRSBIGST7::on() {
-
+	this->odp.deviceType = DEV_ETH;
+	this->odp.ipAddress = IP_ADRESS;
+	p_Cam = new CSBIGCam(odp);
+	error = p_Cam->EstablishLink();
+	if (error != CE_NO_ERROR) {
+		throw 1;
+	}
 }
 
 void STRSBIGST7::off() {
-
+	cout << "Closing 1st Device..." << endl;
+	p_Cam->CloseDevice();
+	cout << "Closing 1st Driver..." << endl;
+	p_Cam->CloseDriver();
 }
 
 void STRSBIGST7::resetCamera() {
@@ -36,7 +45,6 @@ void STRSBIGST7::resetCamera() {
 std::string* STRSBIGST7::startExposure() {
 	std::cout << "STRSBIGST7::getImage()" << std::endl;
 
-	initialize();
 	p_Img = new CSBIGImg;
 
 	/*
@@ -62,16 +70,14 @@ std::string* STRSBIGST7::startExposure() {
 	p_Img->SetObserver(componentProperties->getobserverName());
 	p_Img->SetFilter(componentProperties->getfilterName());
 	p_Img->SetExposureTime(componentProperties->getexposureTime());
-	imageError = p_Img->SaveImage("img1.fits", SBIF_FITS);
+	imageError = p_Img->SaveImage("ST7_img.fits", SBIF_FITS);
 	if (imageError != SBFE_NO_ERROR) {
 		throw 1;
 	}
 
 	std::string *filenames = new string[2];
-	filenames[0] = "img1";
+	filenames[0] = "ST7_img";
 	filenames[1] = "null";
-
-	shutDown();
 
 	return filenames;
 }
@@ -111,22 +117,3 @@ void STRSBIGST7::stopCooler() {
 void STRSBIGST7::update() {
 	std::cout << "STRSBIGST7::update()" << std::endl;
 }
-
-void STRSBIGST7::initialize() {
-	this->odp.deviceType = DEV_ETH;
-	this->odp.ipAddress = IP_ADRESS;
-	p_Cam = new CSBIGCam(odp);
-	error = p_Cam->EstablishLink();
-	if (error != CE_NO_ERROR) {
-		throw 1;
-	}
-
-}
-
-void STRSBIGST7::shutDown() {
-	cout << "Closing 1st Device..." << endl;
-	p_Cam->CloseDevice();
-	cout << "Closing 1st Driver..." << endl;
-	p_Cam->CloseDriver();
-}
-
