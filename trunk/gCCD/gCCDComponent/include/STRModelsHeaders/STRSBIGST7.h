@@ -26,9 +26,6 @@ public:
 
 	void update();
 
-	void initialize();
-	void shutDown();
-
 private:
 	OpenDeviceParams odp;
 	CSBIGCam* p_Cam;
