@@ -90,7 +90,7 @@ void STRSBIGST7::stopExposure() {
 void STRSBIGST7::startCooler() {
 	coolerEnabled = TRUE;
 	double setPoint = componentProperties->getcommandedCCDTemperature();
-	error = p_Cam->SetTemperatureRegulation(coolerEnabled, setpoint);
+	error = p_Cam->SetTemperatureRegulation(coolerEnabled, setPoint);
 	if (error != CE_NO_ERROR) {
 		throw 1;
 	}
@@ -104,7 +104,7 @@ void STRSBIGST7::stopCooler() {
 	double temp = 0;
 	coolerEnabled = FALSE;
 	double setPoint = componentProperties->getcommandedCCDTemperature();
-	error = p_Cam->SetTemperatureRegulation(coolerEnabled, setpoint);
+	error = p_Cam->SetTemperatureRegulation(coolerEnabled, setPoint);
 	if (error != CE_NO_ERROR) {
 		throw 1;
 	}
