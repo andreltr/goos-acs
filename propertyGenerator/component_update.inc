@@ -36,3 +36,9 @@
 		componentProperties->getyStart());
 	yEnd()->set_sync(
 		componentProperties->getyEnd());
+	ipAddress()->set_sync(
+		componentProperties->getipAddress().c_str());
+	deviceType()->set_sync(
+		componentProperties->getdeviceType());
+	telescopeName()->set_sync(
+		componentProperties->gettelescopeName().c_str());
