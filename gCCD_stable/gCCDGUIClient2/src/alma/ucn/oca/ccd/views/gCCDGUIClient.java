@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowAdapter;
@@ -19,6 +20,7 @@ import java.awt.event.WindowListener;
 import java.beans.PropertyChangeEvent;
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import javax.swing.JFileChooser;
 
@@ -72,6 +74,14 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JLabel jLabelCCDTemp;
 	private JLabel jLabelCCDModels;
 	private JButton jButtonCCDOn;
+	private JMenuItem jMenuItemDeviceType;
+	private JMenuItem jMenuItemIP;
+	private JComboBox jComboBoxDeviceType;
+	private JTextField jTextFieldIPAddress;
+	private JTextField jTextFieldIPAddress2;
+	private JLabel jLabelDeviceType;
+	private JLabel jLabelIPAddress;
+	private JSeparator jSeparator2;
 	private JMenuItem jMenuItemExit;
 	private JSeparator jSeparator1;
 	private JMenuItem jMenuItemOpen;
@@ -88,6 +98,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 	private JFrame jFrameCoolerTempDialog;
 	private JFrame jFrameExpTimeDialog;
 	private JFrame jFrameAccDialog;
+	private JFrame jFrameSetIP;
 	private JPanel jPanel2;
 	private JPanel jPanel1;
 	private JMenuItem jMenuItemHelpAbout;
@@ -331,9 +342,9 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 							jPanelCCDSettingsLayout.rowHeights = new int[] { 7,
 									7, 7, 7 };
 							jPanelCCDSettingsLayout.columnWeights = new double[] {
-									0.1, 0.1, 0.1, 0.1 };
+									0.1, 0.1, 0.1, 0.1, 0.1, 0.1 };
 							jPanelCCDSettingsLayout.columnWidths = new int[] {
-									7, 7, 7, 7 };
+									7, 7, 7, 7, 7, 7 };
 							jPanelCCDSettings
 									.setLayout(jPanelCCDSettingsLayout);
 							{
@@ -475,6 +486,26 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 								jPanelCCDSettings.add(
 										getJRadioButtonCCDScanTypeAcc(),
 										new GridBagConstraints(3, 2, 1, 1, 0.0,
+												0.0, GridBagConstraints.CENTER,
+												GridBagConstraints.NONE,
+												new Insets(0, 0, 0, 0), 0, 0));
+								jPanelCCDSettings.add(getJLabelIPAddress(),
+										new GridBagConstraints(4, 1, 1, 1, 0.0,
+												0.0, GridBagConstraints.CENTER,
+												GridBagConstraints.NONE,
+												new Insets(0, 0, 0, 0), 0, 0));
+								jPanelCCDSettings.add(getJLabelDeviceType(),
+										new GridBagConstraints(4, 2, 1, 1, 0.0,
+												0.0, GridBagConstraints.CENTER,
+												GridBagConstraints.NONE,
+												new Insets(0, 0, 0, 0), 0, 0));
+								jPanelCCDSettings.add(getJTextFieldIPAddress(),
+										new GridBagConstraints(5, 1, 1, 1, 0.0,
+												0.0, GridBagConstraints.CENTER,
+												GridBagConstraints.NONE,
+												new Insets(0, 0, 0, 0), 0, 0));
+								jPanelCCDSettings.add(getJComboBoxDeviceType(),
+										new GridBagConstraints(5, 2, 1, 1, 0.0,
 												0.0, GridBagConstraints.CENTER,
 												GridBagConstraints.NONE,
 												new Insets(0, 0, 0, 0), 0, 0));
@@ -671,6 +702,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 					jMenuBar.add(jMenuCCDSetup);
 					jMenuCCDSetup.setText("CCD Setup");
 					jMenuCCDSetup.add(getJMenuCCDSetupModels());
+					jMenuCCDSetup.add(getJSeparator2());
 					jMenuCCDSetup.add(getJMenuItemCCDSetupConnect());
 					jMenuCCDSetup.add(getJMenuItemCCDSetupDisconnect());
 				}
@@ -682,6 +714,8 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 					jMenuCCDSettings.add(getJMenuItemCCDSettingsNAcc());
 					jMenuCCDSettings.add(getJMenuCCDSettingsScanType());
 					jMenuCCDSettings.add(getJMenuItemCCDSettingsCoolerTemp());
+					jMenuCCDSettings.add(getJMenuItemDeviceType());
+					jMenuCCDSettings.add(getJMenuItemIP());
 				}
 				{
 					jMenuCCDControl = new JMenu();
@@ -1722,6 +1756,34 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 				"An error has occured...", JOptionPane.ERROR_MESSAGE);
 	}
 
+	private void getJDialogSelectDeviceType() {
+		int size = jComboBoxDeviceType.getModel().getSize();
+		Object[] deviceTypes = new Object[size];
+		for (int i = 0; i < size; i++) {
+			deviceTypes[i] = jComboBoxDeviceType.getModel().getElementAt(i);
+		}
+
+		String s = (String) JOptionPane.showInputDialog(jFrameErrorDialog,
+				"Select the device type:\n", "Select device type...",
+				JOptionPane.PLAIN_MESSAGE, null, deviceTypes, null);
+
+		if ((s != null) && (s.length() > 0)) {
+			for (int i = 0; i < size; i++) {
+				if (s.equals(jComboBoxDeviceType.getModel().getElementAt(i))) {
+					jComboBoxDeviceType.setSelectedIndex(i);
+					break;
+				}
+			}
+		}
+	}
+
+	private void getJDialogSetIP() {
+		Object[] message = { "Set the camera IP address: ",
+				getJTextFieldIPAddress2() };
+		JOptionPane.showMessageDialog(jFrameCoolerTempDialog, message,
+				"Set camera IP...", JOptionPane.OK_CANCEL_OPTION);
+	}
+
 	private void getJDialogSelectCamera() {
 		int size = jComboBoxCCDModels.getModel().getSize();
 		Object[] cameraModels = new Object[size];
@@ -2001,13 +2063,29 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		else if (evt.getPropertyName().equals(
 				DefaultController.COMP_ACTUAL_CCD_TEMP)) {
 			Double newDoubleValue = (Double) evt.getNewValue();
-			jLabelCCDInfoCurrT.setText(newDoubleValue.toString() + " ºC");
+			if (newDoubleValue != -9999.9) {
+				BigDecimal bd = new BigDecimal(newDoubleValue.toString());
+				bd = bd.setScale(4, BigDecimal.ROUND_HALF_UP);
+				jLabelCCDInfoCurrT.setText(bd + " ºC");
+			}
 		}
 
 		repaint();
 	}
 
 	// Methods that change the model
+
+	private void changeIPActionPerformed() {
+
+		controller.changeIP(jTextFieldIPAddress.getText());
+
+	}
+
+	private void changeDeviceTypeActionPerformed() {
+
+		controller.changeDeviceType(jComboBoxDeviceType.getSelectedIndex() + 1);
+
+	}
 
 	private void changeObserverNameActionPerformed() {
 
@@ -2163,12 +2241,16 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jButtonCCDStartExp.setEnabled(true);
 			jButtonCCDStartCooler.setEnabled(true);
 
+			jComboBoxDeviceType.setEnabled(false);
+			jTextFieldIPAddress.setEnabled(false);
+
 			jMenuItemCCDControlOn.setEnabled(false);
 			jMenuItemCCDControlOff.setEnabled(true);
 			jMenuItemCCDControlReset.setEnabled(true);
 			jMenuItemCCDControlStartExp.setEnabled(true);
 			jMenuItemCCDControlStartCooler.setEnabled(true);
 		} catch (Exception e1) {
+			getJDialogError(e1.getCause().toString());
 			e1.printStackTrace();
 		}
 	}
@@ -2190,12 +2272,16 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jButtonCCDStartExp.setEnabled(false);
 			jButtonCCDStartCooler.setEnabled(false);
 
+			jComboBoxDeviceType.setEnabled(true);
+			jTextFieldIPAddress.setEnabled(true);
+
 			jMenuItemCCDControlOn.setEnabled(true);
 			jMenuItemCCDControlOff.setEnabled(false);
 			jMenuItemCCDControlReset.setEnabled(false);
 			jMenuItemCCDControlStartExp.setEnabled(false);
 			jMenuItemCCDControlStartCooler.setEnabled(false);
 		} catch (Exception e1) {
+			getJDialogError(e1.getCause().toString());
 			e1.printStackTrace();
 		}
 	}
@@ -2204,6 +2290,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		try {
 			controller.resetCamera();
 		} catch (Exception e1) {
+			getJDialogError(e1.getCause().toString());
 			e1.printStackTrace();
 		}
 	}
@@ -2260,7 +2347,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jDialogReceptionProgress.setVisible(false);
 			jDialogAcquiringProgress.setVisible(false);
 			receiving = false;
-			
+
 			controller.stopExposure();
 
 			jButtonCCDStopExp.setEnabled(false);
@@ -2278,6 +2365,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jMenuItemCCDControlStartCooler.setEnabled(!coolerOn);
 			jMenuItemCCDControlStopCooler.setEnabled(coolerOn);
 		} catch (Exception e1) {
+			getJDialogError(e1.getCause().toString());
 			e1.printStackTrace();
 		}
 	}
@@ -2291,6 +2379,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jMenuItemCCDControlStartCooler.setEnabled(false);
 			jMenuItemCCDControlStopCooler.setEnabled(true);
 		} catch (Exception e1) {
+			getJDialogError(e1.getCause().toString());
 			e1.printStackTrace();
 		}
 	}
@@ -2304,6 +2393,7 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 			jMenuItemCCDControlStartCooler.setEnabled(true);
 			jMenuItemCCDControlStopCooler.setEnabled(false);
 		} catch (Exception e1) {
+			getJDialogError(e1.getCause().toString());
 			e1.printStackTrace();
 		}
 	}
@@ -2461,5 +2551,111 @@ public class gCCDGUIClient extends javax.swing.JFrame {
 		jLabelImageInfoH.setText("" + imagePanel.getImageHeight());
 		jLabelImageInfoFr.setText("" + imagePanel.getFrames());
 		jLabelImageInfoFileSz.setText("" + imagePanel.getFileSize());
+	}
+
+	private JSeparator getJSeparator2() {
+		if (jSeparator2 == null) {
+			jSeparator2 = new JSeparator();
+		}
+		return jSeparator2;
+	}
+
+	private JLabel getJLabelIPAddress() {
+		if (jLabelIPAddress == null) {
+			jLabelIPAddress = new JLabel();
+			jLabelIPAddress.setText("IP Address:");
+		}
+		return jLabelIPAddress;
+	}
+
+	private JLabel getJLabelDeviceType() {
+		if (jLabelDeviceType == null) {
+			jLabelDeviceType = new JLabel();
+			jLabelDeviceType.setText("Device Type:");
+		}
+		return jLabelDeviceType;
+	}
+
+	private JTextField getJTextFieldIPAddress() {
+		if (jTextFieldIPAddress == null) {
+			jTextFieldIPAddress = new JTextField();
+			jTextFieldIPAddress.setText("255.255.255.255");
+			jTextFieldIPAddress.setEnabled(true);
+			jTextFieldIPAddress.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					changeIPActionPerformed();
+					jTextFieldIPAddress2.setText(jTextFieldIPAddress.getText());
+				}
+
+				@Override
+				public void focusGained(FocusEvent e) {
+				}
+			});
+		}
+		return jTextFieldIPAddress;
+	}
+
+	private JTextField getJTextFieldIPAddress2() {
+		if (jTextFieldIPAddress2 == null) {
+			jTextFieldIPAddress2 = new JTextField();
+			jTextFieldIPAddress2.setText("255.255.255.255");
+			jTextFieldIPAddress2.setEnabled(true);
+			jTextFieldIPAddress2.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					changeIPActionPerformed();
+					jTextFieldIPAddress.setText(jTextFieldIPAddress2.getText());
+				}
+
+				@Override
+				public void focusGained(FocusEvent e) {
+				}
+			});
+		}
+		return jTextFieldIPAddress2;
+	}
+
+	private JComboBox getJComboBoxDeviceType() {
+		if (jComboBoxDeviceType == null) {
+			ComboBoxModel jComboBoxDeviceTypeModel = new DefaultComboBoxModel(
+					new String[] { "Ethernet", "USB", "Parallel Port" });
+			jComboBoxDeviceType = new JComboBox();
+			jComboBoxDeviceType.setModel(jComboBoxDeviceTypeModel);
+			jComboBoxDeviceType.setEnabled(true);
+			jComboBoxDeviceType.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					changeDeviceTypeActionPerformed();
+				}
+			});
+		}
+		return jComboBoxDeviceType;
+	}
+
+	private JMenuItem getJMenuItemIP() {
+		if (jMenuItemIP == null) {
+			jMenuItemIP = new JMenuItem();
+			jMenuItemIP.setText("Set camera IP...");
+			jMenuItemIP.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent evt) {
+					getJDialogSetIP();
+				}
+			});
+		}
+		return jMenuItemIP;
+	}
+
+	private JMenuItem getJMenuItemDeviceType() {
+		if (jMenuItemDeviceType == null) {
+			jMenuItemDeviceType = new JMenuItem();
+			jMenuItemDeviceType.setText("Set device type...");
+			jMenuItemDeviceType.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent evt) {
+					getJDialogSelectDeviceType();
+				}
+			});
+		}
+		return jMenuItemDeviceType;
 	}
 }

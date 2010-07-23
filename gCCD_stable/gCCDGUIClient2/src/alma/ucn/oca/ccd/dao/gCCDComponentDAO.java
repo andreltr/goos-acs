@@ -70,6 +70,8 @@ public class gCCDComponentDAO extends ComponentClient {
 
 	public void startCamera() {
 		m_logger.info("INFO: Starting camera...");
+		ccdCompReference.ipAddress().set_sync(model.getIP());
+		ccdCompReference.deviceType().set_sync(model.getDeviceType());
 		ccdCompReference.on();
 		getCurrentState();
 	}
@@ -215,7 +217,11 @@ public class gCCDComponentDAO extends ComponentClient {
 				new alma.ACSErr.CompletionHolder()));
 		model.setyEnd((long) ccdCompReference.yEnd().get_sync(
 				new alma.ACSErr.CompletionHolder()));
-		model.setTelescopeName((String) ccdCompReference.telescopeName().get_sync(
+		model.setTelescopeName((String) ccdCompReference.telescopeName()
+				.get_sync(new alma.ACSErr.CompletionHolder()));
+		model.setIP((String) ccdCompReference.ipAddress().get_sync(
+				new alma.ACSErr.CompletionHolder()));
+		model.setDeviceType((int) ccdCompReference.deviceType().get_sync(
 				new alma.ACSErr.CompletionHolder()));
 	}
 

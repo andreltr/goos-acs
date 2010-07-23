@@ -37,6 +37,8 @@ public class gCCDComponentModel extends AbstractModel {
 	private long yEnd;
 	private String telescopeName;
 	private gCCDNCEvent lastNotification;
+	private String IP;
+	private int deviceType;
 
 	//
 	private int currentState;
@@ -72,6 +74,8 @@ public class gCCDComponentModel extends AbstractModel {
 		yStart = -1;
 		yEnd = -1;
 		telescopeName = "none";
+		IP = "0.0.0.0";
+		deviceType = -1;
 
 		managerLoc = System.getProperty("ACS.manager");
 		if (managerLoc == null) {
@@ -162,7 +166,7 @@ public class gCCDComponentModel extends AbstractModel {
 		}
 	}
 
-	public void startExposure() throws Exception{
+	public void startExposure() throws Exception {
 		if (ccd_dao != null) {
 			ccd_dao.startExposure();
 		}
@@ -192,19 +196,19 @@ public class gCCDComponentModel extends AbstractModel {
 	public int getCurrentState() {
 		return currentState;
 	}
-	
-	
-	public void getCCDValues(){
+
+	public void getCCDValues() {
 		if (ccd_dao != null) {
 			ccd_dao.setCurrentModelValuesFromComponent();
 		}
 	}
-	
+
 	public void fileReceived(gCCDNCEvent lastNotification) {
 		gCCDNCEvent oldLastNotification = this.lastNotification;
 		this.lastNotification = lastNotification;
-		
-		firePropertyChange(DefaultController.COMP_FILE_RECEIVED, oldLastNotification, lastNotification);
+
+		firePropertyChange(DefaultController.COMP_FILE_RECEIVED,
+				oldLastNotification, lastNotification);
 	}
 
 	public void endSubscription() {
@@ -628,7 +632,7 @@ public class gCCDComponentModel extends AbstractModel {
 	public long getyEnd() {
 		return yEnd;
 	}
-	
+
 	/**
 	 * @param telescopeName
 	 *            the telescopeName to set
@@ -638,15 +642,53 @@ public class gCCDComponentModel extends AbstractModel {
 		String oldTelescopeName = this.telescopeName;
 		this.telescopeName = telescopeName;
 
-		firePropertyChange(DefaultController.COMP_TELESCOPE_NAME, oldTelescopeName,
-				telescopeName);
+		firePropertyChange(DefaultController.COMP_TELESCOPE_NAME,
+				oldTelescopeName, telescopeName);
 	}
-	
+
 	/**
 	 * @return the telescopeName
 	 */
 	public String getTelescopeName() {
 		return telescopeName;
+	}
+
+	/**
+	 * @param IP
+	 *            the IP to set
+	 */
+
+	public void setIP(String IP) {
+		String oldIP = this.IP;
+		this.IP = IP;
+		firePropertyChange(DefaultController.COMP_IP_ADDRESS, oldIP, IP);
+	}
+
+	/**
+	 * @return the IP
+	 */
+	public String getIP() {
+		return IP;
+	}
+
+	/**
+	 * @param deviceType
+	 *            the deviceType to set
+	 */
+
+	public void setDeviceType(Integer deviceType) {
+		Integer oldDeviceType = this.deviceType;
+		this.deviceType = deviceType;
+
+		firePropertyChange(DefaultController.COMP_DEVICE_TYPE, oldDeviceType,
+				deviceType);
+	}
+
+	/**
+	 * @return the deviceType
+	 */
+	public int getDeviceType() {
+		return deviceType;
 	}
 
 	/**
