@@ -59,6 +59,15 @@ long ComponentProperties::getyStart() {
 long ComponentProperties::getyEnd() {
 	return yEnd;
 }
+std::string ComponentProperties::getipAddress() {
+	return ipAddress;
+}
+long ComponentProperties::getdeviceType() {
+	return deviceType;
+}
+std::string ComponentProperties::gettelescopeName() {
+	return telescopeName;
+}
 void ComponentProperties::setactualAirTemperature(double actualAirTemperature) {
 	if (this->actualAirTemperature != actualAirTemperature) {
 		this->actualAirTemperature = actualAirTemperature;
@@ -152,5 +161,20 @@ void ComponentProperties::setyStart(long yStart) {
 void ComponentProperties::setyEnd(long yEnd) {
 	if (this->yEnd != yEnd) {
 		this->yEnd = yEnd;
+	}
+}
+void ComponentProperties::setipAddress(std::string ipAddress) {
+	if (this->ipAddress != ipAddress) {
+		this->ipAddress = ipAddress;
+	}
+}
+void ComponentProperties::setdeviceType(long deviceType) {
+	if (this->deviceType != deviceType) {
+		this->deviceType = deviceType;
+	}
+}
+void ComponentProperties::settelescopeName(std::string telescopeName) {
+	if (this->telescopeName != telescopeName) {
+		this->telescopeName = telescopeName;
 	}
 }

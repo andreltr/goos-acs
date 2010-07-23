@@ -17,3 +17,6 @@ readonly attribute ACS::RWlong xStart;
 readonly attribute ACS::RWlong xEnd;
 readonly attribute ACS::RWlong yStart;
 readonly attribute ACS::RWlong yEnd;
+readonly attribute ACS::RWstring ipAddress;
+readonly attribute ACS::RWlong deviceType;
+readonly attribute ACS::RWstring telescopeName;
