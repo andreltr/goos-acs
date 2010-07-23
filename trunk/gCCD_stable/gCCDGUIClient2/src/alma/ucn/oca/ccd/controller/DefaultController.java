@@ -52,6 +52,10 @@ public class DefaultController extends AbstractController {
 	public static final String COMP_CAMERA_MODELS = "CCDModels";
 	public static final String COMP_SELECTED_MODEL = "SelectedCamera";
 	public static final String COMP_LIST_FILES = "ListFiles";
+	
+	public static final String COMP_IP_ADDRESS = "IP";
+	public static final String COMP_DEVICE_TYPE = "DeviceType";
+	
 	public static final String COMP_FILE_RECEIVED = "fileReceived";
 	public static final String COMP_END_SUBSCRIPTION = "endSubscription";
 
@@ -169,6 +173,14 @@ public class DefaultController extends AbstractController {
 
 	public void changeCompListFiles(int newListFiles) {
 		setModelProperty(COMP_LIST_FILES, newListFiles);
+	}
+	
+	public void changeIP(String newIP) {
+		setModelProperty(COMP_IP_ADDRESS, newIP);
+	}
+	
+	public void changeDeviceType(int newDeviceType) {
+		setModelProperty(COMP_DEVICE_TYPE, newDeviceType);
 	}
 	
 	public void changeCompFileReceived() throws Exception {
