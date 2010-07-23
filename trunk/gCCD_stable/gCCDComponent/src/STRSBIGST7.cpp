@@ -93,6 +93,9 @@ std::string* STRSBIGST7::startExposure() {
 	p_Img->SetObserver(componentProperties->getobserverName());
 	p_Img->SetFilter(componentProperties->getfilterName());
 	p_Img->SetExposureTime(componentProperties->getexposureTime());
+	p_Img->SetFITSTelescope(componentProperties->gettelescopeName());
+	p_Img->SetFITSObject(componentProperties->getobjectName());
+
 	imageError = p_Img->SaveImage("ST7img.fits", SBIF_FITS);
 	if (imageError != SBFE_NO_ERROR) {
 		throw 1;
