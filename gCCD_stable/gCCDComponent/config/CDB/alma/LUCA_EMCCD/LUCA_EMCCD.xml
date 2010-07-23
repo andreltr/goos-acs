@@ -25,4 +25,6 @@
 	<yStart default_timer_trig="2.0" description="Upper left corner of CCD image (Y)." format="%d" units="pixel" min_value="0" max_value="510" default_value="0"/>
 	<yEnd default_timer_trig="2.0" description="Lower right corner of CCD image (Y)." format="%d" units="pixel" min_value="1" max_value="511" default_value="511"/>
 	<telescopeName default_timer_trig="2.0" description="Name of telescope." format="%s" units="-" default_value="Sirius"/>
+	<ipAddress default_timer_trig="2.0" description="IP Address of the ethernet CCD." format="%s" units="-" default_value="255.255.255.255"/>
+	<deviceType default_timer_trig="2.0" description="Device Type. 1: Ethernet 2:USB 3:LPT1." format="%d" units="-" default_value="1"/>
 </CCDComponent>

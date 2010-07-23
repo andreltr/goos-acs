@@ -1,4 +1,5 @@
 #include "STRModelsHeaders/STRSBIGST7.h"
+#include <boost/asio.hpp>
 #define IP_ADRESS	0xC0A8010C
 
 /*
@@ -22,8 +23,30 @@ STRSBIGST7::~STRSBIGST7() {
 }
 
 void STRSBIGST7::on() {
-	this->odp.deviceType = DEV_ETH;
-	this->odp.ipAddress = IP_ADRESS;
+	boost::asio::ip::address_v4 BoostIP;
+
+	std::string DottedIP = componentProperties->getipAddress();
+
+	BoostIP = boost::asio::ip::address_v4::from_string(DottedIP);
+
+	cout << componentProperties->getipAddress() << endl;
+	cout << BoostIP.to_ulong() << endl;
+	cout << componentProperties->getdeviceType() << endl;
+
+	switch (componentProperties->getdeviceType()) {
+	case 1:
+		this->odp.deviceType = DEV_ETH;
+		break;
+	case 2:
+		this->odp.deviceType = DEV_USB;
+		break;
+	case 3:
+		this->odp.deviceType = DEV_LPT1;
+		break;
+	}
+
+	this->odp.ipAddress = BoostIP.to_ulong();
+
 	p_Cam = new CSBIGCam(odp);
 	error = p_Cam->EstablishLink();
 	if (error != CE_NO_ERROR) {
@@ -89,14 +112,16 @@ void STRSBIGST7::stopExposure() {
 }
 
 void STRSBIGST7::startCooler() {
+	double temp = 0;
 	coolerEnabled = TRUE;
 	double setPoint = componentProperties->getcommandedCCDTemperature();
 	error = p_Cam->SetTemperatureRegulation(coolerEnabled, setPoint);
 	if (error != CE_NO_ERROR) {
 		throw 1;
 	}
-	componentProperties->setactualCCDTemperature(
-			componentProperties->getcommandedCCDTemperature());
+
+	p_Cam->GetCCDTemperature(temp);
+	componentProperties->setactualCCDTemperature(temp);
 	componentProperties->notifyObservers();
 	return;
 }

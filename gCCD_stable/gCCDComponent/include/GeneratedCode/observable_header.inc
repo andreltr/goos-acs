@@ -20,6 +20,8 @@ public:
 	long getxEnd();
 	long getyStart();
 	long getyEnd();
+	std::string getipAddress();
+	long getdeviceType();
 	std::string gettelescopeName();
 	void setactualAirTemperature(double actualAirTemperature);
 	void setactualCCDTemperature(double actualCCDTemperature);
@@ -40,6 +42,8 @@ public:
 	void setxEnd(long xEnd);
 	void setyStart(long yStart);
 	void setyEnd(long yEnd);
+	void setipAddress(std::string ipAddress);
+	void setdeviceType(long deviceType);
 	void settelescopeName(std::string telescopeName);
 protected:
 private:
@@ -62,4 +66,6 @@ private:
 	long xEnd;
 	long yStart;
 	long yEnd;
+	std::string ipAddress;
+	long deviceType;
 	std::string telescopeName;

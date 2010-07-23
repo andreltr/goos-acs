@@ -42,26 +42,28 @@ module CCDmodule
 		long getState();
 		
 		//Insert the contents from the generated file "idl_properties.inc" below
-		readonly attribute ACS::ROdouble actualAirTemperature;
-		readonly attribute ACS::ROdouble actualCCDTemperature;
-		readonly attribute ACS::RWdouble commandedCCDTemperature;
-		readonly attribute ACS::ROstring cameraName;
-		readonly attribute ACS::ROlong cameraModel;
-		readonly attribute ACS::RWstring filterName;
-		readonly attribute ACS::RWstring objectName;
-		readonly attribute ACS::RWstring observerName;
-		readonly attribute ACS::RWdouble exposureTime;
-		readonly attribute ACS::RWlong acquisitionMode;
-		readonly attribute ACS::RWlong numberOfAcquisitions;
-		readonly attribute ACS::RWdouble focalLength;
-		readonly attribute ACS::ROdouble gain;
-		readonly attribute ACS::ROdouble xPixelSize;
-		readonly attribute ACS::ROdouble yPixelSize;
-		readonly attribute ACS::RWlong xStart;
-		readonly attribute ACS::RWlong xEnd;
-		readonly attribute ACS::RWlong yStart;
-		readonly attribute ACS::RWlong yEnd;
-		readonly attribute ACS::RWstring telescopeName;
+readonly attribute ACS::ROdouble actualAirTemperature;
+readonly attribute ACS::ROdouble actualCCDTemperature;
+readonly attribute ACS::RWdouble commandedCCDTemperature;
+readonly attribute ACS::ROstring cameraName;
+readonly attribute ACS::ROlong cameraModel;
+readonly attribute ACS::RWstring filterName;
+readonly attribute ACS::RWstring objectName;
+readonly attribute ACS::RWstring observerName;
+readonly attribute ACS::RWdouble exposureTime;
+readonly attribute ACS::RWlong acquisitionMode;
+readonly attribute ACS::RWlong numberOfAcquisitions;
+readonly attribute ACS::RWdouble focalLength;
+readonly attribute ACS::ROdouble gain;
+readonly attribute ACS::ROdouble xPixelSize;
+readonly attribute ACS::ROdouble yPixelSize;
+readonly attribute ACS::RWlong xStart;
+readonly attribute ACS::RWlong xEnd;
+readonly attribute ACS::RWlong yStart;
+readonly attribute ACS::RWlong yEnd;
+readonly attribute ACS::RWstring ipAddress;
+readonly attribute ACS::RWlong deviceType;
+readonly attribute ACS::RWstring telescopeName;
 
 	};
 

@@ -17,4 +17,6 @@ SmartPropertyPointer<RWlong> m_xStart_sp;
 SmartPropertyPointer<RWlong> m_xEnd_sp;
 SmartPropertyPointer<RWlong> m_yStart_sp;
 SmartPropertyPointer<RWlong> m_yEnd_sp;
+SmartPropertyPointer<RWstring> m_ipAddress_sp;
+SmartPropertyPointer<RWlong> m_deviceType_sp;
 SmartPropertyPointer<RWstring> m_telescopeName_sp;

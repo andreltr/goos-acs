@@ -81,6 +81,7 @@ void CCDComponent::aboutToAbort() {
 /*********************** [ CORBA interface ] ***********************/
 
 void CCDComponent::on() {
+	setComponentPropertiesValues();
 	ACS_TRACE("CCDComponent::on()");
 	context->on();
 }

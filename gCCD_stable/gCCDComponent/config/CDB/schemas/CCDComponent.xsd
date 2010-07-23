@@ -184,6 +184,24 @@
 					</xs:complexContent>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="ipAddress">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="baci:RWstring">
+							<xs:attribute default="ipAddress" name="description" type="xs:string" use="optional"/>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="deviceType">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="baci:RWlong">
+							<xs:attribute default="deviceType" name="description" type="xs:string" use="optional"/>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 		<xs:attribute default="0" name="id" type="xs:int" use="optional"/>
 	</xs:complexType>
