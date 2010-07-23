@@ -52,6 +52,7 @@ USER_LIB = -lACE \
 	-lacstime \
 	-lACSErrTypeCommon \
 	-lpthread \
+	-lboost_system \
 	-L/usr/lib /usr/lib/libCCfits.so  -L. -lcfitsio -lm -lnsl \
 	-L/usr/local/lib/libsbigudrv.so -lsbigudrv -lm \
 	-landor 

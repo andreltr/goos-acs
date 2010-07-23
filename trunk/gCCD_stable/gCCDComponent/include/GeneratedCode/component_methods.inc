@@ -188,6 +188,26 @@ ACS::RWlong_ptr CCDComponent::yEnd()
 	return prop._retn();
 }
 
+ACS::RWstring_ptr CCDComponent::ipAddress()
+		throw (CORBA::SystemException) {
+	if (!m_ipAddress_sp) {
+		return ACS::RWstring::_nil();
+	}
+	ACS::RWstring_var prop = ACS::RWstring::_narrow(
+			m_ipAddress_sp->getCORBAReference());
+	return prop._retn();
+}
+
+ACS::RWlong_ptr CCDComponent::deviceType()
+		throw (CORBA::SystemException) {
+	if (!m_deviceType_sp) {
+		return ACS::RWlong::_nil();
+	}
+	ACS::RWlong_var prop = ACS::RWlong::_narrow(
+			m_deviceType_sp->getCORBAReference());
+	return prop._retn();
+}
+
 ACS::RWstring_ptr CCDComponent::telescopeName()
 		throw (CORBA::SystemException) {
 	if (!m_telescopeName_sp) {
