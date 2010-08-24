@@ -5,5 +5,5 @@ The gCCD project aims to create an ACS-based software to operate CCD cameras. Th
 
 
    * [http://goos-acs.googlecode.com/files/gCCDInstallationManual.odt Installation manual]
-   * [gCCDSystemManual System manual]
-   * [gCCDUsersManual Users manual]
+   * [http://goos-acs.googlecode.com/files/gCCDSystemmanual.odt System manual]
+   * [http://goos-acs.googlecode.com/files/gCCDUserManual.odt Users manual]
