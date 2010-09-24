@@ -22,3 +22,12 @@ the Sirius Observatory of Universidad Católica del Norte. This project is integ
   * ACS 8.1 framework
   * Eclipse GALILEO for Java and C++ development
   * MEADE LX200 for physical testings and final product
+
+= The Component =
+Pending
+
+= The GUI Client =
+Pending
+
+= Connection =
+Pending
