@@ -9,7 +9,7 @@ the Sirius Observatory of Universidad Católica del Norte. This project is integ
 = Details =
 
 == Members of the Project ==
-  * Jaime Pavlich Mariscal (Profesor Guide)
+  * Jaime Pavlich Mariscal (Professor Guide)
   * Cristian Guevara Rojas
   * Felipe Henríquez Díaz
   * Alexis Ibarra Araya
