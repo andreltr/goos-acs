@@ -1,5 +1,7 @@
 #summary Main page of the Telescope Control Software Project.
 
+* Change name to ACS-TCS, to avoid confusion with UTFSM's gTCS project. -- Jaime Pavlich*
+
 = About the Project =
 
 The gTSC is a project developing on ACS framework to control the telescope of 
