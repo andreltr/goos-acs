@@ -1,0 +1,33 @@
+#summary Main page of the ACS Telescope Control Software Project.
+
+= About the Project =
+
+The ACS-TSC is a project developing on ACS framework to control the telescope of 
+the Sirius Observatory of Universidad Católica del Norte. This project is integrated by students of the college in their majors of Computer Science Engineering. The pourpose of the software is controling the MEADE LX200 Telescope with a GUI developed in Java and a ACS component to execute the respective functions of the telescope by a serial connection.
+
+
+= Details =
+
+== Members of the Project ==
+  * Jaime Pavlich Mariscal (Professor Guide)
+  * Cristian Guevara Rojas
+  * Felipe Henríquez Díaz
+  * Alexis Ibarra Araya
+  * Luís Jofré Astudillo
+  * Hernes Puentes Vargas
+  * Santiago Sánchez Pérez
+
+== System Details ==
+  * Scientific Linux 5.4 like O.S.
+  * ACS 8.1 framework
+  * Eclipse GALILEO for Java and C++ development
+  * MEADE LX200 for physical testings and final product
+
+= The Component =
+Pending
+
+= The GUI Client =
+Pending
+
+= Connection =
+Pending
