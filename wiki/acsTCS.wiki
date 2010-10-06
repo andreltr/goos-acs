@@ -1,16 +1,15 @@
 #summary Main page of the ACS Telescope Control Software Project.
 
-= About the Project =
+= Project Brief =
 
-The ACS-TSC is a project developing on ACS framework to control the telescope of 
-the Sirius Observatory of Universidad Católica del Norte. This project is integrated by students of the college in their majors of Computer Science Engineering. The pourpose of the software is controling the MEADE LX200 Telescope with a GUI developed in Java and a ACS component to execute the respective functions of the telescope by a serial connection.
+ACS-TSC is a project developing on ACS framework to control the telescope of the Sirius Observatory of Universidad Católica del Norte. This project is integrated by students of the college in their majors of Computer Science Engineering. The pourpose of the software is controling the MEADE LX200 Telescope with a GUI developed in Java and a ACS component to execute the respective functions of the telescope by a serial connection.
 
 
 = Details =
 
 == Members of the Project ==
-  * Jaime Pavlich Mariscal (Professor Guide)
-  * Cristian Guevara Rojas
+  * Jaime Pavlich Mariscal (Assistant Professor)
+  * Cristian Guevara Rojas (Project Manager)
   * Felipe Henríquez Díaz
   * Alexis Ibarra Araya
   * Luís Jofré Astudillo
@@ -18,16 +17,26 @@ the Sirius Observatory of Universidad Católica del Norte. This project is integ
   * Santiago Sánchez Pérez
 
 == System Details ==
-  * Scientific Linux 5.4 like O.S.
+  * Scientific Linux 5.4 O.S.
   * ACS 8.1 framework
-  * Eclipse GALILEO for Java and C++ development
+  * Eclipse for Java and C++ development
   * MEADE LX200 for physical testings and final product
 
-= The Component =
-Pending
+= Planification =
 
-= The GUI Client =
-Pending
+There are 3 steps of implementation:
 
-= Connection =
-Pending
+==Serial Port Conection==
+
+Implement the interface between Serial Port and the ACS Modules.
+
+==ACS Developing==
+
+  * Study and design an ACS implementation for controlling the telescope.
+  * Implement the component, the CDB schema and the IDL.
+  * Document the development process.
+
+==GUI Client==
+
+  * Study developing of GUI on Java Swing.
+  * Implement a simple Java interface in Swing.
