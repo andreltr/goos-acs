@@ -1,5 +1,5 @@
 #summary Main page of the ACS Telescope Control Software Project.
-#labels Featured
+#labels Phase-Requirements
 
 = Project Brief =
 
@@ -9,13 +9,13 @@ ACS-TSC is a project developing on ACS framework to control the telescope of the
 = Details =
 
 == Members of the Project ==
-  * Jaime Pavlich Mariscal (Assistant Professor)
-  * Cristian Guevara Rojas (Project Manager)
-  * Felipe Henríquez Díaz
-  * Alexis Ibarra Araya
-  * Luís Jofré Astudillo
-  * Hernes Puentes Vargas
-  * Santiago Sánchez Pérez
+  * [http://code.google.com/u/Jaime.Pavlich Jaime Pavlich Mariscal] (Assistant Professor)
+  * [http://code.google.com/u/guevarax Cristian Guevara Rojas] (Project Manager)
+  * [http://code.google.com/u/jadhur Felipe Henríquez Díaz]
+  * [http://code.google.com/u/Ibarra.Alexis Alexis Ibarra Araya]
+  * [http://code.google.com/u/rjofre Luís Jofré Astudillo]
+  * [http://code.google.com/u/animegold1988 Hernes Puentes Vargas]
+  * [http://code.google.com/u/salex.sp Santiago Sánchez Pérez]
 
 == System Details ==
   * Scientific Linux 5.4 O.S.
@@ -46,6 +46,4 @@ Implement the interface between Serial Port and the ACS Modules.
 || Serial Port Conection || [http://code.google.com/u/Ibarra.Alexis Alexis Ibarra Araya] || [http://code.google.com/p/goos-acs/wiki/acsTCS/SerialPortConection Serial Port Conection] ||
 || ACS Developing || [http://code.google.com/u/rjofre Luís Jofré Astudillo] || [http://code.google.com/p/goos-acs/wiki/acsTCS/ACSDeveloping ACS Developing] ||
 || GUI Client || [http://code.google.com/u/jadhur Felipe Henríquez Díaz] || [http://code.google.com/p/goos-acs/wiki/acsTCS/GUIClient GUI Client] ||
-
-
 
