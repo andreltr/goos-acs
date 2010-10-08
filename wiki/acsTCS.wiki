@@ -43,7 +43,6 @@ Implement the interface between Serial Port and the ACS Modules.
   * Implement a simple Java interface in Swing.
 
 || *Step* || *Responsible* || *Wiki Pages* ||
-|| Serial Port Conection || [http://code.google.com/u/Ibarra.Alexis Alexis Ibarra Araya] || [http://code.google.com/p/goos-acs/wiki/acsTCS/SerialPortConection Serial Port Conection] ||
-|| ACS Developing || [http://code.google.com/u/rjofre Luís Jofré Astudillo] || [http://code.google.com/p/goos-acs/wiki/acsTCS/ACSDeveloping ACS Developing] ||
-|| GUI Client || [http://code.google.com/u/jadhur Felipe Henríquez Díaz] || [http://code.google.com/p/goos-acs/wiki/acsTCS/GUIClient GUI Client] ||
-
+|| Serial Port Conection || [http://code.google.com/u/Ibarra.Alexis Alexis Ibarra Araya] || [http://code.google.com/p/goos-acs/wiki/acsTCSSerialPortConection Serial Port Conection] ||
+|| ACS Developing || [http://code.google.com/u/rjofre Luís Jofré Astudillo] || [http://code.google.com/p/goos-acs/wiki/acsTCSACSDeveloping ACS Developing] ||
+|| GUI Client || [http://code.google.com/u/jadhur Felipe Henríquez Díaz] || [http://code.google.com/p/goos-acs/wiki/acsTCS/acsTCSGUIClient GUI Client] ||
