@@ -1,4 +1,5 @@
 #summary Main page of the ACS Telescope Control Software Project.
+#labels Featured
 
 = Project Brief =
 
@@ -20,7 +21,7 @@ ACS-TSC is a project developing on ACS framework to control the telescope of the
   * Scientific Linux 5.4 O.S.
   * ACS 8.1 framework
   * Eclipse for Java and C++ development
-  * MEADE LX200 for physical testings and final product
+  * MEADE LX200GPS for physical testings and final product
 
 = Planification =
 
@@ -40,3 +41,11 @@ Implement the interface between Serial Port and the ACS Modules.
 
   * Study developing of GUI on Java Swing.
   * Implement a simple Java interface in Swing.
+
+|| *Step* || *Responsible* || *Wiki Pages* ||
+|| Serial Port Conection || [http://code.google.com/u/Ibarra.Alexis Alexis Ibarra Araya] || [http://code.google.com/p/goos-acs/wiki/acsTCS/SerialPortConection Serial Port Conection] ||
+|| ACS Developing || [http://code.google.com/u/rjofre Luís Jofré Astudillo] || [http://code.google.com/p/goos-acs/wiki/acsTCS/ACSDeveloping ACS Developing] ||
+|| GUI Client || [http://code.google.com/u/jadhur Felipe Henríquez Díaz] || [http://code.google.com/p/goos-acs/wiki/acsTCS/GUIClient GUI Client] ||
+
+
+
