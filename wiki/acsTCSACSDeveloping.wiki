@@ -1,14 +1,12 @@
-#summary One-sentence summary of this page.
+#summary Detail of the ACS Developing of the acsTCS project.
 
 = Introduction =
 
-Add your content here.
+    * Study and design an ACS implementation for controlling the telescope.
+    * Implement the component, the CDB schema and the IDL.
+    * Document the development process. 
 
 
 = Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
-.
+Coming soon...
