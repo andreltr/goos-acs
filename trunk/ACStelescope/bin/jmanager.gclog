@@ -1,0 +1,180 @@
+Application time: 0.8901860 seconds
+Total time for which application threads were stopped: 0.0002270 seconds
+Application time: 0.6028770 seconds
+1.643: [GC 1.643: [DefNew
+Desired survivor size 819200 bytes, new threshold 1 (max 4)
+- age   1:    1245736 bytes,    1245736 total
+: 13152K->1216K(14784K), 0.0229440 secs] 13152K->1216K(63936K), 0.0230640 secs] [Times: user=0.01 sys=0.02, real=0.02 secs] 
+Total time for which application threads were stopped: 0.0235390 seconds
+Application time: 0.4951630 seconds
+2.162: [GC [1 CMS-initial-mark: 0K(49152K)] 7373K(63936K), 0.0081030 secs] [Times: user=0.01 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0086670 seconds
+2.170: [CMS-concurrent-mark-start]
+2.197: [CMS-concurrent-mark: 0.027/0.027 secs] [Times: user=0.01 sys=0.01, real=0.01 secs] 
+2.197: [CMS-concurrent-preclean-start]
+2.205: [CMS-concurrent-preclean: 0.007/0.008 secs] [Times: user=0.01 sys=0.00, real=0.01 secs] 
+2.205: [CMS-concurrent-abortable-preclean-start]
+Application time: 3.3897310 seconds
+Total time for which application threads were stopped: 0.0007260 seconds
+Application time: 0.4674500 seconds
+Total time for which application threads were stopped: 0.1947160 seconds
+Application time: 12.0504930 seconds
+Total time for which application threads were stopped: 0.0005230 seconds
+Application time: 0.0001040 seconds
+Total time for which application threads were stopped: 0.0001600 seconds
+Application time: 0.0183890 seconds
+Total time for which application threads were stopped: 0.0002710 seconds
+Application time: 6.3457400 seconds
+Total time for which application threads were stopped: 0.0006660 seconds
+Application time: 0.0005450 seconds
+Total time for which application threads were stopped: 0.0001900 seconds
+Application time: 0.0000500 seconds
+Total time for which application threads were stopped: 0.0001330 seconds
+Application time: 0.0594670 seconds
+Total time for which application threads were stopped: 0.0002510 seconds
+Application time: 0.5217930 seconds
+Total time for which application threads were stopped: 0.0003490 seconds
+Application time: 0.0669270 seconds
+Total time for which application threads were stopped: 0.0002330 seconds
+Application time: 0.0175430 seconds
+Total time for which application threads were stopped: 0.0003020 seconds
+Application time: 0.0001050 seconds
+Total time for which application threads were stopped: 0.0001570 seconds
+Application time: 0.0001310 seconds
+Total time for which application threads were stopped: 0.0001000 seconds
+Application time: 0.0001360 seconds
+Total time for which application threads were stopped: 0.0002660 seconds
+Application time: 5.1034230 seconds
+Total time for which application threads were stopped: 0.0002530 seconds
+Application time: 0.0022300 seconds
+Total time for which application threads were stopped: 0.0000940 seconds
+Application time: 0.0001540 seconds
+Total time for which application threads were stopped: 0.0000590 seconds
+Application time: 1.8125090 seconds
+Total time for which application threads were stopped: 0.0002900 seconds
+Application time: 0.0001850 seconds
+Total time for which application threads were stopped: 0.0001010 seconds
+Application time: 0.0004780 seconds
+Total time for which application threads were stopped: 0.0001070 seconds
+Application time: 0.0001870 seconds
+Total time for which application threads were stopped: 0.0000990 seconds
+Application time: 0.0004350 seconds
+Total time for which application threads were stopped: 0.0001030 seconds
+Application time: 0.0002840 seconds
+Total time for which application threads were stopped: 0.0001130 seconds
+Application time: 4.7570520 seconds
+Total time for which application threads were stopped: 0.0002280 seconds
+Application time: 47.4416840 seconds
+Total time for which application threads were stopped: 0.0002990 seconds
+Application time: 0.0004960 seconds
+Total time for which application threads were stopped: 0.0001170 seconds
+Application time: 0.0000510 seconds
+Total time for which application threads were stopped: 0.0000730 seconds
+Application time: 0.0142590 seconds
+Total time for which application threads were stopped: 0.0002270 seconds
+Application time: 0.0128940 seconds
+Total time for which application threads were stopped: 0.0013870 seconds
+Application time: 0.0001210 seconds
+Total time for which application threads were stopped: 0.0001650 seconds
+Application time: 0.0001530 seconds
+Total time for which application threads were stopped: 0.0001020 seconds
+Application time: 0.0001420 seconds
+Total time for which application threads were stopped: 0.0001000 seconds
+Application time: 0.0762400 seconds
+Total time for which application threads were stopped: 0.0003550 seconds
+Application time: 0.0037380 seconds
+Total time for which application threads were stopped: 0.0002130 seconds
+Application time: 0.0077640 seconds
+Total time for which application threads were stopped: 0.0001600 seconds
+Application time: 0.0001740 seconds
+Total time for which application threads were stopped: 0.0000980 seconds
+Application time: 0.0001120 seconds
+Total time for which application threads were stopped: 0.0000950 seconds
+Application time: 0.0001440 seconds
+Total time for which application threads were stopped: 0.0001250 seconds
+Application time: 0.0001420 seconds
+Total time for which application threads were stopped: 0.0000960 seconds
+Application time: 0.0035700 seconds
+Total time for which application threads were stopped: 0.0001700 seconds
+Application time: 0.0001120 seconds
+Total time for which application threads were stopped: 0.0000980 seconds
+Application time: 0.0004560 seconds
+84.553: [GC 84.553: [DefNew
+Desired survivor size 819200 bytes, new threshold 4 (max 4)
+- age   1:     512632 bytes,     512632 total
+: 14400K->500K(14784K), 0.0233110 secs] 14400K->1433K(63936K), 0.0235190 secs] [Times: user=0.00 sys=0.02, real=0.02 secs] 
+Total time for which application threads were stopped: 0.0237730 seconds
+Application time: 0.0032410 seconds
+Total time for which application threads were stopped: 0.0001550 seconds
+Application time: 0.0001140 seconds
+Total time for which application threads were stopped: 0.0001180 seconds
+Application time: 0.0001440 seconds
+Total time for which application threads were stopped: 0.0000980 seconds
+Application time: 0.0001020 seconds
+Total time for which application threads were stopped: 0.0000950 seconds
+Application time: 0.0001820 seconds
+Total time for which application threads were stopped: 0.0000970 seconds
+Application time: 0.0001020 seconds
+Total time for which application threads were stopped: 0.0001060 seconds
+Application time: 0.0001030 seconds
+Total time for which application threads were stopped: 0.0001200 seconds
+Application time: 0.0001040 seconds
+Total time for which application threads were stopped: 0.0000950 seconds
+Application time: 0.0001390 seconds
+Total time for which application threads were stopped: 0.0000970 seconds
+Application time: 0.0001010 seconds
+Total time for which application threads were stopped: 0.0000960 seconds
+Application time: 0.0001030 seconds
+Total time for which application threads were stopped: 0.0002110 seconds
+Application time: 0.0002710 seconds
+Total time for which application threads were stopped: 0.0001070 seconds
+Application time: 0.0001030 seconds
+Total time for which application threads were stopped: 0.0000960 seconds
+Application time: 0.0001000 seconds
+Total time for which application threads were stopped: 0.0000950 seconds
+Application time: 0.0001650 seconds
+Total time for which application threads were stopped: 0.0001120 seconds
+Application time: 0.0001110 seconds
+Total time for which application threads were stopped: 0.0000970 seconds
+Application time: 0.0001020 seconds
+Total time for which application threads were stopped: 0.0000950 seconds
+Application time: 0.0001030 seconds
+Total time for which application threads were stopped: 0.0000960 seconds
+Application time: 0.0001010 seconds
+Total time for which application threads were stopped: 0.0001490 seconds
+Application time: 0.0001330 seconds
+Total time for which application threads were stopped: 0.0002440 seconds
+Application time: 0.0001490 seconds
+Total time for which application threads were stopped: 0.0001000 seconds
+Application time: 0.0005180 seconds
+Total time for which application threads were stopped: 0.0001210 seconds
+Application time: 0.0001520 seconds
+Total time for which application threads were stopped: 0.0000960 seconds
+Application time: 0.0001680 seconds
+Total time for which application threads were stopped: 0.0000950 seconds
+Application time: 1.8087120 seconds
+Total time for which application threads were stopped: 0.0003470 seconds
+Application time: 1.2212400 seconds
+Total time for which application threads were stopped: 0.0004710 seconds
+Application time: 0.0002290 seconds
+Total time for which application threads were stopped: 0.0001040 seconds
+Application time: 11.1784330 seconds
+Total time for which application threads were stopped: 0.0003780 seconds
+Application time: 0.0261770 seconds
+Total time for which application threads were stopped: 0.0005420 seconds
+Application time: 96.3262200 seconds
+Total time for which application threads were stopped: 0.0010360 seconds
+Application time: 12.0681700 seconds
+Total time for which application threads were stopped: 0.0005430 seconds
+Application time: 0.0007680 seconds
+Total time for which application threads were stopped: 0.0001190 seconds
+Application time: 0.0000940 seconds
+Total time for which application threads were stopped: 0.0001060 seconds
+Application time: 0.0122600 seconds
+Total time for which application threads were stopped: 0.0001310 seconds
+Application time: 0.0134290 seconds
+Total time for which application threads were stopped: 0.0001600 seconds
+Application time: 0.0010590 seconds
+Total time for which application threads were stopped: 0.0001250 seconds
+Application time: 0.0009650 seconds
+Total time for
