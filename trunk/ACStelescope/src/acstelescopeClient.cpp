@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
     		std::cout << "\nChoose the desired operation:"
     		<< "\n(0) Exit"
     		<< "\n(1) ...NO USAR"
-    		<< "\n(2) ...NO USAR"
+    		<< "\n(2) ...GET AZIMUTH"
     		<< "\n(3) ...GET RA"
     		<< "\n(4) ...SLEW"
     		<< "\n(5) ...NO USAR"
@@ -114,6 +114,7 @@ int main(int argc, char *argv[])
     				CORBA::Double val = currentPositionDelta->get_sync(completion.out());
     			    	ACS_SHORT_LOG((LM_INFO, "Value: %i", val));
     			}*/
+    			mount->getAzimuth();
     			break;
     		case 3:
     			mount->startTelescope();
@@ -123,6 +124,7 @@ int main(int argc, char *argv[])
     			break;
     		case 5:
     			
+
     			break;
     		default:
     			break;

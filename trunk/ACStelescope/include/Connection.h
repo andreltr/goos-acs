@@ -12,4 +12,5 @@ class Connection {
 	~Connection();
 	void startTelescopeAutomaticSequenceAlignment();
 	void startTelescopeSlew();
+	char *getAzimuth();
 };

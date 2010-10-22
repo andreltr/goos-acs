@@ -22,3 +22,13 @@ void Connection::startTelescopeSlew(){
 	this->serial->write_RS232(":Mn#");
 	message = this->serial->read_RS232();
 }
+
+char *Connection::getAzimuth(){
+
+	char *message;
+	this->serial->write_RS232(":GZ#");
+	message = this->serial->read_RS232();
+
+	return message;
+
+}
