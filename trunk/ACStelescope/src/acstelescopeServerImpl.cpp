@@ -68,9 +68,10 @@ CORBA::Double TelescopeServer::slewTelescope() throw (CORBA::SystemException)
 
 CORBA::Double TelescopeServer::getAltitude() throw (CORBA::SystemException)
 {
+	char * message;
 	ACSErr::Completion *comp = new ACSErr::Completion();
 	Connection *connection = new Connection("/dev/ttyS0");
-	connection->getAltitude();
+	message = connection->getAltitude();
 	cout << "Altitude: " << message << endl;
 	delete connection;
 	delete comp;

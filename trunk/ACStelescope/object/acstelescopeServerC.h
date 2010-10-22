@@ -157,6 +157,24 @@ namespace acstelescopeServer
     // TAO_IDL - Generated from
     // be/be_visitor_operation/operation_ch.cpp:46
     
+    virtual ::CORBA::Double getAltitude (
+        void);
+    
+    // TAO_IDL - Generated from
+    // be/be_visitor_operation/operation_ch.cpp:46
+    
+    virtual ::CORBA::Double getAzimuth (
+        void);
+    
+    // TAO_IDL - Generated from
+    // be/be_visitor_operation/operation_ch.cpp:46
+    
+    virtual ::CORBA::Double stopSlewing (
+        void);
+    
+    // TAO_IDL - Generated from
+    // be/be_visitor_operation/operation_ch.cpp:46
+    
     virtual ::ACS::RWdouble_ptr currentPositionAlpha (
         void);
     
