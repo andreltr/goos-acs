@@ -29,6 +29,7 @@ class TelescopeServer: public baci::CharacteristicComponentImpl,
     //virtual CORBA::Double getCurrentPosition() throw(CORBA::SystemException);
     virtual CORBA::Double startTelescope() throw(CORBA::SystemException);
     virtual CORBA::Double slewTelescope() throw(CORBA::SystemException);
+    virtual CORBA::Double getAzimuth() throw(CORBA::SystemException);
 
     // ATRIBUTOS
     virtual ACS::RWdouble_ptr
