@@ -50,7 +50,7 @@ CORBA::Double TelescopeServer::startTelescope() throw (CORBA::SystemException)
 {
 	ACSErr::Completion *comp = new ACSErr::Completion();
 	Connection *connection = new Connection("/dev/ttyS0");
-	connection->startTelescopeAutomaticSequenceAlignment();
+	connection->startTelescope();
 	delete connection;
 	delete comp;
 	return 1.0;
@@ -60,7 +60,7 @@ CORBA::Double TelescopeServer::slewTelescope() throw (CORBA::SystemException)
 {
 	ACSErr::Completion *comp = new ACSErr::Completion();
 	Connection *connection = new Connection("/dev/ttyS0");
-	connection->startTelescopeSlew();
+	connection->slewTelescope();
 	delete connection;
 	delete comp;
 	return 1.0;
