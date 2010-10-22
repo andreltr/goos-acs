@@ -15,7 +15,7 @@ module acstelescopeServer
 	void badMethod() raises (ACSErrTypeCommon::UnknownEx);
 	double startTelescope();
 	double slewTelescope();
-	double setAltitude();
+	double getAltitude();
 	double getAzimuth();
 		
 	readonly attribute ACS::RWdouble currentPositionAlpha;

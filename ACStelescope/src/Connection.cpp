@@ -11,24 +11,21 @@ Connection::~Connection(){
 	delete this->serial;
 }
 
-void Connection::startTelescopeAutomaticSequenceAlignment(){
+void Connection::startTelescope(){
 	char *message;
 	this->serial->write_RS232(":Aa#");
 	message = this->serial->read_RS232();
 }
 
-void Connection::startTelescopeSlew(){
+void Connection::slewTelescope(){
 	char *message;
 	this->serial->write_RS232(":Mn#");
 	message = this->serial->read_RS232();
 }
 
 char *Connection::getAzimuth(){
-
 	char *message;
 	this->serial->write_RS232(":GZ#");
 	message = this->serial->read_RS232();
-
 	return message;
-
 }

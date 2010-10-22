@@ -79,10 +79,10 @@ int main(int argc, char *argv[])
     	while (!goOff) {
     		std::cout << "\nChoose the desired operation:"
     		<< "\n(0) Exit"
-    		<< "\n(1) ...NO USAR"
+    		<< "\n(1) GET ALTITUDE"
     		<< "\n(2) ...GET AZIMUTH"
-    		<< "\n(3) ...GET RA"
-    		<< "\n(4) ...SLEW"
+    		<< "\n(3) GET RA"
+    		<< "\n(4) SLEW"
     		<< "\n(5) ...NO USAR"
     		<< "\n?"
     		<< std::endl;
@@ -105,15 +105,9 @@ int main(int argc, char *argv[])
     				CORBA::Double val = currentPositionAlpha->get_sync(completion.out());
     				ACS_SHORT_LOG((LM_INFO, "Value: %f", val));
     			}*/
+    			mount->getAltitude();
     			break;
     		case 2:
-			/*ACS_SHORT_LOG((LM_INFO, "Getting COB property: %s:currentPositionDelta", argv[1]));
-    			currentPositionDelta = mount->currentPositionDelta();
-    			if (currentPositionDelta.ptr() != ACS::RWdouble::_nil())
-    			{
-    				CORBA::Double val = currentPositionDelta->get_sync(completion.out());
-    			    	ACS_SHORT_LOG((LM_INFO, "Value: %i", val));
-    			}*/
     			mount->getAzimuth();
     			break;
     		case 3:
@@ -123,8 +117,6 @@ int main(int argc, char *argv[])
     			mount->slewTelescope();
     			break;
     		case 5:
-    			
-
     			break;
     		default:
     			break;

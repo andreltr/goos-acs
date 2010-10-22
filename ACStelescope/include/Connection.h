@@ -10,7 +10,7 @@ class Connection {
 	public:
 	Connection(char *deviceName);
 	~Connection();
-	void startTelescopeAutomaticSequenceAlignment();
-	void startTelescopeSlew();
+	void startTelescope();
+	void slewTelescope();
 	char *getAzimuth();
 };
