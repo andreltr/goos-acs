@@ -90,6 +90,18 @@ CORBA:: Double TelescopeServer::getAzimuth() throw (CORBA::SystemException)
 	return 1.0;
 }
 
+CORBA:: Double TelescopeServer:: stopSlewing() throw (CORBA::SystemException)
+{
+	ACSErr::Completion *comp = new ACSErr::Completion();
+	Connection *connection = new Connection("/dev/ttyS0");
+	connection->stopSlewing();
+
+	delete connection;
+	delete comp;
+	return 1.0;
+
+}
+
 ACS::RWdouble_ptr
 TelescopeServer::currentPositionAlpha ()
 {

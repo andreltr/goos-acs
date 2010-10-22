@@ -17,6 +17,7 @@ module acstelescopeServer
 	double slewTelescope();
 	double getAltitude();
 	double getAzimuth();
+	double stopSlewing();
 		
 	readonly attribute ACS::RWdouble currentPositionAlpha;
 	readonly attribute ACS::RWdouble currentPositionDelta;

@@ -81,9 +81,9 @@ int main(int argc, char *argv[])
     		<< "\n(0) Exit"
     		<< "\n(1) GET ALTITUDE"
     		<< "\n(2) ...GET AZIMUTH"
-    		<< "\n(3) GET RA"
-    		<< "\n(4) SLEW"
-    		<< "\n(5) ...NO USAR"
+    		<< "\n(3) ...GET RA"
+    		<< "\n(4) ...SLEW"
+    		<< "\n(5) ...STOP SLEWING"
     		<< "\n?"
     		<< std::endl;
     		int op;
@@ -117,6 +117,8 @@ int main(int argc, char *argv[])
     			mount->slewTelescope();
     			break;
     		case 5:
+    			mount->stopSlewing();
+
     			break;
     		default:
     			break;

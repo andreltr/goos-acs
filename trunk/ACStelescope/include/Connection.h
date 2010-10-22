@@ -13,4 +13,5 @@ class Connection {
 	void startTelescope();
 	void slewTelescope();
 	char *getAzimuth();
+	void stopSlewing();
 };
