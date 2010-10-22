@@ -29,3 +29,7 @@ char *Connection::getAzimuth(){
 	message = this->serial->read_RS232();
 	return message;
 }
+void Connection::stopSlewing(){
+	this->serial->write_RS232(":Q#");
+}
+
