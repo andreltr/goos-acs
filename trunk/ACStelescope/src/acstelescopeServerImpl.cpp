@@ -66,6 +66,17 @@ CORBA::Double TelescopeServer::slewTelescope() throw (CORBA::SystemException)
 	return 1.0;
 }
 
+CORBA::Double TelescopeServer::getAltitude() throw (CORBA::SystemException)
+{
+	ACSErr::Completion *comp = new ACSErr::Completion();
+	Connection *connection = new Connection("/dev/ttyS0");
+	connection->getAltitude();
+	cout << "Altitude: " << message << endl;
+	delete connection;
+	delete comp;
+	return 1.0;
+}
+
 CORBA:: Double TelescopeServer::getAzimuth() throw (CORBA::SystemException)
 
 {
@@ -73,13 +84,10 @@ CORBA:: Double TelescopeServer::getAzimuth() throw (CORBA::SystemException)
 	ACSErr::Completion *comp = new ACSErr::Completion();
 	Connection *connection = new Connection("/dev/ttyS0");
 	message= connection->getAzimuth();
-	cout<<"Azimuth: "<<message<<endl;
-
+	cout << "Azimuth: " << message << endl;
 	delete connection;
 	delete comp;
 	return 1.0;
-
-
 }
 
 ACS::RWdouble_ptr
