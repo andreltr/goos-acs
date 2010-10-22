@@ -158,46 +158,46 @@ TAO_acstelescopeServer_TelescopeServer_Perfect_Hash_OpTable::hash (const char *s
   static const unsigned char asso_values[] =
     {
 #if defined (ACE_MVS)
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42,  0,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42,  0,
-      0,  4,  0, 10,  0,  5, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42,  5, 42, 42, 42, 42, 42, 42,
-     42, 42, 10,  0, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50,  0,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50,  0,
+     10, 30, 20, 10,  0,  5,  0, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50,  0, 50, 50, 50, 50, 50, 50,
+     50, 50,  0,  0, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50,
 #else
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42, 42,  0, 42,  0,  0,  4,
-      0, 10,  0,  5, 42, 42, 42, 42, 42, 42,
-     42, 42, 42, 42,  5, 10,  0, 42, 42, 42,
-     42, 42, 42, 42, 42, 42, 42, 42,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+     50, 50, 50, 50, 50,  0, 50,  0, 10, 30,
+     20, 10,  0,  5,  0, 50, 50, 50, 50, 50,
+     50, 50, 50, 50,  0,  0,  0, 50, 50, 50,
+     50, 50, 50, 50, 50, 50, 50, 50,
 #endif /* ACE_MVS */
     };
   return len + asso_values[(int) str[len - 1]] + asso_values[(int) str[0]];
@@ -208,44 +208,47 @@ TAO_acstelescopeServer_TelescopeServer_Perfect_Hash_OpTable::lookup (const char 
 {
   enum
     {
-      TOTAL_KEYWORDS = 17,
+      TOTAL_KEYWORDS = 20,
       MIN_WORD_LENGTH = 5,
       MAX_WORD_LENGTH = 26,
       MIN_HASH_VALUE = 5,
-      MAX_HASH_VALUE = 41,
-      HASH_VALUE_RANGE = 37,
+      MAX_HASH_VALUE = 49,
+      HASH_VALUE_RANGE = 45,
       DUPLICATES = 2,
-      WORDLIST_SIZE = 22
+      WORDLIST_SIZE = 25
     };
 
   static const TAO_operation_db_entry  wordlist[] =
     {
       {"",0,0},{"",0,0},{"",0,0},{"",0,0},{"",0,0},
       {"_is_a", &POA_acstelescopeServer::TelescopeServer::_is_a_skel, 0},
-      {"badMethod", &POA_acstelescopeServer::TelescopeServer::badMethod_skel, 0},
       {"_component", &POA_acstelescopeServer::TelescopeServer::_component_skel, 0},
       {"_non_existent", &POA_acstelescopeServer::TelescopeServer::_non_existent_skel, 0},
-      {"_repository_id", &POA_acstelescopeServer::TelescopeServer::_repository_id_skel, 0},
-      {"descriptor", &POA_acstelescopeServer::TelescopeServer::descriptor_skel, 0},
+      {"getAzimuth", &POA_acstelescopeServer::TelescopeServer::getAzimuth_skel, 0},
+      {"stopSlewing", &POA_acstelescopeServer::TelescopeServer::stopSlewing_skel, 0},
       {"_get_name", &POA_acstelescopeServer::TelescopeServer::_get_name_skel, 0},
       {"_interface", &POA_acstelescopeServer::TelescopeServer::_interface_skel, 0},
-      {"find_characteristic", &POA_acstelescopeServer::TelescopeServer::find_characteristic_skel, 0},
-      {"displayMessage", &POA_acstelescopeServer::TelescopeServer::displayMessage_skel, 0},
-      {"_get_currentPositionAlpha", &POA_acstelescopeServer::TelescopeServer::_get_currentPositionAlpha_skel, 0},
-      {"_get_currentPositionDelta", &POA_acstelescopeServer::TelescopeServer::_get_currentPositionDelta_skel, 0},
-      {"_get_componentState", &POA_acstelescopeServer::TelescopeServer::_get_componentState_skel, 0},
       {"slewTelescope", &POA_acstelescopeServer::TelescopeServer::slewTelescope_skel, 0},
       {"startTelescope", &POA_acstelescopeServer::TelescopeServer::startTelescope_skel, 0},
+      {"_get_currentPositionAlpha", &POA_acstelescopeServer::TelescopeServer::_get_currentPositionAlpha_skel, 0},
+      {"_get_currentPositionDelta", &POA_acstelescopeServer::TelescopeServer::_get_currentPositionDelta_skel, 0},
+      {"getAltitude", &POA_acstelescopeServer::TelescopeServer::getAltitude_skel, 0},
       {"get_all_characteristics", &POA_acstelescopeServer::TelescopeServer::get_all_characteristics_skel, 0},
+      {"_get_componentState", &POA_acstelescopeServer::TelescopeServer::_get_componentState_skel, 0},
+      {"descriptor", &POA_acstelescopeServer::TelescopeServer::descriptor_skel, 0},
+      {"_repository_id", &POA_acstelescopeServer::TelescopeServer::_repository_id_skel, 0},
+      {"badMethod", &POA_acstelescopeServer::TelescopeServer::badMethod_skel, 0},
       {"get_characteristic_by_name", &POA_acstelescopeServer::TelescopeServer::get_characteristic_by_name_skel, 0},
+      {"displayMessage", &POA_acstelescopeServer::TelescopeServer::displayMessage_skel, 0},
+      {"find_characteristic", &POA_acstelescopeServer::TelescopeServer::find_characteristic_skel, 0},
     };
 
   static const signed char lookup[] =
     {
-       -1,  -1,  -1,  -1,  -1,   5,  -1,  -1,  -1,   6,   7,  -1,  -1,   8, 
-        9,  10,  -1,  -1,  -1,  11,  12, -15,  -2,  13,  14, -45,  -1,  -1, 
-       -1,  17,  -1,  -1,  -1,  18,  19,  -1,  -1,  -1,  20,  -1,  -1,  21, 
-      
+       -1,  -1,  -1,  -1,  -1,   5,  -1,  -1,  -1,  -1,   6,  -1,  -1,   7, 
+       -1,   8,   9,  -1,  -1,  10,  11, -14,  -2,  12,  13, -53,  16,  -1, 
+       17,  18,  19,  -1,  -1,  -1,  20,  -1,  -1,  -1,  -1,  21,  -1,  22, 
+       -1,  -1,  23,  -1,  -1,  -1,  -1,  24, 
     };
 
   if (len <= MAX_WORD_LENGTH && len >= MIN_WORD_LENGTH)
@@ -617,6 +620,255 @@ void POA_acstelescopeServer::TelescopeServer::slewTelescope_skel (
     static_cast<POA_acstelescopeServer::TelescopeServer *> (servant);
 
   slewTelescope_TelescopeServer command (
+    impl,
+    server_request.operation_details (),
+    args);
+  
+  TAO::Upcall_Wrapper upcall_wrapper;
+  upcall_wrapper.upcall (server_request
+                         , args
+                         , nargs
+                         , command
+#if TAO_HAS_INTERCEPTORS == 1
+                         , servant_upcall
+                         , exceptions
+                         , nexceptions
+#endif  /* TAO_HAS_INTERCEPTORS == 1 */
+                         );
+}
+
+namespace POA_acstelescopeServer
+{
+  
+  
+  // TAO_IDL - Generated from
+  // be/be_visitor_operation/upcall_command_ss.cpp:136
+  
+  class getAltitude_TelescopeServer
+    : public TAO::Upcall_Command
+  {
+  public:
+    inline getAltitude_TelescopeServer (
+      POA_acstelescopeServer::TelescopeServer * servant,
+      TAO_Operation_Details const * operation_details,
+      TAO::Argument * const args[])
+      : servant_ (servant)
+        , operation_details_ (operation_details)
+        , args_ (args)
+    {
+    }
+    
+    virtual void execute (void)
+    {
+      TAO::SArg_Traits< ::CORBA::Double>::ret_arg_type retval =
+        TAO::Portable_Server::get_ret_arg< ::CORBA::Double> (
+          this->operation_details_,
+          this->args_);
+      
+      retval =
+        this->servant_->getAltitude ();
+    }
+  
+  private:
+    POA_acstelescopeServer::TelescopeServer * const servant_;
+    TAO_Operation_Details const * const operation_details_;
+    TAO::Argument * const * const args_;
+  };
+}
+
+
+// TAO_IDL - Generated from 
+// be/be_visitor_operation/operation_ss.cpp:190
+
+void POA_acstelescopeServer::TelescopeServer::getAltitude_skel (
+    TAO_ServerRequest & server_request,
+    void * TAO_INTERCEPTOR (servant_upcall),
+    void * servant)
+{
+#if TAO_HAS_INTERCEPTORS == 1
+  static ::CORBA::TypeCode_ptr const * const exceptions = 0;
+  static ::CORBA::ULong const nexceptions = 0;
+#endif /* TAO_HAS_INTERCEPTORS */
+  
+  TAO::SArg_Traits< ::CORBA::Double>::ret_val retval;
+  
+  TAO::Argument * const args[] =
+    {
+      &retval
+    };
+  
+  static size_t const nargs = 1;
+  
+  POA_acstelescopeServer::TelescopeServer * const impl =
+    static_cast<POA_acstelescopeServer::TelescopeServer *> (servant);
+
+  getAltitude_TelescopeServer command (
+    impl,
+    server_request.operation_details (),
+    args);
+  
+  TAO::Upcall_Wrapper upcall_wrapper;
+  upcall_wrapper.upcall (server_request
+                         , args
+                         , nargs
+                         , command
+#if TAO_HAS_INTERCEPTORS == 1
+                         , servant_upcall
+                         , exceptions
+                         , nexceptions
+#endif  /* TAO_HAS_INTERCEPTORS == 1 */
+                         );
+}
+
+namespace POA_acstelescopeServer
+{
+  
+  
+  // TAO_IDL - Generated from
+  // be/be_visitor_operation/upcall_command_ss.cpp:136
+  
+  class getAzimuth_TelescopeServer
+    : public TAO::Upcall_Command
+  {
+  public:
+    inline getAzimuth_TelescopeServer (
+      POA_acstelescopeServer::TelescopeServer * servant,
+      TAO_Operation_Details const * operation_details,
+      TAO::Argument * const args[])
+      : servant_ (servant)
+        , operation_details_ (operation_details)
+        , args_ (args)
+    {
+    }
+    
+    virtual void execute (void)
+    {
+      TAO::SArg_Traits< ::CORBA::Double>::ret_arg_type retval =
+        TAO::Portable_Server::get_ret_arg< ::CORBA::Double> (
+          this->operation_details_,
+          this->args_);
+      
+      retval =
+        this->servant_->getAzimuth ();
+    }
+  
+  private:
+    POA_acstelescopeServer::TelescopeServer * const servant_;
+    TAO_Operation_Details const * const operation_details_;
+    TAO::Argument * const * const args_;
+  };
+}
+
+
+// TAO_IDL - Generated from 
+// be/be_visitor_operation/operation_ss.cpp:190
+
+void POA_acstelescopeServer::TelescopeServer::getAzimuth_skel (
+    TAO_ServerRequest & server_request,
+    void * TAO_INTERCEPTOR (servant_upcall),
+    void * servant)
+{
+#if TAO_HAS_INTERCEPTORS == 1
+  static ::CORBA::TypeCode_ptr const * const exceptions = 0;
+  static ::CORBA::ULong const nexceptions = 0;
+#endif /* TAO_HAS_INTERCEPTORS */
+  
+  TAO::SArg_Traits< ::CORBA::Double>::ret_val retval;
+  
+  TAO::Argument * const args[] =
+    {
+      &retval
+    };
+  
+  static size_t const nargs = 1;
+  
+  POA_acstelescopeServer::TelescopeServer * const impl =
+    static_cast<POA_acstelescopeServer::TelescopeServer *> (servant);
+
+  getAzimuth_TelescopeServer command (
+    impl,
+    server_request.operation_details (),
+    args);
+  
+  TAO::Upcall_Wrapper upcall_wrapper;
+  upcall_wrapper.upcall (server_request
+                         , args
+                         , nargs
+                         , command
+#if TAO_HAS_INTERCEPTORS == 1
+                         , servant_upcall
+                         , exceptions
+                         , nexceptions
+#endif  /* TAO_HAS_INTERCEPTORS == 1 */
+                         );
+}
+
+namespace POA_acstelescopeServer
+{
+  
+  
+  // TAO_IDL - Generated from
+  // be/be_visitor_operation/upcall_command_ss.cpp:136
+  
+  class stopSlewing_TelescopeServer
+    : public TAO::Upcall_Command
+  {
+  public:
+    inline stopSlewing_TelescopeServer (
+      POA_acstelescopeServer::TelescopeServer * servant,
+      TAO_Operation_Details const * operation_details,
+      TAO::Argument * const args[])
+      : servant_ (servant)
+        , operation_details_ (operation_details)
+        , args_ (args)
+    {
+    }
+    
+    virtual void execute (void)
+    {
+      TAO::SArg_Traits< ::CORBA::Double>::ret_arg_type retval =
+        TAO::Portable_Server::get_ret_arg< ::CORBA::Double> (
+          this->operation_details_,
+          this->args_);
+      
+      retval =
+        this->servant_->stopSlewing ();
+    }
+  
+  private:
+    POA_acstelescopeServer::TelescopeServer * const servant_;
+    TAO_Operation_Details const * const operation_details_;
+    TAO::Argument * const * const args_;
+  };
+}
+
+
+// TAO_IDL - Generated from 
+// be/be_visitor_operation/operation_ss.cpp:190
+
+void POA_acstelescopeServer::TelescopeServer::stopSlewing_skel (
+    TAO_ServerRequest & server_request,
+    void * TAO_INTERCEPTOR (servant_upcall),
+    void * servant)
+{
+#if TAO_HAS_INTERCEPTORS == 1
+  static ::CORBA::TypeCode_ptr const * const exceptions = 0;
+  static ::CORBA::ULong const nexceptions = 0;
+#endif /* TAO_HAS_INTERCEPTORS */
+  
+  TAO::SArg_Traits< ::CORBA::Double>::ret_val retval;
+  
+  TAO::Argument * const args[] =
+    {
+      &retval
+    };
+  
+  static size_t const nargs = 1;
+  
+  POA_acstelescopeServer::TelescopeServer * const impl =
+    static_cast<POA_acstelescopeServer::TelescopeServer *> (servant);
+
+  stopSlewing_TelescopeServer command (
     impl,
     server_request.operation_details (),
     args);

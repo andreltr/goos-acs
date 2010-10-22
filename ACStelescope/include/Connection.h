@@ -12,6 +12,7 @@ class Connection {
 	~Connection();
 	void startTelescope();
 	void slewTelescope();
+	char *getAltitude();
 	char *getAzimuth();
 	void stopSlewing();
 };

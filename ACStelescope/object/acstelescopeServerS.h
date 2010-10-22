@@ -162,6 +162,42 @@ namespace POA_acstelescopeServer
     // TAO_IDL - Generated from
     // be/be_visitor_operation/operation_sh.cpp:45
     
+    virtual ::CORBA::Double getAltitude (
+        void) = 0;
+    
+    static void getAltitude_skel (
+        TAO_ServerRequest & server_request,
+        void * servant_upcall,
+        void * servant
+      );
+    
+    // TAO_IDL - Generated from
+    // be/be_visitor_operation/operation_sh.cpp:45
+    
+    virtual ::CORBA::Double getAzimuth (
+        void) = 0;
+    
+    static void getAzimuth_skel (
+        TAO_ServerRequest & server_request,
+        void * servant_upcall,
+        void * servant
+      );
+    
+    // TAO_IDL - Generated from
+    // be/be_visitor_operation/operation_sh.cpp:45
+    
+    virtual ::CORBA::Double stopSlewing (
+        void) = 0;
+    
+    static void stopSlewing_skel (
+        TAO_ServerRequest & server_request,
+        void * servant_upcall,
+        void * servant
+      );
+    
+    // TAO_IDL - Generated from
+    // be/be_visitor_operation/operation_sh.cpp:45
+    
     virtual ::ACS::RWdouble_ptr currentPositionAlpha (
         void) = 0;
     

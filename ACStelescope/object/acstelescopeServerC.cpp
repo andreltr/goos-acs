@@ -287,6 +287,117 @@ void acstelescopeServer::TelescopeServer::badMethod (
 // TAO_IDL - Generated from
 // be/be_visitor_operation/operation_cs.cpp:78
 
+::CORBA::Double acstelescopeServer::TelescopeServer::getAltitude (
+    void)
+{
+  if (!this->is_evaluated ())
+    {
+      ::CORBA::Object::tao_object_initialize (this);
+    }
+  
+  if (this->the_TAO_TelescopeServer_Proxy_Broker_ == 0)
+    {
+      acstelescopeServer_TelescopeServer_setup_collocation ();
+    }
+  
+  TAO::Arg_Traits< ::CORBA::Double>::ret_val _tao_retval;
+  
+  TAO::Argument *_the_tao_operation_signature [] =
+    {
+      &_tao_retval
+    };
+  
+  TAO::Invocation_Adapter _tao_call (
+      this,
+      _the_tao_operation_signature,
+      1,
+      "getAltitude",
+      11,
+      this->the_TAO_TelescopeServer_Proxy_Broker_
+    );
+  
+  _tao_call.invoke (0, 0);
+  
+  return _tao_retval.retn ();
+}
+
+// TAO_IDL - Generated from
+// be/be_visitor_operation/operation_cs.cpp:78
+
+::CORBA::Double acstelescopeServer::TelescopeServer::getAzimuth (
+    void)
+{
+  if (!this->is_evaluated ())
+    {
+      ::CORBA::Object::tao_object_initialize (this);
+    }
+  
+  if (this->the_TAO_TelescopeServer_Proxy_Broker_ == 0)
+    {
+      acstelescopeServer_TelescopeServer_setup_collocation ();
+    }
+  
+  TAO::Arg_Traits< ::CORBA::Double>::ret_val _tao_retval;
+  
+  TAO::Argument *_the_tao_operation_signature [] =
+    {
+      &_tao_retval
+    };
+  
+  TAO::Invocation_Adapter _tao_call (
+      this,
+      _the_tao_operation_signature,
+      1,
+      "getAzimuth",
+      10,
+      this->the_TAO_TelescopeServer_Proxy_Broker_
+    );
+  
+  _tao_call.invoke (0, 0);
+  
+  return _tao_retval.retn ();
+}
+
+// TAO_IDL - Generated from
+// be/be_visitor_operation/operation_cs.cpp:78
+
+::CORBA::Double acstelescopeServer::TelescopeServer::stopSlewing (
+    void)
+{
+  if (!this->is_evaluated ())
+    {
+      ::CORBA::Object::tao_object_initialize (this);
+    }
+  
+  if (this->the_TAO_TelescopeServer_Proxy_Broker_ == 0)
+    {
+      acstelescopeServer_TelescopeServer_setup_collocation ();
+    }
+  
+  TAO::Arg_Traits< ::CORBA::Double>::ret_val _tao_retval;
+  
+  TAO::Argument *_the_tao_operation_signature [] =
+    {
+      &_tao_retval
+    };
+  
+  TAO::Invocation_Adapter _tao_call (
+      this,
+      _the_tao_operation_signature,
+      1,
+      "stopSlewing",
+      11,
+      this->the_TAO_TelescopeServer_Proxy_Broker_
+    );
+  
+  _tao_call.invoke (0, 0);
+  
+  return _tao_retval.retn ();
+}
+
+// TAO_IDL - Generated from
+// be/be_visitor_operation/operation_cs.cpp:78
+
 ::ACS::RWdouble_ptr acstelescopeServer::TelescopeServer::currentPositionAlpha (
     void)
 {
