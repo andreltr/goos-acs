@@ -119,3 +119,37 @@ class TelescopeServer: public baci::CharacteristicComponentImpl,
 
 #endif
 }}}
+
+== Connection.h ==
+{{{
+#include <SerialRS232.h>
+
+/* Esta clase se ocupa de la coneccion entre el componente y el telescopio,
+utilizando la clase SerialRS232
+*/
+using namespace std;
+
+class Connection {
+
+	private:
+	SerialRS232 *serial;
+
+	public:
+	Connection(char *deviceName);
+	~Connection();
+	// metodo en desuso
+	void startTelescope();
+	// este metodo genera una coneccion con el telescopio y le envia
+	// el codigo ":Mn#" para mover en direccion norte por defecto
+	void slewTelescope();
+	// este metodo retorna la altitud recibida desde el telescopio
+	// una vez enviado el codigo ":GA#"
+	char *getAltitude();
+	// este metodo retorna el azimuth recibida desde el telescopio
+	// una vez enviado el codigo ":GZ#"
+	char *getAzimuth();
+	// este metodo detiene el telescopio, una vez enviado
+	// el codigo ":Q#"
+	void stopSlewing();
+};
+}}}
