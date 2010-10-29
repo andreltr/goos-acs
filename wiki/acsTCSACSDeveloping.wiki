@@ -46,7 +46,7 @@ module acstelescopeServer
 	// metodo slewTelescope
 	double stopSlewing();
 
-	// para el manejo de las variables utilizamos los smartPointer
+	// para el manejo de las variables utilizamos SmartPropertyPointer
 	readonly attribute ACS::RWdouble currentPositionAlpha;
 	readonly attribute ACS::RWdouble currentPositionDelta;
 	};
