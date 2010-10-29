@@ -11,7 +11,7 @@
 = Class Diagram =
 http://img831.imageshack.us/img831/5738/diagramatelescopeserver.png
 = Source Code Documentation=
-IDL
+== acstelescopeServer.idl ==
 {{{
 #ifndef _TELESCOPE_SERVER_IDL
 #define _TELESCOPE_SERVER_IDL
@@ -50,6 +50,71 @@ module acstelescopeServer
 	readonly attribute ACS::RWdouble currentPositionAlpha;
 	readonly attribute ACS::RWdouble currentPositionDelta;
 	};
+};
+
+#endif
+}}}
+
+
+== acstelescopeServerImpl ==
+{{{
+#ifndef _TELESCOPE_SERVER_H
+#define _TELESCOPE_SERVER_H
+
+#ifndef __cplusplus
+#error This is a C++ include file and cannot be used from plain C
+#endif
+
+#include <ACSErrTypeCommon.h>
+#include <acstelescopeServerS.h>
+
+// CharacteristicComponentImpl: implementa los metodos y macros necesarias para la implementacion de la interface CORBA.
+#include <baciCharacteristicComponentImpl.h>
+// tipos Baci utilizados por los SmartPropertyPointer
+#include <baciRWdouble.h>
+#include <baciRWlong.h>
+// incluimos el uso de los SmartPropertyPointer
+#include <baciSmartPropertyPointer.h>
+
+/* Esta clase implementa los métodos y propiedades requeridas para el
+funcionamiento del componente.
+*/
+class TelescopeServer: public baci::CharacteristicComponentImpl,
+			  public virtual POA_acstelescopeServer::TelescopeServer
+{
+  public:
+	TelescopeServer(
+	       const ACE_CString& name,
+	       maci::ContainerServices * containerServices);
+		   
+    virtual ~TelescopeServer();
+
+    virtual void displayMessage();
+    virtual void badMethod();
+    
+    /* Sintaxis para los metodos utilizando CORBA 
+       virtual CORBA::<Tipo> nombre_metodo() throw(CORBA::SystemException); */
+    
+    virtual CORBA::Double startTelescope() throw(CORBA::SystemException);
+    virtual CORBA::Double slewTelescope() throw(CORBA::SystemException);
+    virtual CORBA::Double getAzimuth() throw(CORBA::SystemException);
+    virtual CORBA::Double getAltitude() throw(CORBA::SystemException);
+    virtual CORBA::Double stopSlewing() throw(CORBA::SystemException);
+
+    /* Metodos para el uso de las variables a traves de SmartPropertyPointer */
+    virtual ACS::RWdouble_ptr
+    currentPositionAlpha ();
+
+    virtual ACS::RWdouble_ptr
+    currentPositionDelta ();
+
+    /* Atributos SmartPropertyPointer */
+    private:
+	// currentPositionAlpha almacena la posicion actual Alpha
+        baci::SmartPropertyPointer<baci::RWdouble> m_currentPositionAlpha_sp;
+	// currentPositionDelta almacena la posicion actual Delta
+        baci::SmartPropertyPointer<baci::RWdouble> m_currentPositionDelta_sp;
+	
 };
 
 #endif
