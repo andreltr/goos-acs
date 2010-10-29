@@ -120,7 +120,7 @@ class TelescopeServer: public baci::CharacteristicComponentImpl,
 #endif
 }}}
 
-== Connection.h ==
+== Connection ==
 {{{
 #include <SerialRS232.h>
 
@@ -154,7 +154,7 @@ class Connection {
 };
 }}}
 
-== SerialRS232.h ==
+== SerialRS232 ==
 {{{
 /******************************************************************************
  * OAN - Observatorio Astronómico Nacional
