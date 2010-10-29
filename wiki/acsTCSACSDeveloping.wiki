@@ -9,4 +9,47 @@
 
 = Details =
 
-Coming soon...
+= Source Code Documentation=
+IDL
+{{{
+#ifndef _TELESCOPE_SERVER_IDL
+#define _TELESCOPE_SERVER_IDL
+
+#include <ACSErrTypeCommon.idl>
+#pragma prefix "alma"
+
+// incluimos baci.idl (Basic Control Interface) para tener acceso al uso de RWdouble
+#include <baci.idl>
+
+/* La funcion de esta clase IDL (Interface Definition Language), es la de definir
+los distintos metodos y propiedades que se necesitan para describir la interfaz
+entre el cliente y el servidor */
+module acstelescopeServer 
+{
+    interface TelescopeServer : ACS::CharacteristicComponent
+	{
+	// mensaje inicial del componente
+	void displayMessage();
+	void badMethod() raises (ACSErrTypeCommon::UnknownEx);
+
+	// metodo en desuso
+	double startTelescope();	
+	// este metodo mueve el telescopio en direccion norte
+	// actualmente no posee la capacidad de detenerse automaticamente
+	double slewTelescope();
+	// este metodo retorna la altitud recibida desde el telescopio
+	double getAltitude();
+	// este metodo retorna la posicion azimuth recibida desde el telescopio
+	double getAzimuth();
+	// este metodo se encarga de detener la accion iniciada por el
+	// metodo slewTelescope
+	double stopSlewing();
+
+	// para el manejo de las variables utilizamos los smartPointer
+	readonly attribute ACS::RWdouble currentPositionAlpha;
+	readonly attribute ACS::RWdouble currentPositionDelta;
+	};
+};
+
+#endif
+}}}
