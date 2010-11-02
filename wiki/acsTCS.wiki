@@ -23,6 +23,10 @@ ACS-TSC is a project developing on ACS framework to control the telescope of the
   * Eclipse for Java and C++ development
   * MEADE LX200GPS for physical testings and final product
 
+== Physics Theory ==
+
+  * Comming Soon.
+
 = Planification =
 
 There are 3 steps of implementation:
