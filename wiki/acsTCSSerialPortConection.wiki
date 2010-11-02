@@ -7,7 +7,7 @@ Implementation of the interface between Serial Port and the ACS Modules.
 
 = Details =
 
-For make the conection between LX200GPS Telescoope and SL,  we need to have the permitions for read and write on the ttyS0 port.
+For make the conection between LX200GPS Telescope and SL,  we need to have the permitions for read and write on the ttyS0 port.
 
 
 The read and write permissions are required on the /dev/ttyS0 file. The uucp group, which is the default group owner of the file, has already these rights. 
