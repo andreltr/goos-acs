@@ -26,7 +26,20 @@ ACS-TSC is a project developing on ACS framework to control the telescope of the
 == Physics Theory ==
 
   * Comming Soon.
-  In astronomy, a celestial coordinate system is a coordinate system for mapping positions on the celestial sphere. There are different celestial coordinate systems each using a system of spherical coordinates projected on the celestial sphere, in analogy to the geographic coordinate system used on the surface of the Earth. The coordinate systems differ only in their choice of the fundamental plane, which divides the sky into two equalhemispheres along a great circle. For example, the fundamental plane of the geographic system is the Earth's equator. Each coordinate system is named for its choice of fundamental plane.
+
+  In astronomy, a celestial coordinate system is a coordinate system for mapping positions    on the celestial sphere. There are different celestial coordinate systems each using a system of spherical coordinates projected on the celestial sphere, in analogy to the geographic coordinate system used on the surface of the Earth. The coordinate systems differ only in their choice of the fundamental plane, which divides the sky into two equalhemispheres along a great circle. For example, the fundamental plane of the geographic system is the Earth's equator. Each coordinate system is named for its choice of fundamental plane.
+
+   * Horizontal System
+
+Una coordenada es la altura (que se denota por h), que se define como el ángulo que forma la visual del astro con el plano del horizonte.
+Se cuenta de 0º a 90º hacia Z (si el astro está por encima del horizonte) y de 0º a -90º hacia Z´(si el astro está por debajo del horizonte).
+El ángulo complementario a la altura (z = 90º-h) se denomina distancia zenital (o distancia cenital).
+
+La otra coordenada es el azimut (que se denota por A) que es el ángulo diedro (ángulo que forman dos círculos máximos), que forma el meridiano del lugar con el círculo vertical que pasa por el astro.
+Se toma como origen el Sur (si estamos en el hemisferio Norte) o el Norte (si estamos en el hemisferio Sur)
+Se cuenta en sentido del movimiento diurno, es decir, en dirección S-O-N-E en el hemisferio Norte, y en dirección N-O-S-E en el hemisferio Sur.
+El azimut toma, entonces, valores entre 0º y 360º.
+          
 
 = Planification =
 
