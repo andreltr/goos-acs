@@ -31,7 +31,7 @@ ACS-TSC is a project developing on ACS framework to control the telescope of the
 
    * Horizontal System
 
-Una coordenada es la altura (que se denota por h), que se define como el ángulo que forma la visual del astro con el plano del horizonte.
+    Una coordenada es la altura (que se denota por h), que se define como el ángulo que  forma la visual del astro con el plano del horizonte.
 Se cuenta de 0º a 90º hacia Z (si el astro está por encima del horizonte) y de 0º a -90º hacia Z´(si el astro está por debajo del horizonte).
 El ángulo complementario a la altura (z = 90º-h) se denomina distancia zenital (o distancia cenital).
 
