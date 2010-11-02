@@ -17,9 +17,12 @@ You can see it with the following command:
 If the permissions are not set as above, you can configure them as follow:
 (you have to be logged whit the super user account to make this changes.)
 
-* chown root /dev/ttyS0*
-* chgrp uucp /dev/ttyS0*
-* chmod 660 /dev/ttyS0*
+* #chown root /dev/ttyS0*
+
+* #chgrp uucp /dev/ttyS0*
+
+* #chmod 660 /dev/ttyS0*
+
 
 Add the user name in the uucp group: 
 
