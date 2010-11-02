@@ -31,14 +31,7 @@ ACS-TSC is a project developing on ACS framework to control the telescope of the
 
    * Horizontal System
 
-    Una coordenada es la altura (que se denota por h), que se define como el ángulo que  forma la visual del astro con el plano del horizonte.
-Se cuenta de 0º a 90º hacia Z (si el astro está por encima del horizonte) y de 0º a -90º hacia Z´(si el astro está por debajo del horizonte).
-El ángulo complementario a la altura (z = 90º-h) se denomina distancia zenital (o distancia cenital).
-
-La otra coordenada es el azimut (que se denota por A) que es el ángulo diedro (ángulo que forman dos círculos máximos), que forma el meridiano del lugar con el círculo vertical que pasa por el astro.
-Se toma como origen el Sur (si estamos en el hemisferio Norte) o el Norte (si estamos en el hemisferio Sur)
-Se cuenta en sentido del movimiento diurno, es decir, en dirección S-O-N-E en el hemisferio Norte, y en dirección N-O-S-E en el hemisferio Sur.
-El azimut toma, entonces, valores entre 0º y 360º.
+    Una coordenada es la altura (que se denota por h), que se define como el ángulo que forma la visual del astro con el plano del horizonte.Se cuenta de 0º a 90º hacia Z (si el astro está por encima del horizonte) y de 0º a -90º hacia Z´(si el astro está por debajo del horizonte).El ángulo complementario a la altura (z = 90º-h) se denomina distancia zenital (o distancia cenital).La otra coordenada es el azimut (que se denota por A) que es el ángulo diedro (ángulo que forman dos círculos máximos), que forma el meridiano del lugar con el círculo vertical que pasa por el astro.Se toma como origen el Sur (si estamos en el hemisferio Norte) o el Norte (si estamos en el hemisferio Sur).Se cuenta en sentido del movimiento diurno, es decir, en dirección S-O-N-E en el hemisferio Norte, y en dirección N-O-S-E en el hemisferio Sur.El azimut toma, entonces, valores entre 0º y 360º.
           
 
 = Planification =
