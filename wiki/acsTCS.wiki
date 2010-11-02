@@ -27,7 +27,7 @@ ACS-TSC is a project developing on ACS framework to control the telescope of the
 
    * Coordinate
 
-  In astronomy, a celestial coordinate system is a coordinate system for mapping positions    on the celestial sphere. There are different celestial coordinate systems each using a system of spherical coordinates projected on the celestial sphere, in analogy to the geographic coordinate system used on the surface of the Earth. The coordinate systems differ only in their choice of the fundamental plane, which divides the sky into two equalhemispheres along a great circle. For example, the fundamental plane of the geographic system is the Earth's equator. Each coordinate system is named for its choice of fundamental plane.
+     A celestial coordinate system is a coordinate system for mapping positions    on the celestial sphere. There are different celestial coordinate systems each using a system of spherical coordinates projected on the celestial sphere, in analogy to the geographic coordinate system used on the surface of the Earth. The coordinate systems differ only in their choice of the fundamental plane, which divides the sky into two equalhemispheres along a great circle. For example, the fundamental plane of the geographic system is the Earth's equator. Each coordinate system is named for its choice of fundamental plane.
 
    * Horizontal System
 
