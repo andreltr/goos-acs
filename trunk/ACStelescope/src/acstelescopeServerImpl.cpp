@@ -56,11 +56,40 @@ CORBA::Double TelescopeServer::startTelescope() throw (CORBA::SystemException)
 	return 1.0;
 }
 
-CORBA::Double TelescopeServer::slewTelescope() throw (CORBA::SystemException)
+CORBA::Double TelescopeServer::slewTelescopeNorth() throw (CORBA::SystemException)
 {
 	ACSErr::Completion *comp = new ACSErr::Completion();
 	Connection *connection = new Connection("/dev/ttyS0");
-	connection->slewTelescope();
+	connection->slewTelescopeNorth();
+	delete connection;
+	delete comp;
+	return 1.0;
+}
+CORBA::Double TelescopeServer::slewTelescopeSouth() throw (CORBA::SystemException)
+{
+	ACSErr::Completion *comp = new ACSErr::Completion();
+	Connection *connection = new Connection("/dev/ttyS0");
+	connection->slewTelescopeSouth();
+	delete connection;
+	delete comp;
+	return 1.0;
+}
+
+CORBA::Double TelescopeServer::slewTelescopeWest() throw (CORBA::SystemException)
+{
+	ACSErr::Completion *comp = new ACSErr::Completion();
+	Connection *connection = new Connection("/dev/ttyS0");
+	connection->slewTelescopeWest();
+	delete connection;
+	delete comp;
+	return 1.0;
+}
+
+CORBA::Double TelescopeServer::slewTelescopeEast() throw (CORBA::SystemException)
+{
+	ACSErr::Completion *comp = new ACSErr::Completion();
+	Connection *connection = new Connection("/dev/ttyS0");
+	connection->slewTelescopeEast();
 	delete connection;
 	delete comp;
 	return 1.0;

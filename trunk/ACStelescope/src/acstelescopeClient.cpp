@@ -78,17 +78,19 @@ int main(int argc, char *argv[])
     	std::cout << ">>>>>>>>>>>>>>>>>>> Telescope Server Client >>>>>>>>>>>>>>>>>>>" << endl;
     	while (!goOff) {
     		std::cout << "\nChoose the desired operation:"
-    		<< "\n(0) Exit"
-    		<< "\n(1) GET ALTITUDE"
+    		<< "\n(0) ...Exit"
+    		<< "\n(1) ...GET ALTITUDE"
     		<< "\n(2) ...GET AZIMUTH"
     		<< "\n(3) ...GET RA"
-    		<< "\n(4) ...SLEW"
-    		<< "\n(5) ...STOP SLEWING"
+    		<< "\n(4) ...SLEW_NORTH"
+    		<< "\n(5) ...SLEW_SOUTH"
+    		<< "\n(6) ...SLEW_WEST"
+    		<< "\n(7) ...SLEW_EAST"
     		<< "\n?"
     		<< std::endl;
     		int op;
     		std::cin >> op;
-    		while (!check(op, 5)) {
+    		while (!check(op, 8)) {
     		std::cout << "...out of range!\n" << std::endl;
     		std::cin >> op;
     		}
@@ -114,13 +116,20 @@ int main(int argc, char *argv[])
     			mount->startTelescope();
     			break;
     		case 4:
-    			mount->slewTelescope();
+    			mount->slewTelescopeNorth();
     			break;
     		case 5:
-    			mount->stopSlewing();
+    			mount->slewTelescopeSouth();
 
     			break;
+    		case 6:
+    			mount->  slewTelescopeWest();
+    			break;
+    		case 7:
+    			mount->  slewTelescopeEast();
+    			break;
     		default:
+    			std::cout << "...Not valid option\n" << std::endl;
     			break;
     		}
     	}

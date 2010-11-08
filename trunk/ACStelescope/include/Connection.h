@@ -11,7 +11,10 @@ class Connection {
 	Connection(char *deviceName);
 	~Connection();
 	void startTelescope();
-	void slewTelescope();
+	void slewTelescopeNorth();
+	void slewTelescopeSouth();
+	void slewTelescopeWest();
+	void slewTelescopeEast();
 	char *getAltitude();
 	char *getAzimuth();
 	void stopSlewing();

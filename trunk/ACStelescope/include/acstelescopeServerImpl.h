@@ -28,10 +28,14 @@ class TelescopeServer: public baci::CharacteristicComponentImpl,
     virtual void badMethod();
     //virtual CORBA::Double getCurrentPosition() throw(CORBA::SystemException);
     virtual CORBA::Double startTelescope() throw(CORBA::SystemException);
-    virtual CORBA::Double slewTelescope() throw(CORBA::SystemException);
+    virtual CORBA::Double slewTelescopeNorth() throw(CORBA::SystemException);
+    virtual CORBA::Double slewTelescopeSouth() throw(CORBA::SystemException);
+    virtual CORBA::Double slewTelescopeWest()throw(CORBA::SystemException);
+    virtual CORBA::Double slewTelescopeEast()throw(CORBA::SystemException);
     virtual CORBA::Double getAzimuth() throw(CORBA::SystemException);
     virtual CORBA::Double getAltitude() throw(CORBA::SystemException);
     virtual CORBA::Double stopSlewing() throw(CORBA::SystemException);
+
 
     // ATRIBUTOS
     virtual ACS::RWdouble_ptr

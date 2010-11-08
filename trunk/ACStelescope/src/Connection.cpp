@@ -17,9 +17,26 @@ void Connection::startTelescope(){
 	message = this->serial->read_RS232();
 }
 
-void Connection::slewTelescope(){
+void Connection::slewTelescopeNorth(){
 	char *message;
 	this->serial->write_RS232(":Mn#");
+	message = this->serial->read_RS232();
+}
+
+void Connection::slewTelescopeSouth(){
+	char *message;
+	this->serial->write_RS232(":Ms#");
+	message = this->serial->read_RS232();
+}
+
+void Connection::slewTelescopeEast(){
+	char *message;
+	this->serial->write_RS232(":Me#");
+	message = this->serial->read_RS232();
+}
+void Connection::slewTelescopeWest(){
+	char *message;
+	this->serial->write_RS232(":Mw#");
 	message = this->serial->read_RS232();
 }
 
