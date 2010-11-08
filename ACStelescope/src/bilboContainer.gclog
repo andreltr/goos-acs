@@ -1,0 +1,38 @@
+Application time: 1.1798910 seconds
+Total time for which application threads were stopped: 0.0001710 seconds
+Application time: 0.5086130 seconds
+2.272: [GC 2.272: [DefNew
+Desired survivor size 819200 bytes, new threshold 1 (max 4)
+- age   1:    1254872 bytes,    1254872 total
+: 13184K->1225K(14784K), 0.0163860 secs] 13184K->1225K(63936K), 0.0165850 secs] [Times: user=0.01 sys=0.01, real=0.02 secs] 
+Total time for which application threads were stopped: 0.0168900 seconds
+Application time: 0.2973710 seconds
+2.587: [GC [1 CMS-initial-mark: 0K(49152K)] 7239K(63936K), 0.0070310 secs] [Times: user=0.01 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0073640 seconds
+2.594: [CMS-concurrent-mark-start]
+2.635: [CMS-concurrent-mark: 0.041/0.041 secs] [Times: user=0.01 sys=0.01, real=0.05 secs] 
+2.635: [CMS-concurrent-preclean-start]
+2.639: [CMS-concurrent-preclean: 0.004/0.004 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+2.639: [CMS-concurrent-abortable-preclean-start]
+Application time: 1.3445700 seconds
+3.939: [GC 3.939: [DefNew
+Desired survivor size 819200 bytes, new threshold 4 (max 4)
+- age   1:     213528 bytes,     213528 total
+: 14409K->208K(14784K), 0.0162330 secs] 14409K->1269K(63936K), 0.0163320 secs] [Times: user=0.00 sys=0.01, real=0.01 secs] 
+Total time for which application threads were stopped: 0.0167810 seconds
+4.077: [CMS-concurrent-abortable-preclean: 0.024/1.438 secs] [Times: user=0.27 sys=0.19, real=1.44 secs] 
+Application time: 0.1224230 seconds
+4.078: [GC[YG occupancy: 1082 K (14784 K)]4.078: [Rescan (non-parallel) 4.078: [grey object rescan, 0.0003670 secs]4.078: [root rescan, 0.0014380 secs], 0.0018580 secs]4.080: [weak refs processing, 0.0000070 secs] [1 CMS-remark: 1060K(49152K)] 2143K(63936K), 0.0019270 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+Total time for which application threads were stopped: 0.0021920 seconds
+4.080: [CMS-concurrent-sweep-start]
+4.081: [CMS-concurrent-sweep: 0.001/0.001 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+4.081: [CMS-concurrent-reset-start]
+4.093: [CMS-concurrent-reset: 0.012/0.012 secs] [Times: user=0.00 sys=0.01, real=0.01 secs] 
+Heap
+ def new generation   total 14784K, used 1082K [0xaa000000, 0xab000000, 0xab000000)
+  eden space 13184K,   6% used [0xaa000000, 0xaa0da8d0, 0xaace0000)
+  from space 1600K,  13% used [0xaace0000, 0xaad14218, 0xaae70000)
+  to   space 1600K,   0% used [0xaae70000, 0xaae70000, 0xab000000)
+ concurrent mark-sweep generation total 49152K, used 1060K [0xab000000, 0xae000000, 0xb0000000)
+ concurrent-mark-sweep perm gen total 16384K, used 9303K [0xb0000000, 0xb1000000, 0xb4000000)
+Application time: 0.0141330 seconds

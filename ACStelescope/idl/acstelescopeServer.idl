@@ -14,7 +14,10 @@ module acstelescopeServer
 	void displayMessage();
 	void badMethod() raises (ACSErrTypeCommon::UnknownEx);
 	double startTelescope();
-	double slewTelescope();
+	double slewTelescopeNorth();
+	double slewTelescopeSouth();
+	double slewTelescopeWest();
+	double slewTelescopeEast();
 	double getAltitude();
 	double getAzimuth();
 	double stopSlewing();
