@@ -2,7 +2,7 @@ package alma.ucn.oca.ccd;
 
 import alma.ucn.oca.ccd.controller.DefaultController;
 import alma.ucn.oca.ccd.model.gCCDComponentModel;
-import alma.ucn.oca.ccd.views.gCCDGUIClient;
+import alma.ucn.oca.ccd.views.gCCDGUI2;
 
 /**
  * 
@@ -10,44 +10,43 @@ import alma.ucn.oca.ccd.views.gCCDGUIClient;
  */
 public class Main {
 
-	/** Creates a new instance of Main */
-	public Main() {
-		DefaultController controller = new DefaultController();
+    /** Creates a new instance of Main */
+    public Main() {
+        DefaultController controller = new DefaultController();
 
-		gCCDGUIClient userInterface = new gCCDGUIClient(controller);
+        gCCDGUI2 userInterface = new gCCDGUI2(controller);
 
-		gCCDComponentModel componentModel = null;
+        gCCDComponentModel componentModel = null;
 
-		try {
-			componentModel = new gCCDComponentModel();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        try {
+            componentModel = new gCCDComponentModel();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
-		controller.addModel(componentModel);
+        controller.addModel(componentModel);
 
-		controller.addView(userInterface);
+        controller.addView(userInterface);
 
-		try {
-			componentModel.init();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        try {
+            componentModel.init();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
-		userInterface.pack();
-		userInterface.setLocationRelativeTo(null);
-		userInterface.setMinimumSize(userInterface.getSize());
-		userInterface.setVisible(true);
-	}
+        userInterface.pack();
+        userInterface.setLocationRelativeTo(null);
+        userInterface.setMinimumSize(userInterface.getSize());
+        userInterface.setVisible(true);
+    }
 
-	/**
-	 * @param args
-	 *            the command line arguments
-	 */
-	public static void main(String[] args) {
-		new Main();
-	}
-
+    /**
+     * @param args
+     *            the command line arguments
+     */
+    public static void main(String[] args) {
+        Main main = new Main();
+    }
 }
