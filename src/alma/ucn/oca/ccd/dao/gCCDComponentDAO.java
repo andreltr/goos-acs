@@ -1,4 +1,4 @@
-package alma.ucn.oca.ccd.dao;
+/*package alma.ucn.oca.ccd.dao;
 
 import alma.ucn.oca.ccd.model.gCCDComponentModel;
 import alma.ucn.oca.ccd.utils.gCCDNCEvent;
@@ -23,11 +23,11 @@ public class gCCDComponentDAO extends ComponentClient {
 	private boolean consumerOn;
 	private LinkedList<String> modelsList;
 
-	/**
+	*//**
 	 * Default constructor
 	 * 
 	 * @throws Exception
-	 */
+	 *//*
 	public gCCDComponentDAO(Logger logger, String managerLoc,
 			String clientName, gCCDComponentModel model) throws Exception {
 		super(logger, managerLoc, clientName);
@@ -315,3 +315,4 @@ public class gCCDComponentDAO extends ComponentClient {
 		return this.model;
 	}
 }
+*/
