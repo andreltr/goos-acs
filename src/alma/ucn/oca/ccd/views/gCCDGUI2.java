@@ -132,6 +132,7 @@ public class gCCDGUI2 extends AbstractView {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("alma/ucn/oca/ccd/views/Resources"); // NOI18N
         setTitle(bundle.getString("GCCD")); // NOI18N
+        setMinimumSize(new java.awt.Dimension(800, 600));
 
         jToolBarMain.setBackground(new java.awt.Color(153, 153, 255));
         jToolBarMain.setFloatable(false);
