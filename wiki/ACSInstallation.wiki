@@ -26,7 +26,7 @@ Then install the packages under sudo mode or using the root account, you can do 
 
 = Installing ACS =
 
-Then get the ACS_installer.sh script and execute it under sudo:
+Get the ACS_installer.sh script and place it in a folder with the ACS tar.gz file, the archive should be named ACS800.tar.gz, then execute the script under sudo.
 
 You can use the script to check if everything is OK to install ACS with the "--test" parameter:
 
