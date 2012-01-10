@@ -48,7 +48,9 @@ Reboot your machine and start X (startx) in the account specified in ACS install
 
 You can check if ACS runs fine by executing ACS. The *ACS_CDB* environment variable currently points to an empty folder in the *INTROOT*, so you need to change it to the CDB path where the examples are located if you want to try them out. If you have already a project that you want to use, just compile it, there's no need to change anything.
 
- * */alma/.../defaultCDB/* (examples path?)
+ACS examples path?:
+
+ * */alma/.../defaultCDB/*
 
 Then, just open a terminal and execute one of the following commands:
 
